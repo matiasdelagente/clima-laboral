@@ -4,7 +4,6 @@ angular.module("stockApp")
   scoreSrvc.getAll().success(function(data){
     $scope.scores = data;
     //console.log()
-    console.log($scope.scores[3].scores)
   })
 })
 
