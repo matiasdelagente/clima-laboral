@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Stock</title>
+    <!-- Css Files -->
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <!-- javascript Files -->
+    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-route/angular-route.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/controllers.js"></script>
+    <script src="./js/models.js" type="text/javascript"></script>
+    <script src="./js/services.js" type="text/javascript"></script>
+  </head>
+  <body ng-app="stockApp">
+    <nav class="navbar navbar-default">
+      <div class="container">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/">Resultados</a></li>
+            <li><a href="#/agregar">Cuestionario</a></li>
+          </ul>
+      </div>
+    </nav>
+    <div class='container'>
+      <ng-view></ng-view>
+    </div>
+  </body>
+</html>
