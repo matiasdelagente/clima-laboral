@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
 
 var app = express()
-//mongoose.connect('mongodb://admin:admin@apollo.modulusmongo.net:27017/piGeh9ow')
+mongoose.connect('mongodb://admin:admin@apollo.modulusmongo.net:27017/piGeh9ow')
 mongoose.connect('mongodb://localhost/felicimetro')
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
