@@ -6,25 +6,45 @@ var superSecret = "123456"
 
 router.route('/authenticate')
 .post(function(req,res){
-  User.findOne({name: req.body.name})
-      .select('name password')
-      .exec(function(err, user){
-        if(err) throw err;
-        if(!user) res.json({success:false, message:"no user found"})
-        else {
-          var valid = user.comparePassword(req.body.password)
-          if(!valid) res.json({success: false, message: "wrong password"})
-          else {
-            var token = jwt.sign({
-              name: req.body.name,
-              username: req.body.username
-            },superSecret,{
-              expireInMinutes: 1440
-            });
-            res.json({success: true, message:"OK", token: token})
-          }
-        }
-      })
+  User.findOne({username: req.body.username},function(err, user){
+    if(err) throw err;
+    if(!user) res.json({success:false, message:"no user found"})
+    else {
+      var valid = user.comparePassword(req.body.password)
+      if(!valid) res.json({success: false, message: "wrong password"})
+      else {
+        var token = jwt.sign({
+          username: req.body.username
+        },superSecret,{
+          expireInMinutes: 1440
+        });
+        res.json({success: true, message:"OK", token: token})
+      }
+    }
+  })
+})
+router.use(function(req, res, next){
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
+  if(token){
+    jwt.verify(token, superSecret, function(err,decoded){
+      if(err){
+        res.status(403).send({
+          success: false,
+          message: "incorrect token"
+        })
+      }
+      else {
+        req.decoded = decoded
+        next();
+      }
+    })
+  }
+  else {
+    res.status(403).send({
+      success:false,
+      message: 'No token found'
+    })
+  }
 })
 router.route('/users')
   .get(function(req,res){
@@ -34,8 +54,7 @@ router.route('/users')
     });
   })
   .post(function(req,res){
-    console.log(req.params)
-    console.log(req.param)
+    //console.log(req.body)
     var user = new User(req.body);
       user.save(function(err, data){
         if(err) res.send(err);
@@ -59,7 +78,7 @@ router.route('/users/:id')
     var id = req.params.id
     User.findById(id, function(err,user){
       if(err) res.send(user)
-      user.name = req.body.name
+      user.username = req.body.username
       user.password = req.body.password
       user.save(function(err,data){
         if(err) res.send(err)
@@ -77,5 +96,10 @@ router.route('/users/:id')
       })
     })
   })
+
+router.route('/me')
+.get(function(req,res){
+  res.send(req.decoded);
+})
 
 module.exports = router
