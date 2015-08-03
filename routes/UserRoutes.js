@@ -22,7 +22,7 @@ router.route('/authenticate')
       }
     }
   })
-})/*
+})
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
   if(token){
@@ -46,7 +46,7 @@ router.use(function(req, res, next){
     })
   }
 })
-*/
+
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){
