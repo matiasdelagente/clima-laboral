@@ -1,5 +1,7 @@
 <div class="page-header">
-  <h1>Resultados</h1>
+  <h1>Usuarios
+    <a href="/users/create" class="btn btn-default"><span class="glyphicon glyphicon-plus">  Agregar Usuario</span></a>
+  </h1>
 </div>
 
 <div class="jumbotron text-center" ng-show="processing">
@@ -9,6 +11,7 @@
 <table>
   <thead>
     <tr>
+      <th class="col-md-1">ID</th>
       <th class="col-md-1">Usuario</th>
       <th class="col-md-1">Admin</th>
       <th class="col-md-1">Gerencia</th>
@@ -18,12 +21,13 @@
   </thead>
   <tbody>
     <tr ng-repeat="person in users">
+      <td class="col-md-1">{{person._id}}</td>
       <td class="col-md-1">{{person.username}}</td>
       <td class="col-md-1">{{person.admin}}</td>
       <td class="col-md-1">{{person.area}}</td>
       <td class="col-md-1">{{person.role}}</td>
       <td class="col-md-1">
-        <a href="#/scores/{{person._id}}" class="btn btn-danger">Ver Resultado</a>
+        <a href="/users/{{person._id}}" class="btn btn-danger">Edit</a>
       </td>
     </tr>
   </tbody>

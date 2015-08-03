@@ -1,8 +1,8 @@
 var express = require('express');
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
 var router = express.Router();
-var User = require('../models/UserModel.js')
-var superSecret = "123456"
+var User = require('../models/UserModel.js');
+var superSecret = "123456";
 
 router.route('/authenticate')
 .post(function(req,res){
@@ -22,7 +22,7 @@ router.route('/authenticate')
       }
     }
   })
-})
+})/*
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
   if(token){
@@ -46,6 +46,7 @@ router.use(function(req, res, next){
     })
   }
 })
+*/
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){
@@ -54,7 +55,6 @@ router.route('/users')
     });
   })
   .post(function(req,res){
-    //console.log(req.body)
     var user = new User(req.body);
       user.save(function(err, data){
         if(err) res.send(err);
@@ -62,7 +62,6 @@ router.route('/users')
       });
   });
 router.use('/users/:id',function(req, res, next){
-  console.log(req)
   var token = req.body.token || req.param('token') || req.headers['x-access-token']
   next();
 });
@@ -99,7 +98,11 @@ router.route('/users/:id')
 
 router.route('/me')
 .get(function(req,res){
-  res.send(req.decoded);
+  User.findOne({username: req.decoded.username}, function(err, user){
+    if(err) return error;
+    res.send(user)
+  })
+  //res.send(req.decoded);
 })
 
 module.exports = router

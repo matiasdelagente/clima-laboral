@@ -11,3 +11,10 @@ angular.module("stockApp")
   }
   return score
 })
+.factory("userSrvc", function($http){
+  var user = {}
+    user.all = function(){
+      return $http.get('/api/users')
+    }
+  return user;
+})

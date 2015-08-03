@@ -33,7 +33,7 @@ angular.module("authService", [])
   }
   //check if is logged in
   authFactory.isLoggedIn = function(){
-    if(AuthToken.getToken){
+    if(AuthToken.getToken()){
       return true
     }
     else {
@@ -53,11 +53,11 @@ angular.module("authService", [])
   return authFactory;
 })
 
-.factory("AuthInterceptor", function($q, $location, Authtoken){
+.factory("AuthInterceptor", function($q, $location, AuthToken){
   var authInterceptorFactory = {};
   //atach the token to every request
   authInterceptorFactory.request = function (config) {
-    var token = Authtoken.getToken()
+    var token = AuthToken.getToken()
     if(token){
       config.headers['x-access-token'] = token;
     }
@@ -65,9 +65,10 @@ angular.module("authService", [])
   };
   //redirect if a token doesn't authenticate
   authInterceptorFactory.responseError = function(response){
+
     if(response = 403){
       AuthToken.setToken();
-      $location.path('/login')
+      $location.path('/')
     }
     return $q.reject(response)
   }
