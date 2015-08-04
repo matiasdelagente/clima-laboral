@@ -62,7 +62,7 @@ router.route('/users')
       });
   });
 router.use('/users/:id',function(req, res, next){
-  var token = req.body.token || req.param('token') || req.headers['x-access-token']
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
   next();
 });
 router.route('/users/:id')
@@ -74,11 +74,17 @@ router.route('/users/:id')
     });
   })
   .put(function(req,res){
+    console.log("put users")
     var id = req.params.id
     User.findById(id, function(err,user){
       if(err) res.send(user)
-      user.username = req.body.username
-      user.password = req.body.password
+      if(req.body.username) user.username = req.body.username;
+      if(req.body.password) user.password = req.body.password;
+      if(req.body.admin) user.admin = req.body.admin;
+      if(req.body.area) user.area = req.body.area;
+      if(req.body.role) user.role  = req.body.role;
+      if(req.body.scores) user.scores = req.body.scores;
+      if(req.body.status) user.status = req.body.status;
       user.save(function(err,data){
         if(err) res.send(err)
         res.send(data)

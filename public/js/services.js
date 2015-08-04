@@ -6,7 +6,6 @@ angular.module("stockApp")
     return $http.get('/api/scores')
   }
   score.add = function(scores){
-    console.log(scores)
     return $http.post("/api/scores", scores)
   }
   return score
@@ -15,6 +14,15 @@ angular.module("stockApp")
   var user = {}
     user.all = function(){
       return $http.get('/api/users')
+    }
+    user.get = function(id){
+      return $http.get('/api/users/'+id)
+    }
+    user.edit = function(id, user){
+      return $http.put('/api/users/'+id, user)
+    }
+    user.save = function(id, user){
+      return $http.post('/api/users')
     }
   return user;
 })

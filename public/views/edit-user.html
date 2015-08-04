@@ -1,0 +1,27 @@
+<div class="page-header" ng-if="form">
+  <h1>Editar/Crear Usuario</h1>
+</div>
+
+<div class="col-sm-6 col-sm-offset-3">
+  <form ng-submit="save()">
+    <div class="form-group">
+      <label for="username">Usuario</label>
+      <input class="form-control" type="" name="username" ng-model="form.username">
+    </div>
+    <div class="form-group" ng-if="!form.password">
+      <label for="username">Password</label>
+      <input class="form-control" type="" name="password" ng-model="form.password">
+    </div>
+    <div class="form-group">
+      <label for="area">Gerencia</label>
+      <input class="form-control" type="text" name="area" ng-model="form.area">
+    </div>
+    <div class="form-group">
+      <label for="role">Rol</label>
+      <input class="form-control" type="text" name="role" ng-model="form.role">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-danger form-control" type="submit">Guardar</button>
+    </div>
+  </form>
+</div>

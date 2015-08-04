@@ -1,14 +1,11 @@
 <div class="col-xs-12">
   <div class="table-responsive">
-    <table class="table">
-      <th>Pregunta :</th>
-      <th ng-repeat="i in questions track by $index">{{$index + 1}}</th>
+    <div class="col-md-6">Pregunta</div>
+    <div class="col-md-6">Respuesta</div>
 
-      <tr ng-repeat="score in scores">
-        <td>Puntaje Cuestionario numero: {{$index + 1}}</td>
-        <td ng-repeat="i in questions track by $index">{{score.scores[$index]}}</td>
-      </tr>
-
-    </table>
+    <div class=col-md-12 ng-repeat="score in user.scores track by $index">
+      <div class=col-md-6>{{$index+1}}</div>
+      <div class=col-md-6>{{score}}</div>
+    </div>
   </div>
 </div>

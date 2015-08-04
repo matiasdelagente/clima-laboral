@@ -13,13 +13,21 @@ angular.module("app.routes", [])
     controller: "UserCtrl",
     templateUrl: "./views/users/all.html"
   })
-  .when("/scores/:id",{
-    controller: "userScoresCtrl",
-    templateUrl: "./views/user-scores.html"
+  .when('/users/:id',{
+    controller: "EditUserCtrl",
+    templateUrl: "./views/edit-user.html"
+  })
+  .when('/user/add',{
+    controller: "AddUserCtrl",
+    templateUrl: "./views/edit-user.html"
   })
   .when('/scores',{
     controller: "ScoresCtrl",
     templateUrl: "./views/scores.html"
+  })
+  .when("/scores/:id",{
+    controller: "userScoresCtrl",
+    templateUrl: "./views/user-scores.html"
   })
   .when('/agregar',{
     controller: "AddCtrl",
