@@ -1,4 +1,4 @@
-angular.module("stockApp", [
+angular.module("climaLaboral", [
   "ngRoute",
   "authService",
   "app.routes"

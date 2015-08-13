@@ -1,4 +1,4 @@
-angular.module("stockApp")
+angular.module("climaLaboral")
 
 .controller("MainCtrl", function($scope, $rootScope, $location, Auth){
   $scope.loggedIn = Auth.isLoggedIn();

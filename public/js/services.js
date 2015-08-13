@@ -1,4 +1,4 @@
-angular.module("stockApp")
+angular.module("climaLaboral")
 
 .factory("scoreSrvc",function($http){
   var score = {}
