@@ -58,6 +58,14 @@ angular.module("climaLaboral")
     $scope.processing = false
     $scope.users = data
   })
+  $scope.deleteUser = function(userDeleted){
+    $scope.processing = true
+    userSrvc.delete(userDeleted._id).success(function(data){
+      $scope.processing = false
+      var index = $scope.users.indexOf(userDeleted)
+      $scope.users.splice(index,1)
+    })
+  }
 })
 
 .controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
@@ -77,10 +85,8 @@ angular.module("climaLaboral")
 })
 
 .controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc){
-  console.log("toto")
   $scope.save = function(){
-    userSrvc.edit($scope.user._id, $scope.form).success(function(data){
-      $scope.user = {};
+    userSrvc.save($scope.form).success(function(data){
       $location.path('/users')
     })
   }

@@ -46,7 +46,6 @@ router.use(function(req, res, next){
     })
   }
 })
-
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){
@@ -55,7 +54,7 @@ router.route('/users')
     });
   })
   .post(function(req,res){
-    var user = new User(req.body);
+    var user = new User(req.body)
       user.save(function(err, data){
         if(err) res.send(err);
         res.send(data);
@@ -74,7 +73,6 @@ router.route('/users/:id')
     });
   })
   .put(function(req,res){
-    console.log("put users")
     var id = req.params.id
     User.findById(id, function(err,user){
       if(err) res.send(user)

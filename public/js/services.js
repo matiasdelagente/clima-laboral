@@ -19,10 +19,13 @@ angular.module("climaLaboral")
       return $http.get('/api/users/'+id)
     }
     user.edit = function(id, user){
-      return $http.put('/api/users/'+id, user)
+      return $http.put('/api/users/' + id, user)
     }
-    user.save = function(id, user){
-      return $http.post('/api/users')
+    user.save = function(user){
+      return $http.post('/api/users', user)
+    }
+    user.delete = function(id){
+      return $http.delete('/api/users/' + id)
     }
   return user;
 })

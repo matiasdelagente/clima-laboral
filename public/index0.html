@@ -16,15 +16,13 @@
 
   </head>
   <body ng-app="climaLaboral" ng-controller="MainCtrl">
-    <div class="app app-header-fixed">
       <div ng-include=" 'views/header.html' " class="app-header navbar" ng-hide="!loggedIn"></div>
 
-      <div class="container">
+      <div class="app-content">
         <div ui-butterbar></div>
         <a href class="off-screen-toggle hide" ui-toggle-class="off-screen"></a>
         <div class="app-content-body fade-in-up" ng-view></div>
       </div>
-    </div>  
   <!-- javascript Files -->
     <script src="./bower_components/jquery/dist/jquery.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>

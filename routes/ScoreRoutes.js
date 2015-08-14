@@ -10,29 +10,12 @@ router.route('/scores')
     });
   })
   .post(function(req,res){
-    console.log(req.body);
     var score = new Score(req.body);
       score.save(function(err, data){
         if(err) res.send(err);
         res.send(data);
       });
   });
-
-  router.route('/users')
-    .get(function(req,res){
-      User.find(function(err,data){
-        if(err) res.send(err);
-        res.send(data);
-      });
-    })
-    .post(function(req,res){
-      //console.log(req.body)
-      var user = new User(req.body);
-        user.save(function(err, data){
-          if(err) res.send(err);
-          res.send(data);
-        });
-    });
 router.route('/scores/:id')
   .get(function(req,res){
     var id = req.params.id;

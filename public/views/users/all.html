@@ -27,7 +27,8 @@
       <td class="col-md-1">{{person.area}}</td>
       <td class="col-md-1">{{person.role}}</td>
       <td class="col-md-1">
-        <a href="#/users/{{person._id}}" class="btn btn-danger">Edit</a>
+        <a href="#/users/{{person._id}}" class="btn btn-danger">Editar</a>
+        <a href="" ng-click="deleteUser(person)" class="btn btn-primary">Borrar</a>
       </td>
     </tr>
   </tbody>
