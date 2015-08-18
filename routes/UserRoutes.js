@@ -8,10 +8,10 @@ router.route('/authenticate')
 .post(function(req,res){
   User.findOne({username: req.body.username},function(err, user){
     if(err) throw err;
-    if(!user) res.json({success:false, message:"no user found"})
+    if(!user) res.json({success:false, message:"EL USUARIO NO EXISTE"})
     else {
       var valid = user.comparePassword(req.body.password)
-      if(!valid) res.json({success: false, message: "wrong password"})
+      if(!valid) res.json({success: false, message: "LA CONTRASEÑA ES ERRONEA"})
       else {
         var token = jwt.sign({
           username: req.body.username
@@ -83,6 +83,7 @@ router.route('/users/:id')
       if(req.body.role) user.role  = req.body.role;
       if(req.body.scores) user.scores = req.body.scores;
       if(req.body.status) user.status = req.body.status;
+      if(req.body.email) user.email = req.body.email;
       user.save(function(err,data){
         if(err) res.send(err)
         res.send(data)

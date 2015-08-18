@@ -29,7 +29,7 @@ angular.module("app.routes", [])
     controller: "userScoresCtrl",
     templateUrl: "./views/user-scores.html"
   })
-  .when('/agregar',{
+  .when('/questions/:id',{
     controller: "AddCtrl",
     templateUrl: "./views/add.html"
   })

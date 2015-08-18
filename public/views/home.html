@@ -23,8 +23,8 @@
       <strong>Ingrese sus credenciales</strong>
     </div>
     <form name="form" class="form-validation">
-      <div class="text-danger wrapper text-center" ng-show="authError">
-          {{authError}}
+      <div class="text-danger wrapper text-center" ng-show="error">
+          {{error}}
       </div>
       <div class="list-group list-group-sm">
         <div class="list-group-item">
@@ -34,7 +34,10 @@
            <input type="password" placeholder="Password" class="form-control no-border" ng-model="loginData.password" required>
         </div>
       </div>
-      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="doLogin()" ng-disabled='form.$invalid'>Acceder</button>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="doLogin()" ng-disabled='form.$invalid'>
+        <span ng-if="!processing">Acceder</span>
+        <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+      </button>
       <div class="line line-dashed"></div>
     </form>
   </div>

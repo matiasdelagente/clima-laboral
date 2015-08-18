@@ -9,7 +9,8 @@ var UserSchema = new Schema({
   area: {type:String},
   role: {type:String},
   scores: {type:[Number]},
-  status: {type:String}
+  status: {type:String},
+  email: {type:String}
 });
 
 UserSchema.pre('save',function(next){
