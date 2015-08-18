@@ -27,7 +27,7 @@ angular.module("climaLaboral")
             $location.path('/scores');
           }
           else if(!data.admin){
-            $location.path('/questions/{{user._id}}');
+            $location.path('/questions/'+ data._id);
           }
         });
       }
@@ -61,15 +61,16 @@ angular.module("climaLaboral")
   $scope.company = "Telefonica";
   $scope.formProcessing = false
   $scope.processing = true;
-
+  console.log($routeParams.id);
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
+    console.log($scope.user)
   });
   $scope.add = function(){
     $scope.formProcessing = true
     userSrvc.edit($scope.user._id, $scope.user).success(function(data){
-      $scope.processing = false;
+      $scope.formProcessing = false;
       $location.path('/scores/'+ $scope.user._id);
     });
   };
