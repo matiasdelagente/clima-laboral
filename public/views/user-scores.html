@@ -1,15 +1,19 @@
-<div class="jumbotron text-center" ng-show="processing">
-  <span class="glyphicon glyphicon-repeat spinner"><p>Cargando Resultados</p></span>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Resultado</h1>
 </div>
+<div class="wrapper-md">
+  <div class="jumbotron text-center" ng-show="processing">
+    <span class="glyphicon glyphicon-repeat spinner"><p>Cargando Cuestionario</p></span>
+  </div>
+  <div class="col-xs-12">
+    <div class="table-responsive">
+      <div class="col-md-6">Pregunta</div>
+      <div class="col-md-6">Respuesta</div>
 
-<div class="col-xs-12">
-  <div class="table-responsive">
-    <div class="col-md-6">Pregunta</div>
-    <div class="col-md-6">Respuesta</div>
-
-    <div class=col-md-12 ng-repeat="score in user.scores track by $index">
-      <div class=col-md-6>{{$index+1}}</div>
-      <div class=col-md-6>{{score}}</div>
+      <div class=col-md-12 ng-repeat="score in user.scores track by $index">
+        <div class=col-md-6>{{$index+1}}</div>
+        <div class=col-md-6>{{score}}</div>
+      </div>
     </div>
   </div>
 </div>

@@ -21,7 +21,7 @@ router.route('/authenticate')
         res.json({success: true, message:"OK", token: token})
       }
     }
-  })
+  }).select('username password')
 })
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']

@@ -1,39 +1,44 @@
-<div class="page-header" ng-hide="!formUser._id">
-  <h1>Editar Usuario</h1>
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Editar/Crear Usuario</h1>
 </div>
-<div class="page-header" ng-hide="formUser._id">
-  <h1>Crear Usuario</h1>
-</div>
+<div class="wrapper-md">
+  <div class="page-header" ng-hide="!formUser._id">
+    <h1>Editar Usuario</h1>
+  </div>
+  <div class="page-header" ng-hide="formUser._id">
+    <h1>Crear Usuario</h1>
+  </div>
 
-<div class="col-sm-6 col-sm-offset-3">
-  <form name="form" ng-submit="save()">
-    <div class="form-group">
-      <label for="username">Usuario</label>
-      <input class="form-control" type="text" name="username" ng-model="formUser.username" required>
-    </div>
-    <div class="form-group" ng-if="!formUser._id">
-      <label for="username">Password</label>
-      <input class="form-control" type="password" name="password" ng-model="formUser.password" required>
-    </div>
-    <div class="form-group">
-      <label for="area">Gerencia</label>
-      <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="role">Rol</label>
-      <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="email">Correo electronico</label>
-      <input class="form-control" type="email" name="email" ng-model="formUser.email" required>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
-        <span ng-if="!processing">Guardar</span>
-        <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-      </button>
-    </div>
-  </form>
+  <div class="col-sm-6 col-sm-offset-3">
+    <form name="form" ng-submit="save()">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input class="form-control" type="text" name="username" ng-model="formUser.username" required>
+      </div>
+      <div class="form-group">
+        <label for="username">Password</label>
+        <input class="form-control" type="password" name="password" ng-model="formUser.password" required>
+      </div>
+      <div class="form-group">
+        <label for="area">Gerencia</label>
+        <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="role">Rol</label>
+        <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electronico</label>
+        <input class="form-control" type="email" name="email" ng-model="formUser.email" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
+          <span ng-if="!processing">Guardar</span>
+          <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
