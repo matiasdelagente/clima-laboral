@@ -1,15 +1,9 @@
 <div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3">Editar/Crear Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="!formUser._id">Crear Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="formUser._id">Editar Usuario</h1>
 </div>
 <div class="wrapper-md">
-  <div class="page-header" ng-hide="!formUser._id">
-    <h1>Editar Usuario</h1>
-  </div>
-  <div class="page-header" ng-hide="formUser._id">
-    <h1>Crear Usuario</h1>
-  </div>
-
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-4 col-sm-offset-4">
     <form name="form" ng-submit="save()">
       <div class="form-group">
         <label for="username">Usuario</label>
