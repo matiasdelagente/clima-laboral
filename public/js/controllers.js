@@ -47,37 +47,91 @@ angular.module("climaLaboral")
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
+  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
+  $scope.formUser = {area: null, role: null};
+
   userSrvc.all().success(function(data){
     $scope.processing = false;
     $scope.users = data;
+    $scope.showCompromiso = false;
+    $scope.calcAll();
   });
-  scoreSrvc.getAll().success(function(data){
-    $scope.scores = data;
-    $scope.questions = new Array(40);
-  });
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 100];
 
-  $scope.labels1 = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  $scope.series1 = ['Series A'];
+  $scope.calcCompromiso = function(){
+    console.log($scope.formUser.area,$scope.formUser.role)
+    var area = $scope.formUser.area;
+    var role = $scope.formUser.role;
+    var dataCompromiso = [0, 0, 0];
+    for(var i=0; i<$scope.users.length; i++){
+      if(!$scope.formUser.area) area = $scope.users[i].area;
+      if(!$scope.formUser.role) role = $scope.users[i].role;
+      console.log($scope.users[i].username ,$scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role);
+      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
+        for(var j=0; j<$scope.pregCompromiso.length; j++){
+          if($scope.users[i].scores[$scope.pregCompromiso[j]] > 3) dataCompromiso[0]++;
+          else if($scope.users[i].scores[$scope.pregCompromiso[j]] < 3) dataCompromiso[2]++;
+          else dataCompromiso[1]++;
+        }
+      }
+    }
+    $scope.dataCompromiso = dataCompromiso;
+  };
 
-  $scope.data1 = [
-  [65, 59, 80, 81, 56, 55, 40]
-];
+  $scope.calcMotivadores = function(){
+    var dataMotivadores = [0,0,0,0,0,0,0,0,0,0];
+    var total = [0,0,0,0,0,0,0,0,0,0];
+    for(var i=0; i<$scope.users.length; i++){
+      for(var j=0; j<$scope.pregMotivadores.length; j++){
+        if($scope.users[i].username != "admin"){
+          total[j]++;
+          if($scope.users[i].scores[$scope.pregMotivadores[j]] > 3) dataMotivadores[j]++;
+        }
+      }
+    }
+    for(var i=0; i<dataMotivadores.length; i++){
+      dataMotivadores[i] = (100*dataMotivadores[i])/total[i];
+    }
+    $scope.dataMotivadores = dataMotivadores;
+  };
+
+  $scope.calcFavorable = function(){
+    $scope.dataFavorable = new Array(1);
+    $scope.dataFavorable[0] = new Array(1);
+    var total = $scope.dataCompromiso[0] + $scope.dataCompromiso[1] + $scope.dataCompromiso[2];
+    $scope.dataFavorable[0][0] = (100*$scope.dataCompromiso[0])/total;
+    if(total == 0) $scope.vacioFavorable = true; 
+  };
+
+  $scope.calcAll = function(){
+    $scope.showCompromiso = false;
+    $scope.pregCompromiso = [3, 4, 5, 6];
+    $scope.pregMotivadores = [21, 17, 34, 24, 18, 2, 39, 20, 23, 25];
+    $scope.calcCompromiso();
+    $scope.calcMotivadores();
+    $scope.calcFavorable();
+  };
+// Datos Grafico Compromiso
+  $scope.labelsCompromiso = ["Porcentage Favorable", "Porcentage Neutro", "Porcentage Desfavorable"];
+// Datos Grafico Año Favorable
+  $scope.labelsFavorable = ['2015','2014','Best in Class','General'];
+  $scope.series1 = ['Serie 2015'];
+// Datos Grafico Motivadores
+
 })
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
   $scope.company = "Telefonica";
-  $scope.formProcessing = false
+  $scope.formProcessing = false;
   $scope.processing = true;
   console.log($routeParams.id);
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
-    console.log($scope.user)
+    console.log($scope.user);
   });
   $scope.add = function(){
-    $scope.formProcessing = true
+    $scope.formProcessing = true;
     userSrvc.edit($scope.user._id, $scope.user).success(function(data){
       $scope.formProcessing = false;
       $location.path('/scores/'+ $scope.user._id);
