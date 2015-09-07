@@ -50,6 +50,18 @@ angular.module("climaLaboral")
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.formUser = {area: null, role: null};
+  $scope.questionsMotivadores = [
+    'En Deutsche Post DHL la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+    'Deutsche Post DHL está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+    'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
+    'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
+    'Tengo confianza en el futuro de Deutsche Post DHL. (Estrategia)',
+    'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
+    'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
+    'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
+    'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
+    'Deutsche Post DHL me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+  ];
 
   userSrvc.all().success(function(data){
     $scope.processing = false;
@@ -59,14 +71,12 @@ angular.module("climaLaboral")
   });
 
   $scope.calcCompromiso = function(){
-    console.log($scope.formUser.area,$scope.formUser.role)
     var area = $scope.formUser.area;
     var role = $scope.formUser.role;
     var dataCompromiso = [0, 0, 0];
     for(var i=0; i<$scope.users.length; i++){
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
-      console.log($scope.users[i].username ,$scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role);
       if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
         for(var j=0; j<$scope.pregCompromiso.length; j++){
           if($scope.users[i].scores[$scope.pregCompromiso[j]] > 3) dataCompromiso[0]++;
@@ -79,11 +89,15 @@ angular.module("climaLaboral")
   };
 
   $scope.calcMotivadores = function(){
+    var area = $scope.formUser.area;
+    var role = $scope.formUser.role;
     var dataMotivadores = [0,0,0,0,0,0,0,0,0,0];
     var total = [0,0,0,0,0,0,0,0,0,0];
     for(var i=0; i<$scope.users.length; i++){
-      for(var j=0; j<$scope.pregMotivadores.length; j++){
-        if($scope.users[i].username != "admin"){
+      if(!$scope.formUser.area) area = $scope.users[i].area;
+      if(!$scope.formUser.role) role = $scope.users[i].role;
+      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
+        for(var j=0; j<$scope.pregMotivadores.length; j++){
           total[j]++;
           if($scope.users[i].scores[$scope.pregMotivadores[j]] > 3) dataMotivadores[j]++;
         }
@@ -93,6 +107,7 @@ angular.module("climaLaboral")
       dataMotivadores[i] = (100*dataMotivadores[i])/total[i];
     }
     $scope.dataMotivadores = dataMotivadores;
+    $scope.vacioMotivadores = 0; for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
   };
 
   $scope.calcFavorable = function(){
@@ -100,7 +115,7 @@ angular.module("climaLaboral")
     $scope.dataFavorable[0] = new Array(1);
     var total = $scope.dataCompromiso[0] + $scope.dataCompromiso[1] + $scope.dataCompromiso[2];
     $scope.dataFavorable[0][0] = (100*$scope.dataCompromiso[0])/total;
-    if(total == 0) $scope.vacioFavorable = true; 
+    $scope.vacioFavorable = false ; if(total === 0) $scope.vacioFavorable = true;
   };
 
   $scope.calcAll = function(){
@@ -158,8 +173,8 @@ angular.module("climaLaboral")
 
 .controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
   $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"]
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"]
+  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
 
   userSrvc.get($routeParams.id).success(function(data){
     $scope.formUser = data;
@@ -177,8 +192,8 @@ angular.module("climaLaboral")
 
 .controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc){
   $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"]
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"]
+  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
 
   $scope.save = function(){
     $scope.processing = true;
