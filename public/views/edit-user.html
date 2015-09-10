@@ -7,25 +7,27 @@
     <form name="form" ng-submit="save()">
       <div class="form-group">
         <label for="username">Usuario</label>
-        <input class="form-control" type="text" name="username" ng-model="formUser.username" required>
+        <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre del usuario" ng-model="formUser.username" required>
       </div>
       <div class="form-group">
         <label for="username">Password</label>
-        <input class="form-control" type="password" name="password" ng-model="formUser.password">
+        <input class="form-control" type="password" name="password" placeholder="Ingrese el password del usuario" ng-model="formUser.password">
       </div>
       <div class="form-group">
         <label for="area">Gerencia</label>
         <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
+          <option value=''>- Seleccione la gerencia del usuario -</option>
         </select>
       </div>
       <div class="form-group">
         <label for="role">Rol</label>
         <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
+          <option value=''>- Seleccione el rol del usuario -</option>
         </select>
       </div>
       <div class="form-group">
         <label for="email">Correo electronico</label>
-        <input class="form-control" type="email" name="email" ng-model="formUser.email" required>
+        <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo eletronico del usuario" ng-model="formUser.email" required>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
