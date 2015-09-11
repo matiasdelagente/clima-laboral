@@ -70,7 +70,7 @@ angular.module("climaLaboral")
     $scope.calcAll();
   });
 
-  $scope.calcCompromiso = function(){
+  $scope.calcCompromiso = function(preguntas){
     var area = $scope.formUser.area;
     var role = $scope.formUser.role;
     var dataCompromiso = [0, 0, 0];
@@ -78,14 +78,14 @@ angular.module("climaLaboral")
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
       if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
-        for(var j=0; j<$scope.pregCompromiso.length; j++){
-          if($scope.users[i].scores[$scope.pregCompromiso[j]] > 3) dataCompromiso[0]++;
-          else if($scope.users[i].scores[$scope.pregCompromiso[j]] < 3) dataCompromiso[2]++;
+        for(var j=0; j<preguntas.length; j++){
+          if($scope.users[i].scores[preguntas[j]] > 3) dataCompromiso[0]++;
+          else if($scope.users[i].scores[preguntas[j]] < 3) dataCompromiso[2]++;
           else dataCompromiso[1]++;
         }
       }
     }
-    $scope.dataCompromiso = dataCompromiso;
+    return dataCompromiso;
   };
 
   $scope.calcMotivadores = function(){
@@ -122,12 +122,35 @@ angular.module("climaLaboral")
     $scope.showCompromiso = false;
     $scope.pregCompromiso = [3, 4, 5, 6];
     $scope.pregMotivadores = [21, 17, 34, 24, 18, 2, 39, 20, 23, 25];
-    $scope.calcCompromiso();
+    $scope.pregPromesa = [0, 1, 2];
+    $scope.pregLiderazgo = [7, 8, 9, 10, 11, 12, 13, 14, 15];
+    $scope.pregEstrategia = [16, 17, 18, 19];
+    $scope.pregComunicacion = [20, 21, 22, 23];
+    $scope.pregAprendizaje = [24, 25, 26];
+    $scope.pregCooperacion = [27, 28, 29];
+    $scope.pregVivir = [30, 31];
+    $scope.pregResponsabilidad = [32, 33];
+    $scope.pregSeguimiento = [34, 35];
+    $scope.pregCondiciones = [36, 37, 38, 39];
+
+    $scope.dataCompromiso = $scope.calcCompromiso($scope.pregCompromiso);
+    $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
+    $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
+    $scope.dataLiderazgo = $scope.calcCompromiso($scope.pregLiderazgo);
+    $scope.dataEstrategia = $scope.calcCompromiso($scope.pregEstrategia);
+    $scope.dataComunicacion = $scope.calcCompromiso($scope.pregComunicacion);
+    $scope.dataAprendizaje = $scope.calcCompromiso($scope.pregAprendizaje);
+    $scope.dataCooperacion = $scope.calcCompromiso($scope.pregCooperacion);
+    $scope.dataVivir = $scope.calcCompromiso($scope.pregVivir);
+    $scope.dataResponsabilidad = $scope.calcCompromiso($scope.pregResponsabilidad);
+    $scope.dataSeguimiento = $scope.calcCompromiso($scope.pregSeguimiento);
+    $scope.dataCondiciones = $scope.calcCompromiso($scope.pregCondiciones);
+
     $scope.calcMotivadores();
     $scope.calcFavorable();
   };
 // Datos Grafico Compromiso
-  $scope.labelsCompromiso = ["Porcentage Favorable", "Porcentage Neutro", "Porcentage Desfavorable"];
+  $scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
 // Datos Grafico Año Favorable
   $scope.labelsFavorable = ['2015','2014','Best in Class','General'];
   $scope.series1 = ['Serie 2015'];
