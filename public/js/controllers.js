@@ -51,16 +51,16 @@ angular.module("climaLaboral")
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
-    'En Deutsche Post DHL la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
-    'Deutsche Post DHL está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+    'En DHL la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+    'DHL está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
     'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
     'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
-    'Tengo confianza en el futuro de Deutsche Post DHL. (Estrategia)',
+    'Tengo confianza en el futuro de DHL. (Estrategia)',
     'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
     'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
     'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
     'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
-    'Deutsche Post DHL me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+    'DHL me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
   userSrvc.all().success(function(data){
@@ -77,11 +77,12 @@ angular.module("climaLaboral")
     for(var i=0; i<$scope.users.length; i++){
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
-      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
+      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role && $scope.users[i].scores.length > 0){
         for(var j=0; j<preguntas.length; j++){
           if($scope.users[i].scores[preguntas[j]] > 3) dataCompromiso[0]++;
           else if($scope.users[i].scores[preguntas[j]] < 3) dataCompromiso[2]++;
           else dataCompromiso[1]++;
+          console.log($scope.users[i].username + "->"+ $scope.users[i].scores.length);
         }
       }
     }
@@ -134,7 +135,6 @@ angular.module("climaLaboral")
     $scope.pregCondiciones = [36, 37, 38, 39];
 
     $scope.dataCompromiso = $scope.calcCompromiso($scope.pregCompromiso);
-    $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
     $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
     $scope.dataLiderazgo = $scope.calcCompromiso($scope.pregLiderazgo);
     $scope.dataEstrategia = $scope.calcCompromiso($scope.pregEstrategia);
