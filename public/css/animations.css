@@ -17,5 +17,9 @@
 }
 
 .container-fluid {
-    padding: 0px;
+  padding: 0px;
+}
+.logo-login {
+  margin-top: 25px;
+  margin-bottom: 40px;
 }
