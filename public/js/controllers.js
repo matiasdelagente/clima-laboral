@@ -134,8 +134,8 @@ angular.module("climaLaboral")
     $scope.pregSeguimiento = [34, 35];
     $scope.pregCondiciones = [36, 37, 38, 39];
 
-    $scope.dataCompromiso = $scope.calcCompromiso($scope.pregCompromiso);
     $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
+    $scope.dataCompromiso = $scope.calcCompromiso($scope.pregCompromiso);
     $scope.dataLiderazgo = $scope.calcCompromiso($scope.pregLiderazgo);
     $scope.dataEstrategia = $scope.calcCompromiso($scope.pregEstrategia);
     $scope.dataComunicacion = $scope.calcCompromiso($scope.pregComunicacion);

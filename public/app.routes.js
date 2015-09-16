@@ -21,9 +21,17 @@ angular.module("app.routes", [])
     controller: "AddUserCtrl",
     templateUrl: "./views/edit-user.html"
   })
-  .when('/scores',{
+  .when('/scores-1',{
     controller: "ScoresCtrl",
-    templateUrl: "./views/scores.html"
+    templateUrl: "./views/scores-1.html"
+  })
+  .when('/scores-2',{
+    controller: "ScoresCtrl",
+    templateUrl: "./views/scores-2.html"
+  })
+  .when('/scores-3',{
+    controller: "ScoresCtrl",
+    templateUrl: "./views/scores-3.html"
   })
   .when("/scores/:id",{
     controller: "userScoresCtrl",

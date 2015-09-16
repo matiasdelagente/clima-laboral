@@ -19,9 +19,13 @@
   </head>
   <body ng-app="climaLaboral" ng-controller="MainCtrl">
     <div class="app app-header-fixed">
+      <!-- navbar -->
       <div ng-include=" 'views/header.html' " class="app-header navbar" ng-hide="!loggedIn"></div>
-
-      <div class="container-fluid">
+      <!-- / navbar -->
+      <!-- menu -->
+      <div data-ng-include=" 'views/aside.html' " class="app-aside hidden-xs bg-dark"></div>
+      <!-- / menu -->
+      <div class="app-content">
         <div ui-butterbar></div>
         <a href class="off-screen-toggle hide" ui-toggle-class="off-screen"></a>
         <div class="app-content-body fade-in-up" ng-view></div>

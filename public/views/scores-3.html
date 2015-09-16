@@ -1,0 +1,530 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Resultados</h1>
+</div>
+<div class="jumbotron text-center" ng-show="processing">
+  <span class="glyphicon glyphicon-repeat spinner"><p>Cargando Estadisticas</p></span>
+</div>
+<div class="wrapper-md" ng-show="!processing">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+          Seleccionar gerencia y areas {{formUser.area}}
+        </div>
+        <div class="panel-body">
+          <form class="form-inline" role="form" ng-submit="calcAll()">
+            <div class="form-group">
+              <select class="form-control input-lg" name="area" ng-model="formUser.area" ng-options="area for area in areas">
+              <option value="">Todas las gerencias</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="form-control input-lg" name="role" ng-model="formUser.role" ng-options="role for role in roles">
+                <option value="">Todos los roles</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-default btn-lg pull-right">Calcular Estadisticas</button>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Compromiso del empleado</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">2015 % Favorable</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Los 10 Principales Motivadores
+        </div>
+        <div>
+          <h3 ng-if="!vacioMotivadores" class="text-center">No hay datos disponibles para los filtros seleccionados</h3>
+          <table ng-if="vacioMotivadores" class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
+            <thead>
+              <tr>
+                  <th data-toggle="true">
+                      Pregunta
+                  </th>
+                  <th>
+                    2015 % favorable
+                  </th>
+                  <th data-hide="phone,tablet">
+                    2014 % favorable
+                  </th>
+                  <th data-hide="phone,tablet" data-name="Date Of Birth">
+                    Best in Class
+                  </th>
+                  <th data-hide="phone">
+                    Grupo en General
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="motivador in dataMotivadores track by $index">
+                  <td>{{questionsMotivadores[$index]}}</td>
+                  <td><span class="label bg-success" title="Active">{{motivador | number:1}} %</span></td>
+                  <td>Sin Datos</td>
+                  <td>Sin Datos</td>
+                  <td>Sin Datos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Promesa al Cliente</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Promesa al Cliente</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataPromesa" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Promesa al Cliente</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Promesa al Cliente</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Compromiso del Empleado</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Compromiso del Empleado</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Compromiso del Empleado</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Compromiso del Empleado</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Liderazgo Activo</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Liderazgo Activo</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataLiderazgo" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Liderazgo Activo</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Liderazgo Activo</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Estrategia</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Estrategia</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataEstrategia" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Estrategia</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Estrategia</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Comunicacion</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Comunicacion</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataComunicacion" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Comunicacion</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Comunicacion</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Aprendizaje y Desarrollo</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Aprendizaje y Desarrollo</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataAprendizaje" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Aprendizaje y Desarrollo</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Aprendizaje y Desarrollo</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Cooperacion</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Cooperacion</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataCooperacion" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Cooperacion</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Cooperacion</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Vivir First Choice</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Vivir First Choice</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataVivir" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Vivir First Choice</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Vivir First Choice</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Responsabilidad Social Corporativa</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Responsabilidad Social Corporativa</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataResponsabilidad" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Responsabilidad Social Corporativa</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Responsabilidad Social Corporativa</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Seguimiento de la EOS</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Seguimiento de la EOS</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataSeguimiento" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Seguimiento de la EOS</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Seguimiento de la EOS</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Condiciones Laborales</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Condiciones Laborales</p>
+            Total.
+          </div>
+          <div class="sparkline inline">
+            <canvas id="doughnut" class="chart chart-doughnut" data="dataCondiciones" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+          </div>
+          <div class="line pull-in"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Condiciones Laborales</div>
+        <div class="panel-body text-center">
+          <div class="m-b-md">
+            <p class="h3 font-thin">Estrategia</p>
+            General.
+          </div>
+          <div class="row m-b">
+            <div class="col-xs-12">
+              <div class="sparkline inline">
+                <canvas id="bar" class="chart chart-bar" data="dataFavorable" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
