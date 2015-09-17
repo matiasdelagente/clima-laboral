@@ -23,16 +23,15 @@
       <div ng-include=" 'views/header.html' " class="app-header navbar" ng-hide="!loggedIn"></div>
       <!-- / navbar -->
       <!-- menu -->
-      <div data-ng-include=" 'views/aside.html' " class="app-aside hidden-xs bg-dark"></div>
+      <div data-ng-include=" 'views/aside.html' " class="app-aside hidden-xs bg-dark" ng-hide="!loggedIn"></div>
       <!-- / menu -->
-      <div class="app-content">
+      <div ng-class = "{'app-content': loggedIn}">
         <div ui-butterbar></div>
         <a href class="off-screen-toggle hide" ui-toggle-class="off-screen"></a>
         <div class="app-content-body fade-in-up" ng-view></div>
       </div>
     </div>
   <!-- javascript Files -->
-    <script src="js/app.min.js"></script>
     <script src="./bower_components/angular/angular.js"></script>
     <script src="./bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/Chart.js/Chart.js"></script>
@@ -47,11 +46,6 @@
     <script src="libs/jquery/jquery/dist/jquery.js"></script>
     <script src="libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
     <script src="libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js"></script>
-    <script src="js/ui-load.js"></script>
-    <script src="js/ui-jp.config.js"></script>
-    <script src="js/ui-jp.js"></script>
-    <script src="js/ui-nav.js"></script>
-    <script src="js/ui-toggle.js"></script>
     <script src="libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js"></script>
     <script src="js/my-script.js"></script>
     <script src="bower_components/angular-chart.js/angular-chart.js"></script>

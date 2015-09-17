@@ -30,7 +30,7 @@ angular.module("app.routes", [])
     templateUrl: "./views/scores-2.html"
   })
   .when('/scores-3',{
-    controller: "ScoresCtrl",
+    controller: "Scores3Ctrl",
     templateUrl: "./views/scores-3.html"
   })
   .when("/scores/:id",{

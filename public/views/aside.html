@@ -6,7 +6,7 @@
     <!-- nav -->
     <nav ui-nav class="navi clearfix">
       <!-- list -->
-      <ul class="nav">
+      <ul class="nav" ng-if="url == '/scores-1' || url == '/scores-2' || url == '/scores-3' ">
 
         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
           <span translate="aside.nav.components.COMPONENTS">Paginas</span>
@@ -30,7 +30,7 @@
           </a>
         </li>
         <li>
-          <a hre="#/scores-3" class="auto">
+          <a href="#/scores-3" class="auto">
             <span class="pull-right text-muted">
               <i class="fa fa-fw fa-angle-right text"></i>
               <i class="fa fa-fw fa-angle-down text-active"></i>
