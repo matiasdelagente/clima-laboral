@@ -25,7 +25,7 @@ angular.module("climaLaboral")
       if(data.success){
         Auth.getUser().success(function(data){
           if(data.admin){
-            $location.path('/scores');
+            $location.path('/scores-1');
           }
           else if(!data.admin){
             $location.path('/questions/'+ data._id);
