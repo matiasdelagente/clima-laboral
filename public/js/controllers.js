@@ -1,6 +1,6 @@
 angular.module("climaLaboral")
 
-.controller("MainCtrl", function($scope, $rootScope, $location, Auth){
+.controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
   $scope.loggedIn = Auth.isLoggedIn();
   $rootScope.$on('$routeChangeStart',function(){
     if(Auth.isLoggedIn()){
@@ -8,7 +8,7 @@ angular.module("climaLaboral")
     }
     else {
       $scope.loggedIn = false;
-      $location.path('/');
+      $location.path('/login');
     }
     Auth.getUser().success(function(data){
       $scope.user = data;
@@ -44,6 +44,10 @@ angular.module("climaLaboral")
     $scope.user = {};
     $location.path('/');
   };
+
+  $scope.route = $route;
+
+
 })
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){

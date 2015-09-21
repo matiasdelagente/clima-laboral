@@ -23,3 +23,10 @@
   margin-top: 25px;
   margin-bottom: 40px;
 }
+.nav > li > a:active, .selected {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.nav > li > a:active, .selected {
+    text-decoration: none;
+    background-color: #eee;
+}

@@ -3,7 +3,7 @@ angular.module("app.routes", [])
   $routeProvider
   .when('/',{
     controller: "MainCtrl",
-    templateUrl: "./views/home.html"
+    templateUrl: "./views/dashboard.html"
   })
   .when('/login',{
     controller: "MainCtrl",
@@ -23,15 +23,18 @@ angular.module("app.routes", [])
   })
   .when('/scores-1',{
     controller: "ScoresCtrl",
-    templateUrl: "./views/scores-1.html"
+    templateUrl: "./views/scores-1.html",
+    activetab: 'dashboard'
   })
   .when('/scores-2',{
     controller: "ScoresCtrl",
-    templateUrl: "./views/scores-2.html"
+    templateUrl: "./views/scores-2.html",
+    activetab: 'dashboard'
   })
   .when('/scores-3',{
     controller: "Scores3Ctrl",
-    templateUrl: "./views/scores-3.html"
+    templateUrl: "./views/scores-3.html",
+    activetab: 'dashboard'
   })
   .when("/scores/:id",{
     controller: "userScoresCtrl",
