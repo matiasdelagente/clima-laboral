@@ -6,8 +6,11 @@
     <i class="glyphicon glyphicon-align-justify"></i>
   </button>
   <!-- brand -->
-  <a href="#/" class="navbar-brand text-lt">
-    <span class="hidden-folded m-l-xs">Clima Laboral</span>
+  <a href="#/" class="navbar-brand hidden-xs">
+    <img src="../img/logo-compacto.png" alt="Clima Laboral" />
+  </a>
+  <a href="#/" class="navbar-brand-mobile visible-xs">
+    <img src="../img/logo-1.png" alt="Clima Laboral" height="40" />
   </a>
   <!-- / brand -->
 </div>
@@ -24,7 +27,7 @@
     </li>
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3'}">
-        <i class="icon-check fa-fw"></i>
+        <i class="glyphicon glyphicon-signal"></i>
         <span>Resultados</span>
       </a>
     </li>
@@ -36,14 +39,8 @@
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
       <a href="#/scores/{{user._id}}" class="dropdown-toggle">
-        <i class="icon-check fa-fw"></i>
+        <i class="glyphicon glyphicon-signal"></i>
         <span>Resultados</span>
-      </a>
-    </li>
-    <li class="dropdown pos-stc">
-      <a href="" class="dropdown-toggle" ng-click="doLogout()">
-        <i class="icon-logout fa-fw"></i>
-        <span>Salir</span>
       </a>
     </li>
   </ul>

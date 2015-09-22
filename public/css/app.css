@@ -764,6 +764,14 @@ body {
   float: left;
   width: 100%;
   padding-bottom: 50px;
+  padding-top: 65px;
+}
+
+.app-content-body>.bg-light {
+  position: fixed;
+  width: 100%;
+  top: 50px;
+  z-index: 2;
 }
 
 .app-footer {
@@ -881,31 +889,32 @@ body {
 }
 
 .navbar-brand {
-  display: inline-block;
-  float: none;
-  height: auto;
-  padding: 0 20px;
+  display: block;
+  padding: 0;
   font-size: 20px;
   font-weight: 700;
   line-height: 50px;
   text-align: center;
 }
 
-.navbar-brand:hover {
-  text-decoration: none;
+.navbar-brand-mobile {
+	display:block;
+	padding:5px 0 0 10px;
 }
 
-.navbar-brand img {
-  display: inline;
-  max-height: 20px;
-  margin-top: -4px;
-  vertical-align: middle;
+.navbar-brand:hover {
+  text-decoration: none;
 }
 
 @media (min-width: 768px) {
   .app-aside,
   .navbar-header {
     width: 200px;
+  }
+  .app-aside {
+  	position: fixed;
+  	height: 100%;
+  	top: 115px;
   }
   .navbar-collapse,
   .app-content,
@@ -2651,6 +2660,10 @@ fieldset[disabled] .i-checks input + i:before {
 
 /*Charts*/
 
+.chart-container {
+	min-height: 263px;
+}
+
 .jqstooltip {
   max-height: 12px;
   padding: 5px 10px !important;
@@ -2964,7 +2977,8 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-dark {
   color: #a6a8b1;
-  background-color: #3a3f51;
+  /*background-color: #3a3f51;*/
+  background: #0A2733;
 }
 
 .bg-dark.lt,
