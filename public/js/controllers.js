@@ -118,9 +118,8 @@ angular.module("climaLaboral")
   $scope.calcFavorable = function(data){
     var favorable = new Array(1);
     favorable[0] = new Array(1);
-    var total = data.reduce(function(a,b){return a+b});
+    var total = data.reduce(function(a,b){return a+b;});
     favorable[0][0] = (100 * data[0])/total;
-    //$scope.vacioFavorable = false ; if(total === 0) $scope.vacioFavorable = true;
     return favorable;
   };
 
@@ -188,10 +187,11 @@ angular.module("climaLaboral")
     $scope.calcAll();
   });
 
-  $scope.calcCompromiso = function(preguntas){
+  $scope.calcKpi = function(preguntas){
     var area = $scope.formUser.area;
     var role = $scope.formUser.role;
     var dataCompromiso = [0, 0, 0];
+    var favorable = [];
     for(var i=0; i<$scope.users.length; i++){
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
@@ -201,35 +201,28 @@ angular.module("climaLaboral")
           else if($scope.users[i].scores[preguntas[j]] < 3) dataCompromiso[2]++;
           else dataCompromiso[1]++;
         }
+        var total = dataCompromiso.reduce(function(a,b){return a+b;});
+        favorable.push((100 * dataCompromiso[0])/total);
+        //console.log(favorable, $scope.users[i].username, i);
       }
     }
-    return dataCompromiso;
+    return favorable;
   };
-
-  $scope.calcMotivadores = function(){
+  $scope.calcUsers = function(){
     var area = $scope.formUser.area;
     var role = $scope.formUser.role;
-    var dataMotivadores = [0,0,0,0,0,0,0,0,0,0];
-    var total = [0,0,0,0,0,0,0,0,0,0];
+    var users = [];
     for(var i=0; i<$scope.users.length; i++){
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
-      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role){
-        for(var j=0; j<$scope.pregMotivadores.length; j++){
-          total[j]++;
-          if($scope.users[i].scores[$scope.pregMotivadores[j]] > 3) dataMotivadores[j]++;
-        }
+      if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role && $scope.users[i].scores.length > 0){
+        users.push([$scope.users[i].username, $scope.users[i].area, $scope.users[i].role]);
       }
     }
-    for(var i=0; i<dataMotivadores.length; i++){
-      dataMotivadores[i] = (100*dataMotivadores[i])/total[i];
-    }
-    $scope.dataMotivadores = dataMotivadores;
-    $scope.vacioMotivadores = 0; for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
-  };
+    return users;
+  }
 
   $scope.calcAll = function(){
-    $scope.showCompromiso = false;
     // Numero de las preguntas de cada kpi
     $scope.pregCompromiso = [3, 4, 5, 6];
     $scope.pregMotivadores = [21, 17, 34, 24, 18, 2, 39, 20, 23, 25];
@@ -244,21 +237,20 @@ angular.module("climaLaboral")
     $scope.pregSeguimiento = [34, 35];
     $scope.pregCondiciones = [36, 37, 38, 39];
     //Calculo de los valores de cada kpi, con las preguntas como parametro
-    $scope.dataPromesa = $scope.calcCompromiso($scope.pregPromesa);
-    $scope.dataCompromiso = $scope.calcCompromiso($scope.pregCompromiso);
-    $scope.dataLiderazgo = $scope.calcCompromiso($scope.pregLiderazgo);
-    $scope.dataEstrategia = $scope.calcCompromiso($scope.pregEstrategia);
-    $scope.dataComunicacion = $scope.calcCompromiso($scope.pregComunicacion);
-    $scope.dataAprendizaje = $scope.calcCompromiso($scope.pregAprendizaje);
-    $scope.dataCooperacion = $scope.calcCompromiso($scope.pregCooperacion);
-    $scope.dataVivir = $scope.calcCompromiso($scope.pregVivir);
-    $scope.dataResponsabilidad = $scope.calcCompromiso($scope.pregResponsabilidad);
-    $scope.dataSeguimiento = $scope.calcCompromiso($scope.pregSeguimiento);
-    $scope.dataCondiciones = $scope.calcCompromiso($scope.pregCondiciones);
+    $scope.dataUsers = $scope.calcUsers();
+    $scope.dataKpi1 = $scope.calcKpi($scope.pregPromesa);
+    $scope.dataKpi2 = $scope.calcKpi($scope.pregCompromiso);
+    $scope.dataKpi3 = $scope.calcKpi($scope.pregLiderazgo);
+    $scope.dataKpi4 = $scope.calcKpi($scope.pregEstrategia);
+    $scope.dataKpi5 = $scope.calcKpi($scope.pregComunicacion);
+    $scope.dataKpi6 = $scope.calcKpi($scope.pregAprendizaje);
+    $scope.dataKpi7 = $scope.calcKpi($scope.pregCooperacion);
+    $scope.dataKpi8 = $scope.calcKpi($scope.pregVivir);
+    $scope.dataKpi9 = $scope.calcKpi($scope.pregResponsabilidad);
+    $scope.dataKpi10 = $scope.calcKpi($scope.pregSeguimiento);
+    $scope.dataKpi11 = $scope.calcKpi($scope.pregCondiciones);
 
   };
-// Datos Grafico Compromiso
-    $scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
 })
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
