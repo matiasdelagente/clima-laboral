@@ -254,7 +254,7 @@ angular.module("climaLaboral")
 })
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
-  $scope.company = "Telefonica";
+  $scope.company = "DHL";
   $scope.formProcessing = false;
   $scope.processing = true;
   userSrvc.get($routeParams.id).success(function(data){
