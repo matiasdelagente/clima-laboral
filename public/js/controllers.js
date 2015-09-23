@@ -18,10 +18,10 @@ angular.module("climaLaboral")
 
   $scope.doLogin = function(){
     $scope.processing = true;
+    $scope.disabled = true;
     $scope.error = "";
-
     Auth.login($scope.loginData.username, $scope.loginData.password).success(function(data){
-      $scope.processing = false;
+      //$scope.processing = false;
       if(data.success){
         Auth.getUser().success(function(data){
           if(data.admin){
