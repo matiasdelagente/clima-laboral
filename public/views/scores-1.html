@@ -42,7 +42,6 @@
             <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
             <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
           </div>
-          <div class="line pull-in"></div>
         </div>
       </div>
     </div>
@@ -54,13 +53,9 @@
             <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
             General.
           </div>
-          <div class="row m-b">
-            <div class="col-xs-12">
-              <div class="sparkline inline">
-                <canvas id="bar" class="chart chart-bar" data="faborableCompromiso" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable"></canvas>
-                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
-              </div>
-            </div>
+          <div class="sparkline inline">
+            <canvas id="bar" class="chart chart-bar" data="faborableCompromiso" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable" style="height:246px"></canvas>
+            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
           </div>
         </div>
       </div>

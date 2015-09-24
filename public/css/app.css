@@ -2661,7 +2661,7 @@ fieldset[disabled] .i-checks input + i:before {
 /*Charts*/
 
 .chart-container {
-	min-height: 263px;
+	height: 290px;
 }
 
 .jqstooltip {
@@ -2977,8 +2977,7 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-dark {
   color: #a6a8b1;
-  /*background-color: #3a3f51;*/
-  background: #0A2733;
+  background: #233845;
 }
 
 .bg-dark.lt,
@@ -3023,7 +3022,7 @@ fieldset[disabled] .i-checks input + i:before {
 .bg-dark .nav > li:focus > a,
 .bg-dark .nav > li.active > a {
   color: #ffffff;
-  background-color: #2e3344;
+  background-color: #1C2E3B;
 }
 
 .bg-dark .nav > li > a {
@@ -3032,7 +3031,7 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-dark .nav > li > a:hover,
 .bg-dark .nav > li > a:focus {
-  background-color: #32374a;
+  /*background-color: #32374a;*/
 }
 
 .bg-dark .nav .open > a {
