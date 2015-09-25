@@ -112,14 +112,17 @@ angular.module("climaLaboral")
       dataMotivadores[i] = (100*dataMotivadores[i])/total[i];
     }
     $scope.dataMotivadores = dataMotivadores;
-    $scope.vacioMotivadores = 0; for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
+    $scope.vacioMotivadores = null;
+    for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
+    $scope.showMotivadores = true;
+    if (isNaN($scope.vacioMotivadores)) $scope.showMotivadores = false;
   };
 
   $scope.calcFavorable = function(data){
     var favorable = new Array(1);
     favorable[0] = new Array(1);
     var total = data.reduce(function(a,b){return a+b;});
-    favorable[0][0] = (100 * data[0])/total;
+    favorable[0][0] = ((100 * data[0])/total).toFixed();
     return favorable;
   };
 
@@ -190,12 +193,12 @@ angular.module("climaLaboral")
   $scope.calcKpi = function(preguntas){
     var area = $scope.formUser.area;
     var role = $scope.formUser.role;
-    var dataCompromiso = [0, 0, 0];
     var favorable = [];
     for(var i=0; i<$scope.users.length; i++){
       if(!$scope.formUser.area) area = $scope.users[i].area;
       if(!$scope.formUser.role) role = $scope.users[i].role;
       if($scope.users[i].username != "admin" && $scope.users[i].area === area && $scope.users[i].role === role && $scope.users[i].scores.length > 0){
+        var dataCompromiso = [0, 0, 0];
         for(var j=0; j<preguntas.length; j++){
           if($scope.users[i].scores[preguntas[j]] > 3) dataCompromiso[0]++;
           else if($scope.users[i].scores[preguntas[j]] < 3) dataCompromiso[2]++;
@@ -203,7 +206,7 @@ angular.module("climaLaboral")
         }
         var total = dataCompromiso.reduce(function(a,b){return a+b;});
         favorable.push((100 * dataCompromiso[0])/total);
-        //console.log(favorable, $scope.users[i].username, i);
+        if($scope.users[i].username == 'fran4')console.log(dataCompromiso[0]);
       }
     }
     return favorable;
