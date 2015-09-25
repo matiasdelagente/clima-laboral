@@ -4,34 +4,40 @@
 </div>
 <div class="wrapper-md">
     <h4>
-      <a href="#/user/add" class="btn btn-default"><span class="glyphicon glyphicon-plus"> Agregar Usuario</span></a>
+      <a href="#/user/add" class="btn btn-info">
+      	<span class="glyphicon glyphicon-plus"> Agregar usuario</span>
+      </a>
     </h4>
   <div class="jumbotron text-center" ng-show="processing">
     <span class="glyphicon glyphicon-repeat spinner"><p>Loading Users</p></span>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th class="col-md-1">ID</th>
-        <th class="col-md-1">Usuario</th>
-        <th class="col-md-1">Admin</th>
-        <th class="col-md-1">Gerencia</th>
-        <th class="col-md-1">Rol</th>
-        <th class="col-md-1"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="person in users">
-        <td class="col-md-1">{{person._id}}</td>
-        <td class="col-md-1">{{person.username}}</td>
-        <td class="col-md-1">{{person.admin}}</td>
-        <td class="col-md-1">{{person.area}}</td>
-        <td class="col-md-1">{{person.role}}</td>
-        <td class="col-md-1">
-          <a href="#/users/{{person._id}}" class="btn btn-danger">Editar</a>
-          <a href="" ng-click="deleteUser(person)" class="btn btn-primary">Borrar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="panel panel-default">
+	  <div class="table-responsive">
+		  <table class="table table-striped">
+			 <thead>
+				<tr>
+				  <th class="col-md-1">ID</th>
+				  <th class="col-md-1">Usuario</th>
+				  <th class="col-md-1">Admin</th>
+				  <th class="col-md-1">Gerencia</th>
+				  <th class="col-md-1">Rol</th>
+				  <th class="col-md-1"></th>
+				</tr>
+			 </thead>
+			 <tbody>
+				<tr ng-repeat="person in users">
+				  <td class="col-md-1">{{person._id}}</td>
+				  <td class="col-md-1">{{person.username}}</td>
+				  <td class="col-md-1">{{person.admin}}</td>
+				  <td class="col-md-1">{{person.area}}</td>
+				  <td class="col-md-1">{{person.role}}</td>
+				  <td class="col-md-1" nowrap>
+				    <a href="#/users/{{person._id}}" class="btn btn-danger">Editar</a>
+				    <a href="" ng-click="deleteUser(person)" class="btn btn-primary">Borrar</a>
+				  </td>
+				</tr>
+			 </tbody>
+		  </table>
+		</div>
+	</div>
 </div>

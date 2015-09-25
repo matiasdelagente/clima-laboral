@@ -1,8 +1,42 @@
-
-<div class="alert alert-success" role="alert">
-  <a href="#/scores-1" class="alert-link">Haga click Aqui para dirigirse a los resultados</a>
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3" ng-if="user.admin && loggedIn">
+		<i class="icon-folder-alt fa-fw"></i> Valoraciones
+	</h1>
+	<h1 class="m-n font-thin h3" ng-if="!user.admin && loggedIn">
+		<i class="icon-home fa-fw"></i> Mis Proyectos
+	</h1>
 </div>
-
-<div class="alert alert-success" role="alert">
-  <a href="#/users" class="alert-link">Haga click aqui para dirigirse a los usuarios</a>
+<div class="wrapper-md">
+	<div class="list-group list-group-lg list-group-sp" ng-if="user.admin && loggedIn">
+		<a href="#/scores-1" class="list-group-item clearfix border-left">
+			<h1 class="m-n h3 text-black">Clima Laboral</h1>
+			<small class="text-muted clear">Started Wed. March 5, 2015</small>
+		</a>
+	</div>
+	<div class="panel wrapper" ng-if="!user.admin && loggedIn">
+		<div class="row">
+			<div class="col-xs-8">
+				<br>
+				<h1 class="m-n h3 text-black">Clima Laboral</h1><br>
+				<a href="#/questions/{{user._id}}" class="btn btn-sm btn-primary padder-md m-b">Take Evaluation</a>
+			</div>
+			<div class="col-xs-4 text-center">
+				<div ui-jq="easyPieChart" ui-options="{
+					percent: 75,
+					lineWidth: 4,
+					trackColor: '#e8eff0',
+					barColor: '#7266ba',
+					scaleColor: false,
+					size: 115,
+					rotate: 90,
+					lineCap: 'butt'
+				}" class="inline m-t easyPieChart" style="width: 90px; height: 90px; line-height: 90px">
+					<div>
+						<span class="text-primary h4">75%</span>
+					</div>
+					<canvas width="90" height="90"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

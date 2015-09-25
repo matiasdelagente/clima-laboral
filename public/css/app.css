@@ -2658,6 +2658,20 @@ fieldset[disabled] .i-checks input + i:before {
   color: #fff !important;
 }
 
+.border-left {
+	padding-left:25px;
+	border-left:10px solid #93D55F;
+}
+
+.input-login {
+	height:48px;
+	border-radius:0;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+	pointer-events: inherit;
+}
+
 /*Charts*/
 
 .chart-container {
