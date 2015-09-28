@@ -1,24 +1,25 @@
 <div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3">Cuestionario</h1>
+  <h1 class="m-n font-thin h3"><i class="glyphicon glyphicon-edit"></i> Cuestionario</h1>
 </div>
 <div class="wrapper-md">
   <div class="jumbotron text-center" ng-if="processing">
     <span class="glyphicon glyphicon-repeat spinner"></span>
   </div>
   <div class="row" ng-if="!processing">
-    <div class="col-sm-10">
+    <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading font-bold">
+        <!--<div class="panel-heading font-bold">
           Leyendas: TD (Totalmente de acuerdo) - D (De acuerdo) - N (Ni de acuerdo ni en desacuerdo) - D (En desacuerdo) - TD (Totalmente en desacuerdo)
-        </div>
+        </div>-->
           <div class="panel-body">
             <form class="form" name="form" ng-submit="add()">
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  1. Si yo fuera cliente de {{company}}, estaría extremadamente satisfecho con la calidad de los productos y servicios que recibo.
-                </label>
-                <div class="col-md-4">
-                      <label class="i-checks i-checks-lg">
+                <label class="col-md-6 control-label">1. Si yo fuera cliente de {{company}}, estaría extremadamente satisfecho con la calidad de los productos y servicios que recibo.</label>
+                <div class="col-md-6">
+                	<div class="form-group">
+							<input name="respuesta_1" ui-jq="slider" ui-options="{ min: 0, max: 5, step: 1, value: 4 }" class="slider slider-horizontal form-control" type="text"> 4
+						</div>
+                  <!--    <label class="i-checks i-checks-lg">
                         <input type="radio" name="respuesta_1" id="respuesta_1_1" ng-value=1 ng-model="user.scores[0]" ng-required="true"><i></i>TD &nbsp; &nbsp;
                       </label>
                       <label class="i-checks i-checks-lg">
@@ -32,7 +33,7 @@
                       </label>
                       <label class="i-checks i-checks-lg">
                         <input type="radio" name="respuesta_1" id="respuesta_1_5" ng-value=5 ng-model="user.scores[0]" ng-required="true"><i></i>TA &nbsp; &nbsp;
-                      </label>
+                      </label>-->
                 </div>
               </div>
               <div class="line line-dashed b-b line-lg pull-in"></div>

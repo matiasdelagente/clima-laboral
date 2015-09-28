@@ -42,6 +42,7 @@ angular.module("app.routes", [])
   })
   .when('/questions/:id',{
     controller: "AddCtrl",
-    templateUrl: "./views/add.html"
+    //templateUrl: "./views/add.html"
+    templateUrl: "./views/thanks.html"
   })
 })

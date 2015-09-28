@@ -6,14 +6,17 @@
     <!-- nav -->
     <nav ui-nav class="navi clearfix">
       <!-- list -->
-      <ul class="nav" ng-if=" url == '/scores-1' || url == '/scores-2' || url == '/scores-3' ">
+      <ul class="nav">
+        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+          <span translate="aside.nav.components.COMPONENTS">Reports</span>
+        </li>
         <li>
           <a href="#/scores-1" class="auto">
             <span class="pull-right text-muted">
               <i class="fa fa-fw fa-angle-right text"></i>
               <i class="fa fa-fw fa-angle-down text-active"></i>
             </span>
-            <span>Compromiso del Empleado</span>
+            <span><i class="glyphicon glyphicon-thumbs-up"></i>&nbsp; Compromiso</span>
           </a>
         </li>
         <li>
@@ -22,7 +25,7 @@
               <i class="fa fa-fw fa-angle-right text"></i>
               <i class="fa fa-fw fa-angle-down text-active"></i>
             </span>
-            <span>KPI's</span>
+            <span><i class="glyphicon glyphicon-cog"></i>&nbsp; KPI's</span>
           </a>
         </li>
         <li>
@@ -31,7 +34,7 @@
               <i class="fa fa-fw fa-angle-right text"></i>
               <i class="fa fa-fw fa-angle-down text-active"></i>
             </span>
-            <span>Detalle por persona</span>
+            <span><i class="glyphicon glyphicon-user"></i>&nbsp; Individual</span>
           </a>
         </li>
       </ul>
