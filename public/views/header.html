@@ -10,7 +10,7 @@
     <img src="../img/logo-compacto.png" alt="Clima Laboral" />
   </a>
   <a href="#/" class="navbar-brand-mobile visible-xs">
-    <img src="../img/logo-1.png" alt="Clima Laboral" height="40" />
+    <img src="../img/logo-compacto-alpha.png" alt="Clima Laboral" height="40" />
   </a>
   <!-- / brand -->
 </div>
@@ -21,8 +21,8 @@
   <ul class="nav navbar-nav hidden-sm" ng-if="loggedIn">
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/" class="dropdown-toggle">
-        <i class="icon-folder-alt fa-fw"></i>
-        <span>Valoraciones</span>
+        <i class="fa fa-folder-open-o"></i>
+        <span>Instrumentos</span>
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
@@ -33,7 +33,7 @@
     </li>
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3'}">
-        <i class="icon-folder-alt fa-fw"></i>
+        <i class="fa fa-area-chart"></i>
         <span>Resultados</span>
       </a>
     </li>
@@ -45,7 +45,7 @@
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
       <a href="#/scores/{{user._id}}" class="dropdown-toggle">
-        <i class="icon-folder-alt fa-fw"></i>
+        <i class="fa fa-area-chart"></i>
         <span>Resultados</span>
       </a>
     </li>
