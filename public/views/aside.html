@@ -4,11 +4,11 @@
   -->
   <div class="navi-wrap">
     <!-- nav -->
-    <nav ui-nav class="navi clearfix">
+    <nav ui-nav class="navi clearfix" ng-if=" url == '/scores-1' || url == '/scores-2' || url == '/scores-3' ">
       <!-- list -->
       <ul class="nav">
         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Reports</span>
+          <span translate="aside.nav.components.COMPONENTS">Reportes</span>
         </li>
         <li>
           <a href="#/scores-1" class="auto">
@@ -42,5 +42,28 @@
 
     </nav>
     <!-- nav -->
+
+    <nav ui-nav class="navi clearfix" id="usersMenu" ng-if=" url == '/users' ">
+      <!-- list -->
+      <ul class="nav">
+        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+          <span translate="aside.nav.components.COMPONENTS">Usuarios</span>
+        </li>
+        <li>
+          <a href="#/users" class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <span><i class="glyphicon glyphicon-user"></i>&nbsp; Lista</span>
+          </a>
+        </li>
+      </ul>
+      <!-- / list -->
+
+    </nav>
+    <!-- nav -->
+
+
   </div>
 </div>

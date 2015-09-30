@@ -28,12 +28,15 @@ angular.module("climaLaboral")
             $location.path('/scores-1');
           }
           else if(!data.admin){
-            $location.path('/questions/'+ data._id);
+            // $location.path('/questions/'+ data._id);
+            $location.path('/');
           }
         });
       }
       else {
         $scope.error = data.message;
+        $scope.disabled = false;
+        $scope.processing = false;
       }
 
     });
