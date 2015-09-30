@@ -34,6 +34,8 @@ angular.module("climaLaboral")
       }
       else {
         $scope.error = data.message;
+        $scope.disabled = true;
+
       }
 
     });
