@@ -43,12 +43,15 @@
         <span>Cuestionario</span>
       </a>
     </li>
+    
+    <!-- MENU DE RESULTADOS OCULTO PARA EL USUARIO
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
       <a href="#/scores/{{user._id}}" class="dropdown-toggle">
         <i class="fa fa-area-chart"></i>
         <span>Resultados</span>
       </a>
-    </li>
+    </li>-->
+
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/users" class="dropdown-toggle">
         <i class="icon-users fa-fw"></i>
