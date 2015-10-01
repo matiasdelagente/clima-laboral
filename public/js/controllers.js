@@ -29,7 +29,7 @@ angular.module("climaLaboral")
       if(data.success){
         Auth.getUser().success(function(data){
           if(data.admin){
-            $location.path('/scores-1');
+            $location.path('/');
           }
           else if(!data.admin){
             // $location.path('/questions/'+ data._id);
@@ -49,7 +49,7 @@ angular.module("climaLaboral")
   $scope.doLogout = function(){
     Auth.logout();
     $scope.user = {};
-    $location.path('/');
+    $location.path('/login');
   };
 
   $scope.route = $route;
