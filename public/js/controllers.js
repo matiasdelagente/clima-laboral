@@ -1,6 +1,10 @@
 angular.module("climaLaboral")
 
 .controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
+  $scope.company = "Fostering Talent"
+  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
+  
   $scope.loggedIn = Auth.isLoggedIn();
   $rootScope.$on('$routeChangeStart',function(){
     if(Auth.isLoggedIn()){
@@ -55,20 +59,18 @@ angular.module("climaLaboral")
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
-    'En DHL la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
-    'DHL está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+    'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+    ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
     'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
     'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
-    'Tengo confianza en el futuro de DHL. (Estrategia)',
+    'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
     'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
     'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
     'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
     'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
-    'DHL me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+    ''+$scope.company+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
   userSrvc.all().success(function(data){
@@ -182,8 +184,6 @@ angular.module("climaLaboral")
 
 .controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.formUser = {area: null, role: null};
 
   userSrvc.all().success(function(data){
@@ -260,7 +260,6 @@ angular.module("climaLaboral")
 })
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
-  $scope.company = "DHL";
   $scope.formProcessing = false;
   $scope.processing = true;
   userSrvc.get($routeParams.id).success(function(data){
@@ -295,8 +294,6 @@ angular.module("climaLaboral")
 
 .controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
   $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
 
   userSrvc.get($routeParams.id).success(function(data){
     $scope.formUser = data;
@@ -314,8 +311,7 @@ angular.module("climaLaboral")
 
 .controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc){
   $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
+
 
   $scope.save = function(){
     $scope.processing = true;

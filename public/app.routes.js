@@ -38,11 +38,12 @@ angular.module("app.routes", [])
   })
   .when("/scores/:id",{
     controller: "userScoresCtrl",
-    templateUrl: "./views/user-scores.html"
+    //templateUrl: "./views/user-scores.html"
+    templateUrl: "./views/thanks.html"
   })
   .when('/questions/:id',{
     controller: "AddCtrl",
-    //templateUrl: "./views/add.html"
-    templateUrl: "./views/thanks.html"
+    templateUrl: "./views/add.html"
+    //templateUrl: "./views/thanks.html"
   })
 })
