@@ -35,13 +35,22 @@
       </div>
   </div>
 </div>
+
   <div class="row">
+    
+
+    <!-- TÍTULO -->
+    <div class="bg-light lter b-b wrapper-md ng-scope">
+      <h1 class="m-n font-thin h3">Compromiso del empleado y sus motivadores</h1>
+    </div>
+    <BR>
+
+    <!-- GRAFICO IZQUIERDA -->
     <div class="col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading font-bold">Compromiso del empleado</div>
         <div class="panel-body text-center">
           <div class="m-b-md">
-            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
+            <p class="h3 font-thin">Distribución de Respuestas</p>
           </div>
           <div class="sparkline inline">
             <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
@@ -50,12 +59,13 @@
         </div>
       </div>
     </div>
+
+    <!-- GRAFICO DERECHA -->
     <div class="col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading font-bold">2015 % Favorable</div>
         <div class="panel-body text-center">
           <div class="m-b-md">
-            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
+            <p class="h3 font-thin">Comparación de Grupos y Evolución en el Tiempo</p>
           </div>
           <div class="sparkline inline">
             <canvas id="bar" class="chart chart-bar" data="faborableCompromiso" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable" style="height:246px"></canvas>
@@ -64,7 +74,10 @@
         </div>
       </div>
     </div>
+
+    
   </div>
+
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
