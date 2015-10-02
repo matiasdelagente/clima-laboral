@@ -9,6 +9,17 @@ angular.module("app.routes", [])
     controller: "MainCtrl",
     templateUrl: "./views/login.html"
   })
+
+  .when('/companies',{
+    controller: "CompaniesCtrl",
+    templateUrl: "./views/companies/all.html"
+  })
+
+   .when('/companies/add',{
+    controller: "AddCompaniesCtrl",
+    templateUrl: "./views/edit-companies.html"
+  })
+
   .when('/users',{
     controller: "UserCtrl",
     templateUrl: "./views/users/all.html"

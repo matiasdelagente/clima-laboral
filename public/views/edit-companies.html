@@ -1,0 +1,66 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" ng-if="!formCompany._id"><i class="icon-diamond"></i> Crear Empresa</h1>
+  <h1 class="m-n font-thin h3" ng-if="formCompany._id">Editar Empresa</h1>
+</div>
+<div class="wrapper-md">
+
+
+  
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold">
+        Agregar Empresa
+    </div>
+    <div class="panel-body">
+      <form name="form" ng-submit="" class="form-validation">
+
+
+        <div class="form-group">
+          <label for="username">Empresa</label>
+          <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre de la empresa" ng-model="formCompany.username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico Principal</label>
+          <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo electrónico principal de la empresa" ng-model="formCompany.email" required>
+        </div>
+
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        
+
+        <!-- ACA TIENE QUE SELECCIONAR LOS DISTINTOS INSTRUMENTOS, HOY SOLO PUEDE ELEGIR CLIMA-LABORAL, ES UN FIX
+        <select ui-jq="chosen" multiple="" class="w-md" style="display: none;">
+              <option value="AK">Alaska</option>
+              <option value="HI">Hawaii</option>
+              <option value="CA">California</option>
+              <option value="NV">Nevada</option>
+              <option value="OR">Oregon</option>
+              <option value="WA">Washington</option>
+            </select>
+        -->
+        <div class="form-group">
+          <label for="assessments">Instrumentos Habilitados</label>
+          <select class="form-control" name="assessments" ng-model="formCompany.assessments" ng-options="">
+            <option value=''>- Seleccione los instrumentos -</option>
+          </select>
+        </div>
+
+
+
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
+            <span ng-if="!processing">Guardar</span>
+            <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+  
+
+
