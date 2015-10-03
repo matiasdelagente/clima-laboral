@@ -2,7 +2,7 @@ angular.module("climaLaboral")
 
 .controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
   $scope.company = "Fostering Talent"
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.areas = ["Recursos Humanos", "Contaduría",  "Sistemas", "Marketing", "Administración", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.assessments = ["Clima Laboral", "Felicímetro"];
   

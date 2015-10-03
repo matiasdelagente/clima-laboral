@@ -1,40 +1,127 @@
 <div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3" ng-if="!formUser._id">Crear Usuario</h1>
-  <h1 class="m-n font-thin h3" ng-if="formUser._id">Editar Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="!formUser._id"><i class="icon-users"></i> Crear Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="formUser._id"><i class="icon-users"></i> Editar Usuario</h1>
 </div>
-<div class="wrapper-md">
-  <div class="col-sm-4 col-sm-offset-4">
-    <form name="form" ng-submit="save()" class="form-validation">
-      <div class="form-group">
-        <label for="username">Usuario</label>
-        <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre del usuario" ng-model="formUser.username" required>
+
+
+<div class="wrapper-md ng-scope">
+
+  <div class="row">
+
+    <!-- SUBIR FOTO SI ES NUEVO -->
+    <div class="col-sm-3" ng-if="!formUser._id">
+      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b" nv-file-over="" over-class="b-info" uploader="uploader">
+          Arrastra la Foto aquí.
       </div>
-      <div class="form-group">
-        <label for="username">Password</label>
-        <input class="form-control" type="password" name="password" placeholder="Ingrese el password del usuario" ng-model="formUser.password">
+    </div>
+
+    <!-- FOTO SI EDITA -->
+    <div class="col-sm-3" ng-if="formUser._id">
+      <div class="thumb-lg pull-left m-r">
+        <img src="img/a0.jpg" class="img-circle">
       </div>
-      <div class="form-group">
-        <label for="area">Gerencia</label>
-        <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-          <option value=''>- Seleccione la gerencia del usuario -</option>
-        </select>
+      <div class="clear m-b">
+        <div class="m-b m-t-sm">
+          <span class="h3 text-black">{{formUser.username}}</span>
+          <p class="m-b">
+            <small>{{formUser.role}}</small>
+            <br>
+            <small class="text-muted">{{formUser.area}}</small> 
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="role">Rol</label>
-        <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-          <option value=''>- Seleccione el rol del usuario -</option>
-        </select>
+    </div>
+    
+    <!-- FORMULARIO -->
+    <div class="col-sm-9">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold" ng-if="!formUser._id">Crear Usuario</div>
+        <div class="panel-heading font-bold" ng-if="formUser._id">Editar Usuario</div>
+        <div class="panel-body">
+
+          <form name="form" ng-submit="save()" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
+
+
+
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Usuario</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre de la persona" ng-model="formUser.username" required>
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Password</label>
+              <div class="col-sm-9">
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password de la persona" ng-model="formUser.password" required="" tabindex="0" aria-required="true" aria-invalid="true">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Confirmar</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control ng-pristine ng-untouched ng-valid-validator ng-invalid ng-invalid-required" name="confirm_password" placeholder="Ingrese nuevamente el password" required="" ng-model="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' " tabindex="0" aria-required="true" aria-invalid="true">
+                <span ng-show="form.confirm_password.$error.validator" aria-hidden="true" class="ng-hide">Las Contraseñas no coinciden!</span>
+              </div>
+            </div>
+
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Correo Electrónico</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo electrónico de la persona" ng-model="formUser.email" required>
+                </div>
+            </div>
+
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <label for="area" class="col-sm-3 control-label">Gerencia</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
+                <option value=''>- Seleccione la gerencia a la que pertenece -</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="role" class="col-sm-3 control-label">Rol</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
+                  <option value=''>- Seleccione el rol de la persona -</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            
+
+
+            <div class="form-group">
+              <div class="col-sm-9 col-sm-offset-3">
+                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
+                  <span ng-if="!processing && !formUser._id">Crear</span>
+                  <span ng-if="!processing && formUser._id">Guardar cambios</span>
+                  <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
+              </div>
+            </div>
+
+
+
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email">Correo electronico</label>
-        <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo eletronico del usuario" ng-model="formUser.email" required>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
-          <span ng-if="!processing">Guardar</span>
-          <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-        </button>
-      </div>
-    </form>
   </div>
 </div>
+  
+
+

@@ -78,6 +78,7 @@
     
   </div>
 
+  <!-- TABLA MOTIVADORES -->
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
@@ -86,7 +87,7 @@
         </div>
         <div class="table-responsive">
           <h3 ng-if="!showMotivadores" class="text-center">No hay datos disponibles para los filtros seleccionados</h3>
-          <table ng-if="!showMotivadores" class="table table-striped m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
+          <table ng-if="showMotivadores" class="table table-striped m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
             <thead>
               <tr>
                   <th data-toggle="true">Pregunta</th>
@@ -99,10 +100,10 @@
             <tbody>
               <tr ng-repeat="motivador in dataMotivadores track by $index">
                   <td>{{questionsMotivadores[$index]}}</td>
-                  <td><span class="label bg-success" title="Active">{{motivador | number:0}} %</span></td>
-                  <td>Sin Datos</td>
-                  <td>Sin Datos</td>
-                  <td>Sin Datos</td>
+                  <td><span class="label bg-success" ng-class="{'bg-success' : motivador > 79, 'bg-warning' : motivador > 59 && motivador < 80, 'bg-danger' : motivador < 60}" title="Active">{{motivador | number:0}} %</span></td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
               </tr>
             </tbody>
           </table>
