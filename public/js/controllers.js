@@ -332,6 +332,10 @@ angular.module("climaLaboral")
   };
 })
 
+.controller("ListUserCtrl", function(){
+
+})
+
 .controller("userScoresCtrl", function($scope, $routeParams,userSrvc){
   $scope.processing = true;
 

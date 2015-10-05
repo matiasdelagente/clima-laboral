@@ -24,6 +24,10 @@ angular.module("app.routes", [])
     controller: "UserCtrl",
     templateUrl: "./views/users/all.html"
   })
+  .when('/users/list',{
+    controller: "ListUserCtrl",
+    templateUrl: "./views/list-import.html"
+  })
   .when('/users/:id',{
     controller: "EditUserCtrl",
     templateUrl: "./views/edit-user.html"
