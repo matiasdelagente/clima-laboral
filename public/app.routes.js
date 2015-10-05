@@ -10,6 +10,11 @@ angular.module("app.routes", [])
     templateUrl: "./views/login.html"
   })
 
+  .when('/prices',{
+    controller: "PriceCtrl",
+    templateUrl: "./views/prices.html"
+  })
+
   .when('/companies',{
     controller: "CompaniesCtrl",
     templateUrl: "./views/companies/all.html"

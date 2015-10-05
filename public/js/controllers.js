@@ -285,6 +285,10 @@ angular.module("climaLaboral")
 })
 
 
+.controller("PriceCtrl",function(){
+  
+})
+
 .controller("UserCtrl",function($scope, userSrvc){
   $scope.processing = true;
   userSrvc.all().success(function(data){

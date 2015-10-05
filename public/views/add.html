@@ -7,6 +7,23 @@
   </div>
   <div class="row" ng-if="!processing">
     <div class="col-md-12">
+      
+      <div class="wrapper-lg">
+            <h2 class="m-t-none text-primary">Bienvenido al cuestionario sobre Clima Laboral</h2>
+            <div>
+              <p>Responde qué tan de acuerdo estás con las siguientes afirmaciones.
+              <br>Es importante que sepas que el cuestionaro <b>es anónimo</b> y nadie más que vos podrá acceder a tus respuestas. 
+            </div>
+            <!--
+            <div class="line line-lg b-b b-light"></div>
+            <div class="text-muted">
+              <i class="fa fa-user text-muted"></i> by <a href="" class="m-r-sm">Admin</a>
+              <i class="fa fa-clock-o text-muted"></i> Feb 15, 2013
+              <a href="" class="m-l-sm"><i class="fa fa-comment-o text-muted"></i> 4 comments</a>
+            </div>
+            -->
+      </div>
+
       <div class="panel panel-default">
         <!--<div class="panel-heading font-bold">
           Leyendas: TD (Totalmente de acuerdo) - D (De acuerdo) - N (Ni de acuerdo ni en desacuerdo) - D (En desacuerdo) - TD (Totalmente en desacuerdo)
@@ -15,929 +32,1200 @@
             <form class="form" name="form" ng-submit="add()">
 
               <div class="form-group">
-                <label class="col-md-6 control-label">1. Si yo fuera cliente de {{company}}, estaría extremadamente satisfecho con la calidad de los productos y servicios que recibo.</label>
+                <label class="col-md-6 control-label">1. Si yo fuera cliente de <b>{{company}}</b>, estaría extremadamente satisfecho con la calidad de los productos y servicios que recibo.</label>
+                
+
                 <div class="col-md-6">
                 	<div class="form-group">
-							<input name="respuesta_1" ui-jq="slider" ui-options="{ min: 0, max: 5, step: 1, value: 4 }" class="slider slider-horizontal form-control" type="text"> 4
-						</div>
-                  <!--    <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_1" id="respuesta_1_1" ng-value=1 ng-model="user.scores[0]" ng-required="true"><i></i>TD &nbsp; &nbsp;
-                      </label>
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
+							<!--<input name="respuesta_1" ui-jq="slider" ui-options="{ min: 0, max: 5, step: 1, value: 4 }" class="slider slider-horizontal form-control" type="text"> 4-->
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_1" id="respuesta_1_2" ng-value=2 ng-model="user.scores[0]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_1" id="respuesta_1_1" ng-value=1 ng-model="user.scores[0]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_1" id="respuesta_1_3" ng-value=3 ng-model="user.scores[0]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_1" id="respuesta_1_2" ng-value=2 ng-model="user.scores[0]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_1" id="respuesta_1_4" ng-value=4 ng-model="user.scores[0]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_1" id="respuesta_1_3" ng-value=3 ng-model="user.scores[0]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_1" id="respuesta_1_5" ng-value=5 ng-model="user.scores[0]" ng-required="true"><i></i>TA &nbsp; &nbsp;
-                      </label>-->
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_1" id="respuesta_1_4" ng-value=4 ng-model="user.scores[0]" ng-required="true"><i></i> &nbsp; &nbsp;
+                      </label>
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_1" id="respuesta_1_5" ng-value=5 ng-model="user.scores[0]" ng-required="true"><i></i> Totalmente de Acuerdo
+                      </label>
+                    </div>
                 </div>
               </div>
+             
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   2. En mi equipo de trabajo proporcionamos servicios y productos que facilitan la vida a nuestros clientes.
                 </label>
-                <div class="col-md-4">
+
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_2" id="respuesta_2_1" ng-value=1 ng-model="user.scores[1]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_2" id="respuesta_2_1" ng-value=1 ng-model="user.scores[1]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_2" id="respuesta_2_2" ng-value=2 ng-model="user.scores[1]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_2" id="respuesta_2_2" ng-value=2 ng-model="user.scores[1]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_2" id="respuesta_2_3" ng-value=3 ng-model="user.scores[1]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_2" id="respuesta_2_3" ng-value=3 ng-model="user.scores[1]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_2" id="respuesta_2_4" ng-value=4 ng-model="user.scores[1]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_2" id="respuesta_2_4" ng-value=4 ng-model="user.scores[1]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_2" id="respuesta_2_5" ng-value=5 ng-model="user.scores[1]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_2" id="respuesta_2_5" ng-value=5 ng-model="user.scores[1]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+              
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   3. Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_3" id="respuesta_3_1" ng-value=1 ng-model="user.scores[2]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_3" id="respuesta_3_1" ng-value=1 ng-model="user.scores[2]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_3" id="respuesta_3_2" ng-value=2 ng-model="user.scores[2]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_3" id="respuesta_3_2" ng-value=2 ng-model="user.scores[2]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_3" id="respuesta_3_3" ng-value=3 ng-model="user.scores[2]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_3" id="respuesta_3_3" ng-value=3 ng-model="user.scores[2]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_3" id="respuesta_3_4" ng-value=4 ng-model="user.scores[2]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_3" id="respuesta_3_4" ng-value=4 ng-model="user.scores[2]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_3" id="respuesta_3_5" ng-value=5 ng-model="user.scores[2]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_3" id="respuesta_3_5" ng-value=5 ng-model="user.scores[2]" ng-required="true"><i></i>Totalmente de Acuerdo &nbsp; &nbsp;
                       </label>
+                    </div>
                 </div>
               </div>
+              
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+             
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  4. Yo recomendaría a la empresa {{company}} como un excelente lugar para trabajar.
+                <label class="col-md-6 control-label">
+                  4. Yo recomendaría a la empresa <b>{{company}}</b> como un excelente lugar para trabajar.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_4" id="respuesta_4_1" ng-value=1 ng-model="user.scores[3]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_4" id="respuesta_4_1" ng-value=1 ng-model="user.scores[3]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_4" id="respuesta_4_2" ng-value=2 ng-model="user.scores[3]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_4" id="respuesta_4_2" ng-value=2 ng-model="user.scores[3]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_4" id="respuesta_4_3" ng-value=3 ng-model="user.scores[3]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_4" id="respuesta_4_3" ng-value=3 ng-model="user.scores[3]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_4" id="respuesta_4_4" ng-value=4 ng-model="user.scores[3]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_4" id="respuesta_4_4" ng-value=4 ng-model="user.scores[3]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_4" id="respuesta_4_5" ng-value=5 ng-model="user.scores[3]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_4" id="respuesta_4_5" ng-value=5 ng-model="user.scores[3]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                  </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  5. Raramente pienso en buscar trabajo fuera de {{company}}.
+                
+                <label class="col-md-6 control-label">
+                  5. Raramente pienso en buscar trabajo fuera de <b>{{company}}</b>.
                 </label>
-                <div class="col-md-4">
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_5" id="respuesta_5_1" ng-value=1 ng-model="user.scores[4]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_5" id="respuesta_5_1" ng-value=1 ng-model="user.scores[4]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_5" id="respuesta_5_2" ng-value=2 ng-model="user.scores[4]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_5" id="respuesta_5_2" ng-value=2 ng-model="user.scores[4]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_5" id="respuesta_5_3" ng-value=3 ng-model="user.scores[4]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_5" id="respuesta_5_3" ng-value=3 ng-model="user.scores[4]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_5" id="respuesta_5_4" ng-value=4 ng-model="user.scores[4]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_5" id="respuesta_5_4" ng-value=4 ng-model="user.scores[4]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_5" id="respuesta_5_5" ng-value=5 ng-model="user.scores[4]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_5" id="respuesta_5_5" ng-value=5 ng-model="user.scores[4]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  6. Me siento orgulloso de trabajar para {{company}}.
+                <label class="col-md-6 control-label">
+                  6. Me siento orgulloso de trabajar para <b>{{company}}</b>.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_6" id="respuesta_6_1" ng-value=1 ng-model="user.scores[5]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_6" id="respuesta_6_1" ng-value=1 ng-model="user.scores[5]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_6" id="respuesta_6_2" ng-value=2 ng-model="user.scores[5]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_6" id="respuesta_6_2" ng-value=2 ng-model="user.scores[5]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_6" id="respuesta_6_3" ng-value=3 ng-model="user.scores[5]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_6" id="respuesta_6_3" ng-value=3 ng-model="user.scores[5]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_6" id="respuesta_6_4" ng-value=4 ng-model="user.scores[5]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_6" id="respuesta_6_4" ng-value=4 ng-model="user.scores[5]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_6" id="respuesta_6_5" ng-value=5 ng-model="user.scores[5]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_6" id="respuesta_6_5" ng-value=5 ng-model="user.scores[5]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  7. En general, estoy satisfecho con mi trabajo en {{company}}.
+                <label class="col-md-6 control-label">
+                  7. En general, estoy satisfecho con mi trabajo en <b>{{company}}</b>.
                 </label>
-                <div class="col-md-4">
+               <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_7" id="respuesta_7_1" ng-value=1 ng-model="user.scores[6]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_7" id="respuesta_7_1" ng-value=1 ng-model="user.scores[6]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_7" id="respuesta_7_2" ng-value=2 ng-model="user.scores[6]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_7" id="respuesta_7_2" ng-value=2 ng-model="user.scores[6]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_7" id="respuesta_7_3" ng-value=3 ng-model="user.scores[6]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_7" id="respuesta_7_3" ng-value=3 ng-model="user.scores[6]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_7" id="respuesta_7_4" ng-value=4 ng-model="user.scores[6]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_7" id="respuesta_7_4" ng-value=4 ng-model="user.scores[6]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_7" id="respuesta_7_5" ng-value=5 ng-model="user.scores[6]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_7" id="respuesta_7_5" ng-value=5 ng-model="user.scores[6]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+ 
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   8. Mi jefe inmediato demuestra que me valora y aprecia.
                 </label>
-                <div class="col-md-4">
+              
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_8" id="respuesta_8_1" ng-value=1 ng-model="user.scores[7]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_8" id="respuesta_8_1" ng-value=1 ng-model="user.scores[7]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_8" id="respuesta_8_2" ng-value=2 ng-model="user.scores[7]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_8" id="respuesta_8_2" ng-value=2 ng-model="user.scores[7]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_8" id="respuesta_8_3" ng-value=3 ng-model="user.scores[7]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_8" id="respuesta_8_3" ng-value=3 ng-model="user.scores[7]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_8" id="respuesta_8_4" ng-value=4 ng-model="user.scores[7]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_8" id="respuesta_8_4" ng-value=4 ng-model="user.scores[7]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_8" id="respuesta_8_5" ng-value=5 ng-model="user.scores[7]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_8" id="respuesta_8_5" ng-value=5 ng-model="user.scores[7]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   9. Mi jefe inmediato me explica con claridad qué es lo que espera de mí.
                 </label>
-                <div class="col-md-4">
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_9" id="respuesta_9_1" ng-value=1 ng-model="user.scores[8]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_9" id="respuesta_9_1" ng-value=1 ng-model="user.scores[8]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_9" id="respuesta_9_2" ng-value=2 ng-model="user.scores[8]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_9" id="respuesta_9_2" ng-value=2 ng-model="user.scores[8]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_9" id="respuesta_9_3" ng-value=3 ng-model="user.scores[8]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_9" id="respuesta_9_3" ng-value=3 ng-model="user.scores[8]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_9" id="respuesta_9_4" ng-value=4 ng-model="user.scores[8]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_9" id="respuesta_9_4" ng-value=4 ng-model="user.scores[8]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_9" id="respuesta_9_5" ng-value=5 ng-model="user.scores[8]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_9" id="respuesta_9_5" ng-value=5 ng-model="user.scores[8]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   10. Mi jefe inmediato me ha dado retroalimentación continua (con reconocimiento o sugerencias para mejorar) sobre mi desempeño en los últimos 3 meses.
                 </label>
-                <div class="col-md-4">
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_10" id="respuesta_10_1" ng-value=1 ng-model="user.scores[9]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_10" id="respuesta_10_1" ng-value=1 ng-model="user.scores[9]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_10" id="respuesta_10_2" ng-value=2 ng-model="user.scores[9]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_10" id="respuesta_10_2" ng-value=2 ng-model="user.scores[9]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_10" id="respuesta_10_3" ng-value=3 ng-model="user.scores[9]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_10" id="respuesta_10_3" ng-value=3 ng-model="user.scores[9]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_10" id="respuesta_10_4" ng-value=4 ng-model="user.scores[9]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_10" id="respuesta_10_4" ng-value=4 ng-model="user.scores[9]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_10" id="respuesta_10_5" ng-value=5 ng-model="user.scores[9]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_10" id="respuesta_10_5" ng-value=5 ng-model="user.scores[9]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   11. La retroalimentación que recibo de mi jefe inmediato sobre mi desempeño es tan específica, que sé exactamente cómo mejorar o mantener mi desempeño.
                 </label>
-                <div class="col-md-4">
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_11" id="respuesta_11_1" ng-value=1 ng-model="user.scores[10]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_11" id="respuesta_11_1" ng-value=1 ng-model="user.scores[10]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_11" id="respuesta_11_2" ng-value=2 ng-model="user.scores[10]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_11" id="respuesta_11_2" ng-value=2 ng-model="user.scores[10]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_11" id="respuesta_11_3" ng-value=3 ng-model="user.scores[10]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_11" id="respuesta_11_3" ng-value=3 ng-model="user.scores[10]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_11" id="respuesta_11_4" ng-value=4 ng-model="user.scores[10]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_11" id="respuesta_11_4" ng-value=4 ng-model="user.scores[10]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_11" id="respuesta_11_5" ng-value=5 ng-model="user.scores[10]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_11" id="respuesta_11_5" ng-value=5 ng-model="user.scores[10]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   12. Mi jefe inmediato se interesa por lo que me motiva.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_12" id="respuesta_12_1" ng-value=1 ng-model="user.scores[11]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_12" id="respuesta_12_1" ng-value=1 ng-model="user.scores[11]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_12" id="respuesta_12_2" ng-value=2 ng-model="user.scores[11]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_12" id="respuesta_12_2" ng-value=2 ng-model="user.scores[11]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_12" id="respuesta_12_3" ng-value=3 ng-model="user.scores[11]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_12" id="respuesta_12_3" ng-value=3 ng-model="user.scores[11]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_12" id="respuesta_12_4" ng-value=4 ng-model="user.scores[11]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_12" id="respuesta_12_4" ng-value=4 ng-model="user.scores[11]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_12" id="respuesta_12_5" ng-value=5 ng-model="user.scores[11]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_12" id="respuesta_12_5" ng-value=5 ng-model="user.scores[11]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   13. Mi jefe inmediato apoya y motiva mi desarrollo profesional.
                 </label>
-                <div class="col-md-4">
+                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_13" id="respuesta_13_1" ng-value=1 ng-model="user.scores[12]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_13" id="respuesta_13_1" ng-value=1 ng-model="user.scores[12]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_13" id="respuesta_13_2" ng-value=2 ng-model="user.scores[12]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_13" id="respuesta_13_2" ng-value=2 ng-model="user.scores[12]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_13" id="respuesta_13_3" ng-value=3 ng-model="user.scores[12]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_13" id="respuesta_13_3" ng-value=3 ng-model="user.scores[12]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_13" id="respuesta_13_4" ng-value=4 ng-model="user.scores[12]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_13" id="respuesta_13_4" ng-value=4 ng-model="user.scores[12]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_13" id="respuesta_13_5" ng-value=5 ng-model="user.scores[12]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_13" id="respuesta_13_5" ng-value=5 ng-model="user.scores[12]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   14. Mi jefe inmediato cumple sus promesas.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_14" id="respuesta_14_1" ng-value=1 ng-model="user.scores[13]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_14" id="respuesta_14_1" ng-value=1 ng-model="user.scores[13]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_14" id="respuesta_14_2" ng-value=2 ng-model="user.scores[13]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_14" id="respuesta_14_2" ng-value=2 ng-model="user.scores[13]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_14" id="respuesta_14_3" ng-value=3 ng-model="user.scores[13]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_14" id="respuesta_14_3" ng-value=3 ng-model="user.scores[13]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_14" id="respuesta_14_4" ng-value=4 ng-model="user.scores[13]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_14" id="respuesta_14_4" ng-value=4 ng-model="user.scores[13]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_14" id="respuesta_14_5" ng-value=5 ng-model="user.scores[13]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_14" id="respuesta_14_5" ng-value=5 ng-model="user.scores[13]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   15. Mi jefe inmediato me trata con respeto.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_15" id="respuesta_15_1" ng-value=1 ng-model="user.scores[14]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_15" id="respuesta_15_1" ng-value=1 ng-model="user.scores[14]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_15" id="respuesta_15_2" ng-value=2 ng-model="user.scores[14]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_15" id="respuesta_15_2" ng-value=2 ng-model="user.scores[14]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_15" id="respuesta_15_3" ng-value=3 ng-model="user.scores[14]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_15" id="respuesta_15_3" ng-value=3 ng-model="user.scores[14]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_15" id="respuesta_15_4" ng-value=4 ng-model="user.scores[14]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_15" id="respuesta_15_4" ng-value=4 ng-model="user.scores[14]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_15" id="respuesta_15_5" ng-value=5 ng-model="user.scores[14]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_15" id="respuesta_15_5" ng-value=5 ng-model="user.scores[14]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+             
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   16. En general, estoy satisfecho con mi jefe inmediato.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_16" id="respuesta_16_1" ng-value=1 ng-model="user.scores[15]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_16" id="respuesta_16_1" ng-value=1 ng-model="user.scores[15]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_16" id="respuesta_16_2" ng-value=2 ng-model="user.scores[15]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_16" id="respuesta_16_2" ng-value=2 ng-model="user.scores[15]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_16" id="respuesta_16_3" ng-value=3 ng-model="user.scores[15]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_16" id="respuesta_16_3" ng-value=3 ng-model="user.scores[15]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_16" id="respuesta_16_4" ng-value=4 ng-model="user.scores[15]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_16" id="respuesta_16_4" ng-value=4 ng-model="user.scores[15]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_16" id="respuesta_16_5" ng-value=5 ng-model="user.scores[15]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_16" id="respuesta_16_5" ng-value=5 ng-model="user.scores[15]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  17. La Dirección General brinda a los empleados un panorama claro de la dirección de {{company}}.
+                <label class="col-md-6 control-label">
+                  17. La Dirección General brinda a los empleados un panorama claro de la dirección de <b>{{company}}</b>.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_17" id="respuesta_17_1" ng-value=1 ng-model="user.scores[16]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_17" id="respuesta_17_1" ng-value=1 ng-model="user.scores[16]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_17" id="respuesta_17_2" ng-value=2 ng-model="user.scores[16]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_17" id="respuesta_17_2" ng-value=2 ng-model="user.scores[16]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_17" id="respuesta_17_3" ng-value=3 ng-model="user.scores[16]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_17" id="respuesta_17_3" ng-value=3 ng-model="user.scores[16]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_17" id="respuesta_17_4" ng-value=4 ng-model="user.scores[16]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_17" id="respuesta_17_4" ng-value=4 ng-model="user.scores[16]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_17" id="respuesta_17_5" ng-value=5 ng-model="user.scores[16]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_17" id="respuesta_17_5" ng-value=5 ng-model="user.scores[16]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  18. {{company}} está realizando los cambios necesarios para competir eficientemente.
+                <label class="col-md-6 control-label">
+                  18. <b>{{company}}</b> está realizando los cambios necesarios para competir eficientemente.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_18" id="respuesta_18_1" ng-value=1 ng-model="user.scores[17]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_18" id="respuesta_18_1" ng-value=1 ng-model="user.scores[17]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_18" id="respuesta_18_2" ng-value=2 ng-model="user.scores[17]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_18" id="respuesta_18_2" ng-value=2 ng-model="user.scores[17]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_18" id="respuesta_18_3" ng-value=3 ng-model="user.scores[17]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_18" id="respuesta_18_3" ng-value=3 ng-model="user.scores[17]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_18" id="respuesta_18_4" ng-value=4 ng-model="user.scores[17]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_18" id="respuesta_18_4" ng-value=4 ng-model="user.scores[17]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_18" id="respuesta_18_5" ng-value=5 ng-model="user.scores[17]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_18" id="respuesta_18_5" ng-value=5 ng-model="user.scores[17]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  19. Tengo confianza en el futuro de {{company}}.
+                <label class="col-md-6 control-label">
+                  19. Tengo confianza en el futuro de <b>{{company}}</b>.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_19" id="respuesta_19_1" ng-value=1 ng-model="user.scores[18]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_19" id="respuesta_19_1" ng-value=1 ng-model="user.scores[18]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_19" id="respuesta_19_2" ng-value=2 ng-model="user.scores[18]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_19" id="respuesta_19_2" ng-value=2 ng-model="user.scores[18]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_19" id="respuesta_19_3" ng-value=3 ng-model="user.scores[18]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_19" id="respuesta_19_3" ng-value=3 ng-model="user.scores[18]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_19" id="respuesta_19_4" ng-value=4 ng-model="user.scores[18]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_19" id="respuesta_19_4" ng-value=4 ng-model="user.scores[18]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_19" id="respuesta_19_5" ng-value=5 ng-model="user.scores[18]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_19" id="respuesta_19_5" ng-value=5 ng-model="user.scores[18]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  20. Puedo explicar la estrategia y visión de {{company}} a un nuevo compañero de trabajo.
+                <label class="col-md-6 control-label">
+                  20. Puedo explicar la estrategia y visión de <b>{{company}}</b> a un nuevo compañero de trabajo.
                 </label>
-                <div class="col-md-4">
+               <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_20" id="respuesta_20_1" ng-value=1 ng-model="user.scores[19]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_20" id="respuesta_20_1" ng-value=1 ng-model="user.scores[19]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_20" id="respuesta_20_2" ng-value=2 ng-model="user.scores[19]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_20" id="respuesta_20_2" ng-value=2 ng-model="user.scores[19]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_20" id="respuesta_20_3" ng-value=3 ng-model="user.scores[19]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_20" id="respuesta_20_3" ng-value=3 ng-model="user.scores[19]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_20" id="respuesta_20_4" ng-value=4 ng-model="user.scores[19]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_20" id="respuesta_20_4" ng-value=4 ng-model="user.scores[19]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_20" id="respuesta_20_5" ng-value=5 ng-model="user.scores[19]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_20" id="respuesta_20_5" ng-value=5 ng-model="user.scores[19]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   21. Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_21" id="respuesta_21_1" ng-value=1 ng-model="user.scores[20]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_21" id="respuesta_21_1" ng-value=1 ng-model="user.scores[20]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_21" id="respuesta_21_2" ng-value=2 ng-model="user.scores[20]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_21" id="respuesta_21_2" ng-value=2 ng-model="user.scores[20]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_21" id="respuesta_21_3" ng-value=3 ng-model="user.scores[20]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_21" id="respuesta_21_3" ng-value=3 ng-model="user.scores[20]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_21" id="respuesta_21_4" ng-value=4 ng-model="user.scores[20]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_21" id="respuesta_21_4" ng-value=4 ng-model="user.scores[20]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_21" id="respuesta_21_5" ng-value=5 ng-model="user.scores[20]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_21" id="respuesta_21_5" ng-value=5 ng-model="user.scores[20]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  22. En {{company}} la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe).
+                <label class="col-md-6 control-label">
+                  22. En <b>{{company}}</b> la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe).
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_22" id="respuesta_22_1" ng-value=1 ng-model="user.scores[21]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_22" id="respuesta_22_1" ng-value=1 ng-model="user.scores[21]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_22" id="respuesta_22_2" ng-value=2 ng-model="user.scores[21]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_22" id="respuesta_22_2" ng-value=2 ng-model="user.scores[21]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_22" id="respuesta_22_3" ng-value=3 ng-model="user.scores[21]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_22" id="respuesta_22_3" ng-value=3 ng-model="user.scores[21]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_22" id="respuesta_22_4" ng-value=4 ng-model="user.scores[21]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_22" id="respuesta_22_4" ng-value=4 ng-model="user.scores[21]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_22" id="respuesta_22_5" ng-value=5 ng-model="user.scores[21]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_22" id="respuesta_22_5" ng-value=5 ng-model="user.scores[21]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   23. Mi jefe inmediato se asegura que reciba información relevante para mi trabajo que yo no puedo conseguir.
                 </label>
-                <div class="col-md-4">
+                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_23" id="respuesta_23_1" ng-value=1 ng-model="user.scores[22]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_23" id="respuesta_23_1" ng-value=1 ng-model="user.scores[22]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_23" id="respuesta_23_2" ng-value=2 ng-model="user.scores[22]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_23" id="respuesta_23_2" ng-value=2 ng-model="user.scores[22]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_23" id="respuesta_23_3" ng-value=3 ng-model="user.scores[22]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_23" id="respuesta_23_3" ng-value=3 ng-model="user.scores[22]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_23" id="respuesta_23_4" ng-value=4 ng-model="user.scores[22]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_23" id="respuesta_23_4" ng-value=4 ng-model="user.scores[22]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_23" id="respuesta_23_5" ng-value=5 ng-model="user.scores[22]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_23" id="respuesta_23_5" ng-value=5 ng-model="user.scores[22]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   24. En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_24" id="respuesta_24_1" ng-value=1 ng-model="user.scores[23]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_24" id="respuesta_24_1" ng-value=1 ng-model="user.scores[23]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_24" id="respuesta_24_2" ng-value=2 ng-model="user.scores[23]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_24" id="respuesta_24_2" ng-value=2 ng-model="user.scores[23]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_24" id="respuesta_24_3" ng-value=3 ng-model="user.scores[23]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_24" id="respuesta_24_3" ng-value=3 ng-model="user.scores[23]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_24" id="respuesta_24_4" ng-value=4 ng-model="user.scores[23]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_24" id="respuesta_24_4" ng-value=4 ng-model="user.scores[23]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_24" id="respuesta_24_5" ng-value=5 ng-model="user.scores[23]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_24" id="respuesta_24_5" ng-value=5 ng-model="user.scores[23]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   25. Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_25" id="respuesta_25_1" ng-value=1 ng-model="user.scores[24]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_25" id="respuesta_25_1" ng-value=1 ng-model="user.scores[24]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_25" id="respuesta_25_2" ng-value=2 ng-model="user.scores[24]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_25" id="respuesta_25_2" ng-value=2 ng-model="user.scores[24]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_25" id="respuesta_25_3" ng-value=3 ng-model="user.scores[24]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_25" id="respuesta_25_3" ng-value=3 ng-model="user.scores[24]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_25" id="respuesta_25_4" ng-value=4 ng-model="user.scores[24]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_25" id="respuesta_25_4" ng-value=4 ng-model="user.scores[24]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_25" id="respuesta_25_5" ng-value=5 ng-model="user.scores[24]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_25" id="respuesta_25_5" ng-value=5 ng-model="user.scores[24]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  26. {{company}} me brinda la oportunidad de aprender y desarrollarme profesionalmente.
+                <label class="col-md-6 control-label">
+                  26. <b>{{company}}</b> me brinda la oportunidad de aprender y desarrollarme profesionalmente.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_26" id="respuesta_26_1" ng-value=1 ng-model="user.scores[25]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_26" id="respuesta_26_1" ng-value=1 ng-model="user.scores[25]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_26" id="respuesta_26_2" ng-value=2 ng-model="user.scores[25]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_26" id="respuesta_26_2" ng-value=2 ng-model="user.scores[25]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_26" id="respuesta_26_3" ng-value=3 ng-model="user.scores[25]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_26" id="respuesta_26_3" ng-value=3 ng-model="user.scores[25]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_26" id="respuesta_26_4" ng-value=4 ng-model="user.scores[25]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_26" id="respuesta_26_4" ng-value=4 ng-model="user.scores[25]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_26" id="respuesta_26_5" ng-value=5 ng-model="user.scores[25]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_26" id="respuesta_26_5" ng-value=5 ng-model="user.scores[25]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   27. En mi equipo de trabajo, los errores se aprovechan como oportunidades de aprendizaje.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_27" id="respuesta_27_1" ng-value=1 ng-model="user.scores[26]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_27" id="respuesta_27_1" ng-value=1 ng-model="user.scores[26]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_27" id="respuesta_27_2" ng-value=2 ng-model="user.scores[26]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_27" id="respuesta_27_2" ng-value=2 ng-model="user.scores[26]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_27" id="respuesta_27_3" ng-value=3 ng-model="user.scores[26]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_27" id="respuesta_27_3" ng-value=3 ng-model="user.scores[26]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_27" id="respuesta_27_4" ng-value=4 ng-model="user.scores[26]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_27" id="respuesta_27_4" ng-value=4 ng-model="user.scores[26]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_27" id="respuesta_27_5" ng-value=5 ng-model="user.scores[26]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_27" id="respuesta_27_5" ng-value=5 ng-model="user.scores[26]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   28. Existe una buena cooperación entre mi equipo de trabajo y otros departamentos.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_28" id="respuesta_28_1" ng-value=1 ng-model="user.scores[27]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_28" id="respuesta_28_1" ng-value=1 ng-model="user.scores[27]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_28" id="respuesta_28_2" ng-value=2 ng-model="user.scores[27]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_28" id="respuesta_28_2" ng-value=2 ng-model="user.scores[27]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_28" id="respuesta_28_3" ng-value=3 ng-model="user.scores[27]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_28" id="respuesta_28_3" ng-value=3 ng-model="user.scores[27]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_28" id="respuesta_28_4" ng-value=4 ng-model="user.scores[27]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_28" id="respuesta_28_4" ng-value=4 ng-model="user.scores[27]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_28" id="respuesta_28_5" ng-value=5 ng-model="user.scores[27]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_28" id="respuesta_28_5" ng-value=5 ng-model="user.scores[27]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   29. En mi equipo de trabajo nos ayudamos mutuamente compartiendo experiencias y conocimientos.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_29" id="respuesta_29_1" ng-value=1 ng-model="user.scores[28]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_29" id="respuesta_29_1" ng-value=1 ng-model="user.scores[28]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_29" id="respuesta_29_2" ng-value=2 ng-model="user.scores[28]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_29" id="respuesta_29_2" ng-value=2 ng-model="user.scores[28]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_29" id="respuesta_29_3" ng-value=3 ng-model="user.scores[28]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_29" id="respuesta_29_3" ng-value=3 ng-model="user.scores[28]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_29" id="respuesta_29_4" ng-value=4 ng-model="user.scores[28]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_29" id="respuesta_29_4" ng-value=4 ng-model="user.scores[28]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_29" id="respuesta_29_5" ng-value=5 ng-model="user.scores[28]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_29" id="respuesta_29_5" ng-value=5 ng-model="user.scores[28]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   30. En general, estoy satisfecho con mis compañeros de trabajo.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_30" id="respuesta_30_1" ng-value=1 ng-model="user.scores[29]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_30" id="respuesta_30_1" ng-value=1 ng-model="user.scores[29]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_30" id="respuesta_30_2" ng-value=2 ng-model="user.scores[29]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_30" id="respuesta_30_2" ng-value=2 ng-model="user.scores[29]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_30" id="respuesta_30_3" ng-value=3 ng-model="user.scores[29]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_30" id="respuesta_30_3" ng-value=3 ng-model="user.scores[29]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_30" id="respuesta_30_4" ng-value=4 ng-model="user.scores[29]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_30" id="respuesta_30_4" ng-value=4 ng-model="user.scores[29]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_30" id="respuesta_30_5" ng-value=5 ng-model="user.scores[29]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_30" id="respuesta_30_5" ng-value=5 ng-model="user.scores[29]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   31. En mi equipo de trabajo nos esforzamos continuamente para mejorar nuestros procesos productivos con la ayuda de la metodología, herramientas y materiales de "First Choice".
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_31" id="respuesta_31_1" ng-value=1 ng-model="user.scores[30]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_31" id="respuesta_31_1" ng-value=1 ng-model="user.scores[30]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_31" id="respuesta_31_2" ng-value=2 ng-model="user.scores[30]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_31" id="respuesta_31_2" ng-value=2 ng-model="user.scores[30]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_31" id="respuesta_31_3" ng-value=3 ng-model="user.scores[30]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_31" id="respuesta_31_3" ng-value=3 ng-model="user.scores[30]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_31" id="respuesta_31_4" ng-value=4 ng-model="user.scores[30]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_31" id="respuesta_31_4" ng-value=4 ng-model="user.scores[30]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_31" id="respuesta_31_5" ng-value=5 ng-model="user.scores[30]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_31" id="respuesta_31_5" ng-value=5 ng-model="user.scores[30]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   32.Las actividades de 'First Choice' contribuyen al éxito de mi equipo inmediato.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_32" id="respuesta_32_1" ng-value=1 ng-model="user.scores[31]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_32" id="respuesta_32_1" ng-value=1 ng-model="user.scores[31]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_32" id="respuesta_32_2" ng-value=2 ng-model="user.scores[31]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_32" id="respuesta_32_2" ng-value=2 ng-model="user.scores[31]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_32" id="respuesta_32_3" ng-value=3 ng-model="user.scores[31]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_32" id="respuesta_32_3" ng-value=3 ng-model="user.scores[31]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_32" id="respuesta_32_4" ng-value=4 ng-model="user.scores[31]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_32" id="respuesta_32_4" ng-value=4 ng-model="user.scores[31]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_32" id="respuesta_32_5" ng-value=5 ng-model="user.scores[31]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_32" id="respuesta_32_5" ng-value=5 ng-model="user.scores[31]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  33. {{company}} me anima a actuar de manera socialmente responsable.
+                <label class="col-md-6 control-label">
+                  33. <b>{{company}}</b> me anima a actuar de manera socialmente responsable.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_33" id="respuesta_33_1" ng-value=1 ng-model="user.scores[32]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_33" id="respuesta_33_1" ng-value=1 ng-model="user.scores[32]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_33" id="respuesta_33_2" ng-value=2 ng-model="user.scores[32]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_33" id="respuesta_33_2" ng-value=2 ng-model="user.scores[32]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_33" id="respuesta_33_3" ng-value=3 ng-model="user.scores[32]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_33" id="respuesta_33_3" ng-value=3 ng-model="user.scores[32]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_33" id="respuesta_33_4" ng-value=4 ng-model="user.scores[32]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_33" id="respuesta_33_4" ng-value=4 ng-model="user.scores[32]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_33" id="respuesta_33_5" ng-value=5 ng-model="user.scores[32]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_33" id="respuesta_33_5" ng-value=5 ng-model="user.scores[32]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   34. En mi equipo de trabajo, cada individuo toma medidas para ahorrar energía en el lugar de trabajo (electricidad, gas, combustible, viajes, papel, etc.).
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_34" id="respuesta_34_1" ng-value=1 ng-model="user.scores[33]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_34" id="respuesta_34_1" ng-value=1 ng-model="user.scores[33]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_34" id="respuesta_34_2" ng-value=2 ng-model="user.scores[33]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_34" id="respuesta_34_2" ng-value=2 ng-model="user.scores[33]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_34" id="respuesta_34_3" ng-value=3 ng-model="user.scores[33]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_34" id="respuesta_34_3" ng-value=3 ng-model="user.scores[33]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_34" id="respuesta_34_4" ng-value=4 ng-model="user.scores[33]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_34" id="respuesta_34_4" ng-value=4 ng-model="user.scores[33]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_34" id="respuesta_34_5" ng-value=5 ng-model="user.scores[33]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_34" id="respuesta_34_5" ng-value=5 ng-model="user.scores[33]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   35. Creo que habrá cambios positivos como resultado de esta encuesta.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_35" id="respuesta_35_1" ng-value=1 ng-model="user.scores[34]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_35" id="respuesta_35_1" ng-value=1 ng-model="user.scores[34]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_35" id="respuesta_35_2" ng-value=2 ng-model="user.scores[34]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_35" id="respuesta_35_2" ng-value=2 ng-model="user.scores[34]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_35" id="respuesta_35_3" ng-value=3 ng-model="user.scores[34]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_35" id="respuesta_35_3" ng-value=3 ng-model="user.scores[34]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_35" id="respuesta_35_4" ng-value=4 ng-model="user.scores[34]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_35" id="respuesta_35_4" ng-value=4 ng-model="user.scores[34]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_35" id="respuesta_35_5" ng-value=5 ng-model="user.scores[34]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_35" id="respuesta_35_5" ng-value=5 ng-model="user.scores[34]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   36. En mi equipo de trabajo hemos tomado medidas basándonos en los resultados de la última encuesta de opinión de los empleados.
                 </label>
-                <div class="col-md-4">
+                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_36" id="respuesta_36_1" ng-value=1 ng-model="user.scores[35]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_36" id="respuesta_36_1" ng-value=1 ng-model="user.scores[35]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_36" id="respuesta_36_2" ng-value=2 ng-model="user.scores[35]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_36" id="respuesta_36_2" ng-value=2 ng-model="user.scores[35]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_36" id="respuesta_36_3" ng-value=3 ng-model="user.scores[35]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_36" id="respuesta_36_3" ng-value=3 ng-model="user.scores[35]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_36" id="respuesta_36_4" ng-value=4 ng-model="user.scores[35]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_36" id="respuesta_36_4" ng-value=4 ng-model="user.scores[35]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_36" id="respuesta_36_5" ng-value=5 ng-model="user.scores[35]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_36" id="respuesta_36_5" ng-value=5 ng-model="user.scores[35]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
-                  37. {{company}} está comprometido con la seguridad de los empleados.
+                <label class="col-md-6 control-label">
+                  37. <b>{{company}}</b> está comprometido con la seguridad de los empleados.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_37" id="respuesta_37_1" ng-value=1 ng-model="user.scores[36]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_37" id="respuesta_37_1" ng-value=1 ng-model="user.scores[36]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_37" id="respuesta_37_2" ng-value=2 ng-model="user.scores[36]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_37" id="respuesta_37_2" ng-value=2 ng-model="user.scores[36]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_37" id="respuesta_37_3" ng-value=3 ng-model="user.scores[36]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_37" id="respuesta_37_3" ng-value=3 ng-model="user.scores[36]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_37" id="respuesta_37_4" ng-value=4 ng-model="user.scores[36]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_37" id="respuesta_37_4" ng-value=4 ng-model="user.scores[36]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_37" id="respuesta_37_5" ng-value=5 ng-model="user.scores[36]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_37" id="respuesta_37_5" ng-value=5 ng-model="user.scores[36]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   38. Tengo acceso a los recursos que necesito para realizar mis tareas eficientemente (materiales, equipos, tecnología, etc.).
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_38" id="respuesta_38_1" ng-value=1 ng-model="user.scores[37]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_38" id="respuesta_38_1" ng-value=1 ng-model="user.scores[37]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_38" id="respuesta_38_2" ng-value=2 ng-model="user.scores[37]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_38" id="respuesta_38_2" ng-value=2 ng-model="user.scores[37]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_38" id="respuesta_38_3" ng-value=3 ng-model="user.scores[37]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_38" id="respuesta_38_3" ng-value=3 ng-model="user.scores[37]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_38" id="respuesta_38_4" ng-value=4 ng-model="user.scores[37]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_38" id="respuesta_38_4" ng-value=4 ng-model="user.scores[37]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_38" id="respuesta_38_5" ng-value=5 ng-model="user.scores[37]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_38" id="respuesta_38_5" ng-value=5 ng-model="user.scores[37]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   39. En general, estoy satisfecho con las condiciones físicas de mi lugar de trabajo (temperatura, ventilación, espacio suficiente para trabajar, etc.).
                 </label>
-                <div class="col-md-4">
+                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_39" id="respuesta_39_1" ng-value=1 ng-model="user.scores[38]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_39" id="respuesta_39_1" ng-value=1 ng-model="user.scores[38]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_39" id="respuesta_39_2" ng-value=2 ng-model="user.scores[38]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_39" id="respuesta_39_2" ng-value=2 ng-model="user.scores[38]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_39" id="respuesta_39_3" ng-value=3 ng-model="user.scores[38]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_39" id="respuesta_39_3" ng-value=3 ng-model="user.scores[38]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_39" id="respuesta_39_4" ng-value=4 ng-model="user.scores[38]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_39" id="respuesta_39_4" ng-value=4 ng-model="user.scores[38]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_39" id="respuesta_39_5" ng-value=5 ng-model="user.scores[38]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_39" id="respuesta_39_5" ng-value=5 ng-model="user.scores[38]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group">
-                <label class="col-md-8 control-label">
+                <label class="col-md-6 control-label">
                   40. En general, estoy satisfecho con el tipo de trabajo que realizo.
                 </label>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="text-muted text-xs">Totalmente en Desacuerdo &nbsp;</label>
                       <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_40" id="respuesta_40_1" ng-value=1 ng-model="user.scores[39]" ng-required="true"><i></i>TD &nbsp; &nbsp;
+                        <input type="radio" name="respuesta_40" id="respuesta_40_1" ng-value=1 ng-model="user.scores[39]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_40" id="respuesta_40_2" ng-value=2 ng-model="user.scores[39]" ng-required="true"><i></i>D &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_40" id="respuesta_40_2" ng-value=2 ng-model="user.scores[39]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_40" id="respuesta_40_3" ng-value=3 ng-model="user.scores[39]" ng-required="true"><i></i>N &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_40" id="respuesta_40_3" ng-value=3 ng-model="user.scores[39]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_40" id="respuesta_40_4" ng-value=4 ng-model="user.scores[39]" ng-required="true"><i></i>A &nbsp; &nbsp;
+                      <label class="i-checks i-checks">
+                        <input type="radio" name="respuesta_40" id="respuesta_40_4" ng-value=4 ng-model="user.scores[39]" ng-required="true"><i></i> &nbsp; &nbsp;
                       </label>
-                      <label class="i-checks i-checks-lg">
-                        <input type="radio" name="respuesta_40" id="respuesta_40_5" ng-value=5 ng-model="user.scores[39]" ng-required="true"><i></i>TA &nbsp; &nbsp;
+                      <label class="i-checks i-checks-lg text-muted text-xs">
+                        <input type="radio" name="respuesta_40" id="respuesta_40_5" ng-value=5 ng-model="user.scores[39]" ng-required="true"><i></i> Totalmente de Acuerdo
                       </label>
+                    </div>
                 </div>
               </div>
+
+
               <div class="line line-dashed b-b line-lg pull-in"></div>
+              
+
               <div class="form-group col-md-4 col-md-offset-4">
                 <button type="submit" class="btn btn-lg btn-info btn-block" ng-disabled='form.$invalid'>
-                  <span ng-if="!formProcessing">Guardar</span>
+                  <span ng-if="!formProcessing">Guardar respuestas</span>
                   <span ng-if="formProcessing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
                 </button>
               </div>

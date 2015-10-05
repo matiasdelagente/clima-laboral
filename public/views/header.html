@@ -15,6 +15,7 @@
   <!-- / brand -->
 </div>
 <!-- / navbar header -->
+
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
   <!-- navbar left -->
@@ -34,7 +35,7 @@
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3'}">
         <i class="fa fa-area-chart"></i>
-        <span>Resultados</span>
+        <span>Reportes</span>
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
@@ -66,7 +67,9 @@
     </li>
   </ul>
   <!-- /navbar left -->
-  <!-- nabar right -->
+  
+
+  <!-- navbar right -->
   <ul class="nav navbar-nav navbar-right">
 
     <li class="dropdown">
@@ -75,7 +78,7 @@
           <img src="img/user.gif" alt="...">
           <i class="on md b-white bottom"></i>
         </span>
-        <span class="hidden-sm hidden-md">{{user.username}}</span>
+        <span class="hidden-sm hidden-md">{{user.username}}</span> <b class="caret"></b>
       </a>
       <!-- dropdown -->
       <ul class="dropdown-menu animated fadeInRight w">
