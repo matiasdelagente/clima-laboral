@@ -78,7 +78,7 @@ router.route('/users/:id')
       if(err) res.send(user)
       if(req.body.username) user.username = req.body.username;
       if(req.body.password) user.password = req.body.password;
-      if(req.body.admin) user.admin = req.body.admin;
+      user.admin = req.body.admin;
       if(req.body.area) user.area = req.body.area;
       if(req.body.role) user.role  = req.body.role;
       if(req.body.scores) user.scores = req.body.scores;
