@@ -186,7 +186,6 @@ angular.module("climaLaboral")
 .controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
-  $('[data-toggle="tooltip"]').tooltip();
 
   userSrvc.all().success(function(data){
     $scope.processing = false;
@@ -259,6 +258,8 @@ angular.module("climaLaboral")
     $scope.dataKpi11 = $scope.calcKpi($scope.pregCondiciones);
 
   };
+
+  $('[data-toggle="tooltip"]').tooltip();
 })
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
@@ -344,9 +345,16 @@ angular.module("climaLaboral")
 .controller("userScoresCtrl", function($scope, $routeParams,userSrvc){
   $scope.processing = true;
   $('[data-toggle="tooltip"]').tooltip();
-  
+
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
   });
+})
+
+.directive('tooltip', function() {
+  return function(scope, element, attrs) {
+    console.log(scope, element, attrs, 'aaaaa' )
+      element.find('[data-toggle="tooltip"]').tooltip();
+  };
 });

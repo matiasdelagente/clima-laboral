@@ -90,12 +90,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="user in dataUsers">
+              <tr ng-repeat="user in dataUsers" tooltip>
                   <td>{{user[0]}}</td>
                   <td>{{user[1]}}</span></td>
                   <td>{{user[2]}}</span></td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi1[$index] > 79, 'bg-warning' : dataKpi1[$index] > 59 && dataKpi1[$index] < 80, 'bg-danger' : dataKpi1[$index] < 60}">{{dataKpi1[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Promesa al Cliente" class="label bg-success" ng-class="{'bg-success' : dataKpi1[$index] > 79, 'bg-warning' : dataKpi1[$index] > 59 && dataKpi1[$index] < 80, 'bg-danger' : dataKpi1[$index] < 60}">{{dataKpi1[$index] | number:0}} %</span>
                   </td>
                   <td>
                     <span class="label bg-success" ng-class="{'bg-success' : dataKpi2[$index] > 79, 'bg-warning' : dataKpi2[$index] > 59 && dataKpi2[$index] < 80, 'bg-danger' : dataKpi2[$index] < 60}">{{dataKpi2[$index] | number:0}} %</span>
