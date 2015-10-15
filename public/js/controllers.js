@@ -186,6 +186,7 @@ angular.module("climaLaboral")
 .controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
+  $('[data-toggle="tooltip"]').tooltip();
 
   userSrvc.all().success(function(data){
     $scope.processing = false;
@@ -342,7 +343,8 @@ angular.module("climaLaboral")
 
 .controller("userScoresCtrl", function($scope, $routeParams,userSrvc){
   $scope.processing = true;
-
+  $('[data-toggle="tooltip"]').tooltip();
+  
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
