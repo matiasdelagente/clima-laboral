@@ -111,9 +111,9 @@
               </div>
             </div>
 
-            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="line line-dashed b-b line-lg pull-in" ng-if="user.superadmin && loggedIn"></div>
 
-            <div class="form-group">
+            <div class="form-group" ng-if="user.superadmin && loggedIn">
               <label for="role" class="col-sm-3 control-label">Es SuperAdministrador?</label>
               <div class="col-sm-9">
                 <input class="" type="checkbox" name="superadmin" ng-true-value="true" ng-false-value="false" ng-model="formUser.superadmin">
