@@ -6,6 +6,7 @@ var UserSchema = new Schema({
   username: {type: String, index:{unique:true}},
   password: {type: String, select:false},
   admin: {type: Boolean},
+  superadmin: {type: Boolean},
   area: {type:String},
   role: {type:String},
   scores: {type:[Number]},
