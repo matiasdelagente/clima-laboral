@@ -4,13 +4,13 @@
 </div>
 
 
-<div class="wrapper-md ng-scope">
+<div class="wrapper-md">
 
   <div class="row">
 
     <!-- LOGO -->
     <div class="col-sm-3">
-      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b" nv-file-over="" over-class="b-info" uploader="uploader">
+      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b">
           Arrastra el Logo aquí.
       </div>
     </div>
@@ -23,12 +23,12 @@
         </div>
         <div class="panel-body">
 
-          <form name="form" ng-submit="" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
+          <form name="form" ng-submit="save()" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="username">Empresa</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre de la empresa" ng-model="formCompany.username" required>
+                <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre de la empresa"  ng-model='formCompany.name' required />
               </div>
             </div>
 
@@ -36,7 +36,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Correo Electrónico</label>
               <div class="col-sm-9">
-                <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo electrónico principal de la empresa" ng-model="formCompany.email" required>
+                <input class="form-control" type="email" name="email"  ng-model='formCompany.email' placeholder="Ingrese el correo electrónico principal de la empresa" required />
               </div>
             </div>
 
@@ -46,7 +46,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">URL</label>
               <div class="col-sm-8">
-                <input class="form-control" type="text" placeholder="http://system.fosteringtalen.com/{{formCompany.username}}" disabled="">  
+                <input class="form-control" type="text" placeholder="http://system.fosteringtalen.com/{{formCompany.name|encodeUri}}" ng-model='formCompany.url' disabled/>  
               </div>
               <div class="col-sm-1">
                 <a href="" class="btn pull-in btn-xs btn-icon btn-default"><i class="fa fa-files-o"></i></a>
@@ -78,7 +78,7 @@
                       <i class="fa icon-users control-label"></i>
                     </div>
                     <div class="col-sm-9">
-                      <input type="number" class="form-control ng-pristine ng-invalid ng-invalid-validator ng-invalid-required ng-touched input-sm" placeholder="Nº de Participantes, mín. 20" ng-model="f.g" ui-validate=" '$value >= 20' " required="" tabindex="0" aria-required="true" aria-invalid="true">
+                      <input type="number" class="form-control ng-pristine ng-invalid ng-invalid-validator ng-invalid-required ng-touched input-sm" placeholder="N&deg; de Participantes, m&iacute;n. 20" ui-validate=" '$value >= 20' " required="" tabindex="0" aria-required="true" aria-invalid="true" ng-model='formCompany.maxUsers' />
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@
                       <i class="fa icon-users control-label text-muted"></i>
                     </div>
                     <div class="col-sm-9">
-                      <input type="number" disabled="" class="form-control ng-pristine ng-invalid ng-invalid-validator ng-invalid-required ng-touched input-sm" placeholder="Nº de Participantes, mín. 20" ng-model="" ui-validate=" '$value >= 20' " required="" tabindex="0" aria-required="true" aria-invalid="true">
+                      <input type="number" disabled="" class="form-control ng-pristine ng-invalid ng-invalid-validator ng-invalid-required ng-touched input-sm" placeholder="Nº de Participantes, mín. 20" ui-validate=" '$value >= 20' " required="" tabindex="0" aria-required="true" aria-invalid="true">
                     </div>
                   </div>
                 </div>
@@ -114,14 +114,14 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="admin">Usuario Administrador</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" name="admin" placeholder="Ingrese el nombre del administrador" ng-model="formCompany.admin" required>
+                <input class="form-control" type="text" name="admin" placeholder="Ingrese el nombre del administrador" />
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="username">Password</label>
               <div class="col-sm-9">
-                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password del administrador" ng-model="formCompany.password" required="" tabindex="0" aria-required="true" aria-invalid="true">
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password del administrador" tabindex="0" aria-required="true" aria-invalid="true" />
               </div>
             </div>
             
@@ -137,7 +137,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Correo Electrónico</label>
               <div class="col-sm-9">
-                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" ng-model="formCompany.emailAdmin" required>
+                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" />
                 </div>
             </div>
 
@@ -173,6 +173,3 @@
       </div>
   </div>
 </div>
-  
-
-

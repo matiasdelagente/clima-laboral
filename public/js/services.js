@@ -29,3 +29,22 @@ angular.module("climaLaboral")
     }
   return user;
 })
+.factory("companySrvc", function($http){
+  var user = {}
+    user.all = function(){
+      return $http.get('/api/companies')
+    }
+    user.get = function(id){
+      return $http.get('/api/companies/'+id)
+    }
+    user.edit = function(id, company){
+      return $http.put('/api/companies/' + id, company)
+    }
+    user.save = function(company){
+      return $http.post('/api/companies', company)
+    }
+    user.delete = function(id){
+      return $http.delete('/api/companies/' + id)
+    }
+  return user;
+})

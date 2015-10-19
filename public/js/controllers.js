@@ -278,11 +278,26 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("CompaniesCtrl",function(){
-
+.controller("CompaniesCtrl",function($scope, $location, companySrvc){
+  $scope.processing = true;
+   companySrvc.all().success(function(data){
+    $scope.processing = false;
+    $scope.companies = data;
+  });
 })
 
-.controller("AddCompaniesCtrl", function(){
+.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, $filter){
+  $scope.save = function(){
+    $scope.processing = true;
+    var url = $filter('encodeUri') ($scope.formCompany.name);
+    $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
+    //setup encoded URL
+    companySrvc.save($scope.formCompany).success(function(data){
+      $scope.processing = false;
+      $scope.company = {};
+      $location.path('/companies');
+    });
+  };
 
 })
 

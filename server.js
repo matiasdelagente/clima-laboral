@@ -12,9 +12,11 @@ app.use(bodyParser.json());
 
 var userRoutes = require('./routes/UserRoutes.js')
 var scoreRoutes = require('./routes/ScoreRoutes.js')
+var companyRoutes = require('./routes/companyRoutes.js')
 
 app.use('/api', userRoutes);
 app.use('/api', scoreRoutes);
+app.use('/api', companyRoutes);
 
 app.use(express.static('public'));
 

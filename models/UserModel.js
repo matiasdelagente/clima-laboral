@@ -11,7 +11,8 @@ var UserSchema = new Schema({
   role: {type:String},
   scores: {type:[Number]},
   status: {type:String},
-  email: {type:String}
+  email: {type:String},
+  company: { type: Schema.Types.ObjectId, ref:'company'}
 });
 
 UserSchema.pre('save',function(next){
