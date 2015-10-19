@@ -375,7 +375,29 @@ $scope.series1 = ['Serie 2015'];
         "view_content_link": null,
         "tracking_domain": null,
         "signing_domain": null,
-        "return_path_domain": null
+        "return_path_domain": null,
+        "global_merge_vars": [
+        {
+          "name": "user_name",
+          "content": $scope.formUser.user_name
+        },
+        {
+          "name": "username",
+          "content": $scope.formUser.username
+        },
+        {
+          "name": "password",
+          "content": $scope.formUser.password
+        },
+        {
+          "name": "company",
+          "content": $scope.formUser.company
+        },
+        {
+          "name": "URLEmpresa",
+          "content": $scope.formUser.URLEmpresa
+        }
+        ]
       },
       "async": false,
       "ip_pool": "Main Pool"
@@ -384,7 +406,7 @@ $scope.series1 = ['Serie 2015'];
     var apiURL = "https://mandrillapp.com/api/1.0/messages/send-template.json";
     $http.post(apiURL, mailJSON,{
       headers: {
-        
+
       }}).
     success(function(data, status, headers, config) {
       alert('successful email send.');
