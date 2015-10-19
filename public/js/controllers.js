@@ -62,16 +62,16 @@ angular.module("climaLaboral")
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
-    'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
-    ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
-    'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
-    'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
-    'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
-    'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
-    'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
-    'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
-    'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
-    ''+$scope.company+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+  'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+  ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+  'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
+  'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
+  'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
+  'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
+  'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
+  'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
+  'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
+  ''+$scope.company+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
   userSrvc.all().success(function(data){
@@ -120,7 +120,7 @@ angular.module("climaLaboral")
     $scope.dataMotivadores = dataMotivadores;
     $scope.vacioMotivadores = null;
     for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
-    $scope.showMotivadores = true;
+      $scope.showMotivadores = true;
     if (isNaN($scope.vacioMotivadores)) $scope.showMotivadores = false;
   };
 
@@ -175,10 +175,10 @@ angular.module("climaLaboral")
     $scope.calcMotivadores();
   };
 // Datos Grafico Compromiso
-    $scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
+$scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
 // Datos Grafico Año Favorable
-    $scope.labelsFavorable = ['2015','2014','Best in Class','General'];
-    $scope.series1 = ['Serie 2015'];
+$scope.labelsFavorable = ['2015','2014','Best in Class','General'];
+$scope.series1 = ['Serie 2015'];
 // Datos Grafico Motivadores
 
 })
@@ -279,7 +279,7 @@ angular.module("climaLaboral")
 })
 
 .controller("CompaniesCtrl",function(){
-  
+
 })
 
 .controller("AddCompaniesCtrl", function(){
@@ -288,7 +288,7 @@ angular.module("climaLaboral")
 
 
 .controller("PriceCtrl",function(){
-  
+
 })
 
 .controller("UserCtrl",function($scope, userSrvc){
@@ -325,7 +325,7 @@ angular.module("climaLaboral")
   };
 })
 
-.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc){
+.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http){
   $scope.processing = false;
 
 
@@ -336,6 +336,72 @@ angular.module("climaLaboral")
       $location.path('/users');
     });
   };
+
+
+  $scope.sendMail = function(){
+
+    console.log($scope.formUser.email);
+    
+    var mailJSON ={
+      "key": "yXbOSbsEdGY5XDGY1G4JMw",
+      "template_name": "fts-invitacion",
+      "template_content": [
+      {
+        "name": "",
+        "content": ""
+      }
+      ],
+      "message": {
+        "html": "",
+        "text": "",
+        "subject": "",
+        "from_email": "no-responder@fosterintalent.com",
+        "from_name": "Soporte FTS",
+        "to": [
+        {
+          "email": $scope.formUser.email,
+          "name": $scope.formUser.user_name,
+          "type": "to"
+        }
+        ],
+        "important": false,
+        "track_opens": null,
+        "track_clicks": null,
+        "auto_text": null,
+        "auto_html": null,
+        "inline_css": null,
+        "url_strip_qs": null,
+        "preserve_recipients": null,
+        "view_content_link": null,
+        "tracking_domain": null,
+        "signing_domain": null,
+        "return_path_domain": null
+      },
+      "async": false,
+      "ip_pool": "Main Pool"
+    };
+
+    var apiURL = "https://mandrillapp.com/api/1.0/messages/send-template.json";
+    $http.post(apiURL, mailJSON,{
+      headers: {
+        
+      }}).
+    success(function(data, status, headers, config) {
+      alert('successful email send.');
+      $scope.form={};
+      console.log('successful email send.');
+      console.log('status: ' + status);
+      console.log('data: ' + data);
+      console.log('headers: ' + headers);
+      console.log('config: ' + config);
+    }).error(function(data, status, headers, config) {
+      console.log('error sending email.');
+      console.log('status: ' + status);
+    });
+
+
+  };
+
 })
 
 .controller("ListUserCtrl", function(){
@@ -355,6 +421,6 @@ angular.module("climaLaboral")
 .directive('tooltip', function() {
   return function(scope, element, attrs) {
     console.log(scope, element, attrs, 'aaaaa' )
-      element.find('[data-toggle="tooltip"]').tooltip();
+    element.find('[data-toggle="tooltip"]').tooltip();
   };
 });
