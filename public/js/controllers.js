@@ -301,6 +301,25 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
+.controller("EditCompaniesCtrl", function($scope, $routeParams, $location, companySrvc){
+  $scope.processing = false;
+  console.log('aaa')
+
+  companySrvc.get($routeParams.id).success(function(data){
+    console.log(data)
+    $scope.formCompany = data;
+  });
+
+  $scope.save = function(){
+    $scope.processing = true;
+    companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
+      $scope.processing = false;
+      $scope.user = {};
+      $location.path('/companies');
+    });
+  };
+})
+
 
 .controller("PriceCtrl",function(){
 

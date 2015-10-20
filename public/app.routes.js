@@ -25,6 +25,11 @@ angular.module("app.routes", [])
     templateUrl: "./views/edit-companies.html"
   })
 
+   .when('/company/:id',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/edit-companies.html"
+  })
+
   .when('/users',{
     controller: "UserCtrl",
     templateUrl: "./views/users/all.html"

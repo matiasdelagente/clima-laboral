@@ -25,7 +25,9 @@
         <div class="col-sm-4" ng-repeat="company in companies">
           <div class="panel b-a">
             <div class="panel-heading bg-info dk no-border wrapper-lg">
-              <button class="btn btn-sm btn-icon btn-rounded btn-info pull-right m-r"><i class="fa fa-pencil"></i></button>
+              <a href="#/company/{{company._id}}">
+                <button class="btn btn-sm btn-icon btn-rounded btn-info pull-right m-r"><i class="fa fa-pencil"></i></button>
+              </a>
               <button class="btn btn-sm btn-icon btn-rounded btn-info m-l"><i class="fa fa-phone"></i></button>
             </div>
             <div class="text-center m-b clearfix">
