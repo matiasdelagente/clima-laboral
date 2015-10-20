@@ -177,7 +177,7 @@ angular.module("climaLaboral")
 // Datos Grafico Compromiso
 $scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
 // Datos Grafico Año Favorable
-$scope.labelsFavorable = ['2015','2014','Best in Class','General'];
+$scope.labelsFavorable = ['2015','2014','Top 25%','General'];
 $scope.series1 = ['Serie 2015'];
 // Datos Grafico Motivadores
 
