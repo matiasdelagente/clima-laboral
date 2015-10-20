@@ -284,6 +284,15 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = false;
     $scope.companies = data;
   });
+
+  $scope.deleteCompany = function(companyDeleted){
+    $scope.processing = true;
+    companySrvc.delete(companyDeleted._id).success(function(data){
+      $scope.processing = false;
+      var index = $scope.company.indexOf(companyDeleted);
+      $scope.company.splice(index,1);
+    });
+  };
 })
 
 .controller("AddCompaniesCtrl", function($scope, $location, companySrvc, $filter){

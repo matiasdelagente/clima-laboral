@@ -7,6 +7,7 @@ var CompanySchema = new Schema({
   email: {type: String},
   url: {type: String},
   maxUsers: {type: Number},
+  demo: {type: Boolean},
   user:{ type: Schema.Types.ObjectId, ref:'user'}
 });
 
