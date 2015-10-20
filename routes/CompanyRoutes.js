@@ -31,26 +31,23 @@ router.route('/companies/:id')
     var id = req.params.id;
     Company.findById(id, function(err, data){
       if(err) res.send(err);
+      console.log(data)
       res.send(data)
     });
   })
   .put(function(req,res){
     var id = req.params.id
-    Company.findById(id, function(err,user){
-      // if(err) res.send(user)
-      // if(req.body.username) user.username = req.body.username;
-      // if(req.body.password) user.password = req.body.password;
-      // user.admin = req.body.admin;
-      // user.superadmin = req.body.superadmin;
-      // if(req.body.area) user.area = req.body.area;
-      // if(req.body.role) user.role  = req.body.role;
-      // if(req.body.scores) user.scores = req.body.scores;
-      // if(req.body.status) user.status = req.body.status;
-      // if(req.body.email) user.email = req.body.email;
-      // user.save(function(err,data){
-      //   if(err) res.send(err)
-      //   res.send(data)
-      // })
+    Company.findById(id, function(err, company){
+      if(err) res.send(err)
+      if(req.body.email) company.email = req.body.email;
+      if(req.body.name) company.name = req.body.name;
+      if(req.body.maxUsers) company.maxUsers = req.body.maxUsers;
+
+      company.save(function(err,data){
+        console.log(data)
+        if(err) res.send(err)
+        res.send(data)
+      })
     })
   })
   .delete(function(req,res){
