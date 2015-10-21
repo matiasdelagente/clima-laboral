@@ -52,9 +52,10 @@ router.route('/companies/:id')
   })
   .delete(function(req,res){
     var id = req.params.id
-    Company.findById(id, function(err, user){
+    
+    Company.findById(id, function(err, company){
       if(err) res.send(err)
-      user.remove(function(err, data){
+      company.remove(function(err, data){
         if(err)res.send(err)
         res.send(data);
       })

@@ -287,10 +287,11 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.deleteCompany = function(companyDeleted){
     $scope.processing = true;
+    
     companySrvc.delete(companyDeleted._id).success(function(data){
       $scope.processing = false;
-      var index = $scope.company.indexOf(companyDeleted);
-      $scope.company.splice(index,1);
+      var index = $scope.companies.indexOf(companyDeleted);
+      $scope.companies.splice(index,1);
     });
   };
 })
