@@ -25,7 +25,7 @@
         "to": [
         {
           "email": $scope.formUser.email,
-          "name": $scope.formUser.user_name,
+          "name": $scope.formUser.name,
           "type": "to"
         }
         ],
@@ -43,8 +43,8 @@
         "return_path_domain": null,
         "global_merge_vars": [
         {
-          "name": "user_name",
-          "content": $scope.formUser.user_name
+          "name": "name",
+          "content": $scope.formUser.name
         },
         {
           "name": "username",

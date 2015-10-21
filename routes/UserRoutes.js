@@ -85,6 +85,10 @@ router.route('/users/:id')
       if(req.body.scores) user.scores = req.body.scores;
       if(req.body.status) user.status = req.body.status;
       if(req.body.email) user.email = req.body.email;
+      
+      if(req.body.name) user.name = req.body.name;
+      if(req.body.lastname) user.lastname = req.body.lastname;
+      
       user.save(function(err,data){
         if(err) res.send(err)
         res.send(data)

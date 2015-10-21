@@ -280,7 +280,7 @@ $scope.series1 = ['Serie 2015'];
 
 .controller("CompaniesCtrl",function($scope, $location, companySrvc){
   $scope.processing = true;
-   companySrvc.all().success(function(data){
+  companySrvc.all().success(function(data){
     $scope.processing = false;
     $scope.companies = data;
   });
@@ -469,6 +469,18 @@ $scope.series1 = ['Serie 2015'];
 })
 
 .controller("ListUserCtrl", function(){
+
+  //Converter Class 
+  var Converter = require("csvtojson").Converter;
+  var converter = new Converter({});
+
+  //end_parsed will be emitted once parsing finished 
+  converter.on("end_parsed", function (jsonArray) {
+     console.log(jsonArray); //here is your result jsonarray 
+   });
+
+  //read from file 
+  require("fs").createReadStream("./file.csv").pipe(converter);
 
 })
 
