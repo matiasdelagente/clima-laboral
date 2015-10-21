@@ -15,21 +15,28 @@
 		  <table class="table table-striped">
 			 <thead>
 				<tr>
-				  <th class="col-md-1">ID</th>
+				  <!-- <th class="col-md-1">ID</th> -->
+				  <th class="col-md-1">Nombre</th>
+				  <th class="col-md-1">Apellido</th>
 				  <th class="col-md-1">Usuario</th>
 				  <th class="col-md-1">Admin</th>
 				  <th class="col-md-1">Gerencia</th>
 				  <th class="col-md-1">Rol</th>
+				  <th class="col-md-1">¿Scores?</th>
 				  <th class="col-md-1"></th>
 				</tr>
 			 </thead>
 			 <tbody>
 				<tr ng-repeat="person in users">
-				  <td class="col-md-2">{{person._id}}</td>
+				  <!-- <td class="col-md-2">{{person._id}}</td> -->
+				  <td class="col-md-2">{{person.name}}</td>
+				  <td class="col-md-2">{{person.lastname}}</td>
 				  <td class="col-md-2">{{person.username}}</td>
 				  <td class="col-md-2">{{person.admin}}</td>
 				  <td class="col-md-2">{{person.area}}</td>
 				  <td class="col-md-2">{{person.role}}</td>
+				  <td class="col-md-2 text-danger" ng-if="person.scores.length==0">No</td>
+				  <td class="col-md-2 text-success" ng-if="person.scores.length!=0">Sí</td>
 				  <td class="col-md-1" nowrap>
 				    <a href="#/users/{{person._id}}" class="btn btn-xs btn-icon btn-info"><i class="fa fa-pencil"></i></a>
 				    <a href="" ng-click="deleteUser(person)" class="btn btn-xs btn-icon btn-danger"><i class="fa fa-trash"></i></a>
