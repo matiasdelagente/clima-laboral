@@ -36,7 +36,7 @@
         <div class="panel-heading font-bold" ng-if="formUser._id">Editar Usuario</div>
         <div class="panel-body">
 
-          <form name="form" ng-submit="save();" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
+          <form name="form" ng-submit="save(); sendMail()" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
 
 
             <div class="form-group">

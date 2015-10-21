@@ -1,7 +1,7 @@
 <div class="navbar-header bg-dark">
-  <button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
+<!--   <button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
     <i class="glyphicon glyphicon-cog"></i>
-  </button>
+  </button> -->
   <button class="pull-right visible-xs" ui-toggle="off-screen" target=".app-aside" ui-scroll="app">
     <i class="glyphicon glyphicon-align-justify"></i>
   </button>
@@ -19,7 +19,7 @@
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
   <!-- navbar left -->
-  <ul class="nav navbar-nav hidden-sm" ng-if="loggedIn">
+  <ul class="nav navbar-nav hidden-xs" ng-if="loggedIn">
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/" class="dropdown-toggle">
         <i class="fa fa-folder-open-o"></i>
@@ -78,7 +78,7 @@
           <img src="img/user.gif" alt="...">
           <i class="on md b-white bottom"></i>
         </span>
-        <span class="hidden-sm hidden-md">{{user.username}}</span> <b class="caret"></b>
+        <span class="hidden-sm">{{user.username}}</span> <b class="caret"></b>
       </a>
       <!-- dropdown -->
       <ul class="dropdown-menu animated fadeInRight w">
