@@ -71,4 +71,14 @@ angular.module("app.routes", [])
     templateUrl: "./views/add.html"
     //templateUrl: "./views/thanks.html"
   })
+
+  .when('/hall-of-fame',{
+    controller: "HallOfFameCtrl",
+    templateUrl: "./views/hall-of-fame.html"
+  })
+
+  .when('/hall-of-fame-vote',{
+    controller: "HallOfFameVoteCtrl",
+    templateUrl: "./views/hall-of-fame-vote.html"
+  })
 })

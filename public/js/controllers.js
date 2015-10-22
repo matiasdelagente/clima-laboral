@@ -64,7 +64,7 @@ angular.module("climaLaboral")
   $scope.questionsMotivadores = [
   'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
   ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
-  'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
+  'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento del Cuestionario)',
   'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
   'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
   'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
@@ -467,6 +467,18 @@ $scope.series1 = ['Serie 2015'];
 
   };
 
+})
+
+.controller("HallOfFameCtrl", function(){
+  
+})
+
+.controller("HallOfFameVoteCtrl", function($scope, userSrvc){
+  $scope.processing = true;
+  userSrvc.all().success(function(data){
+    $scope.processing = false;
+    $scope.users = data;
+  });
 })
 
 .controller("ListUserCtrl", function(){
