@@ -18,6 +18,7 @@ angular.module("climaLaboral")
     Auth.getUser().success(function(data){
       $scope.user = data;
     });
+
     $scope.url = $location.path();
   });
 
@@ -296,16 +297,26 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, $filter){
+.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){
   $scope.save = function(){
     $scope.processing = true;
     var url = $filter('encodeUri') ($scope.formCompany.name);
     $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
-    //setup encoded URL
-    companySrvc.save($scope.formCompany).success(function(data){
-      $scope.processing = false;
-      $scope.company = {};
-      $location.path('/companies');
+    //SET USER AS ADMIN
+    $scope.formUser.admin = true;
+    //Add ADMIN USER to company
+
+    userSrvc.save($scope.formUser).success(function(data){
+      // AFTER USER ADD, CREATE COMPANY
+      $scope.formCompany.user = data._id;
+      console.log($scope.formCompany)
+      companySrvc.save($scope.formCompany).success(function(data){
+        console.log(data)
+        $scope.processing = false;
+        $scope.company = {};
+        $location.path('/companies');
+        console.log(data)
+      });
     });
   };
 
@@ -334,12 +345,29 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("UserCtrl",function($scope, userSrvc){
+.controller("UserCtrl",function($scope, $rootScope, AuthToken, userSrvc, companySrvc){
   $scope.processing = true;
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-  });
+  var session = AuthToken.getSession();
+
+  if (session.admin) {
+
+    var companyId = undefined;
+    companySrvc.companyByUser(session._id).success(function(data){
+      companyId = data._id;
+
+      userSrvc.allByCompany(companyId).success(function(data){
+        $scope.processing = false;
+        $scope.users = data;
+      });      
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+    });    
+  }
+
 
   $scope.deleteUser = function(userDeleted){
     $scope.processing = true;
@@ -349,6 +377,7 @@ $scope.series1 = ['Serie 2015'];
       $scope.users.splice(index,1);
     });
   };
+
 })
 
 .controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){

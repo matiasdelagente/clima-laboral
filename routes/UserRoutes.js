@@ -18,10 +18,11 @@ router.route('/authenticate')
         },superSecret,{
           expireInMinutes: 1440
         });
-        res.json({success: true, message:"OK", token: token})
+        console.log('sesion user:', user);
+        res.json({success: true, message:"OK", token: token, session: user})
       }
     }
-  }).select('username password')
+  }).select('username password id superadmin admin')
 })
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
@@ -46,6 +47,17 @@ router.use(function(req, res, next){
     })
   }
 })
+router.route('/usersByCompany/:id')
+  .get(function(req,res){
+    var companyId = req.params.id;
+
+    User.find({company: companyId}, function(err,data){
+      if(err) res.send(err);
+      console.log(data)
+      res.send(data);
+    });
+  })
+
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){

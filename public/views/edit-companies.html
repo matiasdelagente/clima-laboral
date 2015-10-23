@@ -7,17 +7,12 @@
 
   <div class="row">
 
-
-
     <!-- LOGO -->
-
     <div class="col-sm-3">
-      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b" nv-file-over="" over-class="b-info" uploader="uploader">
+      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b">
           Arrastra el Logo aquí. 
       </div>
     </div>
-
-
     
     <!-- FORMULARIO -->
     <div class="col-sm-9">
@@ -111,24 +106,33 @@
               </div>
             </div>
 
-
-
             <div class="line line-dashed b-b line-lg pull-in"></div>
 
 
+            <!-- SI LA EMPRESA ESTÁ EN ESTADO DEMO -->
+            <div class="form-group">
+              <div class="col-sm-9 col-sm-offset-3">
+                <label>
+                <input type="checkbox" value="" checked="" ng-model='formCompany.demo' id="demo"/> 
+                DEMO (?)
+              </label>
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
 
             <!-- USUARIO ADMINISTRADOR PARA LA EMPRESA -->
             <div class="form-group">
               <label class="col-sm-3 control-label" for="admin">Usuario Administrador</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" name="admin" placeholder="Ingrese el nombre del administrador" />
+                <input class="form-control" type="text" name="admin" placeholder="Ingrese el nombre del administrador" ng-model='formUser.username'/>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="username">Password</label>
               <div class="col-sm-9">
-                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password del administrador" tabindex="0" aria-required="true" aria-invalid="true" />
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password del administrador" tabindex="0" aria-required="true" aria-invalid="true" ng-model='formUser.password'/>
               </div>
             </div>
             
@@ -144,7 +148,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Correo Electrónico</label>
               <div class="col-sm-9">
-                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" />
+                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" ng-model='formUser.email'/>
                 </div>
             </div>
 
@@ -158,21 +162,6 @@
               </label>
               </div>
             </div>
-
-
-            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-            <!-- SI LA EMPRESA ESTÁ EN ESTADO DEMO -->
-            <div class="form-group">
-              <div class="col-sm-9 col-sm-offset-3">
-                <label>
-                <input type="checkbox" value="" checked="">
-                ¿Es un DEMO?
-              </label>
-              </div>
-            </div>
-
 
             <div class="line line-dashed b-b line-lg pull-in"></div>
 
