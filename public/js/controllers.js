@@ -306,16 +306,22 @@ $scope.series1 = ['Serie 2015'];
     $scope.formUser.admin = true;
     //Add ADMIN USER to company
 
-    userSrvc.save($scope.formUser).success(function(data){
+    userSrvc.save($scope.formUser).success(function(userData){
+      $scope.formUser = userData;
       // AFTER USER ADD, CREATE COMPANY
-      $scope.formCompany.user = data._id;
-      console.log($scope.formCompany)
-      companySrvc.save($scope.formCompany).success(function(data){
-        console.log(data)
-        $scope.processing = false;
-        $scope.company = {};
-        $location.path('/companies');
-        console.log(data)
+      $scope.formCompany.user = userData._id;
+      
+      companySrvc.save($scope.formCompany).success(function(companyData){
+        $scope.formUser.company = companyData._id;
+        // console.log(companyData)
+        // console.log($scope.formUser);
+
+        userSrvc.edit(userData._id, $scope.formUser).success(function(userResponse){
+          console.log('userResponse', userResponse)
+          $scope.processing = false;
+          $scope.company = {};
+          $location.path('/companies');
+        });
       });
     });
   };
@@ -397,13 +403,18 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http){
+.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http, AuthToken){
   $scope.processing = false;
-
+  var session = AuthToken.getSession();
+  // console.log(session); return;
+  // if (session.admin && !session.superadmin) {
+  //   $scope.formUser.company = {_id: session.company}
+  // }
 
   $scope.save = function(){
     $scope.processing = true;
     userSrvc.save($scope.formUser).success(function(data){
+
       $scope.processing = false;
       $location.path('/users');
     });
