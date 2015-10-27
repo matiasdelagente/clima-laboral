@@ -366,7 +366,7 @@ $scope.series1 = ['Serie 2015'];
     companySrvc.companyByUser(session._id).success(function(data){
       companyId = data._id;
 
-      userSrvc.allByCompany(companyId).success(function(data){
+      userSrvc.usersByCompany(companyId).success(function(data){
         $scope.processing = false;
         $scope.users = data;
       });      

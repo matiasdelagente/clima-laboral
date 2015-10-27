@@ -27,8 +27,11 @@ angular.module("climaLaboral")
     user.delete = function(id){
       return $http.delete('/api/users/' + id)
     }
-    user.allByCompany = function(id){
+    user.usersByCompany = function(id){
       return $http.get('/api/usersByCompany/' + id)
+    }
+    user.allByCompany = function(id){
+      return $http.get('/api/allByCompany/' + id)
     }
   return user;
 })
