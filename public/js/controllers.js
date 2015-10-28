@@ -15,9 +15,10 @@ angular.module("climaLaboral")
       $scope.loggedIn = false;
       $location.path('/login');
     }
-    Auth.getUser().success(function(data){
-      $scope.user = data;
-    });
+    Auth.getUser()
+      .success(function(data){
+        $scope.user = data;
+      })
 
     $scope.url = $location.path();
   });
@@ -363,6 +364,7 @@ $scope.series1 = ['Serie 2015'];
   if (session.admin && !session.superadmin) {
 
     var companyId = undefined;
+
     companySrvc.companyByUser(session._id).success(function(data){
       companyId = data._id;
 
@@ -411,13 +413,15 @@ $scope.series1 = ['Serie 2015'];
 .controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http, AuthToken){
   $scope.processing = false;
   var session = AuthToken.getSession();
-  // console.log(session); return;
-  // if (session.admin && !session.superadmin) {
-  //   $scope.formUser.company = {_id: session.company}
-  // }
 
   $scope.save = function(){
     $scope.processing = true;
+
+    if (session.admin && !session.superadmin) {
+      $scope.formUser.company = session.company;
+      $scope.formUser.admin = false;
+    }
+
     userSrvc.save($scope.formUser).success(function(data){
 
       $scope.processing = false;
@@ -425,7 +429,7 @@ $scope.series1 = ['Serie 2015'];
     });
   };
 
-
+  /*
   $scope.sendMail = function(){
 
     console.log($scope.formUser.email);
@@ -511,6 +515,7 @@ $scope.series1 = ['Serie 2015'];
 
 
   };
+  */
 
 })
 

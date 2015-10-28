@@ -50,6 +50,7 @@ angular.module("authService", [])
   }
   //get user info
   authFactory.getUser = function(){
+    // console.log(AuthToken.getToken())
     if(AuthToken.getToken()){
       return $http.get('/api/me');
     }
