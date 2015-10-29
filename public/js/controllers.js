@@ -60,7 +60,9 @@ angular.module("climaLaboral")
 
 })
 
-.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){
+.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+  var session = AuthToken.getSession();
+
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
@@ -76,12 +78,30 @@ angular.module("climaLaboral")
   ''+$scope.company+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-    $scope.showCompromiso = false;
-    $scope.calcAll();
-  });
+  if (session.admin && !session.superadmin) {
+
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });    
+  }
+
+  // userSrvc.all().success(function(data){
+  //   $scope.processing = false;
+  //   $scope.users = data;
+  //   $scope.showCompromiso = false;
+  //   $scope.calcAll();
+  // });
 
   $scope.calcCompromiso = function(preguntas){
     var area = $scope.formUser.area;
