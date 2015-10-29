@@ -771,7 +771,7 @@ body {
   position: fixed;
   width: 100%;
   top: 50px;
-  z-index: 2;
+  z-index: 3;
 }
 
 .app-content-body>.bg-light h1 i{

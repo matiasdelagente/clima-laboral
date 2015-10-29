@@ -22,7 +22,7 @@ router.route('/authenticate')
         res.json({success: true, message:"OK", token: token, session: user})
       }
     }
-  }).select('username password id superadmin admin company')
+  }).select('username password id superadmin admin company').populate('company')
 })
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']

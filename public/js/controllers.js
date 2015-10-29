@@ -418,8 +418,20 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = true;
 
     if (session.admin && !session.superadmin) {
-      $scope.formUser.company = session.company;
+      $scope.formUser.company = session.company._id;
       $scope.formUser.admin = false;
+
+      userSrvc.usersByCompany(session.company._id).success(function(data){
+
+        //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
+        if(data.length >= session.company.maxUsers) {
+          alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
+          $scope.processing = false;
+          $location.path('/users');
+          return false;
+        }        
+      }); 
+
     }
 
     userSrvc.save($scope.formUser).success(function(data){
