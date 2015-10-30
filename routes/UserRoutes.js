@@ -51,17 +51,6 @@ router.route('/usersByCompany/:id')
   .get(function(req,res){
     var companyId = req.params.id;
 
-    User.find({company: companyId, admin: false}, function(err,data){
-      if(err) res.send(err);
-      // console.log(data)
-      res.send(data);
-    });
-  })
-
-router.route('/allByCompany/:id')
-  .get(function(req,res){
-    var companyId = req.params.id;
-
     User.find({company: companyId}, function(err,data){
       if(err) res.send(err);
       // console.log(data)
