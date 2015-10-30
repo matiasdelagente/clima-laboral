@@ -42,7 +42,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="name">Nombre</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" name="name" placeholder="Ingrese el nombre de la persona" ng-model="formUser.name" />
+                <input class="form-control" type="text" name="name" placeholder="Ingrese el nombre de la persona" ng-model="formUser.name" required>
               </div>
             </div>
 
@@ -51,7 +51,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="lastname">Apellido</label>
               <div class="col-sm-9">
-                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="lastname" placeholder="Ingrese el apellido de la persona" ng-model="formUser.lastname" tabindex="0" aria-required="true" aria-invalid="true" />
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="lastname" placeholder="Ingrese el apellido de la persona" ng-model="formUser.lastname" required="" tabindex="0" aria-required="true" aria-invalid="true">
               </div>
             </div>
 

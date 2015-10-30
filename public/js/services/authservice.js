@@ -5,22 +5,14 @@ angular.module("authService", [])
   authTokenFactory.getToken = function(){
     return $window.localStorage.getItem('token');
   };
-  //get session
-  authTokenFactory.getSession = function(){
-    return JSON.parse($window.localStorage.getItem('session'));
-  };  
   //set token o clear token
-  authTokenFactory.setToken = function(data){
-    if(data && data.token){
-      $window.localStorage.setItem('token',data.token);
-      // console.log(data.session)
-      $window.localStorage.setItem('session', JSON.stringify(data.session));
+  authTokenFactory.setToken = function(token){
+    if(token){
+      $window.localStorage.setItem('token',token);
     }
     else {
       $window.localStorage.removeItem('token');
-      $window.localStorage.removeItem('data');
     }
-    // console.log($window.localStorage)
   };
 
   return authTokenFactory;
@@ -31,7 +23,7 @@ angular.module("authService", [])
   //login
   authFactory.login = function(username, password){
     return $http.post('/api/authenticate',{username: username, password: password}).success(function(data){
-      AuthToken.setToken(data);
+      AuthToken.setToken(data.token);
       return data
     })
   }

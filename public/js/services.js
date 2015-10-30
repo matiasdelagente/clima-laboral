@@ -27,30 +27,24 @@ angular.module("climaLaboral")
     user.delete = function(id){
       return $http.delete('/api/users/' + id)
     }
-    user.allByCompany = function(id){
-      return $http.get('/api/usersByCompany/' + id)
-    }
   return user;
 })
 .factory("companySrvc", function($http){
-  var company = {}
-    company.all = function(){
+  var user = {}
+    user.all = function(){
       return $http.get('/api/companies')
     }
-    company.get = function(id){
+    user.get = function(id){
       return $http.get('/api/companies/'+id)
     }
-    company.edit = function(id, company){
+    user.edit = function(id, company){
       return $http.put('/api/companies/' + id, company)
     }
-    company.save = function(company){
+    user.save = function(company){
       return $http.post('/api/companies', company)
     }
-    company.delete = function(id){
+    user.delete = function(id){
       return $http.delete('/api/companies/' + id)
     }
-    company.companyByUser = function(id){
-      return $http.get('/api/companyByUser/' + id)
-    }   
-  return company;
+  return user;
 })

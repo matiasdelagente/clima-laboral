@@ -20,6 +20,7 @@ router.route('/companies')
       if (err) {
         res.send(err)
       } else {
+        //@TODO create admin user
         res.send(data)
       }
     })
@@ -61,15 +62,5 @@ router.route('/companies/:id')
     })
   })
 
-router.route('/companyByUser/:id')
-  .get(function(req,res){
-    var userId = req.params.id;
-
-    Company.findOne({demo: true}, function(err,data){
-      if(err) res.send(err);
-      console.log(data)
-      res.send(data);
-    });
-  })
 
 module.exports = router
