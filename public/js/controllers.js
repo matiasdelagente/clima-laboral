@@ -349,7 +349,7 @@ $scope.series1 = ['Serie 2015'];
   $scope.processing = true;
   var session = AuthToken.getSession();
 
-  if (session.admin && !session.superadmin) {
+  if (session.admin) {
 
     var companyId = undefined;
     companySrvc.companyByUser(session._id).success(function(data){
