@@ -205,16 +205,37 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
+.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+  var session = AuthToken.getSession();
+
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
 
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-    $scope.showCompromiso = false;
-    $scope.calcAll();
-  });
+  if (session.admin && !session.superadmin) {
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      // console.log(data)
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });    
+  }
+
+
+  // userSrvc.all().success(function(data){
+  //   $scope.processing = false;
+  //   $scope.users = data;
+  //   $scope.showCompromiso = false;
+  //   $scope.calcAll();
+  // });
 
   $scope.calcKpi = function(preguntas){
     var area = $scope.formUser.area;
@@ -392,13 +413,9 @@ $scope.series1 = ['Serie 2015'];
 
     var companyId = undefined;
 
-    companySrvc.companyByUser(session._id).success(function(data){
-      companyId = data._id;
-
-      userSrvc.usersByCompany(companyId).success(function(data){
-        $scope.processing = false;
-        $scope.users = data;
-      });      
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
     });
 
   } else {
@@ -598,7 +615,6 @@ $scope.series1 = ['Serie 2015'];
 
 .directive('tooltip', function() {
   return function(scope, element, attrs) {
-    console.log(scope, element, attrs, 'aaaaa' )
     element.find('[data-toggle="tooltip"]').tooltip();
   };
 });

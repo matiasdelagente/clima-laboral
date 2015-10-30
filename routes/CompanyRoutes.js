@@ -65,7 +65,7 @@ router.route('/companyByUser/:id')
   .get(function(req,res){
     var userId = req.params.id;
 
-    Company.findOne({demo: true}, function(err,data){
+    Company.findOne({user: userId}, function(err,data){
       if(err) res.send(err);
       console.log(data)
       res.send(data);
