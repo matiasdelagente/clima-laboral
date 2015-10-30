@@ -328,17 +328,12 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("EditCompaniesCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+.controller("EditCompaniesCtrl", function($scope, $routeParams, $location, companySrvc){
   $scope.processing = true;
 
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
-    
-
-    userSrvc.get(data.user).success(function(userData) {
-      $scope.formUser = userData;  
-      $scope.processing = false;  
-    });
+    $scope.processing = false;
   });
 
   $scope.save = function(){
