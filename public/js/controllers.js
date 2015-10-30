@@ -66,16 +66,16 @@ angular.module("climaLaboral")
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
-  'En '+ session.company.name+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
-  ''+session.company.name+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+  'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+  ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
   'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento del Cuestionario)',
   'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
-  'Tengo confianza en el futuro de '+session.company.name+'. (Estrategia)',
+  'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
   'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
   'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
   'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
   'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
-  ''+session.company.name+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+  ''+$scope.company+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
   if (session.admin && !session.superadmin) {
@@ -284,20 +284,13 @@ $scope.series1 = ['Serie 2015'];
   $('[data-toggle="tooltip"]').tooltip();
 })
 
-.controller("AddCtrl", function($scope, $routeParams,$location, userSrvc, AuthToken){
+.controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
   $scope.formProcessing = false;
-  // $scope.processing = true;
-  var session = AuthToken.getSession();
-  $scope.user = session;
-  $scope.company = session.company.name;
-  
-  // userSrvc.get($routeParams.id).success(function(data){
-  //   $scope.user = data;
-  //   $scope.company = session.company.name;
+  $scope.processing = true;
+  userSrvc.get($routeParams.id).success(function(data){
+    $scope.user = data;
     $scope.processing = false;
-  // });
-
-
+  });
   $scope.add = function(){
     $scope.formProcessing = true;
     userSrvc.edit($scope.user._id, $scope.user).success(function(data){
