@@ -18,11 +18,11 @@ router.route('/authenticate')
         },superSecret,{
           expireInMinutes: 1440
         });
-        // console.log('sesion user:', user);
+        console.log('sesion user:', user);
         res.json({success: true, message:"OK", token: token, session: user})
       }
     }
-  }).select('username password id superadmin admin company')
+  }).select('username password id superadmin admin')
 })
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
@@ -53,7 +53,7 @@ router.route('/usersByCompany/:id')
 
     User.find({company: companyId}, function(err,data){
       if(err) res.send(err);
-      // console.log(data)
+      console.log(data)
       res.send(data);
     });
   })
@@ -97,7 +97,7 @@ router.route('/users/:id')
       if(req.body.scores) user.scores = req.body.scores;
       if(req.body.status) user.status = req.body.status;
       if(req.body.email) user.email = req.body.email;
-      if(req.body.company) user.company = req.body.company;
+      
       if(req.body.name) user.name = req.body.name;
       if(req.body.lastname) user.lastname = req.body.lastname;
       
