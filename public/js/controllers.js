@@ -62,11 +62,13 @@ angular.module("climaLaboral")
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
   var session = AuthToken.getSession();
-
+  
+  if (!session.company) session.company = {name :'Fostering Talent'};
+  
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
-  'En '+ session.company.name+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+  'En '+ session.company.name +' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
   ''+session.company.name+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
   'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento del Cuestionario)',
   'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
@@ -362,11 +364,8 @@ $scope.series1 = ['Serie 2015'];
       
       companySrvc.save($scope.formCompany).success(function(companyData){
         $scope.formUser.company = companyData._id;
-        // console.log(companyData)
-        // console.log($scope.formUser);
 
         userSrvc.edit(userData._id, $scope.formUser).success(function(userResponse){
-          console.log('userResponse', userResponse)
           $scope.processing = false;
           $scope.company = {};
           $location.path('/companies');
