@@ -62,5 +62,18 @@ router.route('/companies/:id')
     })
   })
 
+<<<<<<< HEAD
+=======
+router.route('/companyByUser/:id')
+  .get(function(req,res){
+    var userId = req.params.id;
+
+    Company.findOne({user: userId}, function(err,data){
+      if(err) res.send(err);
+      console.log(data)
+      res.send(data);
+    });
+  })
+>>>>>>> multi_empresa
 
 module.exports = router

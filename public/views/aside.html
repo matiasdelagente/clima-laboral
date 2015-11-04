@@ -126,11 +126,21 @@
     <!-- nav -->
 
     <!-- MENU HALL OF FAME -->
-    <nav ui-nav class="navi clearfix" ng-if=" url == '/hall-of-fame' || url == '/hall-of-fame-vote' ">
+    <nav ui-nav class="navi clearfix" ng-if=" url == '/hall-of-fame' || url == '/reconocimientos' ">
       <!-- list -->
       <ul class="nav">
         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
           <span translate="aside.nav.components.COMPONENTS">Hall of Fame</span>
+        </li>
+        
+        <li>
+          <a href="#/reconocimientos" class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <span><i class="glyphicon glyphicon-star"></i>&nbsp; Reconocimientos</span>
+          </a>
         </li>
         <li>
           <a href="#/hall-of-fame" class="auto">
@@ -141,16 +151,6 @@
             <span><i class="glyphicon glyphicon-king"></i>&nbsp; Hall of Fame</span>
           </a>
         </li>
-        <li>
-          <a href="#/hall-of-fame-vote" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-star"></i>&nbsp; Mis votos</span>
-          </a>
-        </li>
-        
        
       </ul>
       <!-- / list -->

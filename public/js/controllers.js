@@ -58,12 +58,25 @@ angular.module("climaLaboral")
 
 })
 
+<<<<<<< HEAD
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
   'En '+$scope.company+' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
   ''+$scope.company+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+=======
+.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+  var session = AuthToken.getSession();
+  
+  if (!session.company) session.company = {name :'Todas las Compañias'};
+  
+  $scope.processing = true;
+  $scope.formUser = {area: null, role: null};
+  $scope.questionsMotivadores = [
+  'En '+ session.company.name +' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+  ''+session.company.name+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+>>>>>>> multi_empresa
   'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento del Cuestionario)',
   'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
   'Tengo confianza en el futuro de '+$scope.company+'. (Estrategia)',
@@ -183,16 +196,37 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
+.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+  var session = AuthToken.getSession();
+
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
 
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-    $scope.showCompromiso = false;
-    $scope.calcAll();
-  });
+  if (session.admin && !session.superadmin) {
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      // console.log(data)
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });    
+  }
+
+
+  // userSrvc.all().success(function(data){
+  //   $scope.processing = false;
+  //   $scope.users = data;
+  //   $scope.showCompromiso = false;
+  //   $scope.calcAll();
+  // });
 
   $scope.calcKpi = function(preguntas){
     var area = $scope.formUser.area;
@@ -264,11 +298,24 @@ $scope.series1 = ['Serie 2015'];
 
 .controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
   $scope.formProcessing = false;
+<<<<<<< HEAD
   $scope.processing = true;
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
   });
+=======
+  // $scope.processing = true;
+  var session = AuthToken.getSession();
+  
+  userSrvc.get($routeParams.id).success(function(data){
+    $scope.user = data;
+    $scope.company = session.company.name;
+    $scope.processing = false;
+  });
+
+
+>>>>>>> multi_empresa
   $scope.add = function(){
     $scope.formProcessing = true;
     userSrvc.edit($scope.user._id, $scope.user).success(function(data){
@@ -301,11 +348,32 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = true;
     var url = $filter('encodeUri') ($scope.formCompany.name);
     $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
+<<<<<<< HEAD
     //setup encoded URL
     companySrvc.save($scope.formCompany).success(function(data){
       $scope.processing = false;
       $scope.company = {};
       $location.path('/companies');
+=======
+    //SET USER AS ADMIN
+    $scope.formUser.admin = true;
+    //Add ADMIN USER to company
+
+    userSrvc.save($scope.formUser).success(function(userData){
+      $scope.formUser = userData;
+      // AFTER USER ADD, CREATE COMPANY
+      $scope.formCompany.user = userData._id;
+      
+      companySrvc.save($scope.formCompany).success(function(companyData){
+        $scope.formUser.company = companyData._id;
+
+        userSrvc.edit(userData._id, $scope.formUser).success(function(userResponse){
+          $scope.processing = false;
+          $scope.company = {};
+          $location.path('/companies');
+        });
+      });
+>>>>>>> multi_empresa
     });
   };
 
@@ -336,10 +404,31 @@ $scope.series1 = ['Serie 2015'];
 
 .controller("UserCtrl",function($scope, userSrvc){
   $scope.processing = true;
+<<<<<<< HEAD
   userSrvc.all().success(function(data){
     $scope.processing = false;
     $scope.users = data;
   });
+=======
+  var session = AuthToken.getSession();
+
+  if (session.admin && !session.superadmin) {
+
+    var companyId = undefined;
+
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+    });    
+  }
+
+>>>>>>> multi_empresa
 
   $scope.deleteUser = function(userDeleted){
     $scope.processing = true;
@@ -374,6 +463,27 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.save = function(){
     $scope.processing = true;
+<<<<<<< HEAD
+=======
+
+    if (session.admin && !session.superadmin) {
+      $scope.formUser.company = session.company._id;
+      // $scope.formUser.admin = false;
+
+      userSrvc.usersByCompany(session.company._id).success(function(data){
+
+        //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
+        if(data.length >= session.company.maxUsers) {
+          alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
+          $scope.processing = false;
+          $location.path('/users');
+          return false;
+        }        
+      }); 
+
+    }
+
+>>>>>>> multi_empresa
     userSrvc.save($scope.formUser).success(function(data){
       $scope.processing = false;
       $location.path('/users');
@@ -509,7 +619,6 @@ $scope.series1 = ['Serie 2015'];
 
 .directive('tooltip', function() {
   return function(scope, element, attrs) {
-    console.log(scope, element, attrs, 'aaaaa' )
     element.find('[data-toggle="tooltip"]').tooltip();
   };
 });

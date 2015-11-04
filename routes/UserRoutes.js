@@ -46,12 +46,37 @@ router.use(function(req, res, next){
     })
   }
 })
+<<<<<<< HEAD
+=======
+router.route('/usersByCompany/:id')
+  .get(function(req,res){
+    var companyId = req.params.id;
+    // console.log(companyId)
+    User.find({company: companyId}, function(err,data){
+      if(err) res.send(err);
+      // console.log(data)
+      res.send(data);
+    }).populate('company');
+  })
+
+router.route('/allByCompany/:id')
+  .get(function(req,res){
+    var companyId = req.params.id;
+
+    User.find({company: companyId}, function(err,data){
+      if(err) res.send(err);
+      // console.log(data)
+      res.send(data);
+    }).populate('company');
+  })
+
+>>>>>>> multi_empresa
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){
       if(err) res.send(err);
       res.send(data);
-    });
+    }).populate('company');
   })
   .post(function(req,res){
     var user = new User(req.body)
