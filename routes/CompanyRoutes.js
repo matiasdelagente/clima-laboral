@@ -62,8 +62,6 @@ router.route('/companies/:id')
     })
   })
 
-<<<<<<< HEAD
-=======
 router.route('/companyByUser/:id')
   .get(function(req,res){
     var userId = req.params.id;
@@ -74,6 +72,5 @@ router.route('/companyByUser/:id')
       res.send(data);
     });
   })
->>>>>>> multi_empresa
 
 module.exports = router

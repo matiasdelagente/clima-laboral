@@ -46,8 +46,6 @@ router.use(function(req, res, next){
     })
   }
 })
-<<<<<<< HEAD
-=======
 router.route('/usersByCompany/:id')
   .get(function(req,res){
     var companyId = req.params.id;
@@ -69,8 +67,6 @@ router.route('/allByCompany/:id')
       res.send(data);
     }).populate('company');
   })
-
->>>>>>> multi_empresa
 router.route('/users')
   .get(function(req,res){
     User.find(function(err,data){
