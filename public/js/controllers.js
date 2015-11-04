@@ -311,14 +311,12 @@ $scope.series1 = ['Serie 2015'];
   $scope.formProcessing = false;
   // $scope.processing = true;
   var session = AuthToken.getSession();
-  $scope.user = session;
-  $scope.company = session.company.name;
   
-  // userSrvc.get($routeParams.id).success(function(data){
-  //   $scope.user = data;
-  //   $scope.company = session.company.name;
+  userSrvc.get($routeParams.id).success(function(data){
+    $scope.user = data;
+    $scope.company = session.company.name;
     $scope.processing = false;
-  // });
+  });
 
 
   $scope.add = function(){
