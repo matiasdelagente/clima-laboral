@@ -462,7 +462,7 @@ $scope.series1 = ['Serie 2015'];
 
     if (session.admin && !session.superadmin) {
       $scope.formUser.company = session.company._id;
-      $scope.formUser.admin = false;
+      // $scope.formUser.admin = false;
 
       userSrvc.usersByCompany(session.company._id).success(function(data){
 
