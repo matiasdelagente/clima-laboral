@@ -63,7 +63,7 @@ angular.module("climaLaboral")
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
   var session = AuthToken.getSession();
   
-  if (!session.company) session.company = {name :'Fostering Talent'};
+  if (!session.company) session.company = {name :'Todas las Compañias'};
   
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
