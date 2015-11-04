@@ -59,7 +59,7 @@
 						<th class="col-md-1">Nombre</th>
 						<th class="col-md-1">Apellido</th>
 						<th class="col-md-1">Usuario</th>
-						<th class="col-md-1" ng-if='!user.admin'>Compañía</th>
+						<th class="col-md-1" ng-if='user.superadmin'>Compañía</th>
 						<th class="col-md-1">Tipo</th>
 						<th class="col-md-1">Gerencia</th>
 						<th class="col-md-1">Rol</th>
@@ -78,7 +78,7 @@
 						<td class="col-md-2">{{person.name}}</td>
 						<td class="col-md-2">{{person.lastname}}</td>
 						<td class="col-md-2">{{person.username}}</td>
-						<td class="col-md-2" ng-if='!user.admin'>{{person.company.name}}</td>
+						<td class="col-md-2" ng-if='user.superadmin'>{{person.company.name}}</td>
 						
 						<!-- <td class="col-md-2">{{person.admin}}</td> -->
 

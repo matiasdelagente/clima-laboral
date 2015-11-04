@@ -66,7 +66,7 @@ router.route('/allByCompany/:id')
       if(err) res.send(err);
       // console.log(data)
       res.send(data);
-    });
+    }).populate('company');
   })
 
 router.route('/users')
@@ -74,7 +74,7 @@ router.route('/users')
     User.find(function(err,data){
       if(err) res.send(err);
       res.send(data);
-    });
+    }).populate('company');
   })
   .post(function(req,res){
     var user = new User(req.body)
