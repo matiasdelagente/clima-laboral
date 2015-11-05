@@ -8,136 +8,171 @@
 </div>
 
 
-<div class="wrapper-md ng-scope">
-  <div class="row">
+<!-- MODAL QUE SE ABRE PARA CONFIRMACIÓN -->
 
-    <div class="col-lg-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="clearfix text-center m-t">
-            <div class="inline">
-              <div ui-jq="easyPieChart" ui-options="{
-              percent: 75,
-              lineWidth: 5,
-              trackColor: '#e8eff0',
-              barColor: '#23b7e5',
-              scaleColor: false,
-              color: '#3a3f51',
-              size: 134,
-              lineCap: 'butt',
-              rotate: -90,
-              animate: 1000
-            }" class="easyPieChart" style="width: 134px; height: 134px; line-height: 134px;">
-            <div class="thumb-xl">
-              <img src="img/a8.jpg" class="img-circle" alt="...">
-            </div>
-            <canvas width="268" height="268" style="width: 134px; height: 134px;"></canvas>
-          </div>
+<!-- <div tabindex="-1" role="dialog" class="modal fade ng-isolate-scope in" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" ng-click="close($event)" modal-window="" index="0" animate="animate" style="z-index: 1050; display: block;">
+    <div class="modal-dialog" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}"><div class="modal-content" modal-transclude="">
+            <div ng-include="'tpl/modal.html'" class="ng-scope"><div class="modal-header ng-scope">
+    <h3 class="modal-title">Confirmar</h3>
+</div>
 
-          <div class="h4 m-t m-b-xs">{{formUser.name}} {{formUser.lastname}}</div>
-          <small class="text-muted m-b" ng-if="formUser.role">{{formUser.role}}</small>
-          <small class="text-muted m-b" ng-if="!formUser.role">General</small>
-        </div>                      
-      </div>
-    </div>
-
-
-    <footer class="panel-footer bg-warning text-center no-padder">
-      <div class="row no-gutter">
-        <div class="col-xs-4 lt">
-          <div class="wrapper">
-            <span class="m-b-xs h3 block text-white"><i class="fa fa-star"></i></span>
-            <small class="label bg-warning">Oro</small>
-          </div>
-        </div>
-        <div class="col-xs-4 bg-light">
-          <div class="wrapper">
-            <span class="m-b-xs h3 block text-disabled"><i class="fa fa-star"></i></span>
-            <small class="text-disabled">Plata</small>
-          </div>
-        </div>
-        <div class="col-xs-4 bg-light">
-          <div class="wrapper">
-            <span class="m-b-xs h3 block text-disabled"><i class="fa fa-star"></i></span>
-            <small class="text-disabled">Bronce</small>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <ul class="list-group no-radius">
-      <li class="list-group-item text-muted">
-        Reconocimientos Anteriores
-      </li>
-      <li class="list-group-item">
-        <span class="label bg-warning pull-right">Oro</span>
-        <span class="label bg-light">1</span>
-        Octubre 2015
-      </li>
-      <li class="list-group-item">
-        <span class="label bg-dark pull-right">Plata</span>
-        <span class="label bg-light">2</span>
-        Mayo 2015
-      </li>
-      <li class="list-group-item">
-        <span class="label bg-light pull-right">Bronce</span>
-        <span class="label bg-light">3</span>
-        Diciembre 2014
-      </li>
+<div class="modal-body ng-scope">
+    <ul>
+        <li ng-repeat="item in items" class="ng-scope">
+            <a ng-click="selected.item = item" class="ng-binding">item1</a>
+        </li>
     </ul>
-  </div>
+    Selected: <b class="ng-binding">item1</b>
 </div>
-
-
-<div class="col-lg-8">
-  <div class="tl-content panel padder b-a block">
-    <span class="arrow left pull-up hidden-left"></span>
-    <span class="arrow right pull-up visible-left"></span>
-    <div class="text-lt m-b-sm"><b>¿Por qué vas a reconocer a {{formUser.name}}?</b></div>
-    <div class="panel-body pull-in b-t b-light">
-      <p>Estás a punto de enviar un reconocimiento de <span class="label bg-warning">Oro</span> a {{formUser.name}}. Al hacerlo, le enviaremos un email a él y a toda la empresa, reconociendo el logro e invitándolos a felicitar a su compañero.</p>
-
-      <p>Además, este reconocimiento será tomado en cuenta para el Salón de la Fama.</p>
+<div class="modal-footer ng-scope">                  
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div></div>
+          </div></div>
+        </div> -->
 
 
 
-      <div class="panel panel-default m-t-md m-b-n-sm ">
-        <form>
-          <textarea class="form-control no-border" rows="3" placeholder="Escribe aquí el premio... (opcional)"></textarea>
-        </form>
-        
-      </div>
+        <div class="wrapper-md ng-scope">
+          <div class="row">
 
-      <br><br>
-      <p>Estás a punto onvitándolos a felicitar a su compañero.</p>
+            <div class="col-lg-4">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="clearfix text-center m-t">
+                    <div class="inline">
+                      <div ui-jq="easyPieChart" ui-options="{
+                      percent: 75,
+                      lineWidth: 5,
+                      trackColor: '#e8eff0',
+                      barColor: '#23b7e5',
+                      scaleColor: false,
+                      color: '#3a3f51',
+                      size: 134,
+                      lineCap: 'butt',
+                      rotate: -90,
+                      animate: 1000
+                    }" class="easyPieChart" style="width: 134px; height: 134px; line-height: 134px;">
+                    <div class="thumb-xl">
+                      <img src="img/a8.jpg" class="img-circle" alt="...">
+                    </div>
+                    <canvas width="268" height="268" style="width: 134px; height: 134px;"></canvas>
+                  </div>
+
+                  <div class="h4 m-t m-b-xs">{{formUser.name}}</div>
+                  <small class="text-muted m-b" ng-if="formUser.role">{{formUser.role}}</small>
+                  <small class="text-muted m-b" ng-if="!formUser.role">General</small>
+                </div>                      
+              </div>
+            </div>
 
 
-      <div class="panel panel-default m-t-md m-b-n-sm ">
-        <form>
-          <textarea class="form-control no-border" rows="3" placeholder="Escribe aquí las razones por las cuales crees que merece este reconocimiento..."></textarea>
-        </form>
-        <div class="panel-footer bg-light lter">
-          <button class="btn btn-info pull-right btn-sm">Enviar reconocimiento</button>
-          <ul class="nav nav-pills nav-sm">
-            <li><a href=""><i class="fa fa-bookmark text-muted"></i></a></li>
-          </ul>
+            <footer class="panel-footer bg-warning text-center no-padder">
+              <div class="row no-gutter">
+                <div class="col-xs-4 lt">
+                  <a data-toggle="tooltip" data-placement="top" title="3 puntos">
+                    <div class="wrapper">
+                      <span class="m-b-xs h3 block text-white"><i class="fa fa-star"></i></span>
+                      <small class="label bg-warning">Oro</small>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-xs-4 bg-light">
+                  <div class="wrapper">
+                    <span class="m-b-xs h3 block text-disabled"><i class="fa fa-star"></i></span>
+                    <small class="text-disabled">Plata</small>
+                  </div>
+                </div>
+                <div class="col-xs-4 bg-light">
+                  <div class="wrapper">
+                    <span class="m-b-xs h3 block text-disabled"><i class="fa fa-star"></i></span>
+                    <small class="text-disabled">Bronce</small>
+                  </div>
+                </div>
+              </div>
+            </footer>
+
+            <ul class="list-group no-radius">
+              <li class="list-group-item text-muted">
+                Reconocimientos Anteriores
+              </li>
+              <li class="list-group-item">
+                <span class="label bg-warning pull-right">Oro</span>
+                <span class="label bg-light">1</span>
+                Octubre 2015
+              </li>
+              <li class="list-group-item">
+                <span class="label bg-dark pull-right">Plata</span>
+                <span class="label bg-light">2</span>
+                Mayo 2015
+              </li>
+              <li class="list-group-item">
+                <span class="label bg-light pull-right">Bronce</span>
+                <span class="label bg-light">3</span>
+                Diciembre 2014
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="tl-content panel padder b-a block">
+            <span class="arrow left pull-up hidden-left"></span>
+            <span class="arrow right pull-up visible-left"></span>
+
+            <!-- PANTALLA PARA ENVIAR RECONOCIMIENTO -->
+            <!-- <div class="text-lt m-b-sm"><b>¿Por qué vas a reconocer a {{formUser.name}}?</b></div>
+            <div class="panel-body pull-in b-t b-light">
+              <p>Estás a punto de enviar un reconocimiento de <span class="label bg-warning">Oro</span> a <b>{{formUser.name}}</b>. Al hacerlo, le enviaremos un email a él y a toda la empresa, reconociendo el logro e invitándolos a felicitar a su compañero. Además, este reconocimiento será tomado en cuenta para el Salón de la Fama.</p>
+              <br>
+              <p>Puedes agregar al reconocimiento un premio o beneficio particular. Simplemente tienes que escribirlo a continuación, y, por supuesto, cumplir con esto después.</p>
+
+
+              <div class="panel panel-default m-t-md m-b-n-sm ">
+                <form>
+                  <textarea class="form-control no-border" rows="3" placeholder="Escribe aquí el premio... (opcional)"></textarea>
+                </form>
+
+              </div>
+
+              <br><br>
+              <p>Es importante que detalles las razones por las cuales crees que merece este reconocimiento. Al hacerl, intenta ser muy claro y concreto.</p>
+
+
+              <div class="panel panel-default m-t-md m-b-n-sm ">
+                <form>
+                  <textarea class="form-control no-border" rows="3" placeholder="Escribe aquí las razones por las cuales crees que merece este reconocimiento..."></textarea>
+                </form>
+                <div class="panel-footer bg-light lter">
+                  <button class="btn btn-info pull-right btn-sm">Enviar reconocimiento</button>
+                  <ul class="nav nav-pills nav-sm">
+                    <li><a href=""><i class="fa fa-bookmark text-muted"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div> -->
+
+
+            <!-- RECONOCIMIENTO ENVIADO -->
+            <div class="text-lt m-b-sm"><b>¡Reconocimiento enviado!</b></div>
+            <div class="panel-body pull-in b-t b-light">
+              <p>Acabas de enviar un <b>reconocimiento de <span class="label bg-warning">Oro</span> a {{formUser.name}}</b>. Los premios y reconocimientos aydan a mantener un <b>Clima Laboral Saludable</b>, mantienen el compromiso de las personas y las motivan para seguir creciendo.</p>
+              <br>
+              <span>¡Felicitaciones!</span>
+              
+            </div>
+
+          </div>
+
+
         </div>
       </div>
 
+
+
     </div>
-
-
-
   </div>
-
-
-</div>
-</div>
-
-
-
-</div>
-</div>
 
 
 
