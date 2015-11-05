@@ -1,163 +1,195 @@
 <div class="aside-wrap">
   <!-- if you want to use a custom scroll when aside fixed, use the slimScroll
     <div class="navi-wrap" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
-  -->
+    -->
 
 
-  <div class="navi-wrap">
-    <!-- nav -->
+    <div class="navi-wrap">
+      <!-- nav -->
 
-    <!-- MENU REPORTES -->
-    <nav ui-nav class="navi clearfix" ng-if=" url == '/scores-1' || url == '/scores-2' || url == '/scores-3' ">
-      <!-- list -->
-      <ul class="nav">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Reportes</span>
-        </li>
-        <li>
-          <a href="#/scores-1" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-thumbs-up"></i>&nbsp; Compromiso</span>
-          </a>
-        </li>
-        <li>
-          <a href="#/scores-2" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-cog"></i>&nbsp; KPI's</span>
-          </a>
-        </li>
-        <li>
-          <a href="#/scores-3" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-user"></i>&nbsp; Individual</span>
-          </a>
-        </li>
-      </ul>
-      <!-- / list -->
+      <!-- MENU REPORTES -->
+      <nav ui-nav class="navi clearfix" ng-if=" url == '/scores-1' || url == '/scores-2' || url == '/scores-3' ">
+        <!-- list -->
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span translate="aside.nav.components.COMPONENTS">Reportes</span>
+          </li>
+          <li>
+            <a href="#/scores-1" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <span>Compromiso</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/scores-2" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-cog"></i>
+              <span>KPI's</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/scores-3" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-user"></i>
+              <span>Individual</span>
+            </a>
+          </li>
+        </ul>
+        <!-- / list -->
 
-    </nav>
-    <!-- nav -->
+      </nav>
+      <!-- nav -->
 
-    <!-- MENU USUARIOS -->
-    <nav ui-nav class="navi clearfix" id="usersMenu" ng-if=" url == '/users' ">
-      
-
-      <br>
-      <a href="#/user/add" class="auto">
-        <button class="btn m-b-xs btn-sm btn-info btn-addon m-l m-r"><i class="glyphicon glyphicon-plus"></i>Agregar Usuario</button>
-      </a>
-
-      <!-- list -->
-      <ul class="nav">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Usuarios</span>
-        </li>
-        <li>
-          <a href="#/users" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-user"></i>&nbsp; Lista</span>
-          </a>
-        </li>
-      </ul>
-      <!-- / list -->
-    </nav>
-    <!-- nav -->
+      <!-- MENU USUARIOS -->
+      <nav ui-nav class="navi clearfix" id="usersMenu" ng-if=" url == '/users' ">
 
 
-    <!-- MENU EMPRESAS -->
-    <nav ui-nav class="navi clearfix" id="usersMenu" ng-if=" url == '/companies' ">
-      
-      <br>
-      <a href="#/companies/add" class="auto">
-        <button class="btn m-b-xs btn-sm btn-info btn-addon m-l m-r"><i class="glyphicon glyphicon-plus"></i>Agregar Empresa</button>
-      </a>
+        <br>
+        <a href="#/user/add" class="auto">
+          <button class="btn m-b-xs btn-sm btn-info btn-addon m-l m-r"><i class="glyphicon glyphicon-plus"></i>Agregar Usuario</button>
+        </a>
 
-      <!-- list -->
-      <ul class="nav">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Empresas</span>
-        </li>
-        <li>
-          <a href="#/companies" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-globe"></i>&nbsp; Lista</span>
-          </a>
-        </li>
-      </ul>
-      <!-- / list -->
-    </nav>
-    <!-- nav -->
+        <!-- list -->
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span translate="aside.nav.components.COMPONENTS">Usuarios</span>
+          </li>
+          <li>
+            <a href="#/users" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-user"></i>
+              <span>Lista</span>
+            </a>
+          </li>
+        </ul>
+        <!-- / list -->
+      </nav>
+      <!-- nav -->
 
 
-    <!-- MENU ASSESSMENTS -->
-    <nav ui-nav class="navi clearfix" id="assessmentsMenu" ng-if=" url == '/' ">
-      <!-- list -->
-      <ul class="nav">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Instrumentos</span>
-        </li>
-        <li>
-          <a href="#/" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="fa fa-list-alt"></i>&nbsp; Lista</span>
-          </a>
-        </li>
-      </ul>
-      <!-- / list -->
-    </nav>
-    <!-- nav -->
+      <!-- MENU EMPRESAS -->
+      <nav ui-nav class="navi clearfix" id="usersMenu" ng-if=" url == '/companies' ">
 
-    <!-- MENU HALL OF FAME -->
-    <nav ui-nav class="navi clearfix" ng-if=" url == '/hall-of-fame' || url == '/reconocimientos' ">
-      <!-- list -->
-      <ul class="nav">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-          <span translate="aside.nav.components.COMPONENTS">Hall of Fame</span>
-        </li>
-        
-        <li>
-          <a href="#/reconocimientos" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-star"></i>&nbsp; Reconocimientos</span>
-          </a>
-        </li>
-        <li>
-          <a href="#/hall-of-fame" class="auto">
-            <span class="pull-right text-muted">
-              <i class="fa fa-fw fa-angle-right text"></i>
-              <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <span><i class="glyphicon glyphicon-king"></i>&nbsp; Hall of Fame</span>
-          </a>
-        </li>
-       
-      </ul>
-      <!-- / list -->
+        <br>
+        <a href="#/companies/add" class="auto">
+          <button class="btn m-b-xs btn-sm btn-info btn-addon m-l m-r"><i class="glyphicon glyphicon-plus"></i>Agregar Empresa</button>
+        </a>
 
-    </nav>
-    <!-- nav -->
+        <!-- list -->
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span translate="aside.nav.components.COMPONENTS">Empresas</span>
+          </li>
+          <li>
+            <a href="#/companies" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-globe"></i>
+              <span>Lista</span>
+            </a>
+          </li>
+        </ul>
+        <!-- / list -->
+      </nav>
+      <!-- nav -->
 
 
+      <!-- MENU ASSESSMENTS -->
+      <nav ui-nav class="navi clearfix" id="assessmentsMenu" ng-if=" url == '/' ">
+        <!-- list -->
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span translate="aside.nav.components.COMPONENTS">Instrumentos</span>
+          </li>
+          <li>
+            <a href="#/" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="fa fa-list-alt"></i>
+              <span>Lista</span>
+            </a>
+          </li>
+        </ul>
+        <!-- / list -->
+      </nav>
+      <!-- nav -->
+
+      <!-- MENU HALL OF FAME -->
+      <nav ui-nav class="navi clearfix" ng-if=" url == '/hall-of-fame' || url == '/reconocimientos' ">
+
+
+        <!-- list -->
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+            <span>Reconocimientos</span>
+          </li>
+
+          
+
+
+          <li>
+            <a href="#/reconocimientos" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-star"></i>
+              <span>Reconocimientos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#/hall-of-fame" class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <i class="glyphicon glyphicon-king"></i>
+              <span>Salón de la Fama</span>
+            </a>
+            <ul class="nav nav-sub dk" style="display: block;">
+              <li class="nav-sub-header">
+                <a href="">
+                  <span>Salón de la Fama</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Salón de Oro</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <b class="badge bg-info pull-right">3</b>
+                  <span>Salón de Plata</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+        <!-- / list -->
+
+      </nav>
+      <!-- nav -->
+
+
+    </div>
   </div>
-</div>

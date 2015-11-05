@@ -81,8 +81,8 @@
 						<td class="col-md-2" ng-if='user.superadmin'>{{person.company.name}}</td>
 						
 						<!-- <td class="col-md-2">{{person.admin}}</td> -->
-
-						<td class="col-md-2" ng-if="person.admin"><span class="label bg-primary">Admin</span></td>
+						<td class="col-md-2" ng-if="person.superadmin"><span class="label bg-danger">Super</span></td>
+						<td class="col-md-2" ng-if="person.admin && !person.superadmin"><span class="label bg-primary">Admin</span></td>
 						<td class="col-md-2" ng-if="!person.admin"><span class="label bg-info">Usuario</span></td>
 
 
