@@ -147,10 +147,10 @@ router.route('/users')
 
           mandrill_client.messages.sendTemplate(mailJSON, 
           function(result) {
-            console.log(result);
+            // console.log(result);
           },function(e) {
             // Mandrill returns the error as an object with name and message keys
-            console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+            // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
             // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
           });
         }
