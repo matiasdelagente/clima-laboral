@@ -22,7 +22,7 @@ router.route('/companies')
       if (err) {
         res.send(err)
       } else {
-        console.log(req.body)
+        // console.log(req.body)
         var mailJSON ={
           "template_name": "fts-invitacion-empresa",
           "template_content": [
@@ -85,10 +85,10 @@ router.route('/companies')
 
         mandrill_client.messages.sendTemplate(mailJSON, 
         function(result) {
-          console.log(result);
+          // console.log(result);
         },function(e) {
           // Mandrill returns the error as an object with name and message keys
-          console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+          // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
           // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
         });
 
