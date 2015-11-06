@@ -84,7 +84,7 @@ router.route('/users')
         user.save(function(err, data){
 
         //ONLY SEND MAIL IF IS A REGULAR USER
-        if (req.body.admin) {
+        if (!req.body.admin) {
           var mailJSON ={
             "template_name": "fts-invitacion", //"fts-invitacion-empresa"
             "template_content": [
