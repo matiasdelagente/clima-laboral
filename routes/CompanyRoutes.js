@@ -35,7 +35,7 @@ router.route('/companies')
             "html": "",
             "text": "",
             "subject": "",
-            "from_email": "no-responder@fosterintalent.com",
+            "from_email": "no-responder@fosteringtalent.com",
             "from_name": "Fostering Talent",
             "to": [
             {
@@ -58,20 +58,23 @@ router.route('/companies')
             "return_path_domain": null,
             "global_merge_vars": [
             {
+              // @TODO este es el nombre del administrador
               "name": "user_name",
               "content": req.body.user_name
             },
             {
+              // @TODO este es el username del administrador
               "name": "username",
               "content": req.body.username
             },
             {
+              // @TODO este es el password del administrador
               "name": "password",
               "content": req.body.password
             },
             {
               "name": "company",
-              "content": req.body.company
+              "content": req.body.name
             },
             {
               "name": "URLEmpresa",
@@ -85,7 +88,7 @@ router.route('/companies')
 
         mandrill_client.messages.sendTemplate(mailJSON, 
         function(result) {
-          // console.log(result);
+           console.log(result);
         },function(e) {
           // Mandrill returns the error as an object with name and message keys
           // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
