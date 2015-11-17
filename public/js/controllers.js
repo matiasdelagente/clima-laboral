@@ -346,27 +346,33 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){
+.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){  
   $scope.save = function(){
+    var psw = $scope.formUser.password;
+    console.log(psw)
     $scope.processing = true;
     var url = $filter('encodeUri') ($scope.formCompany.name);
-    var psw = $scope.formUser.password;
 
     $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
-    //SET USER AS ADMIN
+    //IF WE HAVE A COMPANY, WE SET USER AS ADMIN
     $scope.formUser.admin = true;
+    
     //Add ADMIN USER to company
-
     userSrvc.save($scope.formUser).success(function(userData){
       $scope.formUser = userData;
-      // AFTER USER ADD, CREATE COMPANY
+
+      // AFTER USER CREEATION, CREATE COMPANY AND LINK TO THE USER
       $scope.formCompany.user = userData._id;
-      
+      $scope.formCompany.userPsw = psw;
+
+      //RE-SET PASSWORD 
+      $scope.formUser.password = psw;
+
       companySrvc.save($scope.formCompany).success(function(companyData){
         $scope.formUser.company = companyData._id;
-        $scope.formUser.password = psw;
-        
+
         userSrvc.edit(userData._id, $scope.formUser).success(function(userResponse){
+          //LINK USER TO COMPANY
           $scope.processing = false;
           $scope.company = {};
           $location.path('/companies');
@@ -462,20 +468,21 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = true;
 
     if (session.admin && !session.superadmin) {
-      $scope.formUser.company = session.company._id;
       // $scope.formUser.admin = false;
+      $scope.formUser.company = session.company._id;
+      $scope.formUser.companyName = session.company.name;
 
-      userSrvc.usersByCompany(session.company._id).success(function(data){
+      // userSrvc.usersByCompany(session.company._id).success(function(data){
 
-        //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
-        if(data.length >= session.company.maxUsers) {
-          alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
-          $scope.processing = false;
-          $location.path('/users');
-          return false;
-        }        
-      }); 
-
+      //   //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
+      //   if(data.length >= session.company.maxUsers) {
+      //     alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
+      //     $scope.processing = false;
+      //     $location.path('/users');
+      //     return false;
+      //   }        
+      // }); 
+      console.log($scope.formUser)
     }
 
     userSrvc.save($scope.formUser).success(function(data){

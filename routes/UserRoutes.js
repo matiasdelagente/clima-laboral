@@ -2,6 +2,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require('../models/UserModel.js');
+var Company = require('../models/CompanyModel.js');
 var superSecret = "123456";
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('yXbOSbsEdGY5XDGY1G4JMw');
@@ -81,10 +82,11 @@ router.route('/users')
   })
   .post(function(req,res){
     var user = new User(req.body)
-        user.save(function(err, data){
-
+      
+      user.save(function(err, data){
         //ONLY SEND MAIL IF IS A REGULAR USER
-        if (!req.body.admin) {
+        if (!req.body.admin && req.body.sendMail) {
+                  
           var mailJSON ={
             "template_name": "fts-invitacion", //"fts-invitacion-empresa"
             "template_content": [
@@ -134,7 +136,7 @@ router.route('/users')
               {
                 // @TODO ACA HAY QUE PASAR EL NOMBRE DE LA COMPAÑÍA Y NO CON EL ID
                 "name": "company",
-                "content": req.body.company
+                "content": req.body.companyName
               },
               {
                 "name": "URLEmpresa",
@@ -145,17 +147,16 @@ router.route('/users')
             "async": false,
             "ip_pool": "Main Pool"
           };
-
+          
           mandrill_client.messages.sendTemplate(mailJSON, 
-          function(result) {
-             console.log(result);
-          },function(e) {
-            // Mandrill returns the error as an object with name and message keys
-            // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-            // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-          });
+            function(result) {
+               // console.log(result);
+            },function(e) {
+              // Mandrill returns the error as an object with name and message keys
+              // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+              // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+            });
         }
-
 
         if(err) res.send(err);
         res.send(data);

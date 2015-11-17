@@ -135,7 +135,28 @@
                 <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password del administrador" tabindex="0" aria-required="true" aria-invalid="true" ng-model='formUser.password'/>
               </div>
             </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
             
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="name">Nombre</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" name="name" placeholder="Ingrese el nombre de la persona" ng-model="formUser.name" />
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="lastname">Apellido</label>
+              <div class="col-sm-9">
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="lastname" placeholder="Ingrese el apellido de la persona" ng-model="formUser.lastname" tabindex="0" aria-required="true" aria-invalid="true" />
+              </div>
+            </div>
+
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
             <!-- ESTO HAY QUE HACERLO ANDAR! 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="username">Confirmar</label>
@@ -148,7 +169,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Correo Electrónico</label>
               <div class="col-sm-9">
-                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" ng-model='formUser.email'/>
+                <input class="form-control" type="email" name="emailAdmin"  placeholder="Ingrese el correo electrónico del administrador" ng-model='formUser.email' />
                 </div>
             </div>
 
@@ -157,7 +178,7 @@
             <div class="form-group" ng-if="!formCompany._id">
               <div class="col-sm-9 col-sm-offset-3">
                 <label>
-                <input type="checkbox" value="" checked="">
+                <input type="checkbox" name="sendMail" id="sendmail" checked="checked" ng-model="formUser.sendMail" />
                 Enviar invitación por email 
               </label>
               </div>

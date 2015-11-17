@@ -97,14 +97,25 @@
             <div class="form-group" ng-if="!formUser._id">
               <div class="col-sm-9 col-sm-offset-3">
                 <label>
-                <input type="checkbox" value="" checked="">
-                Enviar invitación por email 
+                <input type="checkbox" name="sendMail" checked="checked" ng-model="formUser.sendMail" value />
+                Enviar invitación por email
               </label>
               </div>
             </div>
 
             <div class="line line-dashed b-b line-lg pull-in"></div>
 
+            <div class="form-group" ng-if='user.superadmin'>
+              <label for="area" class="col-sm-3 control-label">Compa&ntilde;ia</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="company" ng-model="formUser.company" ng-options="company for comapny in companies">
+                <option value=''>- Seleccione la compa&ntilde;ia a la que pertenece -</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
+              <input type="hidden" ng-model="formUser.company" name="company"/>
+            </div>
             <div class="form-group">
               <label for="area" class="col-sm-3 control-label">Gerencia</label>
               <div class="col-sm-9">
@@ -126,7 +137,7 @@
             <div class="line line-dashed b-b line-lg pull-in" ng-if='user.superadmin'></div>
 
             <div class="form-group" ng-if='user.superadmin || user.admin'>
-              <label class="col-sm-3 control-label">¿Es Adminsitrador?</label>
+              <label class="col-sm-3 control-label">¿Es Administrador?</label>
               <div class="col-sm-9">
                 <input class="" type="checkbox" name="admin" ng-true-value="true" ng-false-value="false" ng-model="formUser.admin">
               </div>
@@ -140,7 +151,7 @@
                 <input class="" type="checkbox" name="superadmin" ng-true-value="true" ng-false-value="false" ng-model="formUser.superadmin">
               </div>
             </div>
-
+            
             <div class="line line-dashed b-b line-lg pull-in"></div>
             
             <div class="form-group">
