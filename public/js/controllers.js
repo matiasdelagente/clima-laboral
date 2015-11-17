@@ -312,6 +312,8 @@ $scope.series1 = ['Serie 2015'];
   // $scope.processing = true;
   var session = AuthToken.getSession();
   
+  $scope.isDemo = !!(session.company.demo) ? session.company.demo : false;
+  
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.company = session.company.name;
@@ -472,17 +474,16 @@ $scope.series1 = ['Serie 2015'];
       $scope.formUser.company = session.company._id;
       $scope.formUser.companyName = session.company.name;
 
-      // userSrvc.usersByCompany(session.company._id).success(function(data){
+      userSrvc.usersByCompany(session.company._id).success(function(data){
 
-      //   //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
-      //   if(data.length >= session.company.maxUsers) {
-      //     alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
-      //     $scope.processing = false;
-      //     $location.path('/users');
-      //     return false;
-      //   }        
-      // }); 
-      console.log($scope.formUser)
+        //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
+        if(data.length >= session.company.maxUsers) {
+          alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
+          $scope.processing = false;
+          $location.path('/users');
+          return false;
+        }        
+      }); 
     }
 
     userSrvc.save($scope.formUser).success(function(data){
