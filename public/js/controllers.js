@@ -351,7 +351,7 @@ $scope.series1 = ['Serie 2015'];
 .controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){  
   $scope.save = function(){
     var psw = $scope.formUser.password;
-    console.log(psw)
+    // console.log(psw)
     $scope.processing = true;
     var url = $filter('encodeUri') ($scope.formCompany.name);
 
