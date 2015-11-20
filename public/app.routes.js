@@ -86,4 +86,29 @@ angular.module("app.routes", [])
     controller: "EditUserCtrl",
     templateUrl: "./views/reconocer.html"
   })
+
+  .when('/organigrama',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/organigrama.html"
+  })
+
+  .when('/competencias',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/competencias.html"
+  })
+
+  .when('/areasyroles',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/areasyroles.html"
+  })
+
+  .when('/ed-scores-1',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/ed-scores-1.html"
+  })
+
+  .when('/ed-scores-2',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/ed-scores-2.html"
+  })
 })

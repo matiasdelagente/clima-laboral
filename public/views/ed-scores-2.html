@@ -1,0 +1,147 @@
+<div class="bg-light lter b-b wrapper-md ng-scope" style="width:84%;">
+  <div class="btn-group pull-right">
+    <button class="btn m-b-xs btn-sm btn-primary btn-addon"><i class="material-icons md-18">extension</i>Evaluación de Desempeño</button>
+  </div>
+  <h1 class="m-n font-thin h3"><i class="icon-bar-chart"></i> Reportes</h1>
+</div>
+<div class="jumbotron text-center" ng-show="processing">
+  <span class="glyphicon glyphicon-repeat spinner"></span>
+</div>
+
+
+<div class="wrapper-md" ng-show="!processing">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <span class="font-bold">Desempeño</span>
+
+          <div class="row wrapper">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escribir Área">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escribir Rol">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-body">
+          <div ui-jq="plot" ui-options="[{&quot;label&quot;:&quot;iPhone5S&quot;,&quot;data&quot;:40},{&quot;label&quot;:&quot;iPad Mini&quot;,&quot;data&quot;:10},{&quot;label&quot;:&quot;iPad Mini Retina&quot;,&quot;data&quot;:20},{&quot;label&quot;:&quot;iPhone4S&quot;,&quot;data&quot;:12},{&quot;label&quot;:&quot;iPad Air&quot;,&quot;data&quot;:18}],
+          {
+          series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+          colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
+          grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+          tooltip: true,
+          tooltipOpts: { content: '%s: %p.0%' }
+        }" style="height: 240px; padding: 0px; position: relative;"><canvas class="flot-base" width="950" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 475px; height: 240px;"></canvas><canvas class="flot-overlay" width="950" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 475px; height: 240px;"></canvas><div class="legend"><div style="position: absolute; width: 102px; height: 110px; top: 5px; right: 5px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#ccc"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(114,102,186);overflow:hidden"></div></div></td><td class="legendLabel">iPhone5S</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(35,183,229);overflow:hidden"></div></div></td><td class="legendLabel">iPad Mini</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(39,194,76);overflow:hidden"></div></div></td><td class="legendLabel">iPad Mini Retina</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(250,215,51);overflow:hidden"></div></div></td><td class="legendLabel">iPhone4S</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(240,80,80);overflow:hidden"></div></div></td><td class="legendLabel">iPad Air</td></tr></tbody></table></div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 71px; left: 268px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(114,102,186);">iPhone5S<br>40%</div></span><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 207px; left: 198.5px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(35,183,229);">iPad Mini<br>10%</div></span><span class="pieLabel" id="pieLabel2" style="position: absolute; top: 192px; left: 87px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(39,194,76);">iPad Mini Retina<br>20%</div></span><span class="pieLabel" id="pieLabel3" style="position: absolute; top: 97px; left: 57px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(250,215,51);">iPhone4S<br>12%</div></span><span class="pieLabel" id="pieLabel4" style="position: absolute; top: 13px; left: 110.5px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(240,80,80);">iPad Air<br>18%</div></span></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <span class="font-bold">Desempeño</span>
+
+        <div class="row wrapper">
+          <div class="col-sm-6">
+            <div class="input-group">
+              <input type="text" class="input-sm form-control" placeholder="Escribir Área">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="input-group">
+              <input type="text" class="input-sm form-control" placeholder="Escribir Rol">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel-body">
+        <div ui-jq="plot" ui-options="[{&quot;label&quot;:&quot;iPhone5S&quot;,&quot;data&quot;:40},{&quot;label&quot;:&quot;iPad Mini&quot;,&quot;data&quot;:10},{&quot;label&quot;:&quot;iPad Mini Retina&quot;,&quot;data&quot;:20},{&quot;label&quot;:&quot;iPhone4S&quot;,&quot;data&quot;:12},{&quot;label&quot;:&quot;iPad Air&quot;,&quot;data&quot;:18}],
+        {
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+        colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+        tooltip: true,
+        tooltipOpts: { content: '%s: %p.0%' }
+      }" style="height: 240px; padding: 0px; position: relative;"><canvas class="flot-base" width="950" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 475px; height: 240px;"></canvas><canvas class="flot-overlay" width="950" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 475px; height: 240px;"></canvas><div class="legend"><div style="position: absolute; width: 102px; height: 110px; top: 5px; right: 5px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#ccc"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(114,102,186);overflow:hidden"></div></div></td><td class="legendLabel">iPhone5S</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(35,183,229);overflow:hidden"></div></div></td><td class="legendLabel">iPad Mini</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(39,194,76);overflow:hidden"></div></div></td><td class="legendLabel">iPad Mini Retina</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(250,215,51);overflow:hidden"></div></div></td><td class="legendLabel">iPhone4S</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(240,80,80);overflow:hidden"></div></div></td><td class="legendLabel">iPad Air</td></tr></tbody></table></div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 71px; left: 268px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(114,102,186);">iPhone5S<br>40%</div></span><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 207px; left: 198.5px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(35,183,229);">iPad Mini<br>10%</div></span><span class="pieLabel" id="pieLabel2" style="position: absolute; top: 192px; left: 87px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(39,194,76);">iPad Mini Retina<br>20%</div></span><span class="pieLabel" id="pieLabel3" style="position: absolute; top: 97px; left: 57px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(250,215,51);">iPhone4S<br>12%</div></span><span class="pieLabel" id="pieLabel4" style="position: absolute; top: 13px; left: 110.5px;"><div style="font-size:x-small;text-align:center;padding:2px;color:rgb(240,80,80);">iPad Air<br>18%</div></span></div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+     
+     <div class="row wrapper">
+       <span class="font-bold inline m-t-xs">Comparación de Gerencias por Resultados</span>
+            
+
+            <div class="btn-group m-r ng-scope pull-right" ng-controller="ButtonsDemoCtrl">
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty active ng-valid-parse" ng-model="radioModel" btn-radio="'Left'" uncheckable="" aria-invalid="false" style="">Muy Malo</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Middle'" uncheckable="" aria-invalid="false" style="">Malo</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Regular</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Bueno</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Muy Bueno</label>
+            </div>
+
+            <!-- <div class="col-sm-6 pull-right">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escribir Resultados">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div> -->
+          </div>
+
+          </div>
+
+
+    <div class="panel-body">
+      <div ui-jq="plot" ui-options="[
+      { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label: 'Unique Visits', points: { show: true } }, 
+      { data: [[0,4],[1,4.5],[2,7],[3,4.5],[4,3],[5,3.5],[6,6],[7,3],[8,4],[9,3]], label: 'Page Views', bars: { show: true, barWidth: 0.6, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.4}] } } }
+      ],
+      {                
+      colors: [ '#23b7e5','#27c24c' ],
+      series: { shadowSize: 2 },
+      xaxis:{ font: { color: '#ccc' } },
+      yaxis:{ font: { color: '#ccc' } },
+      grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+      tooltip: true,
+      tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+    }" style="height: 240px; padding: 0px; position: relative;"><canvas class="flot-base" width="982" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 491px; height: 240px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 22px; text-align: center;">0</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 69px; text-align: center;">1</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 117px; text-align: center;">2</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 165px; text-align: center;">3</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 213px; text-align: center;">4</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 261px; text-align: center;">5</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 308px; text-align: center;">6</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 356px; text-align: center;">7</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 404px; text-align: center;">8</div><div style="position: absolute; max-width: 43px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 452px; text-align: center;">9</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 216px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 5px; text-align: right;">0.0</div><div style="position: absolute; top: 180px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 5px; text-align: right;">2.5</div><div style="position: absolute; top: 144px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 5px; text-align: right;">5.0</div><div style="position: absolute; top: 109px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 5px; text-align: right;">7.5</div><div style="position: absolute; top: 73px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 0px; text-align: right;">10.0</div><div style="position: absolute; top: 37px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 0px; text-align: right;">12.5</div><div style="position: absolute; top: 2px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(204, 204, 204); left: 0px; text-align: right;">15.0</div></div></div><canvas class="flot-overlay" width="982" height="480" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 491px; height: 240px;"></canvas><div class="legend"><div style="position: absolute; width: 86px; height: 44px; top: 13px; right: 13px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:13px;right:13px;;font-size:smaller;color:#ccc"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(35,183,229);overflow:hidden"></div></div></td><td class="legendLabel">Unique Visits</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(39,194,76);overflow:hidden"></div></div></td><td class="legendLabel">Page Views</td></tr></tbody></table></div></div>
+  </div>                  
+</div>
+</div>
+</div>
+
+</div>
+

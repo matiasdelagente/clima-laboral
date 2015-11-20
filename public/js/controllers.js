@@ -4,7 +4,7 @@ angular.module("climaLaboral")
   $scope.company = "Fostering Talent"
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
-  $scope.assessments = ["Clima Laboral", "Felicímetro"];
+  $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
   
   $scope.loggedIn = Auth.isLoggedIn();
   $rootScope.$on('$routeChangeStart',function(){
@@ -505,6 +505,11 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = false;
     $scope.users = data;
   });
+})
+
+
+.controller("organigramaCtrl", function(){
+  
 })
 
 .controller("ListUserCtrl", function(){

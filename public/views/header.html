@@ -21,9 +21,9 @@
   <!-- navbar left -->
   <ul class="nav navbar-nav hidden-xs" ng-if="loggedIn">
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
-      <a href="#/" class="dropdown-toggle">
+      <a href="#/" class="dropdown-toggle" ng-class = "{'selected': url == '/' || url == '/reconocimientos' }">
         <i class="fa fa-folder-open-o"></i>
-        <span>Instrumentos</span>
+        <span>Herramientas</span>
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
@@ -33,7 +33,7 @@
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
-      <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3'}">
+      <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3' || url == '/ed-scores-1' || url == '/ed-scores-2'}">
         <i class="fa fa-area-chart"></i>
         <span>Reportes</span>
       </a>
@@ -59,10 +59,10 @@
         <span>Usuarios</span>
       </a>
     </li>
-    <li class="dropdown pos-stc" ng-if="user.superadmin && loggedIn">
-      <a href="#/companies" class="dropdown-toggle">
+    <li class="dropdown pos-stc" ng-if="(user.superadmin || user.admin) && loggedIn">
+      <a href="#/companies" class="dropdown-toggle" ng-class = "{'selected': url == '/organigrama' || url == '/competencias' || url == '/areasyroles' || url == '/companies' }">
         <i class="icon-diamond"></i>
-        <span>Empresas</span>
+        <span>Mi Empresa</span>
       </a>
     </li>
   </ul>
