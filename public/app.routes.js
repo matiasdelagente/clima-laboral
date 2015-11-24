@@ -72,6 +72,13 @@ angular.module("app.routes", [])
     //templateUrl: "./views/thanks.html"
   })
 
+
+  .when('/ed',{
+    controller: "AddCtrl",
+    templateUrl: "./views/ed.html"
+    //templateUrl: "./views/thanks.html"
+  })
+
   .when('/hall-of-fame',{
     controller: "HallOfFameCtrl",
     templateUrl: "./views/hall-of-fame.html"
