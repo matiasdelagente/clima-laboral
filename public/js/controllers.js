@@ -408,6 +408,37 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+  $scope.processing = true;
+
+  angular.module('nestable', ['ui.load']);
+
+  uiLoad.load( ['../libs/jquery/nestable/jquery.nestable.css', '../libs/jquery/nestable/jquery.nestable.js'] ).then(function() {
+    // loaded succesfully.
+    $('.dd').nestable({ /* config options */ });
+    $scope.processing = false;
+  });
+
+  // companySrvc.get($routeParams.id).success(function(data){
+  //   $scope.formCompany = data;
+    
+
+  //   userSrvc.get(data.user).success(function(userData) {
+  //     $scope.formUser = userData;  
+  //     $scope.processing = false;  
+  //   });
+  // });
+
+  $scope.save = function(){
+    $scope.processing = true;
+    // companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
+    //   $scope.processing = false;
+    //   $scope.company = {};
+    //   $location.path('/companies');
+    // });
+  };
+})
+
 
 .controller("PriceCtrl",function(){
 

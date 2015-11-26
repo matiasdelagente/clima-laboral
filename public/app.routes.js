@@ -95,7 +95,7 @@ angular.module("app.routes", [])
   })
 
   .when('/organigrama',{
-    controller: "EditCompaniesCtrl",
+    controller: "organizationChartCtrl",
     templateUrl: "./views/organigrama.html"
   })
 
