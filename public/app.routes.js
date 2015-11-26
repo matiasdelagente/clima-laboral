@@ -115,7 +115,7 @@ angular.module("app.routes", [])
   })
 
   .when('/ed-scores-2',{
-    controller: "EditCompaniesCtrl",
+    controller: "edScores2Ctrl",
     templateUrl: "./views/ed-scores-2.html"
   })
 })
