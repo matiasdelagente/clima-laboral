@@ -1,7 +1,7 @@
 <div class="bg-light lter b-b wrapper-md">
 	<!-- PARA ADMIN -->
 	<h1 class="m-n font-thin h3" ng-if="user.admin && loggedIn">
-		<i class="icon-home"></i> Todos los Instrumentos
+		<i class="icon-home"></i> Todos las Herramientas
 	</h1>
 
 	<!-- PARA USUARIOS -->
@@ -27,8 +27,15 @@
 
 		<br>
 
+		<a href="#/ed-scores-1" class="list-group-item clearfix border-left"  style="box-shadow: 0 1px 1px rgba(0,0,0,0.05);">
+			<h1 class="m-n h3 text-black">Evaluación de Desempeño</h1>
+			<small class="text-muted clear">Started Mon. November 18, 2015</small>
+		</a>
+
+		<br>
+
 		<a href="" class="list-group-item clearfix border-left"  style="box-shadow: 0 1px 1px rgba(0,0,0,0.05); opacity: 0.75;">
-			<h1 class="m-n h3">Felicímetro</h1>
+			<h1 class="m-n h3">Bienestar Organizacional</h1>
 			<small class="text-muted clear">Started Wed. July 15, 2015</small>
 		</a>
 	</div>
@@ -68,12 +75,44 @@
 
 		<br>
 
+		<a href="#/ed" class="list-group-item clearfix border-left" style="box-shadow: 0 1px 1px rgba(0,0,0,0.05);">
+			
+			<!-- TEXTO IZQUIERDA -->			
+			<div class="col-xs-8">
+				<span class="h3 m-t-xs m-b-xs text-black">Evaluación de Desempeño</span>
+				<small class="text-muted clear">Started Wed. March 5, 2015</small>
+				<br>
+				<button class="btn btn-sm btn-primary padder-md m-b">Tomar Evaluación</button>
+			</div>
+
+			<!-- PORCENTAJE -->
+			<!-- <div class="col-xs-4 text-center">
+				<div ui-jq="easyPieChart" ui-options="{
+		                      percent: 75,
+		                      lineWidth: 10,
+		                      trackColor: '#e8eff0',
+		                      barColor: '#fad733',
+		                      scaleColor: '#e8eff0',
+		                      size: 188,
+		                      lineCap: 'butt'
+		                    }" class="easyPieChart" style="width: 90px; height: 90px; line-height: 90px;">
+					<div>
+						<span class="h2 m-l-sm step">75</span>%
+						<div class="text text-sm">completado</div>
+					</div>
+					<canvas width="90" height="90"></canvas>
+				</div>
+			</div>-->
+		</a>
+
+		<br>
+
 		<a href="" class="list-group-item clearfix border-left" style="box-shadow: 0 1px 1px rgba(0,0,0,0.05); opacity: 0.75;">
 			
 			<!-- TEXTO IZQUIERDA -->			
 			<div class="col-xs-8">
-				<span class="h3 m-t-xs m-b-xs text-black">Felicímetro</span>
-				<small class="text-muted clear">Started Wed. March 5, 2015</small>
+				<span class="h3 m-t-xs m-b-xs text-black">Bienestar Organizacional</span>
+				<small class="text-muted clear">Started Mon. October 15, 2015</small>
 				<br>
 				<button class="btn btn-sm btn-primary padder-md m-b">Tomar Evaluación</button>
 			</div>

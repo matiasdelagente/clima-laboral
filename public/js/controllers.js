@@ -4,7 +4,7 @@ angular.module("climaLaboral")
   $scope.company = "Fostering Talent"
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
-  $scope.assessments = ["Clima Laboral", "Felicímetro"];
+  $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
   
   $scope.loggedIn = Auth.isLoggedIn();
   $rootScope.$on('$routeChangeStart',function(){
@@ -408,6 +408,95 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+  $scope.processing = true;
+
+  angular.module('nestable', ['ui.load']);
+
+  uiLoad.load( ['../libs/jquery/nestable/jquery.nestable.css', '../libs/jquery/nestable/jquery.nestable.js'] ).then(function() {
+    $('.dd').nestable({ /* config options */ });
+    $scope.processing = false;
+  });
+
+  $scope.save = function(){
+    $scope.processing = true;
+    // companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
+    //   $scope.processing = false;
+    //   $scope.company = {};
+    //   $location.path('/companies');
+    // });
+  };
+})
+
+.controller("edScores2Ctrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+  $scope.processing = true;
+
+  angular.module('plot', ['ui.load']);
+
+  uiLoad.load( [   '../libs/jquery/flot/jquery.flot.js',
+                    '../libs/jquery/flot/jquery.flot.pie.js', 
+                    '../libs/jquery/flot/jquery.flot.resize.js',
+                    '../libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js',
+                    '../libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
+                    '../libs/jquery/flot-spline/js/jquery.flot.spline.min.js'] 
+                    ).then(function() {
+    
+    var plot = $.plot("#graph1", 
+      [
+        {label:'iPhone5S', data:40},
+        {label:'iPad Mini',data:10},
+        {label:'iPad Mini Retina',data:20},
+        {label:'iPhone4S',data:12},
+        {label:'iPad Air',data:18}
+      ], 
+      {
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+        colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+        tooltip: false,
+        tooltipOpts: { content: '%s: %p.0%' }
+      }
+    )
+
+    var plot2 = $.plot("#graph2", 
+      [
+        {label:'iPhone5S', data:40},
+        {label:'iPad Mini',data:10},
+        {label:'iPad Mini Retina',data:20},
+        {label:'iPhone4S',data:12},
+        {label:'iPad Air',data:18}
+      ], 
+      {
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+        colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+        tooltip: false,
+        tooltipOpts: { content: '%s: %p.0%' }
+      }
+    )
+
+    var plot3 = $.plot("#graph3", 
+      [
+        { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label: 'Unique Visits', points: { show: true } }, 
+        { data: [[0,4],[1,4.5],[2,7],[3,4.5],[4,3],[5,3.5],[6,6],[7,3],[8,4],[9,3]], label: 'Page Views', bars: { show: true, barWidth: 0.6, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.4}] } } }
+      ], 
+      {                
+        colors: [ '#23b7e5','#27c24c' ],
+        series: { shadowSize: 2 },
+        xaxis:{ font: { color: '#ccc' } },
+        yaxis:{ font: { color: '#ccc' } },
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+        tooltip: true,
+        tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+      }
+    )
+      
+    $scope.processing = false;
+    console.log('graph1 done')
+  });
+
+})
+
 
 .controller("PriceCtrl",function(){
 
@@ -505,6 +594,11 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = false;
     $scope.users = data;
   });
+})
+
+
+.controller("organigramaCtrl", function(){
+  
 })
 
 .controller("ListUserCtrl", function(){
