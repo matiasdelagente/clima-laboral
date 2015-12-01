@@ -183,6 +183,7 @@
 			};
 
 			function buildNestableHtml(model, tpl){
+				console.log(model)
 				var root = $('<div class="dd"></div>');
 				var rootList = $('<ol class="dd-list"></ol>').appendTo(root);
 				model.forEach(function f(item){
@@ -192,9 +193,11 @@
 					var listItem = $('<li class="dd-item"></li>');
 					var listElement = $('<div ng-nestable-item class="dd-handle"></div>');
 					listElement.append(tpl).appendTo(listItem);
+					// console.log(tpl)
 					list.append(listItem);
 					var itemData = $nestable.itemProperty ? item[$nestable.itemProperty] : item;
-					listItem.data('item', itemData);
+					listItem.data('item', itemData); 
+					// console.log(tpl, listItem);
 					var children = item[$nestable.childrenProperty];
 					if(isArray(children) && children.length > 0){
 						var subRoot = $('<ol class="dd-list"></ol>').appendTo(listItem);

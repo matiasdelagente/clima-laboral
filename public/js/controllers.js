@@ -409,13 +409,7 @@ $scope.series1 = ['Serie 2015'];
 })
 
 .controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
-  // $scope.processing = true;
-  // angular.module('nestable', ['ui.load']);
-  //
-  // uiLoad.load( ['../libs/jquery/nestable/jquery.nestable.css', '../libs/jquery/nestable/jquery.nestable.js'] ).then(function() {
-  //   $('.dd').nestable({ /* config options */ });
-  //   $scope.processing = false;
-  // });
+
   $scope.holis = "oseajelou"
   $scope.mdl =  [
           {
