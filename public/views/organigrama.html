@@ -51,13 +51,13 @@
       </div>
     </div>
 
-
+<!--
     <div class="col-md-4">
       <div ui-jq="nestable" class="dd">
         <ol class="dd-list">
 
           <li class="dd-item" data-id="2">
-            <div class="dd-handle">Item 2</div>
+            <div class="dd-handle">Item 2 {{holis}}</div>
             <ol class="dd-list">
               <li class="dd-item" data-id="3"><div class="dd-handle">Item 3</div></li>
               <li class="dd-item" data-id="4"><div class="dd-handle">Item 4</div></li>
@@ -97,6 +97,12 @@
             </ol>
           </li>
         </ol>
+      </div>
+    </div>
+-->
+    <div  class="col-md-4">
+      <div ng-nestable ng-model="mdl">
+        {{$item.text}}
       </div>
     </div>
 
@@ -109,7 +115,7 @@
 <footer id="footer" class="app-footer" role="footer">
   <div class="wrapper b-t bg-light">
     <span class="pull-right">Fostering Talent System</span>
-    &copy; 2015 
+    &copy; 2015
   </div>
 </footer>
 <!-- / footer -->
