@@ -409,94 +409,50 @@ $scope.series1 = ['Serie 2015'];
 })
 
 .controller("organizationChartCtrl", function($scope, $routeParams, $location, AuthToken, userSrvc){
+  $scope.items = [];
   $scope.processing = true;
   var session = AuthToken.getSession();
+
   //GET ALL USER FROM COMPANY
   if (session.admin && !session.superadmin) {
 
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
-      $scope.processing = false;
-      console.log(data)
       $scope.items = getUsersHierarchy(data);
-
-
-
+      console.info('ITEMS', $scope.items)
+      $scope.processing = false;
     });
 
   } else {
     userSrvc.all().success(function(data){
+      $scope.items = getUsersHierarchy(data);
       $scope.processing = false;
-      $scope.users = data;
     });
   }
 
   //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
   getUsersHierarchy = function(users) {
-      console.log('users array', users)
-      // var html = "<li class='dd-item' data-id='" + item.id + "' id='" + item.id + "'>";
-      // html += "<div class='dd-handle'>" + item.id + "</div>";
       var data = [];
+      var isChildren = [];
 
       angular.forEach(users, function(user, key) {
-        console.log(key, user)
+        console.log('iteration ' + key, user)
         if (!user.admin) {
-          console.log('user ', user.childens)
+          // console.log('childrens of ' + user.name, user.childrens)
           if (!!user.childrens) {
-            console.info('has childrens', user.childrens)
-            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'childrens': getUsersHierarchy(users.childens) })
+            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': getUsersHierarchy(user.childrens) } });
+            console.log('data after push', this, isChildren);
+            
           } else {
-            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} })
+            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': []} })
           }           
         }
        
       }, data);
 
-      console.log('data', data)
+      console.log('data to return:', data)
       return data;
-      // if (item.children) {
-
-      //     html += "<ol class='dd-list'>";
-      //     $.each(item.children, function (index, sub) {
-      //         html += buildItem(sub);
-      //     });
-      //     html += "</ol>";
-
-      // }
-
-      // html += "</li>";
-
-      // return html;
   }
-
-  $scope.holis = "oseajelou"
-  $scope.items =  [
-          {
-            item: {text: 'a'},
-            children: []
-          },
-          {
-            item: {text: 'b'},
-            children: [
-              {
-                item: {text: 'c'},
-                children: []
-              },
-              {
-                item: {text: 'd'},
-                children: []
-              }
-            ]
-          },
-          {
-            item: {text: 'e'},
-            children: []
-          },
-          {
-            item: {text: 'f'},
-            children: []
-          }
-        ]
 
   $scope.save = function(){
     $scope.processing = true;
