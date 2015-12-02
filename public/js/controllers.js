@@ -419,7 +419,6 @@ $scope.series1 = ['Serie 2015'];
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
       $scope.items = getUsersHierarchy(data);
-      console.info('ITEMS', $scope.items)
       $scope.processing = false;
     });
 
@@ -431,24 +430,23 @@ $scope.series1 = ['Serie 2015'];
   }
 
   //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
+  var alreadyInHierarchy = [];
   getUsersHierarchy = function(users) {
       var data = [];
       var isChildren = [];
 
       angular.forEach(users, function(user, key) {
         console.log('iteration ' + key, user)
-        if (!user.admin) {
-          // console.log('childrens of ' + user.name, user.childrens)
+        if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
           if (!!user.childrens) {
-            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': getUsersHierarchy(user.childrens) } });
-            console.log('data after push', this, isChildren);
-            
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': getUsersHierarchy(user.childrens) } });
           } else {
-            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': []} })
-          }           
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': []} })
+          }
+          alreadyInHierarchy.push(user._id)
         }
-       
-      }, data);
+
+      });
 
       console.log('data to return:', data)
       return data;
