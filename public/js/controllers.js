@@ -436,19 +436,19 @@ $scope.series1 = ['Serie 2015'];
       var isChildren = [];
 
       angular.forEach(users, function(user, key) {
-        console.log('iteration ' + key, user)
+        // console.log('iteration ' + key, user)
         if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
           if (!!user.childrens) {
-            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': getUsersHierarchy(user.childrens) } });
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} , 'children': getUsersHierarchy(user.childrens) });
           } else {
-            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname, 'children': []} })
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'children': [] })
           }
           alreadyInHierarchy.push(user._id)
         }
 
       });
 
-      console.log('data to return:', data)
+      // console.log('data to return:', data)
       return data;
   }
 
