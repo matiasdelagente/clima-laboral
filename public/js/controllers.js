@@ -408,10 +408,69 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, AuthToken, userSrvc){
+  $scope.processing = true;
+  var session = AuthToken.getSession();
+  //GET ALL USER FROM COMPANY
+  if (session.admin && !session.superadmin) {
+
+    var companyId = undefined;
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      console.log(data)
+      $scope.items = getUsersHierarchy(data);
+
+
+
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+    });
+  }
+
+  //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
+  getUsersHierarchy = function(users) {
+      console.log('users array', users)
+      // var html = "<li class='dd-item' data-id='" + item.id + "' id='" + item.id + "'>";
+      // html += "<div class='dd-handle'>" + item.id + "</div>";
+      var data = [];
+
+      angular.forEach(users, function(user, key) {
+        console.log(key, user)
+        if (!user.admin) {
+          console.log('user ', user.childens)
+          if (!!user.childrens) {
+            console.info('has childrens', user.childrens)
+            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'childrens': getUsersHierarchy(users.childens) })
+          } else {
+            this.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} })
+          }           
+        }
+       
+      }, data);
+
+      console.log('data', data)
+      return data;
+      // if (item.children) {
+
+      //     html += "<ol class='dd-list'>";
+      //     $.each(item.children, function (index, sub) {
+      //         html += buildItem(sub);
+      //     });
+      //     html += "</ol>";
+
+      // }
+
+      // html += "</li>";
+
+      // return html;
+  }
 
   $scope.holis = "oseajelou"
-  $scope.mdl =  [
+  $scope.items =  [
           {
             item: {text: 'a'},
             children: []

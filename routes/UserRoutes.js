@@ -59,7 +59,7 @@ router.route('/usersByCompany/:id')
       if(err) res.send(err);
       // console.log(data)
       res.send(data);
-    }).populate('company');
+    }).populate('company').populate('parent');
   })
 
 router.route('/allByCompany/:id')
@@ -216,5 +216,6 @@ router.route('/me')
   })
   //res.send(req.decoded);
 })
+
 
 module.exports = router

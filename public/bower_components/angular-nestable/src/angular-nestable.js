@@ -143,12 +143,14 @@
 				var root = $('<div class="dd"></div>');
 				var rootList = $('<ol class="dd-list"></ol>').appendTo(root);
 				model.forEach(function f(item){
+					// console.log(item.item.text)
 					var list = Array.prototype.slice.call(arguments).slice(-1)[0];
 					if(!(list instanceof $)) list = rootList;
 
 					var listItem = $('<li class="dd-item"></li>');
 					var listElement = $('<div ng-nestable-item class="dd-handle"></div>');
-					listElement.append(tpl).appendTo(listItem);
+					listElement.attr({})
+					listElement.append(item.item.text).appendTo(listItem);
 					list.append(listItem);
 					listItem.data('item', item.item);
 					if(isArray(item.children) && item.children.length > 0){
