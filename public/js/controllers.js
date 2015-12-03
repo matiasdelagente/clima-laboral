@@ -429,6 +429,11 @@ $scope.series1 = ['Serie 2015'];
     });
   }
 
+  $scope.$watch(function(scope) { return scope.items }, function(newVal, oldVal){
+    console.log("Search was changed to:", newVal, 'oldVal', oldVal);
+    ///UPDATE HIERARCHY IN CASE THAT NEW VAL <> FROM OLDVAL
+  });
+
   //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
   var alreadyInHierarchy = [];
   getUsersHierarchy = function(users) {
