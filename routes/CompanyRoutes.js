@@ -25,13 +25,13 @@ router.route('/companies')
       } else {
         var companyUser = {}
 
-        //FIND COMPANY USER SO WE CAN SEND WELCOME EMAIL 
+        //FIND COMPANY USER SO WE CAN SEND WELCOME EMAIL
         User.findOne({_id: req.body.user}, function(err,data){
 
             // console.log('USER --- ---', data);
             // console.log('formCompany', req.body);
             companyUser = data;
-            
+
             var mailJSON ={
               "template_name": "fts-invitacion-empresa",
               "template_content": [
@@ -95,7 +95,7 @@ router.route('/companies')
               "ip_pool": "Main Pool"
             };
 
-            mandrill_client.messages.sendTemplate(mailJSON, 
+            mandrill_client.messages.sendTemplate(mailJSON,
             function(result) {
                console.log(result);
             },function(e) {
@@ -105,7 +105,7 @@ router.route('/companies')
             });
 
 
-          }).populate('company');    
+          }).populate('company');
 
 
         res.send(data)
@@ -120,7 +120,10 @@ router.route('/companies/:id')
       if(err) res.send(err);
       // console.log(data)
       res.send(data)
-    });
+    })
+    .populate('roles')
+    .populate('areas')
+    .populate('competencies')
   })
   .put(function(req,res){
     var id = req.params.id
@@ -129,6 +132,9 @@ router.route('/companies/:id')
       if(req.body.email) company.email = req.body.email;
       if(req.body.name) company.name = req.body.name;
       if(req.body.maxUsers) company.maxUsers = req.body.maxUsers;
+      if(req.body.areas) company.areas = req.body.areas;
+      if(req.body.roles) company.roles = req.body.roles;
+      if(req.body.competencies) company.competencies = req.body.competencies;
 
       company.save(function(err,data){
         // console.log(data)
@@ -139,7 +145,7 @@ router.route('/companies/:id')
   })
   .delete(function(req,res){
     var id = req.params.id
-    
+
     Company.findById(id, function(err, company){
       if(err) res.send(err)
       company.remove(function(err, data){
