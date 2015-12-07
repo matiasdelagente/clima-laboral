@@ -311,8 +311,9 @@ $scope.series1 = ['Serie 2015'];
   $scope.formProcessing = false;
   // $scope.processing = true;
   var session = AuthToken.getSession();
-  
-  $scope.isDemo = !!(session.company.demo) ? session.company.demo : false;
+  console.log(session);debugger;
+
+  $scope.isDemo = !!(session.company) ? session.company.demo : false;
   
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
