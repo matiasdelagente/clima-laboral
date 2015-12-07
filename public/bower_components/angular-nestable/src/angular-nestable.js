@@ -128,7 +128,8 @@
 								$element.empty().append(root);
 								$compile(root)($scope);
 								root.nestable(options);
-								root.on('change', function(){
+								root.on('change', function(a){
+									// console.log($(a.currentTarget).attr('data-id'))
 									$ngModel.$setViewValue(root.nestable('serialize'));
 									$scope && $scope.$root && $scope.$root.$$phase || $scope.$apply();
 								});
@@ -149,7 +150,7 @@
 
 					var listItem = $('<li class="dd-item"></li>');
 					var listElement = $('<div ng-nestable-item class="dd-handle"></div>');
-					listElement.attr({})
+					listElement.attr({'data-id': item.item.id, 'ng-click':'setMaster(item)'})
 					listElement.append(item.item.text).appendTo(listItem);
 					list.append(listItem);
 					listItem.data('item', item.item);

@@ -412,14 +412,20 @@ $scope.series1 = ['Serie 2015'];
   $scope.items = [];
   $scope.processing = true;
   var session = AuthToken.getSession();
-
+  var users = [];
   //GET ALL USER FROM COMPANY
   if (session.admin && !session.superadmin) {
 
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
       $scope.items = getUsersHierarchy(data);
+      users = getUsersHierarchy(data);
       $scope.processing = false;
+
+        $('.dd-item div').on('click', function(){
+          console.log('algo')
+        });
+
     });
 
   } else {
@@ -432,7 +438,22 @@ $scope.series1 = ['Serie 2015'];
   $scope.$watch(function(scope) { return scope.items }, function(newVal, oldVal){
     console.log("Search was changed to:", newVal, 'oldVal', oldVal);
     ///UPDATE HIERARCHY IN CASE THAT NEW VAL <> FROM OLDVAL
+
   });
+
+  $scope.setMaster = function(obj, $event){
+    console.log('aaaa',$event.target);
+  }
+
+  //FIND ELEMENT THAT HAS DIFFERENT CHILDRENS
+  findUserChanged = function(users) {
+    angular.forEach(users, function(user, key) {
+      if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
+        //FIND USER INSIDE ELEMENTS
+        var result = $.grep(myArray, function(e){ return e.id == id; });
+      }
+    });
+  }
 
   //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
   var alreadyInHierarchy = [];
