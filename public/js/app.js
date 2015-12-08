@@ -3,7 +3,8 @@ angular.module("climaLaboral", [
   "authService",
   "app.routes",
   "chart.js",
-  "rt.encodeuri"
+  "rt.encodeuri",
+  "ng-nestable"
   ])
 .config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptor');

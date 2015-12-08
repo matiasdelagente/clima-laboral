@@ -5,7 +5,7 @@ angular.module("climaLaboral")
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
-  
+
   $scope.loggedIn = Auth.isLoggedIn();
   $rootScope.$on('$routeChangeStart',function(){
     if(Auth.isLoggedIn()){
@@ -62,9 +62,9 @@ angular.module("climaLaboral")
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
   var session = AuthToken.getSession();
-  
+
   if (!session.company) session.company = {name :'Todas las Compañias'};
-  
+
   $scope.processing = true;
   $scope.formUser = {area: null, role: null};
   $scope.questionsMotivadores = [
@@ -95,7 +95,7 @@ angular.module("climaLaboral")
       $scope.users = data;
       $scope.showCompromiso = false;
       $scope.calcAll();
-    });    
+    });
   }
 
   // userSrvc.all().success(function(data){
@@ -228,7 +228,7 @@ $scope.series1 = ['Serie 2015'];
       $scope.users = data;
       $scope.showCompromiso = false;
       $scope.calcAll();
-    });    
+    });
   }
 
 
@@ -339,7 +339,7 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.deleteCompany = function(companyDeleted){
     $scope.processing = true;
-    
+
     companySrvc.delete(companyDeleted._id).success(function(data){
       $scope.processing = false;
       var index = $scope.companies.indexOf(companyDeleted);
@@ -348,7 +348,7 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){  
+.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){
   $scope.save = function(){
     var psw = $scope.formUser.password;
     // console.log(psw)
@@ -358,7 +358,7 @@ $scope.series1 = ['Serie 2015'];
     $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
     //IF WE HAVE A COMPANY, WE SET USER AS ADMIN
     $scope.formUser.admin = true;
-    
+
     //Add ADMIN USER to company
     userSrvc.save($scope.formUser).success(function(userData){
       $scope.formUser = userData;
@@ -367,7 +367,7 @@ $scope.series1 = ['Serie 2015'];
       $scope.formCompany.user = userData._id;
       $scope.formCompany.userPsw = psw;
 
-      //RE-SET PASSWORD 
+      //RE-SET PASSWORD
       $scope.formUser.password = psw;
 
       companySrvc.save($scope.formCompany).success(function(companyData){
@@ -390,11 +390,11 @@ $scope.series1 = ['Serie 2015'];
 
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
-    
+
 
     userSrvc.get(data.user).success(function(userData) {
-      $scope.formUser = userData;  
-      $scope.processing = false;  
+      $scope.formUser = userData;
+      $scope.processing = false;
     });
   });
 
@@ -408,23 +408,146 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, AuthToken, userSrvc){
+  $scope.items = [];
   $scope.processing = true;
+  $scope.hasChanged = false;
+  $scope.usersNewVal = [];
+  $scope.users = [];
 
-  angular.module('nestable', ['ui.load']);
+  var session = AuthToken.getSession();
+  var usersChanged = [];
 
-  uiLoad.load( ['../libs/jquery/nestable/jquery.nestable.css', '../libs/jquery/nestable/jquery.nestable.js'] ).then(function() {
-    $('.dd').nestable({ /* config options */ });
-    $scope.processing = false;
+  //GET ALL USER FROM COMPANY
+  if (session.admin && !session.superadmin) {
+
+    var companyId = undefined;
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.users = data;      
+      $scope.items = getUsersHierarchy(data);
+      $scope.processing = false;
+
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.users = data;
+      $scope.items = getUsersHierarchy(data);
+      $scope.processing = false;
+    });
+  }
+
+  $scope.$watch(function(scope) { return scope.items }, function(newVal, oldVal){
+    //RESET VAR THAT STORE HIERARCHY CHANGES
+    usersChanged.length = 0;
+
+    //GET USERS THAT NEED TO BE UPDATED FROM HIERARCHY IN CASE THAT NEW VAL <> FROM OLDVAL
+    if (newVal != oldVal && oldVal.length > 0 ) {
+      $scope.hasChanged = true;
+      $scope.usersNewVal = newVal;
+    }
+
   });
+
+  findUserChanged = function(newUsers, user) {
+    angular.forEach(newUsers, function(newUser, key) {
+      if (!newUser.admin) {
+        // console.log(newUser.children)
+        if (!!newUser.children) {
+          
+          if (user._id == newUser.item.id) {
+            // console.log('coincidencia', newUser.item.text)
+            // console.log(user, newUser, typeof(user.childrens), typeof(user.children))
+
+            if (typeof(user.children) == 'object') {
+              //NO TENGO HIJOS EN DB, PERO SI EN NEW USER
+              // console.info(newUser.children, user.childrens)
+              if (newUser.children.length != user.children.length) {
+                console.info('HIJOS DIFERENTES, TENGO QUE HACER UN UPDATE DE ', newUser.item.text);
+                usersChanged.push({id:user._id, 'childrens':newUser.children})
+              } else {
+                console.info('MISMA CANTIDAD DE HIJOS, TENGO QUE HACER UN BUCLE PARA VER SI HAY UPDATE DE ', newUser.item.text)
+              }
+            } else {
+              //EL NODO NUEVO TIENE HIJOS, PERO ANTES NO ESTABAN
+              console.info('ANTES NO TENIA HIJOS, AHORA HAY UPDATE DE ', newUser.item.text)
+              usersChanged.push({id:user._id, 'childrens':newUser.children});
+            }  
+            return;       
+          } else {
+            findUserChanged(newUser.children, user)
+          }
+        } else {
+          if (user._id == newUser.item.id) {
+            // console.log('coincidencia', newUser.item.text, user, newUser)
+            if (typeof(user.children) == 'object' && user.children.length > 0 ) {
+              //NEW USER DOESNT HAVE CHILDS, OLD USER HAS SO WE CLEAN DB USER CHILDS
+              console.info('BORRAR HIJOS DE ' + newUser.item.text);
+              usersChanged.push({id:user._id, 'childrens':[]});
+            }
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
+  var alreadyInHierarchy = [];  //TO STORE USERS THAT ARE ALREADY IN THE HIERARCHY
+  getUsersHierarchy = function(users) {
+      var data = [];
+      var isChildren = [];
+      // console.log('users', users)
+      angular.forEach(users, function(user, key) {
+        // console.log('iteration ' + key, user)
+        if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
+          if (!!user.children) {
+            var childs = [];
+
+            angular.forEach(user.children, function(child, key) {
+              // console.log(child, $scope.users)
+              var el = $.grep($scope.users, function(e){ return e._id == child; })
+              // console.log(el)
+              childs.push(el[0])
+            });
+            // console.log(user, childs)
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} , 'children': getUsersHierarchy(childs) });
+          } else {
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'children': [] })
+          }
+          alreadyInHierarchy.push(user._id)
+        }
+
+      });
+      return data;
+  }
 
   $scope.save = function(){
     $scope.processing = true;
-    // companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
-    //   $scope.processing = false;
-    //   $scope.company = {};
-    //   $location.path('/companies');
-    // });
+    $scope.hasChanged = false;
+
+    angular.forEach($scope.users, function(user, key) {
+        // var userChanged = findUserChanged(newVal, oldVal);
+      findUserChanged($scope.usersNewVal, user);
+    });
+
+    //STORE NEW VALUES FOR EVERY USER THAT HAS CHANGED
+    angular.forEach(usersChanged, function(userChanged, key) {
+      var childrens = [];
+
+      angular.forEach(userChanged.childrens, function(childs, key) {
+        // console.log(childs, key);
+        childrens.push(childs.item.id)
+      });
+
+      // console.log('saving user', userChanged, childrens);
+
+      userSrvc.setChildrens(userChanged.id, childrens).success(function(data){
+        // console.log('after save', data)
+        $scope.processing = false;
+        $location.path('/organigrama');
+      });
+    });
   };
 })
 
@@ -434,53 +557,53 @@ $scope.series1 = ['Serie 2015'];
   angular.module('plot', ['ui.load']);
 
   uiLoad.load( [   '../libs/jquery/flot/jquery.flot.js',
-                    '../libs/jquery/flot/jquery.flot.pie.js', 
+                    '../libs/jquery/flot/jquery.flot.pie.js',
                     '../libs/jquery/flot/jquery.flot.resize.js',
                     '../libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js',
                     '../libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
-                    '../libs/jquery/flot-spline/js/jquery.flot.spline.min.js'] 
+                    '../libs/jquery/flot-spline/js/jquery.flot.spline.min.js']
                     ).then(function() {
-    
-    var plot = $.plot("#graph1", 
+
+    var plot = $.plot("#graph1",
       [
         {label:'iPhone5S', data:40},
         {label:'iPad Mini',data:10},
         {label:'iPad Mini Retina',data:20},
         {label:'iPhone4S',data:12},
         {label:'iPad Air',data:18}
-      ], 
+      ],
       {
         series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
         colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
-        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
         tooltip: false,
         tooltipOpts: { content: '%s: %p.0%' }
       }
     )
 
-    var plot2 = $.plot("#graph2", 
+    var plot2 = $.plot("#graph2",
       [
         {label:'iPhone5S', data:40},
         {label:'iPad Mini',data:10},
         {label:'iPad Mini Retina',data:20},
         {label:'iPhone4S',data:12},
         {label:'iPad Air',data:18}
-      ], 
+      ],
       {
         series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
         colors: ['#7266ba','#23b7e5','#27c24c','#fad733','#f05050'],
-        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
         tooltip: false,
         tooltipOpts: { content: '%s: %p.0%' }
       }
     )
 
-    var plot3 = $.plot("#graph3", 
+    var plot3 = $.plot("#graph3",
       [
-        { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label: 'Unique Visits', points: { show: true } }, 
+        { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label: 'Unique Visits', points: { show: true } },
         { data: [[0,4],[1,4.5],[2,7],[3,4.5],[4,3],[5,3.5],[6,6],[7,3],[8,4],[9,3]], label: 'Page Views', bars: { show: true, barWidth: 0.6, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.4}] } } }
-      ], 
-      {                
+      ],
+      {
         colors: [ '#23b7e5','#27c24c' ],
         series: { shadowSize: 2 },
         xaxis:{ font: { color: '#ccc' } },
@@ -490,7 +613,7 @@ $scope.series1 = ['Serie 2015'];
         tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
       }
     )
-      
+
     $scope.processing = false;
     console.log('graph1 done')
   });
@@ -519,7 +642,7 @@ $scope.series1 = ['Serie 2015'];
     userSrvc.all().success(function(data){
       $scope.processing = false;
       $scope.users = data;
-    });    
+    });
   }
 
 
@@ -571,8 +694,8 @@ $scope.series1 = ['Serie 2015'];
           $scope.processing = false;
           $location.path('/users');
           return false;
-        }        
-      }); 
+        }
+      });
     }
 
     userSrvc.save($scope.formUser).success(function(data){
@@ -585,7 +708,7 @@ $scope.series1 = ['Serie 2015'];
 })
 
 .controller("HallOfFameCtrl", function(){
-  
+
 })
 
 .controller("HallOfFameVoteCtrl", function($scope, userSrvc){
@@ -598,16 +721,16 @@ $scope.series1 = ['Serie 2015'];
 
 .controller("ListUserCtrl", function(){
 
-  //Converter Class 
+  //Converter Class
   var Converter = require("csvtojson").Converter;
   var converter = new Converter({});
 
-  //end_parsed will be emitted once parsing finished 
+  //end_parsed will be emitted once parsing finished
   converter.on("end_parsed", function (jsonArray) {
-     console.log(jsonArray); //here is your result jsonarray 
+     console.log(jsonArray); //here is your result jsonarray
    });
 
-  //read from file 
+  //read from file
   require("fs").createReadStream("./file.csv").pipe(converter);
 
 })

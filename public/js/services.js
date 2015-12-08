@@ -33,6 +33,10 @@ angular.module("climaLaboral")
     user.allByCompany = function(id){
       return $http.get('/api/allByCompany/' + id)
     }
+    user.setChildrens = function(id, childrens){
+      return $http.put('/api/users/setChildrens/' + id, childrens)
+    }
+    
   return user;
 })
 .factory("companySrvc", function($http){

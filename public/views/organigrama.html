@@ -51,52 +51,15 @@
       </div>
     </div>
 
-
-    <div class="col-md-4">
-      <div ui-jq="nestable" class="dd">
-        <ol class="dd-list">
-
-          <li class="dd-item" data-id="2">
-            <div class="dd-handle">Item 2</div>
-            <ol class="dd-list">
-              <li class="dd-item" data-id="3"><div class="dd-handle">Item 3</div></li>
-              <li class="dd-item" data-id="4"><div class="dd-handle">Item 4</div></li>
-              <li class="dd-item" data-id="5">
-                <div class="dd-handle">Item 5</div>
-                <ol class="dd-list">
-                  <li class="dd-item" data-id="6"><div class="dd-handle">Item 6</div></li>
-                  <li class="dd-item" data-id="7"><div class="dd-handle">Item 7</div></li><div class="dd-placeholder" style="height: 42px;"></div>
-                  <li class="dd-item" data-id="8"><div class="dd-handle">Item 8</div></li>
-                </ol>
-              </li>
-              <li class="dd-item" data-id="9"><div class="dd-handle">Item 9</div></li>
-            </ol>
-          </li>
-        </ol>
+    <div  class="col-md-4">
+      <div ng-nestable ng-model="items">
+        {{item}}
       </div>
-    </div>
-
-    <div class="col-md-4">
-      <div ui-jq="nestable" class="dd">
-        <ol class="dd-list">
-
-          <li class="dd-item" data-id="2">
-            <div class="dd-handle">Item 2</div>
-            <ol class="dd-list">
-              <li class="dd-item" data-id="3"><div class="dd-handle">Item 3</div></li>
-              <li class="dd-item" data-id="4"><div class="dd-handle">Item 4</div></li>
-              <li class="dd-item" data-id="5">
-                <div class="dd-handle">Item 5</div>
-                <ol class="dd-list">
-                  <li class="dd-item" data-id="6"><div class="dd-handle">Item 6</div></li>
-                  <li class="dd-item" data-id="7"><div class="dd-handle">Item 7</div></li><div class="dd-placeholder" style="height: 42px;"></div>
-                  <li class="dd-item" data-id="8"><div class="dd-handle">Item 8</div></li>
-                </ol>
-              </li>
-              <li class="dd-item" data-id="9"><div class="dd-handle">Item 9</div></li>
-            </ol>
-          </li>
-        </ol>
+      <div class="text-right">
+        <button type="submit" ng-click="save()" class="btn btn-info" ng-disabled='!hasChanged'>
+          <span ng-if="!processing">Guardar Organigrama</span>
+          <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
       </div>
     </div>
 
@@ -109,7 +72,7 @@
 <footer id="footer" class="app-footer" role="footer">
   <div class="wrapper b-t bg-light">
     <span class="pull-right">Fostering Talent System</span>
-    &copy; 2015 
+    &copy; 2015
   </div>
 </footer>
 <!-- / footer -->

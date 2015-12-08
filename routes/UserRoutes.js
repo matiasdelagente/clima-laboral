@@ -208,6 +208,24 @@ router.route('/users/:id')
     })
   })
 
+router.route('/users/setChildrens/:id')
+  .put(function(req,res){
+    var id = req.params.id 
+    User.findById(id, function(err,user){
+      if(err) res.send(user)
+
+      // user.childrens = req.body;
+      user.children = req.body;
+
+      console.log(user.childrens)
+      user.save(function(err,data){
+        if(err) res.send(err)
+        res.send(data)
+      })
+    })
+  })
+
+
 router.route('/me')
 .get(function(req,res){
   User.findOne({username: req.decoded.username}, function(err, user){
@@ -216,5 +234,6 @@ router.route('/me')
   })
   //res.send(req.decoded);
 })
+
 
 module.exports = router
