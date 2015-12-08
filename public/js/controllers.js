@@ -416,7 +416,7 @@ $scope.series1 = ['Serie 2015'];
   companySrvc.get($scope.company._id).success(function(data){
     $scope.processing = false;
     $scope.company = data;
-    console.log(data);
+    // console.log(data);
   });
 
   $scope.addArea = function(){
@@ -431,6 +431,20 @@ $scope.series1 = ['Serie 2015'];
       })
     });
   };
+
+  $scope.deleteArea = function(id){
+    $scope.processing = true;
+    areaSrvc.delete(id).success(function(area){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.processing = false;
+        $scope.company = data;
+        // console.log(data);
+      });      
+      // $scope.processing = false;
+    });
+  };
+
+
 })
 
 .controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){

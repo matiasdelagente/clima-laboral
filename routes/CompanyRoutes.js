@@ -138,8 +138,16 @@ router.route('/companies/:id')
 
       company.save(function(err,company){
         if(err) res.send(err)
-        company.populate('areas');
-        res.send(company)
+        // company.populate('areas');
+
+        myCompany = Company.findById(id, function(err, data){
+          if(err) res.send(err);
+          // console.log(data)
+          res.send(data)
+        })
+        .populate('roles')
+        .populate('areas')
+        .populate('competencies')
       })
 
     })
