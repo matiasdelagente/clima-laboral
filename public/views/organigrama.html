@@ -55,6 +55,12 @@
       <div ng-nestable ng-model="items">
         {{item}}
       </div>
+      <div class="text-right">
+        <button type="submit" ng-click="save()" class="btn btn-info" ng-disabled='!hasChanged'>
+          <span ng-if="!processing">Guardar Organigrama</span>
+          <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
+      </div>
     </div>
 
 
