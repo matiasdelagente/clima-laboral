@@ -136,11 +136,12 @@ router.route('/companies/:id')
       if(req.body.roles) company.roles = req.body.roles;
       if(req.body.competencies) company.competencies = req.body.competencies;
 
-      company.save(function(err,data){
-        // console.log(data)
+      company.save(function(err,company){
         if(err) res.send(err)
-        res.send(data)
+        company.populate('areas');
+        res.send(company)
       })
+
     })
   })
   .delete(function(req,res){
