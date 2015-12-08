@@ -408,7 +408,7 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc){
+.controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc, roleSrvc){
   $scope.processing = true;
   $scope.company = AuthToken.getSession().company;
   $scope.newArea = {};
@@ -423,7 +423,20 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = true;
     areaSrvc.save($scope.newArea).success(function(area){
       $scope.company.areas.push(area._id);
-      console.log("new area: "+area._id);
+      // console.log("new area: "+area._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        console.log(company);
+        $scope.company = company;
+        $scope.newArea = {};
+      })
+    });
+  };
+
+  $scope.addRole = function(){
+    $scope.processing = true;
+    roleSrvc.save($scope.newArea).success(function(role){
+      $scope.company.roles.push(role._id);
+      console.log("new role: "+role._id);
       companySrvc.edit($scope.company._id, $scope.company).success(function(company){
         console.log(company);
         $scope.company = company;
