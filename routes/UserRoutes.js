@@ -59,7 +59,7 @@ router.route('/usersByCompany/:id')
       if(err) res.send(err);
       // console.log(data)
       res.send(data);
-    }).populate('company').populate('childrens');
+    }).populate('company').populate('children');
   })
 
 router.route('/allByCompany/:id')
@@ -216,7 +216,7 @@ router.route('/users/setChildrens/:id')
 
       // user.childrens = req.body;
       user.children = req.body;
-      
+
       console.log(user.childrens)
       user.save(function(err,data){
         if(err) res.send(err)
