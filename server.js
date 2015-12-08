@@ -21,6 +21,7 @@ app.use('/api', userRoutes);
 app.use('/api', scoreRoutes);
 app.use('/api', companyRoutes);
 app.use('/api', areaRoutes);
+app.use('/api', roleRoutes);
 app.use('/api', competenceRoutes);
 
 app.use(express.static('public'));

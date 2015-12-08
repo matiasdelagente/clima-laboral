@@ -16,6 +16,7 @@ router.route('/roles')
       });
     })
     .post(function(req,res){
+      console.log("holis");
       var role = new Role(req.body);
       console.log(role);
       role.save(function(err, role){

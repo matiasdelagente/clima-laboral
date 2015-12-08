@@ -77,7 +77,7 @@ angular.module("climaLaboral")
     };
   return area;
 })
-.factory("rolesSrvc", function($http){
+.factory("roleSrvc", function($http){
   var role = {};
     role.all = function(){
       return $http.get('/api/roles');
@@ -89,7 +89,7 @@ angular.module("climaLaboral")
       return $http.put('/api/roles/' + id, role);
     };
     role.save = function(role){
-      console.log(area);
+      console.log(role);
       return $http.post('/api/roles', role);
     };
     role.delete = function(id){
