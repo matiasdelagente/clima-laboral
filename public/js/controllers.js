@@ -529,10 +529,7 @@ $scope.series1 = ['Serie 2015'];
 
       angular.forEach(userChanged.childrens, function(childs, key) {
         console.log(childs, key);
-        childrens.push(
-        {
-            "_id": childs.item.id
-        })
+        childrens.push(childs.item.id)
       });
 
       console.log('saving user', userChanged, childrens);
@@ -543,12 +540,6 @@ $scope.series1 = ['Serie 2015'];
         $location.path('/organigrama');
       });
     });
-    
-    // companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
-    //   $scope.processing = false;
-    //   $scope.company = {};
-    //   $location.path('/companies');
-    // });
   };
 })
 

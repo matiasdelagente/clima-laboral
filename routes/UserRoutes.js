@@ -214,7 +214,7 @@ router.route('/users/setChildrens/:id')
     User.findById(id, function(err,user){
       if(err) res.send(user)
 
-      user.childrens = req.body;
+      // user.childrens = req.body;
       user.children = req.body;
       
       console.log(user.childrens)

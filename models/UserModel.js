@@ -17,7 +17,7 @@ var UserSchema = new Schema({
   status: {type:String},
   email: {type:String},
   company: { type: Schema.ObjectId, ref:'company'},
-  children: [{ type: { type: Schema.ObjectId, ref:'user'}}]
+  children: [{ type: Schema.ObjectId, ref:'user'}]
 
 });
 
