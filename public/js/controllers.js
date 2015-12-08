@@ -419,12 +419,8 @@ $scope.series1 = ['Serie 2015'];
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
       $scope.items = getUsersHierarchy(data);
-      users = getUsersHierarchy(data);
+      $scope.users = data;
       $scope.processing = false;
-
-        $('.dd-item div').on('click', function(){
-          console.log('algo')
-        });
 
     });
 
@@ -438,25 +434,101 @@ $scope.series1 = ['Serie 2015'];
   $scope.$watch(function(scope) { return scope.items }, function(newVal, oldVal){
     console.log("Search was changed to:", newVal, 'oldVal', oldVal);
     ///UPDATE HIERARCHY IN CASE THAT NEW VAL <> FROM OLDVAL
+    if (newVal != oldVal && oldVal.length > 0 ) {
+      angular.forEach($scope.users, function(user, key) {
+        // var userChanged = findUserChanged(newVal, oldVal);
+        findUserChanged(newVal, user);
 
+      });
+    }
   });
 
-  $scope.setMaster = function(obj, $event){
-    console.log('aaaa',$event.target);
-  }
+  findUserChanged = function(newUsers, user) {
+    angular.forEach(newUsers, function(newUser, key) {
+      console.log(newUser)
+      if (!newUser.admin) {
+        // console.log(newUser.children)
+        if (!!newUser.children) {
+          
+          if (user._id == newUser.item.id) {
+            console.log('coincidencia', newUser.item.text)
+            console.log(user, newUser, typeof(user.childrens))
+            //bucle para ver si tengo alguno de mas
+            console.log(newUser.children.length, user.childrens.length)
 
-  //FIND ELEMENT THAT HAS DIFFERENT CHILDRENS
-  findUserChanged = function(users) {
-    angular.forEach(users, function(user, key) {
-      if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
-        //FIND USER INSIDE ELEMENTS
-        var result = $.grep(myArray, function(e){ return e.id == id; });
+            if (typeof(user.children) == 'object' && typeof(user.childrens) == 'object' && newUser.children.length != user.childrens.length) {
+              //NO TENGO HIJOS EN DB, PERO SI EN NEW USER
+              console.info('TENGO QUE HACER UN UPDATE DE ', newUser.item.text)  
+            }     
+            return;       
+          } else {
+            findUserChanged(newUser.children, user)
+          }
+        } else {
+          if (user._id == newUser.item.id) {
+            console.log('coincidencia', newUser.item.text, user, newUser)
+            if (typeof(user.children) == 'object' && typeof(user.childrens) == 'object' && user.childrens.length > 0 ) {
+              //NEW USER DOESNT HAVE CHILDS, OLD USER HAS SO WE CLEAN DB USER CHILDS
+              console.info('borrar hijos de ' + newUser.item.text)
+            }
+            return;
+          }
+        }
       }
     });
   }
 
+  // findUserChanged = function(newVal, oldVal ) {
+  //     var result = false;
+  //     //FIND ELEMENT THAT HAS DIFFERENT CHILDRENS
+  //     console.log(newVal)
+  //     angular.forEach(newVal, function(newUser, key) {
+  //         console.info(key, newUser.item.id, newUser.item.text, newUser.children)
+  //         //FIND USER INSIDE ELEMENTS
+  //         if (!newUser.admin) {
+  //           if (!!newUser.children) {
+  //              findUserChanged(newUser.children);
+  //           } else {
+  //             //IF HAVE NO CHILDRENS
+  //             angular.forEach($scope.users, function(user, key) {
+  //                 if(newUser.item.id == user._id) {
+  //                   //IN CASE THAT WE HAVE A USER WITH CHILDS, AND AFTER UPDATE WE HAVE ZERO CHILDS
+  //                   console.info(newUser.item.id, newUser.item.text)
+  //                   console.log('user.childrens', user.childrens);
+  //                   console.log('search user childs', newUser.children)
+  //                   if (user.childrens != 'undefined' && newUser.children == 'undefined') {
+  //                     //RESET USER CHILDS
+  //                     user.childrens = [];
+  //                     console.log('user after edit', user)
+  //                     // userSrvc.edit(user._id, user).success(function(data){
+  //                     //   console.info('user update')
+  //                     // });
+  //                   }
+  //                 }
+
+  
+  //                 // if(user.childrens && newUser.item.id == user._id) {
+  //                 //   console.info('find user', newUser.item.id, user.name)
+  //                 //   var oldLength = !!(user.childrens) ? user.childrens.length : -1;
+  //                 //   var newLength = !!(newUser.children) ? newUser.children.length : -1;
+
+  //                 //   if (oldLength != newLength) {
+  //                 //     result = newUser;
+  //                 //     console.log('user has changed', result), user;
+
+  //                 //   }
+  //                 // }
+
+
+  //             });
+  //           }
+  //         }
+  //     });
+
+  // }
+
   //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
-  var alreadyInHierarchy = [];
+  var alreadyInHierarchy = [];  //TO STORE USERS THAT ARE ALREADY IN THE HIERARCHY
   getUsersHierarchy = function(users) {
       var data = [];
       var isChildren = [];
