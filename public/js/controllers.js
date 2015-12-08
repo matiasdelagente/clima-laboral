@@ -1,7 +1,7 @@
 angular.module("climaLaboral")
 
 .controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
-  $scope.company = "Fostering Talent"
+  $scope.company = "Fostering Talent";
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
@@ -18,7 +18,7 @@ angular.module("climaLaboral")
     Auth.getUser()
       .success(function(data){
         $scope.user = data;
-      })
+      });
 
     $scope.url = $location.path();
   });
@@ -272,7 +272,7 @@ $scope.series1 = ['Serie 2015'];
       }
     }
     return users;
-  }
+  };
 
   $scope.calcAll = function(){
     // Numero de las preguntas de cada kpi
@@ -391,7 +391,6 @@ $scope.series1 = ['Serie 2015'];
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
 
-
     userSrvc.get(data.user).success(function(userData) {
       $scope.formUser = userData;
       $scope.processing = false;
@@ -408,8 +407,63 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("organizationChartCtrl", function($scope, $routeParams, $location, AuthToken, userSrvc){
-  $scope.items = [];
+.controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc, roleSrvc){
+  $scope.processing = true;
+  $scope.company = AuthToken.getSession().company;
+  $scope.newArea = {};
+  $scope.newRole = {};
+
+  companySrvc.get($scope.company._id).success(function(data){
+    $scope.processing = false;
+    $scope.company = data;
+    // console.log(data);
+  });
+
+  $scope.addArea = function(){
+    $scope.processing = true;
+    areaSrvc.save($scope.newArea).success(function(area){
+      $scope.company.areas.push(area._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.company = company;
+        $scope.newArea = {};
+      });
+    });
+  };
+
+  $scope.deleteArea = function(id){
+    $scope.processing = true;
+    areaSrvc.delete(id).success(function(area){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.processing = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+  $scope.addRole = function(){
+    $scope.processing = true;
+    roleSrvc.save($scope.newRole).success(function(role){
+      $scope.company.roles.push(role._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.company = company;
+        $scope.newRole = {};
+      });
+    });
+  };
+
+  $scope.deleteRole = function(id){
+    $scope.processing = true;
+    roleSrvc.delete(id).success(function(role){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.processing = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+})
+
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
   $scope.processing = true;
   $scope.hasChanged = false;
   $scope.usersNewVal = [];
@@ -579,7 +633,7 @@ $scope.series1 = ['Serie 2015'];
         tooltip: false,
         tooltipOpts: { content: '%s: %p.0%' }
       }
-    )
+    );
 
     var plot2 = $.plot("#graph2",
       [
@@ -596,7 +650,7 @@ $scope.series1 = ['Serie 2015'];
         tooltip: false,
         tooltipOpts: { content: '%s: %p.0%' }
       }
-    )
+    );
 
     var plot3 = $.plot("#graph3",
       [
@@ -612,10 +666,10 @@ $scope.series1 = ['Serie 2015'];
         tooltip: true,
         tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
       }
-    )
+    );
 
     $scope.processing = false;
-    console.log('graph1 done')
+    console.log('graph1 done');
   });
 
 })

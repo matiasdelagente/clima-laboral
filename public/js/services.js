@@ -7,31 +7,31 @@ angular.module("climaLaboral")
   }
   score.add = function(scores){
     return $http.post("/api/scores", scores)
-  }
-  return score
+  };
+  return score;
 })
 .factory("userSrvc", function($http){
-  var user = {}
+  var user = {};
     user.all = function(){
-      return $http.get('/api/users')
-    }
+      return $http.get('/api/users');
+    };
     user.get = function(id){
-      return $http.get('/api/users/'+id)
-    }
+      return $http.get('/api/users/'+id);
+    };
     user.edit = function(id, user){
-      return $http.put('/api/users/' + id, user)
-    }
+      return $http.put('/api/users/' + id, user);
+    };
     user.save = function(user){
-      return $http.post('/api/users', user)
-    }
+      return $http.post('/api/users', user);
+    };
     user.delete = function(id){
-      return $http.delete('/api/users/' + id)
+      return $http.delete('/api/users/' + id);
     }
     user.usersByCompany = function(id){
-      return $http.get('/api/usersByCompany/' + id)
+      return $http.get('/api/usersByCompany/' + id);
     }
     user.allByCompany = function(id){
-      return $http.get('/api/allByCompany/' + id)
+      return $http.get('/api/allByCompany/' + id);
     }
     user.setChildrens = function(id, childrens){
       return $http.put('/api/users/setChildrens/' + id, childrens)
@@ -58,6 +58,46 @@ angular.module("climaLaboral")
     }
     company.companyByUser = function(id){
       return $http.get('/api/companyByUser/' + id)
-    }   
+    }
   return company;
 })
+.factory("areaSrvc", function($http){
+  var area = {};
+    area.all = function(){
+      return $http.get('/api/areas');
+    };
+    area.get = function(id){
+      return $http.get('/api/areas/'+id);
+    };
+    area.edit = function(id, area){
+      return $http.put('/api/areas/' + id, area);
+    };
+    area.save = function(area){
+      console.log(area);
+      return $http.post('/api/areas', area);
+    };
+    area.delete = function(id){
+      return $http.delete('/api/areas/' + id);
+    };
+  return area;
+})
+.factory("roleSrvc", function($http){
+  var role = {};
+    role.all = function(){
+      return $http.get('/api/roles');
+    };
+    role.get = function(id){
+      return $http.get('/api/roles/'+id);
+    };
+    role.edit = function(id, role){
+      return $http.put('/api/roles/' + id, role);
+    };
+    role.save = function(role){
+      console.log(role);
+      return $http.post('/api/roles', role);
+    };
+    role.delete = function(id){
+      return $http.delete('/api/roles/' + id);
+    };
+  return role ;
+});

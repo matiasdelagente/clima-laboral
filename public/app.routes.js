@@ -105,7 +105,7 @@ angular.module("app.routes", [])
   })
 
   .when('/areasyroles',{
-    controller: "EditCompaniesCtrl",
+    controller: "EditAreasAndRolesCtrl",
     templateUrl: "./views/areasyroles.html"
   })
 
