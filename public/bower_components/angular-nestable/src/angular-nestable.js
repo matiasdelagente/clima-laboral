@@ -150,7 +150,7 @@
 
 					var listItem = $('<li class="dd-item"></li>');
 					var listElement = $('<div ng-nestable-item class="dd-handle"></div>');
-					listElement.attr({'data-id': item.item.id, 'ng-click':'setMaster(item)'})
+					listElement.attr({'data-id': item.item.id})
 					listElement.append(item.item.text).appendTo(listItem);
 					list.append(listItem);
 					listItem.data('item', item.item);

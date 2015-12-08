@@ -413,9 +413,9 @@ $scope.series1 = ['Serie 2015'];
   $scope.processing = true;
   $scope.hasChanged = false;
   $scope.usersNewVal = [];
+  $scope.users = [];
 
   var session = AuthToken.getSession();
-  var users = [];
   var usersChanged = [];
 
   //GET ALL USER FROM COMPANY
@@ -423,14 +423,15 @@ $scope.series1 = ['Serie 2015'];
 
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.users = data;      
       $scope.items = getUsersHierarchy(data);
-      $scope.users = data;
       $scope.processing = false;
 
     });
 
   } else {
     userSrvc.all().success(function(data){
+      $scope.users = data;
       $scope.items = getUsersHierarchy(data);
       $scope.processing = false;
     });
@@ -458,16 +459,16 @@ $scope.series1 = ['Serie 2015'];
             // console.log('coincidencia', newUser.item.text)
             // console.log(user, newUser, typeof(user.childrens), typeof(user.children))
 
-            if (typeof(user.children) == 'object' && typeof(user.childrens) == 'object') {
+            if (typeof(user.children) == 'object') {
               //NO TENGO HIJOS EN DB, PERO SI EN NEW USER
               // console.info(newUser.children, user.childrens)
-              if (newUser.children.length != user.childrens.length) {
+              if (newUser.children.length != user.children.length) {
                 console.info('HIJOS DIFERENTES, TENGO QUE HACER UN UPDATE DE ', newUser.item.text);
                 usersChanged.push({id:user._id, 'childrens':newUser.children})
               } else {
                 console.info('MISMA CANTIDAD DE HIJOS, TENGO QUE HACER UN BUCLE PARA VER SI HAY UPDATE DE ', newUser.item.text)
               }
-            } else if( typeof(user.children) == 'object' && typeof(user.childrens) == 'undefined' ) {
+            } else {
               //EL NODO NUEVO TIENE HIJOS, PERO ANTES NO ESTABAN
               console.info('ANTES NO TENIA HIJOS, AHORA HAY UPDATE DE ', newUser.item.text)
               usersChanged.push({id:user._id, 'childrens':newUser.children});
@@ -478,10 +479,10 @@ $scope.series1 = ['Serie 2015'];
           }
         } else {
           if (user._id == newUser.item.id) {
-            console.log('coincidencia', newUser.item.text, user, newUser)
-            if (typeof(user.children) == 'object' && typeof(user.childrens) == 'object' && user.childrens.length > 0 ) {
+            // console.log('coincidencia', newUser.item.text, user, newUser)
+            if (typeof(user.children) == 'object' && user.children.length > 0 ) {
               //NEW USER DOESNT HAVE CHILDS, OLD USER HAS SO WE CLEAN DB USER CHILDS
-              console.info('borrar hijos de ' + newUser.item.text);
+              console.info('BORRAR HIJOS DE ' + newUser.item.text);
               usersChanged.push({id:user._id, 'childrens':[]});
             }
             return;
@@ -496,12 +497,21 @@ $scope.series1 = ['Serie 2015'];
   getUsersHierarchy = function(users) {
       var data = [];
       var isChildren = [];
-
+      // console.log('users', users)
       angular.forEach(users, function(user, key) {
         // console.log('iteration ' + key, user)
         if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
           if (!!user.children) {
-            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} , 'children': getUsersHierarchy(user.children) });
+            var childs = [];
+
+            angular.forEach(user.children, function(child, key) {
+              // console.log(child, $scope.users)
+              var el = $.grep($scope.users, function(e){ return e._id == child; })
+              // console.log(el)
+              childs.push(el[0])
+            });
+            // console.log(user, childs)
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} , 'children': getUsersHierarchy(childs) });
           } else {
             data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'children': [] })
           }
@@ -515,7 +525,7 @@ $scope.series1 = ['Serie 2015'];
   $scope.save = function(){
     $scope.processing = true;
     $scope.hasChanged = false;
-    console.log('save');
+
     angular.forEach($scope.users, function(user, key) {
         // var userChanged = findUserChanged(newVal, oldVal);
       findUserChanged($scope.usersNewVal, user);
@@ -526,14 +536,14 @@ $scope.series1 = ['Serie 2015'];
       var childrens = [];
 
       angular.forEach(userChanged.childrens, function(childs, key) {
-        console.log(childs, key);
+        // console.log(childs, key);
         childrens.push(childs.item.id)
       });
 
-      console.log('saving user', userChanged, childrens);
+      // console.log('saving user', userChanged, childrens);
 
       userSrvc.setChildrens(userChanged.id, childrens).success(function(data){
-        console.log('after save', data)
+        // console.log('after save', data)
         $scope.processing = false;
         $location.path('/organigrama');
       });
