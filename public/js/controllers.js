@@ -313,7 +313,7 @@ $scope.series1 = ['Serie 2015'];
   var session = AuthToken.getSession();
 
   $scope.isDemo = !!(session.company) ? session.company.demo : false;
-  
+
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.company = session.company.name;
@@ -463,6 +463,40 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
+.controller("CompetenciesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc){
+  $scope.processing = true;
+  $scope.company = AuthToken.getSession().company;
+  $scope.newCompetence = {};
+
+  companySrvc.get($scope.company._id).success(function(data){
+    $scope.processing = false;
+    $scope.company = data;
+    console.log($scope.company);
+  });
+
+  $scope.addCompetence = function(){
+    $scope.processing = true;
+    competenceSrvc.save($scope.newArea).success(function(competence){
+      $scope.company.competencies.push(competence._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.company = company;
+        $scope.newCompetence = {};
+      });
+    });
+  };
+
+  $scope.deleteCompetence = function(id){
+    $scope.processing = true;
+    competenceSrvc.delete(id).success(function(competence){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.processing = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+})
+
 .controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
   $scope.processing = true;
   $scope.hasChanged = false;
@@ -477,7 +511,7 @@ $scope.series1 = ['Serie 2015'];
 
     var companyId = undefined;
     userSrvc.usersByCompany(session.company._id).success(function(data){
-      $scope.users = data;      
+      $scope.users = data;
       $scope.items = getUsersHierarchy(data);
       $scope.processing = false;
 
@@ -508,7 +542,7 @@ $scope.series1 = ['Serie 2015'];
       if (!newUser.admin) {
         // console.log(newUser.children)
         if (!!newUser.children) {
-          
+
           if (user._id == newUser.item.id) {
             // console.log('coincidencia', newUser.item.text)
             // console.log(user, newUser, typeof(user.childrens), typeof(user.children))
@@ -526,8 +560,8 @@ $scope.series1 = ['Serie 2015'];
               //EL NODO NUEVO TIENE HIJOS, PERO ANTES NO ESTABAN
               console.info('ANTES NO TENIA HIJOS, AHORA HAY UPDATE DE ', newUser.item.text)
               usersChanged.push({id:user._id, 'childrens':newUser.children});
-            }  
-            return;       
+            }
+            return;
           } else {
             findUserChanged(newUser.children, user)
           }

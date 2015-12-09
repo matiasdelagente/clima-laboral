@@ -36,7 +36,7 @@ angular.module("climaLaboral")
     user.setChildrens = function(id, childrens){
       return $http.put('/api/users/setChildrens/' + id, childrens)
     }
-    
+
   return user;
 })
 .factory("companySrvc", function($http){
@@ -100,4 +100,24 @@ angular.module("climaLaboral")
       return $http.delete('/api/roles/' + id);
     };
   return role ;
+})
+.factory("competenceSrvc", function($http){
+  var competence = {};
+    competence.all = function(){
+      return $http.get('/api/competencies');
+    };
+    competence.get = function(id){
+      return $http.get('/api/competencies/'+id);
+    };
+    competence.edit = function(id, competence){
+      return $http.put('/api/competencies/' + id, competence);
+    };
+    competence.save = function(competence){
+      console.log(competence);
+      return $http.post('/api/competencies', competence);
+    };
+    competence.delete = function(id){
+      return $http.delete('/api/competencies/' + id);
+    };
+  return competence ;
 });

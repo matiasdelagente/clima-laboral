@@ -10,7 +10,7 @@
 
 <!-- CONTENIDO -->
 
-<div class="wrapper-md">
+<div class="wrapper-md" ng-if="!processing">
 	<!-- EMPRESAS -->
 	<div class="row">
 
@@ -20,7 +20,7 @@
         <!-- AGREGAR -->
         <div class="col-md-4">
           <div class="panel b-a" style="height: 305px;">
-            <div class="hbox text-center b-t b-light">          
+            <div class="hbox text-center b-t b-light">
               <a href="" class="col padder-v text-muted b-r b-light" style="vertical-align:middle; text-align:center;">
                 <div class="h1"><i class="icon-plus"></i></div>
                 <span>Agregar Competencia</span>
@@ -28,19 +28,20 @@
             </div>
           </div>
         </div>
-        
+
         <!-- LIST -->
-        <div class="col-md-4" >
+        <div class="col-md-4" ng-repeat="competence in company.competencies">
           <div class="panel b-a" style="height: 305px;">
             <div class="panel-heading b-b">
-              <b>Competencia 1</b>
+              <b>{{competence.name}}</b>
               <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
               <i class="fa fa-pencil pull-right text-muted "></i>
-              
+              <span class="pull-right m-t-sm ">&nbsp;</span>
+              <i class="fa fa-trash pull-right text-muted " ng-click="deleteCompetence(competence._id)"></i>
             </div>
             <div class="panel-body">
-              
-              <div class="">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
+
+              <div class="">{{competence.description}}</div>
             </div>
             <div class="panel-footer">
               <div class="">
@@ -50,7 +51,7 @@
                 <!-- <i class="fa fa-clock-o"></i> -->
                 Recursos Humanos
               </span>
-<!-- 
+<!--
               <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
             </div> -->
           </div>
