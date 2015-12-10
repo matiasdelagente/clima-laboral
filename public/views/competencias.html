@@ -18,7 +18,7 @@
       <div class="row">
 
         <!-- AGREGAR -->
-        <div class="col-md-4">
+        <div class="col-md-4" ng-click="adding = true">
           <div class="panel b-a" style="height: 305px;">
             <div class="hbox text-center b-t b-light">
               <a href="" class="col padder-v text-muted b-r b-light" style="vertical-align:middle; text-align:center;">
@@ -28,6 +28,29 @@
             </div>
           </div>
         </div>
+
+        <div class="col-md-4" ng-show="adding">
+          <div class="panel b-a competencia" style="height: 305px;">
+            <div class="panel-heading b-b">
+              <input type="text" value="{{competence.name}}" placeholder="Nombre de la competencia" />
+
+              <i class="fa fa-trash pull-right text-muted " ng-click="adding = false"></i>
+            </div>
+            <div class="panel-body">
+              <textarea name="description" placeholder="Descripcion" rows="8"></textarea>
+            </div>
+            <div class="panel-footer">
+              <div class="">
+                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="adding = false">Guardar</button>
+              </div>
+              <span class="text-muted m-l-sm pull-left">
+                <!-- <i class="fa fa-clock-o"></i> -->
+                <!-- Recursos Humanos -->
+              </span>
+<!--
+              <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
+            </div> -->
+          </div>
 
         <!-- LIST -->
         <div class="col-md-4" ng-repeat="competence in company.competencies">
