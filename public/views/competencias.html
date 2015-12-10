@@ -31,21 +31,24 @@
 
         <!-- LIST -->
         <div class="col-md-4" ng-repeat="competence in company.competencies">
-          <div class="panel b-a" style="height: 305px;">
+          <div class="panel b-a competencia" style="height: 305px;">
             <div class="panel-heading b-b">
-              <b>{{competence.name}}</b>
+              <b ng-hide="editing">{{competence.name}}</b>
+              <input type="text" value="{{competence.name}}" ng-show="editing" />
+
               <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
-              <i class="fa fa-pencil pull-right text-muted "></i>
+              <i class="fa fa-pencil pull-right text-muted " ng-hide="editing" ng-click="editing = true"></i>
               <span class="pull-right m-t-sm ">&nbsp;</span>
               <i class="fa fa-trash pull-right text-muted " ng-click="deleteCompetence(competence._id)"></i>
             </div>
             <div class="panel-body">
 
-              <div class="">{{competence.description}}</div>
+              <div class="" ng-hide="editing">{{competence.description}}</div>
+              <textarea name="description" ng-show="editing">{{competence.description}}</textarea>
             </div>
             <div class="panel-footer">
               <div class="">
-                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right">Guardar</button>
+                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-show="editing" ng-click="editing = false">Guardar</button>
               </div>
               <span class="text-muted m-l-sm pull-left">
                 <!-- <i class="fa fa-clock-o"></i> -->
