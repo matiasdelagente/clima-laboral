@@ -10,7 +10,7 @@
 
 <!-- CONTENIDO -->
 
-<div class="wrapper-md">
+<div class="wrapper-md" ng-if="!processing">
 	<!-- EMPRESAS -->
 	<div class="row">
 
@@ -18,9 +18,9 @@
       <div class="row">
 
         <!-- AGREGAR -->
-        <div class="col-md-4">
+        <div class="col-md-4" ng-click="adding = true">
           <div class="panel b-a" style="height: 305px;">
-            <div class="hbox text-center b-t b-light">          
+            <div class="hbox text-center b-t b-light">
               <a href="" class="col padder-v text-muted b-r b-light" style="vertical-align:middle; text-align:center;">
                 <div class="h1"><i class="icon-plus"></i></div>
                 <span>Agregar Competencia</span>
@@ -28,31 +28,72 @@
             </div>
           </div>
         </div>
-        
-        <!-- LIST -->
-        <div class="col-md-4" >
-          <div class="panel b-a" style="height: 305px;">
+
+        <div class="col-md-4" ng-show="adding">
+          <form class="form" name="form" ng-submit="addCompetence()">
+          <div class="panel b-a competencia" style="height: 305px;">
             <div class="panel-heading b-b">
-              <b>Competencia 1</b>
-              <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
-              <i class="fa fa-pencil pull-right text-muted "></i>
-              
+              <input type="text" value="{{competence.name}}" placeholder="Nombre de la competencia" class="form-control" ng-required="true" ng-model="formCompetence.name"/>
             </div>
             <div class="panel-body">
-              
-              <div class="">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
+              <textarea name="description" placeholder="Descripcion" rows="8" class="form-control" ng-required="true" ng-model="formCompetence.description"></textarea>
+
             </div>
             <div class="panel-footer">
-              <div class="">
-                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right">Guardar</button>
+              <div class="text-right">
+                <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-click="adding = false">Cancelar</button>
+                <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon" ng-disabled='form.$invalid'>
+                  <span ng-if="!formProcessing">Guardar</span>
+                  <span ng-if="formProcessing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
+              </div>
+              <span class="text-muted m-l-sm pull-left">
+                <!-- <i class="fa fa-clock-o"></i> -->
+                <!-- Recursos Humanos -->
+              </span>
+<!--
+              <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
+            </div> -->
+            </div>
+          </div>
+          </form>
+        </div>
+        <!-- LIST -->
+        <div class="col-md-4" ng-repeat="competence in company.competencies">
+          <div class="panel b-a competencia" style="height: 305px;">
+          <form ng-submit="editCompetence(competence); editing = false">
+            <div class="panel-heading b-b">
+              <b ng-hide="editing">{{competence.name}}</b>
+              <input type="text" value="{{competence.name}}" ng-show="editing" class="form-control" ng-model="competence.name"/>
+
+              <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
+              <i class="fa fa-pencil pull-right text-muted " ng-hide="editing" ng-click="editing = true"></i>
+              <span class="pull-right m-t-sm ">&nbsp;</span>
+              <i class="fa fa-trash pull-right text-muted " ng-hide="editing" ng-click="deleteCompetence(competence._id)"></i>
+            </div>
+            <div class="panel-body">
+
+              <div class="" ng-hide="editing">{{competence.description}}</div>
+              <textarea name="description" ng-show="editing" class="form-control" rows="7" ng-model="competence.description">{{competence.description}}</textarea>
+            </div>
+            <div class="panel-footer">
+              <div class="text-right">
+                <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-show="editing" ng-click="editing = false">Cancelar</button>
+
+                <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon" ng-show="editing">
+                  <span ng-if="!formSaving">Guardar</span>
+                  <span ng-if="formSaving" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
               </div>
               <span class="text-muted m-l-sm pull-left">
                 <!-- <i class="fa fa-clock-o"></i> -->
                 Recursos Humanos
               </span>
-<!-- 
+<!--
               <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
-            </div> -->
+              -->
+            </div> 
+          </form>
           </div>
         </div>
 
