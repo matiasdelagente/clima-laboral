@@ -518,7 +518,7 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc, AuthToken){
   $scope.processing = true;
   $scope.hasChanged = false;
   $scope.usersNewVal = [];
