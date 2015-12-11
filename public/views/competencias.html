@@ -30,18 +30,22 @@
         </div>
 
         <div class="col-md-4" ng-show="adding">
+          <form class="form" name="form" ng-submit="addCompetence()">
           <div class="panel b-a competencia" style="height: 305px;">
             <div class="panel-heading b-b">
-              <input type="text" value="{{competence.name}}" placeholder="Nombre de la competencia" />
-
-              <i class="fa fa-trash pull-right text-muted " ng-click="adding = false"></i>
+              <input type="text" value="{{competence.name}}" placeholder="Nombre de la competencia" class="form-control" ng-required="true" ng-model="formCompetence.name"/>
             </div>
             <div class="panel-body">
-              <textarea name="description" placeholder="Descripcion" rows="8"></textarea>
+              <textarea name="description" placeholder="Descripcion" rows="8" class="form-control" ng-required="true" ng-model="formCompetence.description"></textarea>
+
             </div>
             <div class="panel-footer">
-              <div class="">
-                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="adding = false">Guardar</button>
+              <div class="text-right">
+                <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-click="adding = false">Cancelar</button>
+                <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon" ng-disabled='form.$invalid'>
+                  <span ng-if="!formProcessing">Guardar</span>
+                  <span ng-if="formProcessing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
               </div>
               <span class="text-muted m-l-sm pull-left">
                 <!-- <i class="fa fa-clock-o"></i> -->
@@ -50,28 +54,36 @@
 <!--
               <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
             </div> -->
+            </div>
           </div>
-
+          </form>
+        </div>
         <!-- LIST -->
         <div class="col-md-4" ng-repeat="competence in company.competencies">
           <div class="panel b-a competencia" style="height: 305px;">
+          <form ng-submit="editCompetence(competence); editing = false">
             <div class="panel-heading b-b">
               <b ng-hide="editing">{{competence.name}}</b>
-              <input type="text" value="{{competence.name}}" ng-show="editing" />
+              <input type="text" value="{{competence.name}}" ng-show="editing" class="form-control" ng-model="competence.name"/>
 
               <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
               <i class="fa fa-pencil pull-right text-muted " ng-hide="editing" ng-click="editing = true"></i>
               <span class="pull-right m-t-sm ">&nbsp;</span>
-              <i class="fa fa-trash pull-right text-muted " ng-click="deleteCompetence(competence._id)"></i>
+              <i class="fa fa-trash pull-right text-muted " ng-hide="editing" ng-click="deleteCompetence(competence._id)"></i>
             </div>
             <div class="panel-body">
 
               <div class="" ng-hide="editing">{{competence.description}}</div>
-              <textarea name="description" ng-show="editing">{{competence.description}}</textarea>
+              <textarea name="description" ng-show="editing" class="form-control" rows="7" ng-model="competence.description">{{competence.description}}</textarea>
             </div>
             <div class="panel-footer">
-              <div class="">
-                <button class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-show="editing" ng-click="editing = false">Guardar</button>
+              <div class="text-right">
+                <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-show="editing" ng-click="editing = false">Cancelar</button>
+
+                <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon" ng-show="editing">
+                  <span ng-if="!formSaving">Guardar</span>
+                  <span ng-if="formSaving" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
               </div>
               <span class="text-muted m-l-sm pull-left">
                 <!-- <i class="fa fa-clock-o"></i> -->
@@ -79,7 +91,9 @@
               </span>
 <!--
               <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
-            </div> -->
+              -->
+            </div> 
+          </form>
           </div>
         </div>
 

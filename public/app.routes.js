@@ -100,7 +100,7 @@ angular.module("app.routes", [])
   })
 
   .when('/competencias',{
-    controller: "CompetenciesCtrl",
+    controller: "CompetencesCtrl",
     templateUrl: "./views/competencias.html"
   })
 

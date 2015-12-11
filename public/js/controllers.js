@@ -463,10 +463,10 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("CompetenciesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc){
+.controller("CompetencesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc){
   $scope.processing = true;
   $scope.company = AuthToken.getSession().company;
-  $scope.newCompetence = {};
+  $scope.formCompetence = {};
 
   companySrvc.get($scope.company._id).success(function(data){
     $scope.processing = false;
@@ -476,12 +476,33 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.addCompetence = function(){
     $scope.processing = true;
-    competenceSrvc.save($scope.newArea).success(function(competence){
+    
+    competenceSrvc.save($scope.formCompetence).success(function(competence){
+      $scope.adding = false;
+
       $scope.company.competencies.push(competence._id);
       companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        console.log(company)
         $scope.company = company;
-        $scope.newCompetence = {};
+        $scope.formCompetence = {}
       });
+    });
+  };
+
+  $scope.editCompetence = function(competence){
+    $scope.formSaving = true;
+    // $scope.processing = true;
+    // console.log('muerte!!', competence)
+    competenceSrvc.edit(competence._id, competence).success(function(competence){
+      $scope.adding = false;
+
+      $scope.formSaving = false;      
+      // $scope.company.competencies.push(competence._id);
+      // companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+      //   console.log(company)
+      //   $scope.company = company;
+      //   $scope.formCompetence = {}
+      // });
     });
   };
 
