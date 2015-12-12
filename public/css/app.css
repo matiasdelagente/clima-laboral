@@ -237,11 +237,12 @@ a:hover .caret-white {
 .list-group-item {
   padding-right: 15px;
   border-color: #e7ecee;
+  cursor: pointer;
 }
 
-a.list-group-item:hover,
-a.list-group-item:focus,
-a.list-group-item.hover {
+div.list-group-item:hover,
+div.list-group-item:focus,
+div.list-group-item.hover {
   background-color: #f6f8f8;
 }
 

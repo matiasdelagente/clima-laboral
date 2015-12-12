@@ -430,6 +430,14 @@ $scope.series1 = ['Serie 2015'];
     });
   };
 
+  $scope.editArea = function(area){
+    $scope.formSaving = true;
+
+    areaSrvc.edit(area._id, area).success(function(area){
+      $scope.formSaving = false;
+    });
+  };
+
   $scope.deleteArea = function(id){
     $scope.processing = true;
     areaSrvc.delete(id).success(function(area){
@@ -448,6 +456,14 @@ $scope.series1 = ['Serie 2015'];
         $scope.company = company;
         $scope.newRole = {};
       });
+    });
+  };
+
+  $scope.editRole = function(role){
+    $scope.formSaving = true;
+  
+    roleSrvc.edit(role._id, role).success(function(role){
+      $scope.formSaving = false;
     });
   };
 

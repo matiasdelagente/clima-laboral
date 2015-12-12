@@ -229,7 +229,7 @@ router.route('/users/setChildrens/:id')
 router.route('/me')
 .get(function(req,res){
   User.findOne({username: req.decoded.username}, function(err, user){
-    if(err) return error;
+    if(err) return err;
     res.send(user)
   })
   //res.send(req.decoded);
