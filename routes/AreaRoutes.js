@@ -93,21 +93,11 @@ router.route('/areas/allByUser/:id')
 router.route('/areas/allByCompany/:id')
     .get(function(req,res){
       var id = req.params.id;
-      User.find({company: id}, function(err,data){
+      Area.find({company: id},function(err, data){
         if(err){
           res.send(err);
         }
         else{
-          data.forEach(function (user){
-            Area.find({'user': user._id},function(err, areas){
-              if(err){
-                res.send(err);
-              }
-              else{
-                data.areas = areas;
-              }
-            });
-          });
           console.log(data);
           res.send(data);
         }

@@ -94,21 +94,11 @@ router.route('/roles/allByUser/:id')
 router.route('/roles/allByCompany/:id')
     .get(function(req,res){
       var id = req.params.id;
-      User.find({company: id}, function(err,data){
+      Role.find({company: id},function(err, data){
         if(err){
           res.send(err);
         }
         else{
-          data.forEach(function (user){
-            Role.find({'user': user._id},function(err, roles){
-              if(err){
-                res.send(err);
-              }
-              else{
-                data.roles = roles;
-              }
-            });
-          });
           console.log(data);
           res.send(data);
         }

@@ -73,11 +73,13 @@ angular.module("climaLaboral")
       return $http.put('/api/areas/' + id, area);
     };
     area.save = function(area){
-      console.log(area);
       return $http.post('/api/areas', area);
     };
     area.delete = function(id){
       return $http.delete('/api/areas/' + id);
+    };
+    area.allByCompany = function(id){
+      return $http.get('/api/areas/allByCompany/' + id);
     };
   return area;
 })
@@ -98,6 +100,9 @@ angular.module("climaLaboral")
     };
     role.delete = function(id){
       return $http.delete('/api/roles/' + id);
+    };
+    role.allByCompany = function(id){
+      return $http.get('/api/roles/allByCompany/' + id);
     };
   return role ;
 })

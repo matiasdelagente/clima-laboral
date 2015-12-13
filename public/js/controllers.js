@@ -420,10 +420,14 @@ $scope.series1 = ['Serie 2015'];
   });
 
   $scope.addArea = function(){
-    $scope.processing = true;
+    $scope.addingArea = true;
+    $scope.newArea.company = $scope.company._id;
+
     areaSrvc.save($scope.newArea).success(function(area){
+
       $scope.company.areas.push(area._id);
       companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.addingArea = false;
         $scope.company = company;
         $scope.newArea = {};
       });
@@ -439,22 +443,26 @@ $scope.series1 = ['Serie 2015'];
   };
 
   $scope.deleteArea = function(id){
-    $scope.processing = true;
+    $scope.areaDel = true;
     areaSrvc.delete(id).success(function(area){
       companySrvc.get($scope.company._id).success(function(data){
-        $scope.processing = false;
+        $scope.areaDel = false;
         $scope.company = data;
       });
     });
   };
 
   $scope.addRole = function(){
-    $scope.processing = true;
+    $scope.addingArea = true;
+    $scope.newRole.company = $scope.company._id;
+
     roleSrvc.save($scope.newRole).success(function(role){
       $scope.company.roles.push(role._id);
       companySrvc.edit($scope.company._id, $scope.company).success(function(company){
         $scope.company = company;
         $scope.newRole = {};
+        
+        $scope.addingArea = false;
       });
     });
   };
@@ -468,10 +476,10 @@ $scope.series1 = ['Serie 2015'];
   };
 
   $scope.deleteRole = function(id){
-    $scope.processing = true;
+    $scope.roleDel = true;
     roleSrvc.delete(id).success(function(role){
       companySrvc.get($scope.company._id).success(function(data){
-        $scope.processing = false;
+        $scope.roleDel = false;
         $scope.company = data;
       });
     });
@@ -479,15 +487,22 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("CompetencesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc){
+.controller("CompetencesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc, areaSrvc, roleSrvc){
   $scope.processing = true;
   $scope.company = AuthToken.getSession().company;
   $scope.formCompetence = {};
 
+  //GET COMPANY DATA
   companySrvc.get($scope.company._id).success(function(data){
-    $scope.processing = false;
     $scope.company = data;
-    console.log($scope.company);
+    areaSrvc.allByCompany($scope.company._id).success(function(areas){
+      $scope.allAreas = areas;
+      
+      roleSrvc.allByCompany($scope.company._id).success(function(roles){
+        $scope.allRoles = roles;
+        $scope.processing = false;
+      });
+    });
   });
 
   $scope.addCompetence = function(){

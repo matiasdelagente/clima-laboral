@@ -27,7 +27,8 @@
           <div class="input-group">
             <input type="text" class="input-sm form-control" placeholder="Agregar Área" ng-model="newArea.name">
             <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button" ng-click="addArea()"><i class="fa fa-plus"></i></button>
+              <button class="btn btn-sm btn-default" type="button" ng-click="addArea()" ng-if="!addingArea"><i class="fa fa-plus"></i></button>                  
+              <button class="btn btn-sm btn-default" type="button" ng-if="addingArea"><i class="spinner glyphicon glyphicon-repeat"></i></button>
             </span>
           </div>
         </div>
@@ -42,7 +43,8 @@
               <span class="clear">
                 <span class="pull-right m-t-sm btn btn-xs btn-info" ng-click="editing = true"><i class="fa fa-pencil"></i></span>
                 <span class="pull-right m-t-sm ">&nbsp;</span>
-                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-click="deleteArea(area._id)"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="areaDel"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="!areaDel" ng-click="deleteArea(area._id)"><i class="fa fa-trash"></i></span>
                 <span ng-hide="editing">{{area.name}}</span>
                 
                 <small class="text-muted clear text-ellipsis">{{area.description}}</small>
@@ -81,8 +83,9 @@
 
           <div class="input-group">
             <input type="text" class="input-sm form-control" placeholder="Agregar Rol" ng-model="newRole.name">
-            <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button" ng-click="addRole()"><i class="fa fa-plus"></i></button>
+            <span class="input-group-btn">                  
+              <button class="btn btn-sm btn-default" type="button" ng-if="addingArea"><i class="spinner glyphicon glyphicon-repeat"></i></button>            
+              <button class="btn btn-sm btn-default" type="button" ng-click="addRole()" ng-if="!addingArea"><i class="fa fa-plus"></i></button>
             </span>
           </div>
         </div>
@@ -97,7 +100,8 @@
               <span class="clear">
                 <span class="pull-right m-t-sm btn btn-xs btn-info" ng-click="editing = true"><i class="fa fa-pencil"></i></span>
                 <span class="pull-right m-t-sm ">&nbsp;</span>
-                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-click="deleteRole(role._id)"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="!roleDel" ng-click="deleteRole(role._id)"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="roleDel"><i class="fa fa-trash"></i></span>
                 <span>{{role.name}}</span>
                 <small class="text-muted clear text-ellipsis">{{role.description}}</small>
               </span>

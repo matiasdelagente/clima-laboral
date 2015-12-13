@@ -69,29 +69,44 @@
               <!-- <label class="label bg-info m-l-xs">Editor</label>  -->
               <i class="fa fa-pencil pull-right text-muted " ng-hide="editing" ng-click="editing = true"></i>
               <span class="pull-right m-t-sm ">&nbsp;</span>
-              <i class="fa fa-trash pull-right text-muted " ng-hide="editing" ng-click="deleteCompetence(competence._id)"></i>
+              <i class="glyphicon glyphicon-repeat pull-right text-muted spinner" ng-if="areaDel"></i>
+              <i class="fa fa-trash pull-right text-muted " ng-hide="editing" ng-click="deleteCompetence(competence._id)" ng-if="!areaDel"></i>
             </div>
-            <div class="panel-body">
+            <div class="panel-body b-b">
 
               <div class="" ng-hide="editing">{{competence.description}}</div>
-              <textarea name="description" ng-show="editing" class="form-control" rows="7" ng-model="competence.description">{{competence.description}}</textarea>
+              <textarea name="description" ng-show="editing" class="form-control" rows="2" ng-model="competence.description">{{competence.description}}</textarea>
+            </div>
+            <div class="panel-body">
+              <div ng-show="editing">
+                <small>Roles</small>
+                <div class="checkbox" ng-repeat="role in allRoles">
+                  <label class="i-checks i-checks-sm">
+                    <input type="checkbox">
+                    <i></i>
+                    {{role.name}}
+                  </label>
+                </div>
+                <small>Areas</small>
+                <div class="checkbox" ng-repeat="area in allAreas">
+                  <label class="i-checks i-checks-sm">
+                    <input type="checkbox">
+                    <i></i>
+                    {{area.name}}
+                  </label>
+                </div>
+              </div>
             </div>
             <div class="panel-footer">
               <div class="text-right">
-                <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-show="editing" ng-click="editing = false">Cancelar</button>
+                <button class="btn m-b-xs btn-xs btn-danger btn-addon" ng-show="editing" ng-click="editing = false">Cancelar</button>
 
-                <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon" ng-show="editing">
+                <button type="submit" class="btn m-b-xs btn-xs btn-primary btn-addon" ng-show="editing">
                   <span ng-if="!formSaving">Guardar</span>
                   <span ng-if="formSaving" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
                 </button>
               </div>
-              <span class="text-muted m-l-sm pull-left">
-                <!-- <i class="fa fa-clock-o"></i> -->
-                Recursos Humanos
-              </span>
-<!--
-              <div class="chosen-container chosen-container-multi" title=""><ul class="chosen-choices"><li class="search-field"><input type="text" value="Select Some Options" class="default" autocomplete="off" style="width: 147px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"><li class="active-result" data-option-array-index="0">Alaska</li></ul></div></div>
-              -->
+
             </div> 
           </form>
           </div>
