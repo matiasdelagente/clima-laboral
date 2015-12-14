@@ -60,7 +60,7 @@ angular.module("climaLaboral")
 
 })
 
-.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken, $location){
   var session = AuthToken.getSession();
 
   if (!session.company) session.company = {name :'Todas las Compañias'};
@@ -104,6 +104,10 @@ angular.module("climaLaboral")
   //   $scope.showCompromiso = false;
   //   $scope.calcAll();
   // });
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
 
   $scope.calcCompromiso = function(preguntas){
     var area = $scope.formUser.area;
@@ -207,7 +211,7 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc, AuthToken){
+.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc, AuthToken, $location){
   var session = AuthToken.getSession();
 
   $scope.processing = true;
@@ -231,6 +235,9 @@ $scope.series1 = ['Serie 2015'];
     });
   }
 
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
 
   // userSrvc.all().success(function(data){
   //   $scope.processing = false;
@@ -405,6 +412,10 @@ $scope.series1 = ['Serie 2015'];
       $location.path('/companies');
     });
   };
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }  
 })
 
 .controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc, roleSrvc){
@@ -763,6 +774,10 @@ $scope.series1 = ['Serie 2015'];
     console.log('graph1 done');
   });
 
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
+
 })
 
 
@@ -888,6 +903,7 @@ $scope.series1 = ['Serie 2015'];
     $scope.user = data;
     $scope.processing = false;
   });
+
 })
 
 .directive('tooltip', function() {
