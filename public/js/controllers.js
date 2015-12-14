@@ -461,7 +461,7 @@ $scope.series1 = ['Serie 2015'];
       companySrvc.edit($scope.company._id, $scope.company).success(function(company){
         $scope.company = company;
         $scope.newRole = {};
-        
+
         $scope.addingArea = false;
       });
     });
@@ -495,6 +495,19 @@ $scope.series1 = ['Serie 2015'];
   //GET COMPANY DATA
   companySrvc.get($scope.company._id).success(function(data){
     $scope.company = data;
+    
+    console.log($scope.company);
+
+    $scope.selection = {};
+
+    angular.forEach($scope.company.competencies, function(competence, key) {
+      var algo = $scope.selection.competence = {id: competence._id}
+      console.log($scope.selection)
+      angular.forEach(competence.areas, function(area, key) {
+        algo = {'area': ids: {"50d5ad": true}}
+      });
+    });
+
     areaSrvc.allByCompany($scope.company._id).success(function(areas){
       $scope.allAreas = areas;
       
@@ -522,18 +535,10 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.editCompetence = function(competence){
     $scope.formSaving = true;
-    // $scope.processing = true;
-    // console.log('muerte!!', competence)
-    competenceSrvc.edit(competence._id, competence).success(function(competence){
-      $scope.adding = false;
 
+    competenceSrvc.edit(competence._id, competence).success(function(competence){
+      // $scope.adding = false;
       $scope.formSaving = false;      
-      // $scope.company.competencies.push(competence._id);
-      // companySrvc.edit($scope.company._id, $scope.company).success(function(company){
-      //   console.log(company)
-      //   $scope.company = company;
-      //   $scope.formCompetence = {}
-      // });
     });
   };
 
