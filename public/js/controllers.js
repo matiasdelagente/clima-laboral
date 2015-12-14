@@ -500,13 +500,13 @@ $scope.series1 = ['Serie 2015'];
 
     $scope.selection = {};
 
-    angular.forEach($scope.company.competencies, function(competence, key) {
-      var algo = $scope.selection.competence = {id: competence._id}
-      console.log($scope.selection)
-      angular.forEach(competence.areas, function(area, key) {
-        algo = {'area': ids: {"50d5ad": true}}
-      });
-    });
+    // angular.forEach($scope.company.competencies, function(competence, key) {
+    //   var algo = $scope.selection.competence = {id: competence._id}
+    //   console.log($scope.selection)
+    //   angular.forEach(competence.areas, function(area, key) {
+    //     algo = {'area': ids: {"50d5ad": true}}
+    //   });
+    // });
 
     areaSrvc.allByCompany($scope.company._id).success(function(areas){
       $scope.allAreas = areas;
