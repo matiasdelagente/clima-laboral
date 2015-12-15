@@ -402,7 +402,7 @@ $scope.series1 = ['Serie 2015'];
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
     $scope.formCompany.logo = 'img/'+data.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
-    console.log($scope.formCompany)
+    // console.log($scope.formCompany)
     userSrvc.get(data.user).success(function(userData) {
       $scope.formUser = userData;
       $scope.processing = false;
@@ -776,7 +776,7 @@ $scope.series1 = ['Serie 2015'];
     );
 
     $scope.processing = false;
-    console.log('graph1 done');
+    // console.log('graph1 done');
   });
 
   $scope.redirect = function(url) {
