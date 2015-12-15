@@ -171,7 +171,21 @@ router.route('/users/:id')
     var id = req.params.id;
     User.findById(id, function(err, data){
       if(err) res.send(err);
-      res.send(data)
+      // res.send(data)
+    })//.populate('company')
+    .deepPopulate('company.areas')
+    .exec(function(err, docs) {
+      if(err) return callback(err);
+      // console.info(algo)
+      User.populate(docs, {
+        path: 'company.areas',
+        model: 'area'
+      },
+      function(err, user) {
+        if(err) return callback(err);
+        console.log(user); // This object should now be populated accordingly.
+        res.send(user)
+      });
     });
   })
   .put(function(req,res){

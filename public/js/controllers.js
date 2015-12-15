@@ -818,10 +818,12 @@ $scope.series1 = ['Serie 2015'];
 })
 
 .controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
-  $scope.processing = false;
+  $scope.processing = true;
 
   userSrvc.get($routeParams.id).success(function(data){
     $scope.formUser = data;
+    console.log(data);
+    $scope.processing = false;
   });
 
   $scope.save = function(){
