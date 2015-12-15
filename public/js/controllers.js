@@ -729,7 +729,7 @@ $scope.series1 = ['Serie 2015'];
         {label:'No cumple',data:10}
       ],
       {
-        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: false, threshold: 0.05 } } },
         colors: ['#4cae4c','#27c24c','#fad733','#f05050','#761c19'],
         grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
         tooltip: false,
@@ -740,13 +740,13 @@ $scope.series1 = ['Serie 2015'];
     var plot2 = $.plot("#graph2",
       [
         {label:'Excede por mucho', data:20},
-        {label:'Excede',data:25},
+        {label:'Excede',data:35},
         {label:'Cumple completamente',data:35},
-        {label:'Cumple parcialmente',data:15},
+        {label:'Cumple parcialmente',data:5},
         {label:'No cumple',data:5}
       ],
       {
-        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: false, threshold: 0.05 } } },
         colors: ['#4cae4c','#27c24c','#fad733','#f05050','#761c19'],
         grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
         tooltip: false,
