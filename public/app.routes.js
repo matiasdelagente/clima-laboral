@@ -118,4 +118,9 @@ angular.module("app.routes", [])
     controller: "edScores2Ctrl",
     templateUrl: "./views/ed-scores-2.html"
   })
+
+  .when('/ed-scores-3',{
+    controller: "edScores3Ctrl",
+    templateUrl: "./views/ed-scores-3.html"
+  })
 })
