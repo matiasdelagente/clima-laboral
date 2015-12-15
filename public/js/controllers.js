@@ -340,8 +340,12 @@ $scope.series1 = ['Serie 2015'];
 .controller("CompaniesCtrl",function($scope, $location, companySrvc){
   $scope.processing = true;
   companySrvc.all().success(function(data){
+
     $scope.processing = false;
     $scope.companies = data;
+    angular.forEach($scope.companies, function(company, key) {
+      company.logo = 'img/'+company.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+    });
   });
 
   $scope.deleteCompany = function(companyDeleted){
@@ -397,7 +401,8 @@ $scope.series1 = ['Serie 2015'];
 
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
-
+    $scope.formCompany.logo = 'img/'+data.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+    console.log($scope.formCompany)
     userSrvc.get(data.user).success(function(userData) {
       $scope.formUser = userData;
       $scope.processing = false;
