@@ -930,6 +930,11 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
+.controller("edScores1Ctrl", function($scope, $routeParams,userSrvc){
+  
+
+})
+
 
 .directive('tooltip', function() {
   return function(scope, element, attrs) {

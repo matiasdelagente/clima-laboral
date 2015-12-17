@@ -214,7 +214,7 @@ router.route('/users/:id')
     .populate('role')
     .deepPopulate('company company.areas company.roles')
     .exec(function(err, user) {
-      if(err) return callback(err);
+      if(err) return err;
       // console.info(algo)
       // User.populate(docs, {
       //   path: 'company.areas',
