@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var UserSchema = new Schema({
   username: {type: String, index:{unique:true}},
@@ -11,8 +12,8 @@ var UserSchema = new Schema({
 
   admin: {type: Boolean},
   superadmin: {type: Boolean},
-  area: {type:String},
-  role: {type:String},
+  area: { type: Schema.ObjectId, ref:'area'},
+  role: { type: Schema.ObjectId, ref:'role'},
   scores: {type:[Number]},
   status: {type:String},
   email: {type:String},
@@ -35,5 +36,6 @@ UserSchema.methods.comparePassword = function (password){
   var user = this;
   return bcrypt.compareSync(password, user.password);
 };
+UserSchema.plugin(deepPopulate)//, options /* more on options below */);
 
 module.exports = mongoose.model('user', UserSchema);

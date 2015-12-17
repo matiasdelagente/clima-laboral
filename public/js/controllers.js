@@ -801,6 +801,7 @@ $scope.series1 = ['Serie 2015'];
     userSrvc.usersByCompany(session.company._id).success(function(data){
       $scope.processing = false;
       $scope.users = data;
+      // console.log(data)
     });
 
   } else {
@@ -822,11 +823,24 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
-  $scope.processing = false;
-
+.controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc, companySrvc, AuthToken){
+  $scope.processing = true;
+  var session = AuthToken.getSession();
+  // console.info(session)
+  
   userSrvc.get($routeParams.id).success(function(data){
     $scope.formUser = data;
+    // console.log(data);
+
+    //IF WE ARE LOGGED IN AS A SUPERADMIN, WE HAVE TO FETCH COMPANIES
+    if (session.superadmin) {
+      companySrvc.all().success(function(companies){
+        $scope.formUser.companies = companies;
+        $scope.processing = false;
+      });
+    } else {
+      $scope.processing = false;
+    }
   });
 
   $scope.save = function(){

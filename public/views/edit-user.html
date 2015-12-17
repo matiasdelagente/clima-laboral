@@ -22,10 +22,10 @@
         <img src="img/a0.jpg" class="img-circle" alt="...">
       </div>
       <br><br>
-      <div class="h3 text-black">{{formUser.username}}</div>
-      <small class="text-muted m-b font-bold">{{formUser.role}}</small>
+      <div class="h3 text-black">{{formUser.name}} {{formUser.lastname}}</div>
+      <small class="text-muted m-b font-bold">{{formUser.role.name}}</small>
       <br>
-      <small class="text-muted m-b">{{formUser.area}}</small>
+      <small class="text-muted m-b">{{formUser.area.name}}</small>
       <br><br>
     </div>
 
@@ -108,7 +108,7 @@
             <div class="form-group" ng-if='user.superadmin'>
               <label for="area" class="col-sm-3 control-label">Compa&ntilde;ia</label>
               <div class="col-sm-9">
-                <select class="form-control" name="company" ng-model="formUser.company" ng-options="company for comapny in companies">
+                <select class="form-control" name="company" ng-model="formUser.company._id" ng-options="company._id as company.name for company in formUser.companies">
                 <option value=''>- Seleccione la compa&ntilde;ia a la que pertenece -</option>
                 </select>
               </div>
@@ -116,19 +116,19 @@
             <div class="form-group" ng-if='!user.superadmin && user.admin'>
               <input type="hidden" ng-model="formUser.company" name="company"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
               <label for="area" class="col-sm-3 control-label">Gerencia</label>
               <div class="col-sm-9">
-                <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
+                <select class="form-control" name="area" ng-model="formUser.area._id" ng-options="area._id as area.name for area in formUser.company.areas">
                 <option value=''>- Seleccione la gerencia a la que pertenece -</option>
                 </select>
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
               <label for="role" class="col-sm-3 control-label">Rol</label>
               <div class="col-sm-9">
-                <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
+                <select class="form-control" name="role" ng-model="formUser.role._id" ng-options="role._id as role.name for role in formUser.company.roles">
                   <option value=''>- Seleccione el rol de la persona -</option>
                 </select>
               </div>

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var CompanySchema = new Schema({
   name: {type: String},
@@ -13,5 +14,6 @@ var CompanySchema = new Schema({
   roles: [{type: Schema.ObjectId, ref:'role'}],
   competencies: [{type: Schema.ObjectId, ref:'competence'}],
 });
+CompanySchema.plugin(deepPopulate)//, options /* more on options below */);
 
 module.exports = mongoose.model('company', CompanySchema);
