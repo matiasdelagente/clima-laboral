@@ -86,8 +86,8 @@
 						<td class="col-md-2" ng-if="!person.admin"><span class="label bg-info">Usuario</span></td>
 
 
-						<td class="col-md-2">{{person.area}}</td>
-						<td class="col-md-2">{{person.role}}</td>
+						<td class="col-md-2">{{person.area.name}}</td>
+						<td class="col-md-2">{{person.role.name}}</td>
 
 						<td class="col-md-2" ng-if="person.scores.length==0 && !person.admin"><span class="label bg-danger">No</span></td>
 						<td class="col-md-2" ng-if="person.scores.length==0 && person.admin"><span class="label bg-light">&nbsp;-&nbsp;</span></td>

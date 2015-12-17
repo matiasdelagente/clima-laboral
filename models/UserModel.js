@@ -12,8 +12,8 @@ var UserSchema = new Schema({
 
   admin: {type: Boolean},
   superadmin: {type: Boolean},
-  area: {type:String},
-  role: {type:String},
+  area: { type: Schema.ObjectId, ref:'area'},
+  role: { type: Schema.ObjectId, ref:'role'},
   scores: {type:[Number]},
   status: {type:String},
   email: {type:String},

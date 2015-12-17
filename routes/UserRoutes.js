@@ -55,11 +55,29 @@ router.route('/usersByCompany/:id')
   .get(function(req,res){
     var companyId = req.params.id;
     // console.log(companyId)
-    User.find({company: companyId}, function(err,data){
-      if(err) res.send(err);
-      // console.log(data)
-      res.send(data);
-    }).populate('company');
+    // User.find({company: companyId}, function(err,data){
+    //   if(err) res.send(err);
+    //   // console.log(data)
+    //   res.send(data);
+    // })//.populate('company');
+    User.find({company: companyId})
+    .populate('area')
+    .populate('role')
+    .deepPopulate('company company.areas company.roles')
+    .exec(function(err, users) {
+      if(err) return err;
+      // console.info(algo)
+      // User.populate(docs, {
+      //   path: 'company.areas',
+      //   model: 'area'
+      // },
+      // function(err, user) {
+      //   if(err) return callback(err);
+      //   // console.log(user); // This object should now be populated accordingly.
+      //   res.send(user)
+      // console.log(docs)
+      res.send(users)
+    });
   })
 
 router.route('/allByCompany/:id')
@@ -70,7 +88,25 @@ router.route('/allByCompany/:id')
       if(err) res.send(err);
       // console.log(data)
       res.send(data);
-    }).populate('company');
+     })//.populate('company');
+    .populate('area')
+    .populate('role')
+    .deepPopulate('company company.areas company.roles')
+    .exec(function(err, users) {
+      if(err) return err;
+      // console.info(algo)
+      // User.populate(users, {
+      //   path: 'area',
+      //   model: 'area'
+      // },
+      // function(err, user) {
+      //   if(err) return callback(err);
+        // console.log(user); // This object should now be populated accordingly.
+        // res.send(user)
+      res.send(users)
+      // console.log(docs)
+      // });
+    });
   })
 
 router.route('/users')
@@ -169,23 +205,28 @@ router.use('/users/:id',function(req, res, next){
 router.route('/users/:id')
   .get(function(req,res){
     var id = req.params.id;
-    User.findById(id, function(err, data){
-      if(err) res.send(err);
-      // res.send(data)
-    })//.populate('company')
-    .deepPopulate('company.areas')
-    .exec(function(err, docs) {
+    // User.findById(id, function(err, data){
+    //   if(err) res.send(err);
+    //   // res.send(data)
+    // }).populate('company')
+    User.findById(id)
+    .populate('area')
+    .populate('role')
+    .deepPopulate('company company.areas company.roles')
+    .exec(function(err, user) {
       if(err) return callback(err);
       // console.info(algo)
-      User.populate(docs, {
-        path: 'company.areas',
-        model: 'area'
-      },
-      function(err, user) {
-        if(err) return callback(err);
-        console.log(user); // This object should now be populated accordingly.
-        res.send(user)
-      });
+      // User.populate(docs, {
+      //   path: 'company.areas',
+      //   model: 'area'
+      // },
+      // function(err, user) {
+      //   if(err) return callback(err);
+      //   // console.log(user); // This object should now be populated accordingly.
+      //   res.send(user)
+      // console.log(docs)
+      res.send(user)
+      // });
     });
   })
   .put(function(req,res){
