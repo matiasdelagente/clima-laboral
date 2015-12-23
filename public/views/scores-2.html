@@ -12,18 +12,18 @@
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="panel-heading font-bold">
-          Seleccionar gerencia y areas {{formUser.area}}
+          Seleccionar gerencia y areas
         </div>
         <div class="panel-body">
           <form class="form-inline" role="form" ng-submit="calcAll()">
             <div class="form-group">
-              <select class="form-control input-lg" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-                <option value="">Todas las gerencias</option>
+              <select class="form-control input-lg" name="area" ng-model="formUser.area._id" ng-options="area._id as area.name for area in formUser.company.areas">
+                <option value=''>Todas las gerencias</option>
               </select>
             </div>
             <div class="form-group">
-              <select class="form-control input-lg" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-                <option value="">Todos los roles</option>
+              <select class="form-control input-lg" name="role" ng-model="formUser.role._id" ng-options="role._id as role.name for role in formUser.company.roles">
+                  <option value=''>Todos los roles</option>
               </select>
             </div>
             <button type="submit" class="btn btn-default btn-lg pull-right">Calcular Estadisticas</button>

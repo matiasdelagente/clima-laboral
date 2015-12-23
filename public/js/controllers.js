@@ -1,25 +1,31 @@
 angular.module("climaLaboral")
 
-.controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
+.controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route, AuthToken){
+    
   $scope.company = "Fostering Talent";
   $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
   $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
   $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
 
   $scope.loggedIn = Auth.isLoggedIn();
+
   $rootScope.$on('$routeChangeStart',function(){
     if(Auth.isLoggedIn()){
       $scope.loggedIn = true;
+      var session = AuthToken.getSession();
+      $scope.user = session;
+      // console.log(session)  
     }
     else {
       $scope.loggedIn = false;
       $location.path('/login');
     }
-    Auth.getUser()
-      .success(function(data){
-        $scope.user = data;
-      });
-
+    // Auth.getUser()
+    //   .success(function(data){
+    //     $scope.user = data;
+    //     console.log(data)
+    //   });
+    
     $scope.url = $location.path();
   });
 
@@ -62,11 +68,12 @@ angular.module("climaLaboral")
 
 .controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken, $location){
   var session = AuthToken.getSession();
-
-  if (!session.company) session.company = {name :'Todas las Compañias'};
-
+  // console.log($scope.user, session)
+  if (!session.company) session.company = {name :'Todas las Compañias', area: null, role: null};
+  
   $scope.processing = true;
-  $scope.formUser = {area: null, role: null};
+  $scope.formUser = session;
+
   $scope.questionsMotivadores = [
   'En '+ session.company.name +' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
   ''+session.company.name+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
@@ -215,7 +222,7 @@ $scope.series1 = ['Serie 2015'];
   var session = AuthToken.getSession();
 
   $scope.processing = true;
-  $scope.formUser = {area: null, role: null};
+  $scope.formUser = session;
 
   if (session.admin && !session.superadmin) {
     userSrvc.usersByCompany(session.company._id).success(function(data){

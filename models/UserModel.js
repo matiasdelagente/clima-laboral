@@ -5,7 +5,7 @@ var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var UserSchema = new Schema({
   username: {type: String, index:{unique:true}},
-  password: {type: String, select:false},
+  password: {type: String },
 
   name: {type: String},
   lastname: {type: String},

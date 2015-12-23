@@ -57,7 +57,7 @@
               <form ng-submit="editArea(area); editing = false">
                 <div class="col-xs-10">
                   <p><input type="text" value="{{area.name}}" class="form-control" ng-model="area.name"/></p>
-                  <p><textarea name="description" class="form-control" rows="2" ng-model="area.description">{{area.description}}</textarea></p>
+                  <p><textarea name="description" class="form-control" rows="2" ng-model="area.description" placeholder="Escriba la descripción aquí">{{area.description}}</textarea></p>
                 </div>
                 <div class="col-xs-2">
                   <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon">
@@ -115,7 +115,7 @@
               <form ng-submit="editRole(role); editing = false">
                 <div class="col-xs-10">
                   <p><input type="text" value="{{role.name}}" class="form-control" ng-model="role.name"/></p>
-                  <p><textarea name="description" class="form-control" rows="2" ng-model="role.description">{{role.description}}</textarea></p>
+                  <p><textarea name="description" class="form-control" rows="2" ng-model="role.description" placeholder="Escriba la descripción aquí">{{role.description}}</textarea></p>
                 </div>
                 <div class="col-xs-2">
                   <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon">

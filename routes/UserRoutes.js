@@ -10,23 +10,38 @@ var mandrill_client = new mandrill.Mandrill('yXbOSbsEdGY5XDGY1G4JMw');
 
 router.route('/authenticate')
 .post(function(req,res){
+  var req = req;
+  var loginError = false;
   User.findOne({username: req.body.username},function(err, user){
     if(err) throw err;
-    if(!user) res.json({success:false, message:"EL USUARIO NO EXISTE"})
+    if(!user) {
+      loginError = true;
+      res.json({success:false, message:"EL USUARIO NO EXISTE"})
+    }
     else {
       var valid = user.comparePassword(req.body.password)
-      if(!valid) res.json({success: false, message: "LA CONTRASEÑA ES ERRONEA"})
-      else {
+      if(!valid) {
+        loginError = true;
+        res.json({success: false, message: "LA CONTRASEÑA ES ERRONEA"})
+      }
+    }
+  })//.select('username password id superadmin admin company role area')
+  //.populate('company')
+    .populate('area')
+    .populate('role')
+    .deepPopulate('company company.areas company.roles')
+    .exec(function(err, users) {
+
+      if(err) return err;
         var token = jwt.sign({
           username: req.body.username
         },superSecret,{
           expireInMinutes: 1440
         });
         // console.log('sesion user:', user);
-        res.json({success: true, message:"OK", token: token, session: user})
-      }
-    }
-  }).select('username password id superadmin admin company').populate('company')
+        if (!loginError)
+        res.json({success: true, message:"OK", token: token, session: users[0]})
+    });
 })
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']

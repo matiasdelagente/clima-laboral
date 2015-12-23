@@ -31,7 +31,9 @@ angular.module("authService", [])
   //login
   authFactory.login = function(username, password){
     return $http.post('/api/authenticate',{username: username, password: password}).success(function(data){
+      // console.log('login!', data);//companySrvc.get($routeParams.id).success(function(data){
       AuthToken.setToken(data);
+      // console.log(data)
       return data
     })
   }
