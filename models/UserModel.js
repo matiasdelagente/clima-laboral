@@ -17,6 +17,7 @@ var UserSchema = new Schema({
   scores: {type:[Number]},
   status: {type:String},
   email: {type:String},
+  imageurl: {type:String},
   company: { type: Schema.ObjectId, ref:'company'},
   children: [{ type: Schema.ObjectId, ref:'user'}]
 

@@ -830,7 +830,7 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc, companySrvc, AuthToken){
+.controller("EditUserCtrl", function($scope, $routeParams, $timeout, $location, awsSrvc, companySrvc, userSrvc, AuthToken, Upload){
   $scope.processing = true;
   var session = AuthToken.getSession();
   // console.info(session)
@@ -858,6 +858,43 @@ $scope.series1 = ['Serie 2015'];
       $location.path('/users');
     });
   };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.log = '';
+
+  $scope.upload = function (croppedData) {
+    var self = this;
+    var picFile = self.picFile;
+    if (!picFile.$error && croppedData) {
+      awsSrvc.signS3(picFile.name, picFile.type).then(function (data) {
+        
+        var d = data.data;
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", d.signed_request);
+        xhr.setRequestHeader('x-amz-acl', 'public-read');
+        xhr.onload = function() {
+          
+          userSrvc.edit($scope.formUser._id, {imageurl: d.url}).success(function (data) {
+            $scope.formUser.imageurl = d.url;
+            self.picFile = '';
+            $scope.croppedDataUrl = '';
+            $scope.$evalAsync();
+          });
+        };
+        
+        xhr.onerror = function() {
+          alert("Lo sentimos, intente nuevamente.");
+        };
+        
+        xhr.send(Upload.dataUrltoBlob(croppedData));
+        
+      });
+    }
+  };
+  /* ngFileUpload END */
 })
 
 .controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http, AuthToken){

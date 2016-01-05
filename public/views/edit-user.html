@@ -1,3 +1,23 @@
+<style>
+  .action-buttons {
+    margin-top: 10px;
+  }
+  .crop-area {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 100%;
+    height: 180px;
+  }
+  .dragover {
+    border: 5px dashed #233845;
+  }
+  .img-preview {
+    margin-top: 10px;
+    max-width: 128px;
+    max-height: 128px;
+  }
+</style>
+
 <div class="bg-light lter b-b wrapper-md">
   <h1 class="m-n font-thin h3" ng-if="!formUser._id"><i class="icon-users"></i> Crear Usuario</h1>
   <h1 class="m-n font-thin h3" ng-if="formUser._id"><i class="icon-users"></i> Editar Usuario</h1>
@@ -19,8 +39,42 @@
 
     <div class="col-sm-3 text-center m-t" ng-if="formUser._id">
       <div class="thumb-xl">
-        <img src="img/a0.jpg" class="img-circle" alt="...">
+        <img ng-src="{{formUser.imageurl || 'img/a0.jpg'}}" class="img-circle" alt="..."
+        
+          ng-style="{display: !picFile ? '' : 'none'}"
+          
+          ngf-drop ngf-select ng-model="picFile" 
+          ngf-drag-over-class="'dragover'" ngf-multiple="false"
+          accept="image/*" 
+          ngf-pattern="'image/*'"
+          
+        >
+        
       </div>
+      
+      <div ng-style="{display: picFile ? '' : 'none'}">
+        
+        <div class="crop-area">
+          <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl"></img-crop>
+        </div>
+        
+      </div>
+      
+      <!-- Si el Drag n Drop no es soportado, permito seleccionar la imagen -->
+      <div ngf-no-file-drop>
+        <div ng-style="{display: !picFile ? '' : 'none'}" class="button" ngf-select ng-model="picFile" ngf-multiple="false">Cambiar Imagen</div>  
+      </div>
+      
+      <div class="action-buttons" ng-style="{display: picFile ? '' : 'none'}">
+        <button class="btn btn-default btn-block" ng-click="picFile = ''; croppedDataUrl = '';">Cancelar</button> 
+        <button class="btn btn-primary btn-block" ng-click="upload(croppedDataUrl)">Subir</button>
+        
+        <!-- Vista Previa -->
+        <div class="thumb-xl">
+          <img class="img-circle img-preview" ng-src="{{croppedDataUrl}}" />
+        </div>
+      </div>
+      
       <br><br>
       <div class="h3 text-black">{{formUser.name}} {{formUser.lastname}}</div>
       <small class="text-muted m-b font-bold">{{formUser.role.name}}</small>
@@ -28,7 +82,7 @@
       <small class="text-muted m-b">{{formUser.area.name}}</small>
       <br><br>
     </div>
-
+    
     <!-- FORMULARIO -->
     <div class="col-sm-9">
       <div class="panel panel-default">

@@ -213,7 +213,7 @@ router.route('/users')
         res.send(data);
       });
   });
-router.use('/users/:id',function(req, res, next){
+router.use('/users/:id', function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
   next();
 });
@@ -260,6 +260,7 @@ router.route('/users/:id')
       if(req.body.company) user.company = req.body.company;
       if(req.body.name) user.name = req.body.name;
       if(req.body.lastname) user.lastname = req.body.lastname;
+      if(req.body.imageurl) user.imageurl = req.body.imageurl;
       
       user.save(function(err,data){
         if(err) res.send(err)

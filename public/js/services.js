@@ -12,30 +12,30 @@ angular.module("climaLaboral")
 })
 .factory("userSrvc", function($http){
   var user = {};
-    user.all = function(){
-      return $http.get('/api/users');
-    };
-    user.get = function(id){
-      return $http.get('/api/users/'+id);
-    };
-    user.edit = function(id, user){
-      return $http.put('/api/users/' + id, user);
-    };
-    user.save = function(user){
-      return $http.post('/api/users', user);
-    };
-    user.delete = function(id){
-      return $http.delete('/api/users/' + id);
-    }
-    user.usersByCompany = function(id){
-      return $http.get('/api/usersByCompany/' + id);
-    }
-    user.allByCompany = function(id){
-      return $http.get('/api/allByCompany/' + id);
-    }
-    user.setChildrens = function(id, childrens){
-      return $http.put('/api/users/setChildrens/' + id, childrens)
-    }
+  user.all = function(){
+    return $http.get('/api/users');
+  };
+  user.get = function(id){
+    return $http.get('/api/users/'+id);
+  };
+  user.edit = function(id, user){
+    return $http.put('/api/users/' + id, user);
+  };
+  user.save = function(user){
+    return $http.post('/api/users', user);
+  };
+  user.delete = function(id){
+    return $http.delete('/api/users/' + id);
+  }
+  user.usersByCompany = function(id){
+    return $http.get('/api/usersByCompany/' + id);
+  }
+  user.allByCompany = function(id){
+    return $http.get('/api/allByCompany/' + id);
+  }
+  user.setChildrens = function(id, childrens){
+    return $http.put('/api/users/setChildrens/' + id, childrens)
+  }
 
   return user;
 })
@@ -125,4 +125,14 @@ angular.module("climaLaboral")
       return $http.delete('/api/competencies/' + id);
     };
   return competence ;
+})
+.factory("awsSrvc", function ($http) {
+  
+  var aws = {
+    signS3: function (fileName, fileType) {
+      return $http.get('/api/sign_s3?file_name='+fileName+'&file_type='+fileType);
+    }
+  };
+  
+  return aws;
 });

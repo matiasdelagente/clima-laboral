@@ -77,7 +77,7 @@ angular.module("authService", [])
   //redirect if a token doesn't authenticate
   authInterceptorFactory.responseError = function(response){
 
-    if(response = 403){
+    if(response = 403) {
       AuthToken.setToken();
       $location.path('/')
     }

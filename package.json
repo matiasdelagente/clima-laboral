@@ -9,6 +9,7 @@
   "author": "Matias Benincasa",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.2.26",
     "bcrypt-nodejs": "0.0.3",
     "csvtojson": "^0.4.3",
     "jsonwebtoken": "^5.0.4",

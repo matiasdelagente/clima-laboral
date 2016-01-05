@@ -16,13 +16,20 @@ var companyRoutes = require('./routes/CompanyRoutes.js');
 var areaRoutes = require('./routes/AreaRoutes.js');
 var roleRoutes = require('./routes/RoleRoutes.js');
 var competenceRoutes = require('./routes/CompetenceRoutes.js');
+var awsRoutes = require('./routes/AwsRoutes');
 
-app.use('/api', userRoutes);
-app.use('/api', scoreRoutes);
-app.use('/api', companyRoutes);
-app.use('/api', areaRoutes);
-app.use('/api', roleRoutes);
-app.use('/api', competenceRoutes);
+var router = express.Router();
+
+router.use(userRoutes);
+router.use(scoreRoutes);
+router.use(companyRoutes);
+router.use(areaRoutes);
+router.use(roleRoutes);
+router.use(competenceRoutes);
+router.use(awsRoutes);
+	
+// todas los servicios van a estar bajo /api
+app.use('/api', router);
 
 app.use(express.static('public'));
 
