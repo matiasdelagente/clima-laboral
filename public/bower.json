@@ -1,0 +1,22 @@
+{
+  "name": "ClimaLaboral",
+  "homepage": "https://github.com/bueyfx/clima-laboral",
+  "authors": [
+    "Anakin No Skywalker"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "PRIVATE",
+  "private": true,
+  "dependencies": {
+    "angular-encode-uri": "~1.0.0",
+    "angular-nestable": "ng-nestable#~0.0.1",
+    "angular-chart.js": "~0.7.6",
+    "angular-route": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.3",
+    "ng-file-upload": "~11.0.1",
+    "ng-img-crop": "ngImgCrop#~0.3.2"
+  }
+}
