@@ -129,12 +129,14 @@ router.route('/companies/:id')
     var id = req.params.id
     Company.findById(id, function(err, company){
       if(err) res.send(err)
-      if(req.body.email) company.email = req.body.email;
-      if(req.body.name) company.name = req.body.name;
-      if(req.body.maxUsers) company.maxUsers = req.body.maxUsers;
-      if(req.body.areas) company.areas = req.body.areas;
-      if(req.body.roles) company.roles = req.body.roles;
-      if(req.body.competencies) company.competencies = req.body.competencies;
+      var b = req.body;
+      if(b.email) company.email = b.email;
+      if(b.name) company.name = b.name;
+      if(b.maxUsers) company.maxUsers = b.maxUsers;
+      if(b.areas) company.areas = b.areas;
+      if(b.roles) company.roles = b.roles;
+      if(b.competencies) company.competencies = b.competencies;
+      if(b.logourl) company.logourl = b.logourl;
 
       company.save(function(err,company){
         if(err) res.send(err)

@@ -351,7 +351,7 @@ $scope.series1 = ['Serie 2015'];
     $scope.processing = false;
     $scope.companies = data;
     angular.forEach($scope.companies, function(company, key) {
-      company.logo = 'img/'+company.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+      company.logo = company.logourl || 'img/'+company.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
     });
   });
 
@@ -366,8 +366,13 @@ $scope.series1 = ['Serie 2015'];
   };
 })
 
-.controller("AddCompaniesCtrl", function($scope, $location, companySrvc, userSrvc, $filter){
-  $scope.save = function(){
+.controller("AddCompaniesCtrl", function($filter, $location, $scope, awsSrvc, companySrvc, userSrvc) {
+  $scope.save = function() {
+    var picFile = $scope.picFile;
+    
+    if (picFile) 
+      return alert('CONFIRME O RECHAZE LA IMAGEN SELECCIONADA ANTES DE CONTINUAR');
+    
     var psw = $scope.formUser.password;
     // console.log(psw)
     $scope.processing = true;
@@ -400,15 +405,36 @@ $scope.series1 = ['Serie 2015'];
       });
     });
   };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    return awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      // no hago un save al servidor porque el usuario aún no existe
+      // en su lugar agrego la información a la compañía
+      if (!$scope.formCompany) $scope.formCompany = {};
+      $scope.formCompany.logourl = $scope.formCompany.logo = url;
+      $scope.picFile = undefined;
+      $scope.croppedDataUrl = '';
+      $scope.$evalAsync();
+    });
+    
+  };
+  /* ngFileUpload END */
 
 })
 
-.controller("EditCompaniesCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+.controller("EditCompaniesCtrl", function($location, $routeParams, $scope, awsSrvc, companySrvc, userSrvc){
   $scope.processing = true;
 
   companySrvc.get($routeParams.id).success(function(data){
     $scope.formCompany = data;
-    $scope.formCompany.logo = 'img/'+data.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+    $scope.formCompany.logo = data.logourl || 'img/'+data.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
     // console.log($scope.formCompany)
     userSrvc.get(data.user).success(function(userData) {
       $scope.formUser = userData;
@@ -427,7 +453,28 @@ $scope.series1 = ['Serie 2015'];
 
   $scope.redirect = function(url) {
     $location.path(url);
-  }  
+  }
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      companySrvc.edit($scope.formCompany._id, {logourl: url}).success(function (data) {
+        $scope.formCompany.logo = url;
+        $scope.picFile = undefined;
+        $scope.croppedDataUrl = '';
+        $scope.$evalAsync();
+      });
+      
+    });
+    
+  };
+  /* ngFileUpload END */  
 })
 
 .controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc, roleSrvc){
@@ -830,7 +877,7 @@ $scope.series1 = ['Serie 2015'];
 
 })
 
-.controller("EditUserCtrl", function($scope, $routeParams, $timeout, $location, awsSrvc, companySrvc, userSrvc, AuthToken, Upload){
+.controller("EditUserCtrl", function($scope, $routeParams, $location, awsSrvc, companySrvc, userSrvc, AuthToken, Upload){
   $scope.processing = true;
   var session = AuthToken.getSession();
   // console.info(session)
@@ -862,71 +909,84 @@ $scope.series1 = ['Serie 2015'];
   /* ngFileUpload */
   $scope.croppedDataUrl = '';
   
-  $scope.log = '';
-
   $scope.upload = function (croppedData) {
+  
     var self = this;
     var picFile = self.picFile;
-    if (!picFile.$error && croppedData) {
-      awsSrvc.signS3(picFile.name, picFile.type).then(function (data) {
-        
-        var d = data.data;
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open("PUT", d.signed_request);
-        xhr.setRequestHeader('x-amz-acl', 'public-read');
-        xhr.onload = function() {
-          
-          userSrvc.edit($scope.formUser._id, {imageurl: d.url}).success(function (data) {
-            $scope.formUser.imageurl = d.url;
-            self.picFile = '';
-            $scope.croppedDataUrl = '';
-            $scope.$evalAsync();
-          });
-        };
-        
-        xhr.onerror = function() {
-          alert("Lo sentimos, intente nuevamente.");
-        };
-        
-        xhr.send(Upload.dataUrltoBlob(croppedData));
-        
+    
+    awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      userSrvc.edit($scope.formUser._id, {imageurl: url}).success(function (data) {
+        $scope.formUser.imageurl = url;
+        self.picFile = '';
+        $scope.croppedDataUrl = '';
+        $scope.$evalAsync();
       });
-    }
+      
+    });
+    
   };
   /* ngFileUpload END */
 })
 
-.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc, $http, AuthToken){
+.controller("AddUserCtrl", function($http, $location, $routeParams, $scope, awsSrvc, userSrvc, AuthToken, Upload){
   $scope.processing = false;
   var session = AuthToken.getSession();
 
-  $scope.save = function(){
+  $scope.save = function() {
+    var picFile = $scope.picFile;
+    
+    if (picFile) 
+      return alert('CONFIRME O RECHAZE LA IMAGEN SELECCIONADA ANTES DE CONTINUAR');
+
     $scope.processing = true;
 
     if (session.admin && !session.superadmin) {
       // $scope.formUser.admin = false;
       $scope.formUser.company = session.company._id;
       $scope.formUser.companyName = session.company.name;
-
-      userSrvc.usersByCompany(session.company._id).success(function(data){
-
-        //IF THERE'S MORES USERS THAT ALLOWED, DO NOT ADD THE USER
-        if(data.length >= session.company.maxUsers) {
-          alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + session.company.maxUsers + ' USUARIOS');
-          $scope.processing = false;
-          $location.path('/users');
-          return false;
-        }
-      });
+      
     }
-
-    userSrvc.save($scope.formUser).success(function(data){
-
-      $scope.processing = false;
+    
+    userSrvc.save($scope.formUser).then(function () {
       $location.path('/users');
+    }).catch(function (data) {
+      
+      var e = data.data.error;
+
+      if (e.message === 'usersCapacityIsFull') { 
+        
+        alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + e.maxUsers + ' USUARIOS');
+        $location.path('/users');
+      } else
+        alert('NO SE HA PODIDO CREAR EL USUARIO. INTENTE NUEVAMENTE.')
+      
+    }).finally(function () {
+      $scope.processing = false;
     });
+
   };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    return awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      // no hago un save al servidor porque el usuario aún no existe
+      // en su lugar agrego la información al user
+      if (!$scope.formUser) $scope.formUser = {};
+      $scope.formUser.imageurl = url;
+      $scope.picFile = undefined;
+      $scope.croppedDataUrl = '';
+      $scope.$evalAsync();
+    });
+    
+  };
+  /* ngFileUpload END */
 
 })
 

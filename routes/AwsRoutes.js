@@ -10,7 +10,6 @@ router.route('/sign_s3')
   var fileName = Date.now() + '_' + req.query.file_name;
   
   /*
-   * Load the S3 information from the environment variables.
    * Credenciales de UploadImagesUser
    */
   var AWS_ACCESS_KEY = 'AKIAJ44XZFJKNHPNOTQA';

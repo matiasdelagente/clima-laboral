@@ -126,11 +126,41 @@ angular.module("climaLaboral")
     };
   return competence ;
 })
-.factory("awsSrvc", function ($http) {
+.factory("awsSrvc", function ($http, $q, $timeout, Upload) {
   
   var aws = {
     signS3: function (fileName, fileType) {
       return $http.get('/api/sign_s3?file_name='+fileName+'&file_type='+fileType);
+    },
+    uploadS3CroppedImage: function (croppedData, file) {
+      var defer = $q.defer();
+      
+      if (!file.$error && croppedData) {
+        aws.signS3(file.name, file.type).then(function (data) {
+          
+          var d = data.data;
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open("PUT", d.signed_request);
+          xhr.setRequestHeader('x-amz-acl', 'public-read');
+          xhr.onload = function() {
+            defer.resolve(d.url);
+          };
+          
+          xhr.onerror = function() {
+            alert("Lo sentimos, intente nuevamente.");
+          };
+          
+          xhr.send(Upload.dataUrltoBlob(croppedData));
+          
+        });
+      } else {
+        $timeout(function () {
+          defer.reject();
+        });
+      }
+      
+      return defer.promise;
     }
   };
   

@@ -131,8 +131,48 @@ router.route('/users')
       res.send(data);
     }).populate('company');
   })
-  .post(function(req,res){
-    var user = new User(req.body)
+  .post(function(req, res) {
+    
+    var companyId = req.body.company;
+    
+    // obtengo la información del usuario que va a agregar
+    User.findOne({username: req.decoded.username}, function(err, user) {
+      if(err) return res.send(err);
+      
+      if (user.superadmin) {
+        addUser();
+      } else {
+        // valido que realmente pueda agregar usuarios
+        User.count({company: companyId}, function(err, companyUsers) {
+          if(err) return res.send(err);
+          
+          // obtengo la companía del usuario
+          Company.findById(companyId, function(err, data) {
+            if(err) return res.send(err);
+            
+            /* 
+             * valido limite de usuarios TODO al momento de agregar la empresa no encontraba la compañía así
+             * que si no hay data, permito proseguir con la carga del nuevo usuario
+             */
+            if(data && companyUsers >= data.maxUsers)
+              // TODO no devuelvo error 403 porque sino angular va a desloguear al usuario
+              return res.status(403).send({
+                message: 'usersCapacityIsFull',
+                maxUsers: data.maxUsers
+              });
+              
+            addUser();  
+            
+          });
+          
+        });
+      }
+      
+    });
+    
+    function addUser () {
+    
+      var user = new User(req.body)
       
       user.save(function(err, data){
         //ONLY SEND MAIL IF IS A REGULAR USER
@@ -201,7 +241,7 @@ router.route('/users')
           
           mandrill_client.messages.sendTemplate(mailJSON, 
             function(result) {
-               // console.log(result);
+                // console.log(result);
             },function(e) {
               // Mandrill returns the error as an object with name and message keys
               // console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -212,6 +252,8 @@ router.route('/users')
         if(err) res.send(err);
         res.send(data);
       });
+    }
+    
   });
 router.use('/users/:id', function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']

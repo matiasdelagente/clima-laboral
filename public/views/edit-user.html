@@ -28,59 +28,71 @@
 
   <div class="row">
 
-    <!-- SUBIR FOTO SI ES NUEVO -->
-    <div class="col-sm-3" ng-if="!formUser._id">
-      <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b" nv-file-over="" over-class="b-info" uploader="uploader">
-          Arrastra la Foto aquí.
-      </div>
-    </div>
-
-    <!-- FOTO SI EDITA -->
-
-    <div class="col-sm-3 text-center m-t" ng-if="formUser._id">
-      <div class="thumb-xl">
-        <img ng-src="{{formUser.imageurl || 'img/a0.jpg'}}" class="img-circle" alt="..."
+    <div class="col-sm-3">
         
-          ng-style="{display: !picFile ? '' : 'none'}"
+      <!-- SUBIR FOTO SI ES NUEVO -->
+      <div ng-style="{display: !formUser._id ? '' : 'none'}">
+        <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b"
+        
+          ng-style="{display: !picFile && !formUser.imageurl ? '' : 'none'}"
           
           ngf-drop ngf-select ng-model="picFile" 
           ngf-drag-over-class="'dragover'" ngf-multiple="false"
           accept="image/*" 
           ngf-pattern="'image/*'"
-          
+        
         >
-        
-      </div>
-      
-      <div ng-style="{display: picFile ? '' : 'none'}">
-        
-        <div class="crop-area">
-          <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl"></img-crop>
+            Arrastra la Foto aquí.
         </div>
-        
       </div>
-      
-      <!-- Si el Drag n Drop no es soportado, permito seleccionar la imagen -->
-      <div ngf-no-file-drop>
-        <div ng-style="{display: !picFile ? '' : 'none'}" class="button" ngf-select ng-model="picFile" ngf-multiple="false">Cambiar Imagen</div>  
-      </div>
-      
-      <div class="action-buttons" ng-style="{display: picFile ? '' : 'none'}">
-        <button class="btn btn-default btn-block" ng-click="picFile = ''; croppedDataUrl = '';">Cancelar</button> 
-        <button class="btn btn-primary btn-block" ng-click="upload(croppedDataUrl)">Subir</button>
-        
-        <!-- Vista Previa -->
+
+      <!-- FOTO SI EDITA -->
+      <div class="text-center m-t" ng-if="formUser._id || picFile || formUser.imageurl">
         <div class="thumb-xl">
-          <img class="img-circle img-preview" ng-src="{{croppedDataUrl}}" />
+          <img ng-src="{{formUser.imageurl || 'img/a0.jpg'}}" class="img-circle" alt="..."
+          
+            ng-style="{display: !picFile ? '' : 'none'}"
+            
+            ngf-drop ngf-select ng-model="picFile" 
+            ngf-drag-over-class="'dragover'" ngf-multiple="false"
+            accept="image/*" 
+            ngf-pattern="'image/*'"
+          
+          >
+          
         </div>
+        
+        <div ng-style="{display: picFile ? '' : 'none'}">
+          
+          <div class="crop-area">
+            <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl"></img-crop>
+          </div>
+          
+        </div>
+        
+        <!-- Si el Drag n Drop no es soportado, permito seleccionar la imagen -->
+        <div ngf-no-file-drop>
+          <div ng-style="{display: !picFile ? '' : 'none'}" class="button" ngf-select ng-model="picFile" ngf-multiple="false">Cambiar Imagen</div>  
+        </div>
+        
+        <div class="action-buttons" ng-style="{display: picFile ? '' : 'none'}">
+          <button class="btn btn-default btn-block" ng-click="picFile = ''; croppedDataUrl = '';">Cancelar</button> 
+          <button class="btn btn-primary btn-block" ng-click="upload(croppedDataUrl)">{{formUser._id ? 'Subir' : 'Confirmar'}}</button>
+          
+          <!-- Vista Previa -->
+          <div class="thumb-xl" ng-if="picFile">
+            <img class="img-circle img-preview" ng-src="{{croppedDataUrl}}" />
+          </div>
+        </div>
+        
+        <br><br>
+        <div class="h3 text-black">{{formUser.name}} {{formUser.lastname}}</div>
+        <small class="text-muted m-b font-bold">{{formUser.role.name}}</small>
+        <br>
+        <small class="text-muted m-b">{{formUser.area.name}}</small>
+        <br><br>
       </div>
-      
-      <br><br>
-      <div class="h3 text-black">{{formUser.name}} {{formUser.lastname}}</div>
-      <small class="text-muted m-b font-bold">{{formUser.role.name}}</small>
-      <br>
-      <small class="text-muted m-b">{{formUser.area.name}}</small>
-      <br><br>
+            
     </div>
     
     <!-- FORMULARIO -->

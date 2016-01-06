@@ -75,13 +75,14 @@ angular.module("authService", [])
     return config
   };
   //redirect if a token doesn't authenticate
-  authInterceptorFactory.responseError = function(response){
+  authInterceptorFactory.responseError = function(response) {
 
-    if(response = 403) {
+    if(response.status === 401) {
       AuthToken.setToken();
       $location.path('/')
     }
-    return $q.reject(response)
+    
+    return $q.reject(response);
   }
 
   return authInterceptorFactory;
