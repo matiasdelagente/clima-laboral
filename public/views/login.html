@@ -1,7 +1,7 @@
 <div class="container w-xxl w-auto-xs">
   <div class="text-center logo-login">
-    <a href="#"><img src="../img/logo.png" alt="logo"/>
-    </a>
+    <img src="../img/logo-h.png" alt="logo"/>
+    
   </div>
   <div class="m-b-lg">
     <div class="wrapper text-center">
@@ -12,13 +12,21 @@
           {{error}}
       </div>
       <input type="text" placeholder="Nombre de Usuario" class="form-control input-login" ng-model="loginData.username" required>
-      <input type="password" placeholder="Password" class="form-control input-login" ng-model="loginData.password" required>
-      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="doLogin()" ng-disabled='form.$invalid || disabled'>
+      <input type="password" placeholder="Password" class="form-control input-login" ng-model="loginData.password" required style="margin-top: 5px">
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="doLogin()" ng-disabled='form.$invalid || disabled' style="margin-top: 15px;">
         <span ng-if="!processing">Acceder</span>
         <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
       </button>
+
       <div class="line line-dashed"></div>
     </form>
   </div>
+<!-- 
+  <div class="text-center logo-login">
+    <img src="../img/logo-text.png" alt="logo"/>
+  </div> -->
+
+
   <div class="text-center" ng-include="'views/footer.html'"></div>
 </div>

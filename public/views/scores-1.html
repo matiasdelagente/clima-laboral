@@ -1,6 +1,11 @@
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3"><i class="glyphicon glyphicon-signal"></i> Resultados</h1>
+<div class="bg-light lter b-b wrapper-md ng-scope" style="width:84%;">
+  <div class="btn-group pull-right">
+    <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="redirect('/ed-scores-1')"><i class="material-icons md-18">extension</i>Clima Laboral</button>
+  </div>
+  <h1 class="m-n font-thin h3"><i class="icon-bar-chart"></i> Reportes</h1>
 </div>
+
+
 <div class="jumbotron text-center" ng-show="processing">
   <span class="glyphicon glyphicon-repeat spinner"></span>
 </div>
@@ -9,18 +14,18 @@
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="panel-heading font-bold">
-          Seleccionar gerencia y areas {{formUser.area}}
+          Seleccionar gerencia y areas
         </div>
         <div class="panel-body">
           <form class="form-inline" role="form" ng-submit="calcAll()">
             <div class="form-group">
-              <select class="form-control input-lg" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-              <option value="">Todas las gerencias</option>
+              <select class="form-control input-lg" name="area" ng-model="formUser.area._id" ng-options="area._id as area.name for area in formUser.company.areas">
+                <option value=''>Todas las gerencias</option>
               </select>
             </div>
             <div class="form-group">
-              <select class="form-control input-lg" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-                <option value="">Todos los roles</option>
+              <select class="form-control input-lg" name="role" ng-model="formUser.role._id" ng-options="role._id as role.name for role in formUser.company.roles">
+                  <option value=''>Todos los roles</option>
               </select>
             </div>
             <button type="submit" class="btn btn-default btn-lg pull-right">Calcular Estadisticas</button>
@@ -29,61 +34,77 @@
       </div>
   </div>
 </div>
+
+    
+
+    <!-- TÍTULO -->
+    
   <div class="row">
-    <div class="col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading font-bold">Compromiso del empleado</div>
-        <div class="panel-body text-center">
-          <div class="m-b-md">
-            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
-          </div>
-          <div class="sparkline inline">
-            <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
-            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
-          </div>
+    <div class="col-lg-12">
+      <div class="panel panel-info" draggable="true">
+        <div class="panel-heading h3 text-center">
+          Compromiso del Empleado
         </div>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading font-bold">2015 % Favorable</div>
-        <div class="panel-body text-center">
-          <div class="m-b-md">
-            <p class="h3 font-thin">Compromiso del empleado y sus motivadores</p>
-          </div>
-          <div class="sparkline inline">
-            <canvas id="bar" class="chart chart-bar" data="faborableCompromiso" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable" style="height:246px"></canvas>
-            <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+        <div class="list-group bg-white">
+          <div class="panel-body">
+            <div class="col-md-6">
+              <div class="m-b-md">
+                <p class="h4 text-center">Distribución de Respuestas</p>
+              </div>
+
+              <div>
+                <canvas id="doughnut" class="chart chart-doughnut" data="dataCompromiso" labels="labelsCompromiso" legend="true" ng-if="!vacioFavorable"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+
+              <div class="line pull-in"></div>
+            </div>
+
+
+            <!-- GRAFICO DERECHA -->
+            <div class="col-md-6">
+
+              <div class="m-b-md">
+                <p class="h4 text-center">Comparación de Grupos y Evolución en el Tiempo</p>
+              </div>
+              <div>
+                <canvas id="bar" class="chart chart-bar" data="faborableCompromiso" labels="labelsFavorable" legend="false" ng-if="!vacioFavorable" style="height:246px"></canvas>
+                <h3 ng-if="vacioFavorable">No hay datos disponibles para los filtros seleccionados</h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
+
+  <!-- TABLA MOTIVADORES -->
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading font-bold">
           Los 10 Principales Motivadores
         </div>
         <div class="table-responsive">
           <h3 ng-if="!showMotivadores" class="text-center">No hay datos disponibles para los filtros seleccionados</h3>
-          <table ng-if="!showMotivadores" class="table table-striped m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
+          <table ng-if="showMotivadores" class="table table-striped m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
             <thead>
               <tr>
                   <th data-toggle="true">Pregunta</th>
-                  <th>2015 % favorable</th>
-                  <th data-hide="phone,tablet">2014 % favorable</th>
-                  <th nowrap data-hide="phone,tablet" data-name="Date Of Birth">Best in<br>Class</th>
-                  <th nowrap data-hide="phone">Grupo en<br>General</th>
+                  <th >2015 % favorable</th>
+                  <th  data-hide="phone,tablet">2014 % favorable</th>
+                  <th  data-hide="phone,tablet" data-name="Date Of Birth">Top 25%</th>
+                  <th  data-hide="phone">Grupo en General</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="motivador in dataMotivadores track by $index">
                   <td>{{questionsMotivadores[$index]}}</td>
-                  <td><span class="label bg-success" title="Active">{{motivador | number:0}} %</span></td>
-                  <td>Sin Datos</td>
-                  <td>Sin Datos</td>
-                  <td>Sin Datos</td>
+                  <td><span class="label bg-success" ng-class="{'bg-success' : motivador > 79, 'bg-warning' : motivador > 59 && motivador < 80, 'bg-danger' : motivador < 60}" title="Active">{{motivador | number:0}} %</span></td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
               </tr>
             </tbody>
           </table>

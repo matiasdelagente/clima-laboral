@@ -1,5 +1,8 @@
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3"><i class="glyphicon glyphicon-signal"></i> Resultados</h1>
+<div class="bg-light lter b-b wrapper-md ng-scope" style="width:84%;">
+  <div class="btn-group pull-right">
+    <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="redirect('/ed-scores-1')"><i class="material-icons md-18">extension</i>Clima Laboral</button>
+  </div>
+  <h1 class="m-n font-thin h3"><i class="icon-bar-chart"></i> Reportes</h1>
 </div>
 <div class="jumbotron text-center" ng-show="processing">
   <span class="glyphicon glyphicon-repeat spinner"></span>
@@ -9,18 +12,18 @@
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="panel-heading font-bold">
-          Seleccionar gerencia y areas {{formUser.area}}
+          Seleccionar gerencia y areas
         </div>
         <div class="panel-body">
           <form class="form-inline" role="form" ng-submit="calcAll()">
             <div class="form-group">
-              <select class="form-control input-lg" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-              <option value="">Todas las gerencias</option>
+              <select class="form-control input-lg" name="area" ng-model="formUser.area._id" ng-options="area._id as area.name for area in formUser.company.areas">
+                <option value=''>Todas las gerencias</option>
               </select>
             </div>
             <div class="form-group">
-              <select class="form-control input-lg" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-                <option value="">Todos los roles</option>
+              <select class="form-control input-lg" name="role" ng-model="formUser.role._id" ng-options="role._id as role.name for role in formUser.company.roles">
+                  <option value=''>Todos los roles</option>
               </select>
             </div>
             <button type="submit" class="btn btn-default btn-lg pull-right">Calcular Estadisticas</button>
@@ -33,9 +36,10 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          Los 10 Principales Motivadores
+        <div class="panel-heading font-bold">
+          KPIs por Persona
         </div>
+
         <div class="table-responsive">
           <table class="table table-striped m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
             <thead>
@@ -50,77 +54,78 @@
                     Rol
                   </th>
                   <th>
-                    KPI 1
+                  <a data-toggle="tooltip" data-placement="top" title="Promesa al Cliente">KPI 1</a>
+                    
                   </th>
                   <th>
-                    KPI 2
+                    <a data-toggle="tooltip" data-placement="top" title="Compromiso del Empleado">KPI 2</a>
                   </th>
                   <th>
-                    KPI 3
+                    <a data-toggle="tooltip" data-placement="top" title="Liderazgo Activo">KPI 3</a>
                   </th>
                   <th>
-                    KPI 4
+                    <a data-toggle="tooltip" data-placement="top" title="Estrategia">KPI 4</a>
                   </th>
                   <th>
-                    KPI 5
+                    <a data-toggle="tooltip" data-placement="top" title="Comunicación">KPI 5</a>
                   </th>
                   <th>
-                    KPI 6
+                    <a data-toggle="tooltip" data-placement="top" title="Aprendizaje y Desarrollo">KPI 6</a>
                   </th>
                   <th>
-                    KPI 7
+                    <a data-toggle="tooltip" data-placement="top" title="Cooperación">KPI 7</a>
                   </th>
                   <th>
-                    KPI 8
+                    <a data-toggle="tooltip" data-placement="top" title="Vivir los Valores">KPI 8</a>
                   </th>
                   <th>
-                    KPI 9
+                    <a data-toggle="tooltip" data-placement="top" title="Responsabilidad Social Corporativa">KPI 9</a>
                   </th>
                   <th>
-                    KPI 10
+                    <a data-toggle="tooltip" data-placement="top" title="Seguimiento del Cuestionario">KPI 10</a>
                   </th>
                   <th>
-                    KPI 11
+                    <a data-toggle="tooltip" data-placement="top" title="Condiciones Laborales">KPI 11</a>
                   </th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="user in dataUsers">
+              <tr ng-repeat="user in dataUsers" tooltip>
                   <td>{{user[0]}}</td>
                   <td>{{user[1]}}</span></td>
                   <td>{{user[2]}}</span></td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi1[$index] > 79, 'bg-warning' : dataKpi1[$index] > 59 && dataKpi1[$index] < 80, 'bg-danger' : dataKpi1[$index] < 60}">{{dataKpi1[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Promesa al Cliente" class="label bg-success" ng-class="{'bg-success' : dataKpi1[$index] > 79, 'bg-warning' : dataKpi1[$index] > 59 && dataKpi1[$index] < 80, 'bg-danger' : dataKpi1[$index] < 60}">{{dataKpi1[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi2[$index] > 79, 'bg-warning' : dataKpi2[$index] > 59 && dataKpi2[$index] < 80, 'bg-danger' : dataKpi2[$index] < 60}">{{dataKpi2[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Compromiso del Empleado" class="label bg-success" ng-class="{'bg-success' : dataKpi2[$index] > 79, 'bg-warning' : dataKpi2[$index] > 59 && dataKpi2[$index] < 80, 'bg-danger' : dataKpi2[$index] < 60}">{{dataKpi2[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi3[$index] > 79, 'bg-warning' : dataKpi3[$index] > 59 && dataKpi3[$index] < 80, 'bg-danger' : dataKpi3[$index] < 60}">{{dataKpi3[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Liderazgo Activo" class="label bg-success" ng-class="{'bg-success' : dataKpi3[$index] > 79, 'bg-warning' : dataKpi3[$index] > 59 && dataKpi3[$index] < 80, 'bg-danger' : dataKpi3[$index] < 60}">{{dataKpi3[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi4[$index] > 79, 'bg-warning' : dataKpi4[$index] > 59 && dataKpi4[$index] < 80, 'bg-danger' : dataKpi4[$index] < 60}">{{dataKpi4[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Estrategia" class="label bg-success" ng-class="{'bg-success' : dataKpi4[$index] > 79, 'bg-warning' : dataKpi4[$index] > 59 && dataKpi4[$index] < 80, 'bg-danger' : dataKpi4[$index] < 60}">{{dataKpi4[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi5[$index] > 79, 'bg-warning' : dataKpi5[$index] > 59 && dataKpi5[$index] < 80, 'bg-danger' : dataKpi5[$index] < 60}">{{dataKpi5[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Comunicación" class="label bg-success" ng-class="{'bg-success' : dataKpi5[$index] > 79, 'bg-warning' : dataKpi5[$index] > 59 && dataKpi5[$index] < 80, 'bg-danger' : dataKpi5[$index] < 60}">{{dataKpi5[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi6[$index] > 79, 'bg-warning' : dataKpi6[$index] > 59 && dataKpi6[$index] < 80, 'bg-danger' : dataKpi6[$index] < 60}">{{dataKpi6[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Aprendizaje y Desarrollo" class="label bg-success" ng-class="{'bg-success' : dataKpi6[$index] > 79, 'bg-warning' : dataKpi6[$index] > 59 && dataKpi6[$index] < 80, 'bg-danger' : dataKpi6[$index] < 60}">{{dataKpi6[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi7[$index] > 79, 'bg-warning' : dataKpi7[$index] > 59 && dataKpi7[$index] < 80, 'bg-danger' : dataKpi7[$index] < 60}">{{dataKpi7[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Cooperación" class="label bg-success" ng-class="{'bg-success' : dataKpi7[$index] > 79, 'bg-warning' : dataKpi7[$index] > 59 && dataKpi7[$index] < 80, 'bg-danger' : dataKpi7[$index] < 60}">{{dataKpi7[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi8[$index] > 79, 'bg-warning' : dataKpi8[$index] > 59 && dataKpi8[$index] < 80, 'bg-danger' : dataKpi8[$index] < 60}">{{dataKpi8[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Vivir los Valores" class="label bg-success" ng-class="{'bg-success' : dataKpi8[$index] > 79, 'bg-warning' : dataKpi8[$index] > 59 && dataKpi8[$index] < 80, 'bg-danger' : dataKpi8[$index] < 60}">{{dataKpi8[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi9[$index] > 79, 'bg-warning' : dataKpi9[$index] > 59 && dataKpi9[$index] < 80, 'bg-danger' : dataKpi9[$index] < 60}">{{dataKpi9[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Responsabilidad Social Corporativa" class="label bg-success" ng-class="{'bg-success' : dataKpi9[$index] > 79, 'bg-warning' : dataKpi9[$index] > 59 && dataKpi9[$index] < 80, 'bg-danger' : dataKpi9[$index] < 60}">{{dataKpi9[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi10[$index] > 79, 'bg-warning' : dataKpi10[$index] > 59 && dataKpi10[$index] < 80, 'bg-danger' : dataKpi10[$index] < 60}">{{dataKpi10[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Seguimiento del Cuestionario" class="label bg-success" ng-class="{'bg-success' : dataKpi10[$index] > 79, 'bg-warning' : dataKpi10[$index] > 59 && dataKpi10[$index] < 80, 'bg-danger' : dataKpi10[$index] < 60}">{{dataKpi10[$index] | number:0}} %</span>
                   </td>
                   <td>
-                    <span class="label bg-success" ng-class="{'bg-success' : dataKpi11[$index] > 79, 'bg-warning' : dataKpi11[$index] > 59 && dataKpi11[$index] < 80, 'bg-danger' : dataKpi11[$index] < 60}">{{dataKpi11[$index] | number:0}} %</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Condiciones Laborales" class="label bg-success" ng-class="{'bg-success' : dataKpi11[$index] > 79, 'bg-warning' : dataKpi11[$index] > 59 && dataKpi11[$index] < 80, 'bg-danger' : dataKpi11[$index] < 60}">{{dataKpi11[$index] | number:0}} %</span>
                   </td>
               </tr>
             </tbody>

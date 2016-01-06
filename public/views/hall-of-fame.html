@@ -1,0 +1,410 @@
+
+<div class="bg-light lter b-b wrapper-md ng-scope">
+  <h1 class="m-n font-thin h3"><i class="icon-trophy"></i> Salón de la Fama</h1>
+</div>
+
+
+<!-- content -->
+<div class="wrapper-md bg-white-only b-b">
+  <div class="row text-center">
+    <h1 class="text-center text-muted"><i class="glyphicon glyphicon-king"></i></h1>
+    <h4 class="text-lt m-t-none m-b-none">Salón de la Fama de Bronce</h4>
+    <span class="m-t-none hidden-xs text-muted text-ellipsis">Este salón contiene los puntos del Quarter actual y se renueva cada 4 meses.</span>
+    <br>
+    <span class="label bg-light">Quarter 4 de 2015</span>
+    <br><br><br>
+  </div>
+
+  <div class="row text-center">
+
+    <div class="col-sm-2 col-sm-offset-2 col-xs-6">
+      <div class="panel no-border no-shadow">
+        <div class="panel-body">
+          <div class="h1 text-light text-muted font-thin h1">35</div>
+          <span class="text-muted text-xs">Personas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-xs-6">
+      <div class="panel bg-warning no-border no-shadow">
+        <div class="panel-body">
+          <div class="h1 text-black font-thin h1">14</div>
+          <span class="text-xs text-black">Oro</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-xs-6">
+      <div class="panel bg-black no-border no-shadow">
+        <div class="panel-body">
+          <div class="h1 text-light font-thin h1">26</div>
+          <span class="text-light text-xs">Plata</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-xs-6">
+      <div class="panel bg-light no-border no-shadow">
+        <div class="panel-body">
+          <div class="h1 text-light font-thin h1">38</div>
+          <span class="text-light text-xs">Bronce</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-sm-3 col-xs-6">
+      <div class="h1 text-warning font-thin h1">13</div>
+      <span class="label bg-warning">Oro</span>
+    </div>
+
+
+    <div class="col-sm-3 col-xs-6">
+      <div class="h1 text-black font-thin h1">22</div>
+      <span class="label bg-black">Plata</span>
+    </div>
+
+
+    <div class="col-sm-3 col-xs-6">
+      <div class="h1 text-muted font-thin h1">35</div>
+      <span class="label bg-light">Bronce</span>
+    </div> -->
+
+  </div>
+</div>
+
+<div class="wrapper-md ng-scope" >
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="panel b-a">
+        <!-- <div class="panel-heading bg-black">
+          <div class="row">
+            <div class="col-sm-1">
+              <h4 class="text-center"><i class="glyphicon glyphicon-king"></i></h4>
+            </div>
+            <div class="col-sm-11">
+              <span class="text-xs text-lt pull-right m-t-sm">Quarter &nbsp;<span class="label bg-info">4</span> &nbsp;2015</span>
+              <h4 class="text-lt m-t-none m-b-none">Salón de la Fama de Bronce</h4>
+              <span class="m-t-none hidden-xs text-ellipsis">Este salón contiene los puntos del Quarter actual y se renueva cada 4 meses</span>
+            </div>
+          </div>
+        </div> -->
+
+
+        <div class="panel-body">
+
+          <div class="row">
+            <!-- NUMBER 1 ORO-->
+            <div class="col-md-4">
+              <a href="" class="" >
+                <div class="b-warning panel">
+
+                  <div class="panel-heading no-border bg-warning">
+                    <span class="text-xs label bg-primary pull-right">32 puntos</span>          
+                    <span class="text-black">Persona de Oro</span>
+                  </div>
+
+                  <div class="clearfix text-center m-t">
+                    <div class="inline">
+                      <div class="thumb-xl avatar">
+                        <img src="img/a10.jpg" alt="..." class="img-circle">
+
+                        <div class="h4 m-t m-b-xs" ng-if="person.name">{{person.name}}</div>
+                        <div class="h4 m-t m-b-xs" ng-if="!person.name">Username</div>
+                        <small class="text-muted m-b" ng-if="person.role">{{person.role}}</small>
+                        <small class="text-muted m-b" ng-if="!person.role">General</small>
+                        <br><br>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="list-group no-radius">
+                    <li class="list-group-item text-muted">
+                      Reconocimientos
+
+                      <span class="text-xs text-muted pull-right">
+                        <i class="fa fa-circle text-warning m-r-xs"></i> 12
+                        <i class="fa fa-circle text-black m-r-xs m-l-sm"></i> 30
+                        <i class="fa fa-circle text-light m-r-xs m-l-sm"></i> 98
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+            </div>
+
+            <!-- NUMBER 2 PLATA-->
+            <div class="col-md-4">
+              <a href="" class="" >
+                <div class="b-black panel">
+
+                  <div class="panel-heading no-border bg-black">
+                    <span class="text-xs label bg-primary pull-right">26 puntos</span>        
+                    <span class="text-lt">Persona de Plata</span>
+                  </div>
+
+                  <div class="clearfix text-center m-t">
+                    <div class="inline">
+                      <div class="thumb-xl avatar">
+                        <img src="img/a4.jpg" alt="..." class="img-circle">
+
+                        <div class="h4 m-t m-b-xs" ng-if="person.name">{{person.name}}</div>
+                        <div class="h4 m-t m-b-xs" ng-if="!person.name">Username</div>
+                        <small class="text-muted m-b" ng-if="person.role">{{person.role}}</small>
+                        <small class="text-muted m-b" ng-if="!person.role">General</small>
+                        <br><br>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="list-group no-radius">
+                    <li class="list-group-item text-muted">
+                      Reconocimientos
+
+                      <span class="text-xs text-muted pull-right">
+                        <i class="fa fa-circle text-warning m-r-xs" data-toggle="tooltip" data-placement="top" title="Promesa al Cliente"></i> 12
+                        <i class="fa fa-circle text-black m-r-xs m-l-sm"></i> 30
+                        <i class="fa fa-circle text-light m-r-xs m-l-sm"></i> 98
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+            </div>
+
+            <!-- NUMBER 3 -->
+            <div class="col-md-4">
+              <a href="" class="" >
+                <div class="b-light panel">
+
+                  <div class="panel-heading no-border bg-light">
+                    <span class="text-xs label bg-primary pull-right">14 puntos</span>            
+                    <span class="text-lt">Persona de Bronce</span>
+                  </div>
+
+                  <div class="clearfix text-center m-t">
+                    <div class="inline">
+                      <div class="thumb-xl avatar">
+                        <img src="img/a2.jpg" alt="..." class="img-circle">
+
+                        <div class="h4 m-t m-b-xs" ng-if="person.name">{{person.name}}</div>
+                        <div class="h4 m-t m-b-xs" ng-if="!person.name">Username</div>
+                        <small class="text-muted m-b" ng-if="person.role">{{person.role}}</small>
+                        <small class="text-muted m-b" ng-if="!person.role">General</small>
+                        <br><br>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="list-group no-radius">
+                    <li class="list-group-item text-muted">
+                      Reconocimientos
+
+                      <span class="text-xs text-muted pull-right">
+                        <i class="fa fa-circle text-warning m-r-xs" data-toggle="tooltip" data-placement="top" title="Promesa al Cliente"></i> 12
+                        <i class="fa fa-circle text-black m-r-xs m-l-sm"></i> 30
+                        <i class="fa fa-circle text-light m-r-xs m-l-sm"></i> 98
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+            </div>
+          </div>
+
+
+          <!-- TEAMMATES -->
+          <div class="row">
+            <br>
+            <div class="col-md-12">
+              <div class="line b-b"></div>
+              <br>
+            </div>
+          </div>
+
+          <div class="row">
+          <div class="col-sm-1">
+              <h4 class="text-center"><i class="glyphicon glyphicon-king text-muted"></i></h4>
+            </div>
+            <div class="col-sm-11">
+              <span class="label bg-light pull-right m-t-sm">Quarter 4 de 2015</span>
+              <h4 class="text-lt m-t-none m-b-none">Todas las personas</h4>
+              <span class="text-xs hidden-xs text-muted">Los puntos se acumulan para el Salón de Plata y Oro</span>
+              <br><br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="list-group list-group-lg list-group-sp">
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">4</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a0.jpg" class="r r-2x" alt="...">
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">11 puntos</span>
+                    <span>Chris Fox</span>
+                    <small class="text-muted clear text-ellipsis">Supervisor de Recursos Humanos</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">5</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a1.jpg" class="r r-2x" alt="...">
+                  </span>
+                  <span class="clear">
+                    <span class="pull-left badge bg-light m-t-sm"></span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="pull-right label bg-primary inline m-t-sm">9 puntos</span>
+                    <span>Amanda Conlan</span>
+                    <small class="text-muted clear text-ellipsis">Supervisor de Administración</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">6</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a2.jpg" class="r r-2x" alt="...">
+                    <i class="busy b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">8 puntos</span>
+                    <span>Dan Doorack</span>
+                    <small class="text-muted clear text-ellipsis">Diseñador de User Experience</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">7</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a3.jpg" class="r r-2x" alt="...">
+                    <i class="busy b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">7 puntos</span>
+                    <span>Lauren Taylor</span>
+                    <small class="text-muted clear text-ellipsis">Desarrollador Senior de Sistemas</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">8</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a4.jpg" class="r r-2x" alt="...">
+                    <i class="away b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">6 puntos</span>
+                    <span>Mike Jackson</span>
+                    <small class="text-muted clear text-ellipsis">Comunicador de Marketing</small>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">            
+              <div class="list-group list-group-lg list-group-sp">
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">9</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a10.jpg" class="r r-2x" class="r r-2x" alt="...">
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">5 puntos</span>
+                    <span>Chris Fox</span>
+                    <small class="text-muted clear text-ellipsis">Supervisor de Marketing</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">10</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a5.jpg" class="r r-2x" alt="...">
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">4 puntos</span>
+                    <span>Amanda Conlan</span>
+                    <small class="text-muted clear text-ellipsis">Rol sorpresa de Administración</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">11</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a6.jpg" class="r r-2x" alt="...">
+                    <i class="busy b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">3 puntos</span>
+                    <span>Dan Doorack</span>
+                    <small class="text-muted clear text-ellipsis">Ñoqui de Sistemas</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">12</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a7.jpg" class="r r-2x" alt="...">
+                    <i class="busy b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">2 puntos</span>
+                    <span>Lauren Taylor</span>
+                    <small class="text-muted clear text-ellipsis">Contador de Administración</small>
+                  </span>
+                </a>
+                <a herf="" class="list-group-item clearfix">
+                  <span class="pull-left badge bg-light m-t-sm">13</span>
+                  <span class="pull-left m-t-sm">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="pull-left thumb-sm m-r">
+                    <img src="img/a8.jpg" class="r r-2x" alt="...">
+                    <i class="away b-white right"></i>
+                  </span>
+                  <span class="clear">
+                    <span class="pull-right label bg-primary inline m-t-sm">1 punto</span>
+                    <span>Mike Jackson</span>
+                    <small class="text-muted clear text-ellipsis">Telemarketer de Marketing</small>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+<!-- footer -->
+<footer id="footer" class="app-footer" role="footer">
+  <div class="wrapper b-t bg-light">
+    <span class="pull-right">Fostering Talent System</span>
+    &copy; 2015 
+  </div>
+</footer>
+<!-- / footer -->
+
+
+
+</div>

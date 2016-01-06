@@ -5,14 +5,22 @@ angular.module("authService", [])
   authTokenFactory.getToken = function(){
     return $window.localStorage.getItem('token');
   };
+  //get session
+  authTokenFactory.getSession = function(){
+    return JSON.parse($window.localStorage.getItem('session'));
+  };  
   //set token o clear token
-  authTokenFactory.setToken = function(token){
-    if(token){
-      $window.localStorage.setItem('token',token);
+  authTokenFactory.setToken = function(data){
+    if(data && data.token){
+      $window.localStorage.setItem('token',data.token);
+      // console.log(data.session)
+      $window.localStorage.setItem('session', JSON.stringify(data.session));
     }
     else {
       $window.localStorage.removeItem('token');
+      $window.localStorage.removeItem('data');
     }
+    // console.log($window.localStorage)
   };
 
   return authTokenFactory;
@@ -23,7 +31,9 @@ angular.module("authService", [])
   //login
   authFactory.login = function(username, password){
     return $http.post('/api/authenticate',{username: username, password: password}).success(function(data){
-      AuthToken.setToken(data.token);
+      // console.log('login!', data);//companySrvc.get($routeParams.id).success(function(data){
+      AuthToken.setToken(data);
+      // console.log(data)
       return data
     })
   }
@@ -42,6 +52,7 @@ angular.module("authService", [])
   }
   //get user info
   authFactory.getUser = function(){
+    // console.log(AuthToken.getToken())
     if(AuthToken.getToken()){
       return $http.get('/api/me');
     }
@@ -64,13 +75,14 @@ angular.module("authService", [])
     return config
   };
   //redirect if a token doesn't authenticate
-  authInterceptorFactory.responseError = function(response){
+  authInterceptorFactory.responseError = function(response) {
 
-    if(response = 403){
+    if(response.status === 401) {
       AuthToken.setToken();
       $location.path('/')
     }
-    return $q.reject(response)
+    
+    return $q.reject(response);
   }
 
   return authInterceptorFactory;

@@ -1,18 +1,31 @@
 angular.module("climaLaboral")
 
-.controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route){
+.controller("MainCtrl", function($scope, $rootScope, $location, Auth, $route, AuthToken){
+    
+  $scope.company = "Fostering Talent";
+  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
+  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
+  $scope.assessments = ["Clima Laboral", "Bienestar Organizacional"];
+
   $scope.loggedIn = Auth.isLoggedIn();
+
   $rootScope.$on('$routeChangeStart',function(){
     if(Auth.isLoggedIn()){
       $scope.loggedIn = true;
+      var session = AuthToken.getSession();
+      $scope.user = session;
+      // console.log(session)  
     }
     else {
       $scope.loggedIn = false;
       $location.path('/login');
     }
-    Auth.getUser().success(function(data){
-      $scope.user = data;
-    });
+    // Auth.getUser()
+    //   .success(function(data){
+    //     $scope.user = data;
+    //     console.log(data)
+    //   });
+    
     $scope.url = $location.path();
   });
 
@@ -25,17 +38,18 @@ angular.module("climaLaboral")
       if(data.success){
         Auth.getUser().success(function(data){
           if(data.admin){
-            $location.path('/scores-1');
+            $location.path('/');
           }
           else if(!data.admin){
-            $location.path('/questions/'+ data._id);
+            // $location.path('/questions/'+ data._id);
+            $location.path('/');
           }
         });
       }
       else {
         $scope.error = data.message;
-        $scope.disabled = true;
-
+        $scope.disabled = false;
+        $scope.processing = false;
       }
 
     });
@@ -44,7 +58,7 @@ angular.module("climaLaboral")
   $scope.doLogout = function(){
     Auth.logout();
     $scope.user = {};
-    $location.path('/');
+    $location.path('/login');
   };
 
   $scope.route = $route;
@@ -52,30 +66,55 @@ angular.module("climaLaboral")
 
 })
 
-.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc){
+.controller("ScoresCtrl", function($scope, scoreSrvc, userSrvc, AuthToken, $location){
+  var session = AuthToken.getSession();
+  // console.log($scope.user, session)
+  if (!session.company) session.company = {name :'Todas las Compañias', area: null, role: null};
+  
   $scope.processing = true;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
-  $scope.formUser = {area: null, role: null};
+  $scope.formUser = session;
+
   $scope.questionsMotivadores = [
-    'En DHL la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
-    'DHL está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
-    'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento de la EOS)',
-    'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
-    'Tengo confianza en el futuro de DHL. (Estrategia)',
-    'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
-    'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
-    'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
-    'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
-    'DHL me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
+  'En '+ session.company.name +' la comunicación es abierta y honesta en ambos sentidos (del jefe al colaborador y del colaborador al jefe). (Comunicación)',
+  ''+session.company.name+' está realizando los cambios necesarios para competir eficientemente. (Estrategia)',
+  'Creo que habrá cambios positivos como resultado de esta encuesta. (Seguimiento del Cuestionario)',
+  'Mi trabajo aprovecha muy bien mis talentos, habilidades y aptitudes. (Aprendizaje y Desarrollo)',
+  'Tengo confianza en el futuro de '+session.company.name+'. (Estrategia)',
+  'Estoy dispuesto a contribuir con soluciones sostenibles para nuestros clientes. (Promesa al Cliente)',
+  'En general, estoy satisfecho con el tipo de trabajo que realizo. (Condiciones Laborales)',
+  'Recibo la información y comunicación que necesito para realizar mi trabajo efectivamente. (Comunicación)',
+  'En general, estoy satisfecho con el intercambio de información y la comunicación en mi área de trabajo. (Comunicación)',
+  ''+session.company.name+' me brinda la oportunidad de aprender y desarrollarme profesionalmente. (Aprendizaje y Desarrollo)'
   ];
 
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-    $scope.showCompromiso = false;
-    $scope.calcAll();
-  });
+  if (session.admin && !session.superadmin) {
+
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+  }
+
+  // userSrvc.all().success(function(data){
+  //   $scope.processing = false;
+  //   $scope.users = data;
+  //   $scope.showCompromiso = false;
+  //   $scope.calcAll();
+  // });
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
 
   $scope.calcCompromiso = function(preguntas){
     var area = $scope.formUser.area;
@@ -116,7 +155,7 @@ angular.module("climaLaboral")
     $scope.dataMotivadores = dataMotivadores;
     $scope.vacioMotivadores = null;
     for(var i in $scope.dataMotivadores) $scope.vacioMotivadores += $scope.dataMotivadores[i];
-    $scope.showMotivadores = true;
+      $scope.showMotivadores = true;
     if (isNaN($scope.vacioMotivadores)) $scope.showMotivadores = false;
   };
 
@@ -171,26 +210,48 @@ angular.module("climaLaboral")
     $scope.calcMotivadores();
   };
 // Datos Grafico Compromiso
-    $scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
+$scope.labelsCompromiso = ["Porcentaje Favorable", "Porcentaje Neutro", "Porcentaje Desfavorable"];
 // Datos Grafico Año Favorable
-    $scope.labelsFavorable = ['2015','2014','Best in Class','General'];
-    $scope.series1 = ['Serie 2015'];
+$scope.labelsFavorable = ['2015','2014','Top 25%','General'];
+$scope.series1 = ['Serie 2015'];
 // Datos Grafico Motivadores
 
 })
 
-.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc){
-  $scope.processing = true;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
-  $scope.formUser = {area: null, role: null};
+.controller("Scores3Ctrl", function($scope, scoreSrvc, userSrvc, AuthToken, $location){
+  var session = AuthToken.getSession();
 
-  userSrvc.all().success(function(data){
-    $scope.processing = false;
-    $scope.users = data;
-    $scope.showCompromiso = false;
-    $scope.calcAll();
-  });
+  $scope.processing = true;
+  $scope.formUser = session;
+
+  if (session.admin && !session.superadmin) {
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      // console.log(data)
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      $scope.showCompromiso = false;
+      $scope.calcAll();
+    });
+  }
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
+
+  // userSrvc.all().success(function(data){
+  //   $scope.processing = false;
+  //   $scope.users = data;
+  //   $scope.showCompromiso = false;
+  //   $scope.calcAll();
+  // });
 
   $scope.calcKpi = function(preguntas){
     var area = $scope.formUser.area;
@@ -225,7 +286,7 @@ angular.module("climaLaboral")
       }
     }
     return users;
-  }
+  };
 
   $scope.calcAll = function(){
     // Numero de las preguntas de cada kpi
@@ -256,16 +317,24 @@ angular.module("climaLaboral")
     $scope.dataKpi11 = $scope.calcKpi($scope.pregCondiciones);
 
   };
+
+  $('[data-toggle="tooltip"]').tooltip();
 })
 
-.controller("AddCtrl", function($scope, $routeParams,$location, userSrvc){
-  $scope.company = "DHL";
+.controller("AddCtrl", function($scope, $routeParams,$location, userSrvc, AuthToken){
   $scope.formProcessing = false;
-  $scope.processing = true;
+  // $scope.processing = true;
+  var session = AuthToken.getSession();
+
+  $scope.isDemo = !!(session.company) ? session.company.demo : false;
+
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
+    $scope.company = session.company.name;
     $scope.processing = false;
   });
+
+
   $scope.add = function(){
     $scope.formProcessing = true;
     userSrvc.edit($scope.user._id, $scope.user).success(function(data){
@@ -275,12 +344,527 @@ angular.module("climaLaboral")
   };
 })
 
-.controller("UserCtrl",function($scope, userSrvc){
+.controller("CompaniesCtrl",function($scope, $location, companySrvc){
   $scope.processing = true;
-  userSrvc.all().success(function(data){
+  companySrvc.all().success(function(data){
+
     $scope.processing = false;
-    $scope.users = data;
+    $scope.companies = data;
+    angular.forEach($scope.companies, function(company, key) {
+      company.logo = company.logourl || 'img/'+company.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+    });
   });
+
+  $scope.deleteCompany = function(companyDeleted){
+    $scope.processing = true;
+
+    companySrvc.delete(companyDeleted._id).success(function(data){
+      $scope.processing = false;
+      var index = $scope.companies.indexOf(companyDeleted);
+      $scope.companies.splice(index,1);
+    });
+  };
+})
+
+.controller("AddCompaniesCtrl", function($filter, $location, $scope, awsSrvc, companySrvc, userSrvc) {
+  $scope.save = function() {
+    var picFile = $scope.picFile;
+    
+    if (picFile) 
+      return alert('CONFIRME O RECHAZE LA IMAGEN SELECCIONADA ANTES DE CONTINUAR');
+    
+    var psw = $scope.formUser.password;
+    // console.log(psw)
+    $scope.processing = true;
+    var url = $filter('encodeUri') ($scope.formCompany.name);
+
+    $scope.formCompany.url = 'http://system.fosteringtalent.com/' + url;
+    //IF WE HAVE A COMPANY, WE SET USER AS ADMIN
+    $scope.formUser.admin = true;
+
+    //Add ADMIN USER to company
+    userSrvc.save($scope.formUser).success(function(userData){
+      $scope.formUser = userData;
+
+      // AFTER USER CREEATION, CREATE COMPANY AND LINK TO THE USER
+      $scope.formCompany.user = userData._id;
+      $scope.formCompany.userPsw = psw;
+
+      //RE-SET PASSWORD
+      $scope.formUser.password = psw;
+
+      companySrvc.save($scope.formCompany).success(function(companyData){
+        $scope.formUser.company = companyData._id;
+
+        userSrvc.edit(userData._id, $scope.formUser).success(function(userResponse){
+          //LINK USER TO COMPANY
+          $scope.processing = false;
+          $scope.company = {};
+          $location.path('/companies');
+        });
+      });
+    });
+  };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    return awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      // no hago un save al servidor porque el usuario aún no existe
+      // en su lugar agrego la información a la compañía
+      if (!$scope.formCompany) $scope.formCompany = {};
+      $scope.formCompany.logourl = $scope.formCompany.logo = url;
+      $scope.picFile = undefined;
+      $scope.croppedDataUrl = '';
+      $scope.$evalAsync();
+    });
+    
+  };
+  /* ngFileUpload END */
+
+})
+
+.controller("EditCompaniesCtrl", function($location, $routeParams, $scope, awsSrvc, companySrvc, userSrvc){
+  $scope.processing = true;
+
+  companySrvc.get($routeParams.id).success(function(data){
+    $scope.formCompany = data;
+    $scope.formCompany.logo = data.logourl || 'img/'+data.name.replace(/ /g,'-').toLowerCase()+'-logo.png';
+    // console.log($scope.formCompany)
+    userSrvc.get(data.user).success(function(userData) {
+      $scope.formUser = userData;
+      $scope.processing = false;
+    });
+  });
+
+  $scope.save = function(){
+    $scope.processing = true;
+    companySrvc.edit($scope.formCompany._id, $scope.formCompany).success(function(data){
+      $scope.processing = false;
+      $scope.company = {};
+      $location.path('/companies');
+    });
+  };
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      companySrvc.edit($scope.formCompany._id, {logourl: url}).success(function (data) {
+        $scope.formCompany.logo = url;
+        $scope.picFile = undefined;
+        $scope.croppedDataUrl = '';
+        $scope.$evalAsync();
+      });
+      
+    });
+    
+  };
+  /* ngFileUpload END */  
+})
+
+.controller("EditAreasAndRolesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, areaSrvc, roleSrvc){
+  $scope.processing = true;
+  $scope.company = AuthToken.getSession().company;
+  $scope.newArea = {};
+  $scope.newRole = {};
+
+  companySrvc.get($scope.company._id).success(function(data){
+    $scope.processing = false;
+    $scope.company = data;
+    // console.log(data);
+  });
+
+  $scope.addArea = function(){
+    $scope.addingArea = true;
+    $scope.newArea.company = $scope.company._id;
+
+    areaSrvc.save($scope.newArea).success(function(area){
+
+      $scope.company.areas.push(area._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.addingArea = false;
+        $scope.company = company;
+        $scope.newArea = {};
+      });
+    });
+  };
+
+  $scope.editArea = function(area){
+    $scope.formSaving = true;
+
+    areaSrvc.edit(area._id, area).success(function(area){
+      $scope.formSaving = false;
+    });
+  };
+
+  $scope.deleteArea = function(id){
+    $scope.areaDel = true;
+    areaSrvc.delete(id).success(function(area){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.areaDel = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+  $scope.addRole = function(){
+    $scope.addingArea = true;
+    $scope.newRole.company = $scope.company._id;
+
+    roleSrvc.save($scope.newRole).success(function(role){
+      $scope.company.roles.push(role._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        $scope.company = company;
+        $scope.newRole = {};
+
+        $scope.addingArea = false;
+      });
+    });
+  };
+
+  $scope.editRole = function(role){
+    $scope.formSaving = true;
+  
+    roleSrvc.edit(role._id, role).success(function(role){
+      $scope.formSaving = false;
+    });
+  };
+
+  $scope.deleteRole = function(id){
+    $scope.roleDel = true;
+    roleSrvc.delete(id).success(function(role){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.roleDel = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+})
+
+.controller("CompetencesCtrl", function($scope, AuthToken, $routeParams, $location, companySrvc, competenceSrvc, areaSrvc, roleSrvc){
+  $scope.processing = true;
+  $scope.company = AuthToken.getSession().company;
+  $scope.formCompetence = {};
+
+  //GET COMPANY DATA
+  companySrvc.get($scope.company._id).success(function(data){
+    $scope.company = data;
+    
+    console.log($scope.company);
+
+    $scope.selection = {};
+
+    // angular.forEach($scope.company.competencies, function(competence, key) {
+    //   var algo = $scope.selection.competence = {id: competence._id}
+    //   console.log($scope.selection)
+    //   angular.forEach(competence.areas, function(area, key) {
+    //     algo = {'area': ids: {"50d5ad": true}}
+    //   });
+    // });
+
+    areaSrvc.allByCompany($scope.company._id).success(function(areas){
+      $scope.allAreas = areas;
+      
+      roleSrvc.allByCompany($scope.company._id).success(function(roles){
+        $scope.allRoles = roles;
+        $scope.processing = false;
+      });
+    });
+  });
+
+  $scope.addCompetence = function(){
+    $scope.processing = true;
+    
+    competenceSrvc.save($scope.formCompetence).success(function(competence){
+      $scope.adding = false;
+
+      $scope.company.competencies.push(competence._id);
+      companySrvc.edit($scope.company._id, $scope.company).success(function(company){
+        console.log(company)
+        $scope.company = company;
+        $scope.formCompetence = {}
+      });
+    });
+  };
+
+  $scope.editCompetence = function(competence){
+    $scope.formSaving = true;
+
+    competenceSrvc.edit(competence._id, competence).success(function(competence){
+      // $scope.adding = false;
+      $scope.formSaving = false;      
+    });
+  };
+
+  $scope.deleteCompetence = function(id){
+    $scope.processing = true;
+    competenceSrvc.delete(id).success(function(competence){
+      companySrvc.get($scope.company._id).success(function(data){
+        $scope.processing = false;
+        $scope.company = data;
+      });
+    });
+  };
+
+})
+
+.controller("organizationChartCtrl", function($scope, $routeParams, $location, companySrvc, userSrvc, AuthToken){
+  $scope.processing = true;
+  $scope.hasChanged = false;
+  $scope.usersNewVal = [];
+  $scope.users = [];
+
+  var session = AuthToken.getSession();
+  var usersChanged = [];
+
+  //GET ALL USER FROM COMPANY
+  if (session.admin && !session.superadmin) {
+
+    var companyId = undefined;
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.users = data;
+      $scope.items = getUsersHierarchy(data);
+      $scope.processing = false;
+
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.users = data;
+      $scope.items = getUsersHierarchy(data);
+      $scope.processing = false;
+    });
+  }
+
+  $scope.$watch(function(scope) { return scope.items }, function(newVal, oldVal){
+    //RESET VAR THAT STORE HIERARCHY CHANGES
+    usersChanged.length = 0;
+
+    //GET USERS THAT NEED TO BE UPDATED FROM HIERARCHY IN CASE THAT NEW VAL <> FROM OLDVAL
+    if (newVal != oldVal && oldVal.length > 0 ) {
+      $scope.hasChanged = true;
+      $scope.usersNewVal = newVal;
+    }
+
+  });
+
+  findUserChanged = function(newUsers, user) {
+    angular.forEach(newUsers, function(newUser, key) {
+      if (!newUser.admin) {
+        // console.log(newUser.children)
+        if (!!newUser.children) {
+
+          if (user._id == newUser.item.id) {
+            // console.log('coincidencia', newUser.item.text)
+            // console.log(user, newUser, typeof(user.childrens), typeof(user.children))
+
+            if (typeof(user.children) == 'object') {
+              //NO TENGO HIJOS EN DB, PERO SI EN NEW USER
+              // console.info(newUser.children, user.childrens)
+              if (newUser.children.length != user.children.length) {
+                console.info('HIJOS DIFERENTES, TENGO QUE HACER UN UPDATE DE ', newUser.item.text);
+                usersChanged.push({id:user._id, 'childrens':newUser.children})
+              } else {
+                console.info('MISMA CANTIDAD DE HIJOS, TENGO QUE HACER UN BUCLE PARA VER SI HAY UPDATE DE ', newUser.item.text)
+              }
+            } else {
+              //EL NODO NUEVO TIENE HIJOS, PERO ANTES NO ESTABAN
+              console.info('ANTES NO TENIA HIJOS, AHORA HAY UPDATE DE ', newUser.item.text)
+              usersChanged.push({id:user._id, 'childrens':newUser.children});
+            }
+            return;
+          } else {
+            findUserChanged(newUser.children, user)
+          }
+        } else {
+          if (user._id == newUser.item.id) {
+            // console.log('coincidencia', newUser.item.text, user, newUser)
+            if (typeof(user.children) == 'object' && user.children.length > 0 ) {
+              //NEW USER DOESNT HAVE CHILDS, OLD USER HAS SO WE CLEAN DB USER CHILDS
+              console.info('BORRAR HIJOS DE ' + newUser.item.text);
+              usersChanged.push({id:user._id, 'childrens':[]});
+            }
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  //GET COMPANY USERS AS AN ARRAY SUITABLE FOR NESTABLE.JS
+  var alreadyInHierarchy = [];  //TO STORE USERS THAT ARE ALREADY IN THE HIERARCHY
+  getUsersHierarchy = function(users) {
+      var data = [];
+      var isChildren = [];
+      // console.log('users', users)
+      angular.forEach(users, function(user, key) {
+        // console.log('iteration ' + key, user)
+        if (!user.admin && alreadyInHierarchy.indexOf(user._id) < 0) {
+          if (!!user.children) {
+            var childs = [];
+
+            angular.forEach(user.children, function(child, key) {
+              // console.log(child, $scope.users)
+              var el = $.grep($scope.users, function(e){ return e._id == child; })
+              // console.log(el)
+              childs.push(el[0])
+            });
+            // console.log(user, childs)
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname} , 'children': getUsersHierarchy(childs) });
+          } else {
+            data.push({'item' : {'id':user._id, text: user.name + " " + user.lastname}, 'children': [] })
+          }
+          alreadyInHierarchy.push(user._id)
+        }
+
+      });
+      return data;
+  }
+
+  $scope.save = function(){
+    $scope.processing = true;
+    $scope.hasChanged = false;
+
+    angular.forEach($scope.users, function(user, key) {
+        // var userChanged = findUserChanged(newVal, oldVal);
+      findUserChanged($scope.usersNewVal, user);
+    });
+
+    //STORE NEW VALUES FOR EVERY USER THAT HAS CHANGED
+    angular.forEach(usersChanged, function(userChanged, key) {
+      var childrens = [];
+
+      angular.forEach(userChanged.childrens, function(childs, key) {
+        // console.log(childs, key);
+        childrens.push(childs.item.id)
+      });
+
+      // console.log('saving user', userChanged, childrens);
+
+      userSrvc.setChildrens(userChanged.id, childrens).success(function(data){
+        // console.log('after save', data)
+        $scope.processing = false;
+        $location.path('/organigrama');
+      });
+    });
+  };
+})
+
+.controller("edScores2Ctrl", function($scope, $routeParams, $location, companySrvc, userSrvc){
+  $scope.processing = true;
+
+  angular.module('plot', ['ui.load']);
+
+  uiLoad.load( [   '../libs/jquery/flot/jquery.flot.js',
+                    '../libs/jquery/flot/jquery.flot.pie.js',
+                    '../libs/jquery/flot/jquery.flot.resize.js',
+                    '../libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js',
+                    '../libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
+                    '../libs/jquery/flot-spline/js/jquery.flot.spline.min.js']
+                    ).then(function() {
+
+    var plot = $.plot("#graph1",
+      [
+        {label:'Excede por mucho', data:10},
+        {label:'Excede',data:20},
+        {label:'Cumple completamente',data:30},
+        {label:'Cumple parcialmente',data:30},
+        {label:'No cumple',data:10}
+      ],
+      {
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: false, threshold: 0.05 } } },
+        colors: ['#4cae4c','#27c24c','#fad733','#f05050','#761c19'],
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+        tooltip: false,
+        tooltipOpts: { content: '%s: %p.0%' }
+      }
+    );
+
+    var plot2 = $.plot("#graph2",
+      [
+        {label:'Excede por mucho', data:20},
+        {label:'Excede',data:35},
+        {label:'Cumple completamente',data:35},
+        {label:'Cumple parcialmente',data:5},
+        {label:'No cumple',data:5}
+      ],
+      {
+        series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: false, threshold: 0.05 } } },
+        colors: ['#4cae4c','#27c24c','#fad733','#f05050','#761c19'],
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+        tooltip: false,
+        tooltipOpts: { content: '%s: %p.0%' }
+      }
+    );
+
+    var plot3 = $.plot("#graph3",
+      [
+        // { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label: 'Unique Visits', points: { show: true } },
+        { data: [[0,4],[1,4],[2,7],[3,4],[4,3]], label: 'Cantidad de Personas', bars: { show: true, barWidth: 0.6, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.4}] } } }
+      ],
+      {
+        colors: [ '#23b7e5','#27c24c' ],
+        series: { shadowSize: 2 },
+        xaxis:{ font: { color: '#ccc' } },
+        yaxis:{ font: { color: '#ccc' } },
+        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+        tooltip: true,
+        tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 0 } }
+      }
+    );
+
+    $scope.processing = false;
+    // console.log('graph1 done');
+  });
+
+  $scope.redirect = function(url) {
+    $location.path(url);
+  }
+
+})
+
+
+.controller("PriceCtrl",function(){
+
+})
+
+.controller("UserCtrl",function($scope, $rootScope, AuthToken, userSrvc, companySrvc){
+  $scope.processing = true;
+  var session = AuthToken.getSession();
+
+  if (session.admin && !session.superadmin) {
+
+    var companyId = undefined;
+
+    userSrvc.usersByCompany(session.company._id).success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+      // console.log(data)
+    });
+
+  } else {
+    userSrvc.all().success(function(data){
+      $scope.processing = false;
+      $scope.users = data;
+    });
+  }
+
 
   $scope.deleteUser = function(userDeleted){
     $scope.processing = true;
@@ -290,15 +874,27 @@ angular.module("climaLaboral")
       $scope.users.splice(index,1);
     });
   };
+
 })
 
-.controller("EditUserCtrl", function($scope, $routeParams, $location, userSrvc){
-  $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
-
+.controller("EditUserCtrl", function($scope, $routeParams, $location, awsSrvc, companySrvc, userSrvc, AuthToken, Upload){
+  $scope.processing = true;
+  var session = AuthToken.getSession();
+  // console.info(session)
+  
   userSrvc.get($routeParams.id).success(function(data){
     $scope.formUser = data;
+    // console.log(data);
+
+    //IF WE ARE LOGGED IN AS A SUPERADMIN, WE HAVE TO FETCH COMPANIES
+    if (session.superadmin) {
+      companySrvc.all().success(function(companies){
+        $scope.formUser.companies = companies;
+        $scope.processing = false;
+      });
+    } else {
+      $scope.processing = false;
+    }
   });
 
   $scope.save = function(){
@@ -309,27 +905,143 @@ angular.module("climaLaboral")
       $location.path('/users');
     });
   };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var self = this;
+    var picFile = self.picFile;
+    
+    awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      userSrvc.edit($scope.formUser._id, {imageurl: url}).success(function (data) {
+        $scope.formUser.imageurl = url;
+        self.picFile = '';
+        $scope.croppedDataUrl = '';
+        $scope.$evalAsync();
+      });
+      
+    });
+    
+  };
+  /* ngFileUpload END */
 })
 
-.controller("AddUserCtrl", function($scope, $routeParams, $location, userSrvc){
+.controller("AddUserCtrl", function($http, $location, $routeParams, $scope, awsSrvc, userSrvc, AuthToken, Upload){
   $scope.processing = false;
-  $scope.areas = ["Recursos Humanos", "Contaduria",  "Sistemas", "Marketing", "Administracion", "Compras", "Legales"];
-  $scope.roles = ["Gerente", "Secretario", "Asistente", "Contador", "Abogado", "Pasante", "Escriba"];
+  var session = AuthToken.getSession();
 
-  $scope.save = function(){
+  $scope.save = function() {
+    var picFile = $scope.picFile;
+    
+    if (picFile) 
+      return alert('CONFIRME O RECHAZE LA IMAGEN SELECCIONADA ANTES DE CONTINUAR');
+
     $scope.processing = true;
-    userSrvc.save($scope.formUser).success(function(data){
-      $scope.processing = false;
+
+    if (session.admin && !session.superadmin) {
+      // $scope.formUser.admin = false;
+      $scope.formUser.company = session.company._id;
+      $scope.formUser.companyName = session.company.name;
+      
+    }
+    
+    userSrvc.save($scope.formUser).then(function () {
       $location.path('/users');
+    }).catch(function (data) {
+      
+      var e = data.data.error;
+
+      if (e.message === 'usersCapacityIsFull') { 
+        
+        alert('EMPRESA DEMO, NO SE PUEDEN CREAR MAS DE ' + e.maxUsers + ' USUARIOS');
+        $location.path('/users');
+      } else
+        alert('NO SE HA PODIDO CREAR EL USUARIO. INTENTE NUEVAMENTE.')
+      
+    }).finally(function () {
+      $scope.processing = false;
     });
+
   };
+  
+  /* ngFileUpload */
+  $scope.croppedDataUrl = '';
+  
+  $scope.upload = function (croppedData) {
+  
+    var picFile = $scope.picFile;
+    
+    return awsSrvc.uploadS3CroppedImage(croppedData, picFile).then(function (url) {
+      
+      // no hago un save al servidor porque el usuario aún no existe
+      // en su lugar agrego la información al user
+      if (!$scope.formUser) $scope.formUser = {};
+      $scope.formUser.imageurl = url;
+      $scope.picFile = undefined;
+      $scope.croppedDataUrl = '';
+      $scope.$evalAsync();
+    });
+    
+  };
+  /* ngFileUpload END */
+
+})
+
+.controller("HallOfFameCtrl", function(){
+
+})
+
+.controller("HallOfFameVoteCtrl", function($scope, userSrvc){
+  $scope.processing = true;
+  userSrvc.all().success(function(data){
+    $scope.processing = false;
+    $scope.users = data;
+  });
+})
+
+.controller("ListUserCtrl", function(){
+
+  //Converter Class
+  var Converter = require("csvtojson").Converter;
+  var converter = new Converter({});
+
+  //end_parsed will be emitted once parsing finished
+  converter.on("end_parsed", function (jsonArray) {
+     console.log(jsonArray); //here is your result jsonarray
+   });
+
+  //read from file
+  require("fs").createReadStream("./file.csv").pipe(converter);
+
 })
 
 .controller("userScoresCtrl", function($scope, $routeParams,userSrvc){
   $scope.processing = true;
+  $('[data-toggle="tooltip"]').tooltip();
 
   userSrvc.get($routeParams.id).success(function(data){
     $scope.user = data;
     $scope.processing = false;
   });
+
+})
+
+.controller("edScores3Ctrl", function($scope, $routeParams,userSrvc){
+  
+
+})
+
+.controller("edScores1Ctrl", function($scope, $routeParams,userSrvc){
+  
+
+})
+
+
+.directive('tooltip', function() {
+  return function(scope, element, attrs) {
+    element.find('[data-toggle="tooltip"]').tooltip();
+  };
 });

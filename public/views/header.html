@@ -1,7 +1,7 @@
 <div class="navbar-header bg-dark">
-  <button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
+<!--   <button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
     <i class="glyphicon glyphicon-cog"></i>
-  </button>
+  </button> -->
   <button class="pull-right visible-xs" ui-toggle="off-screen" target=".app-aside" ui-scroll="app">
     <i class="glyphicon glyphicon-align-justify"></i>
   </button>
@@ -10,19 +10,20 @@
     <img src="../img/logo-compacto.png" alt="Clima Laboral" />
   </a>
   <a href="#/" class="navbar-brand-mobile visible-xs">
-    <img src="../img/logo-1.png" alt="Clima Laboral" height="40" />
+    <img src="../img/logo-compacto-horizontal.png" alt="Clima Laboral" height="40" />
   </a>
   <!-- / brand -->
 </div>
 <!-- / navbar header -->
+
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
   <!-- navbar left -->
-  <ul class="nav navbar-nav hidden-sm" ng-if="loggedIn">
+  <ul class="nav navbar-nav hidden-xs" ng-if="loggedIn">
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
-      <a href="#/" class="dropdown-toggle">
-        <i class="icon-folder-alt fa-fw"></i>
-        <span>Valoraciones</span>
+      <a href="#/" class="dropdown-toggle" ng-class = "{'selected': url == '/' || url == '/reconocimientos' }">
+        <i class="fa fa-folder-open-o"></i>
+        <span>Herramientas</span>
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
@@ -32,9 +33,9 @@
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
-      <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3'}">
-        <i class="icon-folder-alt fa-fw"></i>
-        <span>Resultados</span>
+      <a href="#/scores-1" class="dropdown-toggle" ng-class = "{'selected': url == '/scores-1' || url == '/scores-2' || url == '/scores-3' || url == '/ed-scores-1' || url == '/ed-scores-2'}">
+        <i class="fa fa-area-chart"></i>
+        <span>Reportes</span>
       </a>
     </li>
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
@@ -43,21 +44,32 @@
         <span>Cuestionario</span>
       </a>
     </li>
+    
+    <!-- MENU DE RESULTADOS OCULTO PARA EL USUARIO
     <li class="dropdown pos-stc" ng-if="!user.admin && loggedIn">
       <a href="#/scores/{{user._id}}" class="dropdown-toggle">
-        <i class="icon-folder-alt fa-fw"></i>
+        <i class="fa fa-area-chart"></i>
         <span>Resultados</span>
       </a>
-    </li>
+    </li>-->
+
     <li class="dropdown pos-stc" ng-if="user.admin && loggedIn">
       <a href="#/users" class="dropdown-toggle">
         <i class="icon-users fa-fw"></i>
         <span>Usuarios</span>
       </a>
     </li>
+    <li class="dropdown pos-stc" ng-if="(user.superadmin || user.admin) && loggedIn">
+      <a href="#/companies" class="dropdown-toggle" ng-class = "{'selected': url == '/organigrama' || url == '/competencias' || url == '/areasyroles' || url == '/companies' }">
+        <i class="icon-diamond"></i>
+        <span>Mi Empresa</span>
+      </a>
+    </li>
   </ul>
   <!-- /navbar left -->
-  <!-- nabar right -->
+  
+
+  <!-- navbar right -->
   <ul class="nav navbar-nav navbar-right">
 
     <li class="dropdown">
@@ -66,23 +78,23 @@
           <img src="img/user.gif" alt="...">
           <i class="on md b-white bottom"></i>
         </span>
-        <span class="hidden-sm hidden-md">{{user.username}}</span>
+        <span class="hidden-sm">{{user.username}}</span> <b class="caret"></b>
       </a>
       <!-- dropdown -->
       <ul class="dropdown-menu animated fadeInRight w">
         <li>
-          <a >
+          <a>
             <span>{{user.username}}</span>
           </a>
         </li>
         <li>
           <a href>
-            <span>{{user.role}}</span>
+            <span>{{user.role.name}}</span>
           </a>
         </li>
         <li>
           <a href>
-            <span>{{user.area}}</span>
+            <span>{{user.area.name}}</span>
           </a>
         </li>
         <li class="divider"></li>

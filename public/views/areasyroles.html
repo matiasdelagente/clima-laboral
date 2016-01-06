@@ -1,0 +1,153 @@
+
+<div class="bg-light lter b-b wrapper-md ng-scope">
+  <!-- <span class="text-md text-muted pull-right  text-center">
+    <i class="fa fa-star m-r-xs"></i> 3 votos restantes
+  </span> -->
+
+  <h1 class="m-n font-thin h3"><i class="icon-graph"></i> Áreas y Roles de Mi Empresa</h1>
+</div>
+
+
+<!-- CONTENIDO -->
+
+
+
+
+<div class="wrapper-md ng-scope" ng-if="!processing">
+  <div class="row">
+
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading wrapper b-b b-light text-center">
+
+          <span class="h3 font-thin">ÁREAS</span><br><br>
+
+
+          <div class="input-group">
+            <input type="text" class="input-sm form-control" placeholder="Agregar Área" ng-model="newArea.name">
+            <span class="input-group-btn">
+              <button class="btn btn-sm btn-default" type="button" ng-click="addArea()" ng-if="!addingArea"><i class="fa fa-plus"></i></button>                  
+              <button class="btn btn-sm btn-default" type="button" ng-if="addingArea"><i class="spinner glyphicon glyphicon-repeat"></i></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="list-group">
+          <div class="list-group-item clearfix" ng-repeat="area in company.areas">
+            <div ng-hide="editing">
+              <span class="pull-left m-r">
+                <!-- ACA VAN LA CANTIDAD DE USUARIOS QUE ESTÁN EN ESTE AREA - @TODO -->
+
+                <!-- <div class="h2 text-light text-muted font-thin text-center">35</div> -->
+                <!-- <span class="text-muted text-xs">Personas</span> -->
+              </span>
+              <span class="clear">
+                <span class="pull-right m-t-sm btn btn-xs btn-info" ng-click="editing = true"><i class="fa fa-pencil"></i></span>
+                <span class="pull-right m-t-sm ">&nbsp;</span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="areaDel"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="!areaDel" ng-click="deleteArea(area._id)"><i class="fa fa-trash"></i></span>
+                <span ng-hide="editing">{{area.name}}</span>
+                
+                <small class="text-muted clear text-ellipsis">{{area.description}}</small>
+              </span>
+
+            </div>
+            <div ng-show="editing" >
+              <form ng-submit="editArea(area); editing = false">
+                <div class="col-xs-10">
+                  <p><input type="text" value="{{area.name}}" class="form-control" ng-model="area.name"/></p>
+                  <p><textarea name="description" class="form-control" rows="2" ng-model="area.description" placeholder="Escriba la descripción aquí">{{area.description}}</textarea></p>
+                </div>
+                <div class="col-xs-2">
+                  <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon">
+                    <span ng-if="!formSaving">Guardar</span>
+                    <span ng-if="formSaving" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                  </button>
+                  <button class="btn m-b-xs btn-sm btn-addon btn-danger" ng-show="editing" ng-click="editing = false">Cancelar</button>
+                </div>
+              </form>            
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading wrapper b-b b-light text-center">
+
+          <span class="h3 font-thin">ROLES</span><br><br>
+
+          <div class="input-group">
+            <input type="text" class="input-sm form-control" placeholder="Agregar Rol" ng-model="newRole.name">
+            <span class="input-group-btn">                  
+              <button class="btn btn-sm btn-default" type="button" ng-if="addingArea"><i class="spinner glyphicon glyphicon-repeat"></i></button>            
+              <button class="btn btn-sm btn-default" type="button" ng-click="addRole()" ng-if="!addingArea"><i class="fa fa-plus"></i></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="list-group">
+          <div class="list-group-item clearfix" ng-repeat="role in company.roles">
+            <div ng-hide="editing">
+              <span class="pull-left m-r">
+                <!-- ACA VAN LA CANTIDAD DE USUARIOS QUE ESTÁN EN ESTE ROL - @TODO -->
+                <!-- <div class="h2 text-light text-muted font-thin text-center">7</div> -->
+                <!-- <span class="text-muted text-xs">Personas</span> -->
+              </span>
+              <span class="clear">
+                <span class="pull-right m-t-sm btn btn-xs btn-info" ng-click="editing = true"><i class="fa fa-pencil"></i></span>
+                <span class="pull-right m-t-sm ">&nbsp;</span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="!roleDel" ng-click="deleteRole(role._id)"><i class="fa fa-trash"></i></span>
+                <span class="pull-right m-t-sm btn btn-xs btn-danger" ng-if="roleDel"><i class="fa fa-trash"></i></span>
+                <span>{{role.name}}</span>
+                <small class="text-muted clear text-ellipsis">{{role.description}}</small>
+              </span>
+            </div>
+
+
+            <div ng-show="editing" >
+              <form ng-submit="editRole(role); editing = false">
+                <div class="col-xs-10">
+                  <p><input type="text" value="{{role.name}}" class="form-control" ng-model="role.name"/></p>
+                  <p><textarea name="description" class="form-control" rows="2" ng-model="role.description" placeholder="Escriba la descripción aquí">{{role.description}}</textarea></p>
+                </div>
+                <div class="col-xs-2">
+                  <button type="submit" class="btn m-b-xs btn-sm btn-primary btn-addon">
+                    <span ng-if="!formSaving">Guardar</span>
+                    <span ng-if="formSaving" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                  </button>
+                  <button class="btn m-b-xs btn-sm btn-addon btn-danger" ng-show="editing" ng-click="editing = false">Cancelar</button>
+                </div>
+              </form>            
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<!-- footer -->
+<footer id="footer" class="app-footer" role="footer">
+  <div class="wrapper b-t bg-light">
+    <span class="pull-right">Fostering Talent System</span>
+    &copy; 2015
+  </div>
+</footer>
+<!-- / footer -->
+
+
+
+</div>

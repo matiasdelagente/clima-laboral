@@ -1,40 +1,242 @@
+<style>
+  .action-buttons {
+    margin-top: 10px;
+  }
+  .crop-area {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 100%;
+    height: 180px;
+  }
+  .dragover {
+    border: 5px dashed #233845;
+  }
+  .img-preview {
+    margin-top: 10px;
+    max-width: 128px;
+    max-height: 128px;
+  }
+</style>
+
 <div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3" ng-if="!formUser._id">Crear Usuario</h1>
-  <h1 class="m-n font-thin h3" ng-if="formUser._id">Editar Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="!formUser._id"><i class="icon-users"></i> Crear Usuario</h1>
+  <h1 class="m-n font-thin h3" ng-if="formUser._id"><i class="icon-users"></i> Editar Usuario</h1>
 </div>
-<div class="wrapper-md">
-  <div class="col-sm-4 col-sm-offset-4">
-    <form name="form" ng-submit="save()">
-      <div class="form-group">
-        <label for="username">Usuario</label>
-        <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre del usuario" ng-model="formUser.username" required>
+
+
+<div class="wrapper-md ng-scope">
+
+  <div class="row">
+
+    <div class="col-sm-3">
+        
+      <!-- SUBIR FOTO SI ES NUEVO -->
+      <div ng-style="{display: !formUser._id ? '' : 'none'}">
+        <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b"
+        
+          ng-style="{display: !picFile && !formUser.imageurl ? '' : 'none'}"
+          
+          ngf-drop ngf-select ng-model="picFile" 
+          ngf-drag-over-class="'dragover'" ngf-multiple="false"
+          accept="image/*" 
+          ngf-pattern="'image/*'"
+        
+        >
+            Arrastra la Foto aquí.
+        </div>
       </div>
-      <div class="form-group">
-        <label for="username">Password</label>
-        <input class="form-control" type="password" name="password" placeholder="Ingrese el password del usuario" ng-model="formUser.password">
+
+      <!-- FOTO SI EDITA -->
+      <div class="text-center m-t" ng-if="formUser._id || picFile || formUser.imageurl">
+        <div class="thumb-xl">
+          <img ng-src="{{formUser.imageurl || 'img/a0.jpg'}}" class="img-circle" alt="..."
+          
+            ng-style="{display: !picFile ? '' : 'none'}"
+            
+            ngf-drop ngf-select ng-model="picFile" 
+            ngf-drag-over-class="'dragover'" ngf-multiple="false"
+            accept="image/*" 
+            ngf-pattern="'image/*'"
+          
+          >
+          
+        </div>
+        
+        <div ng-style="{display: picFile ? '' : 'none'}">
+          
+          <div class="crop-area">
+            <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl"></img-crop>
+          </div>
+          
+        </div>
+        
+        <!-- Si el Drag n Drop no es soportado, permito seleccionar la imagen -->
+        <div ngf-no-file-drop>
+          <div ng-style="{display: !picFile ? '' : 'none'}" class="button" ngf-select ng-model="picFile" ngf-multiple="false">Cambiar Imagen</div>  
+        </div>
+        
+        <div class="action-buttons" ng-style="{display: picFile ? '' : 'none'}">
+          <button class="btn btn-default btn-block" ng-click="picFile = ''; croppedDataUrl = '';">Cancelar</button> 
+          <button class="btn btn-primary btn-block" ng-click="upload(croppedDataUrl)">{{formUser._id ? 'Subir' : 'Confirmar'}}</button>
+          
+          <!-- Vista Previa -->
+          <div class="thumb-xl" ng-if="picFile">
+            <img class="img-circle img-preview" ng-src="{{croppedDataUrl}}" />
+          </div>
+        </div>
+        
+        <br><br>
+        <div class="h3 text-black">{{formUser.name}} {{formUser.lastname}}</div>
+        <small class="text-muted m-b font-bold">{{formUser.role.name}}</small>
+        <br>
+        <small class="text-muted m-b">{{formUser.area.name}}</small>
+        <br><br>
       </div>
-      <div class="form-group">
-        <label for="area">Gerencia</label>
-        <select class="form-control" name="area" ng-model="formUser.area" ng-options="area for area in areas">
-          <option value=''>- Seleccione la gerencia del usuario -</option>
-        </select>
+            
+    </div>
+    
+    <!-- FORMULARIO -->
+    <div class="col-sm-9">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold" ng-if="!formUser._id">Crear Usuario</div>
+        <div class="panel-heading font-bold" ng-if="formUser._id">Editar Usuario</div>
+        <div class="panel-body">
+
+          <form name="form" ng-submit="save(); sendMail()" class="form-validation form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled">
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="name">Nombre</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" name="name" placeholder="Ingrese el nombre de la persona" ng-model="formUser.name" />
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="lastname">Apellido</label>
+              <div class="col-sm-9">
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="text" name="lastname" placeholder="Ingrese el apellido de la persona" ng-model="formUser.lastname" tabindex="0" aria-required="true" aria-invalid="true" />
+              </div>
+            </div>
+
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Usuario</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" name="username" placeholder="Ingrese el nombre de usuario la persona" ng-model="formUser.username" required>
+              </div>
+            </div>
+
+
+
+<!--             <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Password</label>
+              <div class="col-sm-9">
+                <input class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" type="password" name="password" placeholder="Ingrese el password de la persona" ng-model="formUser.password" required="" tabindex="0" aria-required="true" aria-invalid="true">
+              </div>
+            </div> -->
+            
+            <!-- ESTO HAY QUE HACERLO ANDAR! 
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="username">Confirmar</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control ng-pristine ng-untouched ng-valid-validator ng-invalid ng-invalid-required" name="confirm_password" placeholder="Ingrese nuevamente el password" required="" ng-model="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' " tabindex="0" aria-required="true" aria-invalid="true">
+                <span ng-show="form.confirm_password.$error.validator" aria-hidden="true" class="ng-hide">Las Contraseñas no coinciden!</span>
+              </div>
+            </div>-->
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Correo Electrónico</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo electrónico de la persona" ng-model="formUser.email" required>
+                </div>
+            </div>
+
+            <!-- SÓLO SI AGREGA NUEVO USER -->
+            <div class="form-group" ng-if="!formUser._id">
+              <div class="col-sm-9 col-sm-offset-3">
+                <label>
+                <input type="checkbox" name="sendMail" checked="checked" ng-model="formUser.sendMail" value />
+                Enviar invitación por email
+              </label>
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group" ng-if='user.superadmin'>
+              <label for="area" class="col-sm-3 control-label">Compa&ntilde;ia</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="company" ng-model="formUser.company._id" ng-options="company._id as company.name for company in formUser.companies">
+                <option value=''>- Seleccione la compa&ntilde;ia a la que pertenece -</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
+              <input type="hidden" ng-model="formUser.company" name="company"/>
+            </div>
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
+              <label for="area" class="col-sm-3 control-label">Gerencia</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="area" ng-model="formUser.area._id" ng-options="area._id as area.name for area in formUser.company.areas">
+                <option value=''>- Seleccione la gerencia a la que pertenece -</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" ng-if='!user.superadmin && user.admin'>
+              <label for="role" class="col-sm-3 control-label">Rol</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="role" ng-model="formUser.role._id" ng-options="role._id as role.name for role in formUser.company.roles">
+                  <option value=''>- Seleccione el rol de la persona -</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in" ng-if='user.superadmin'></div>
+
+            <div class="form-group" ng-if='user.superadmin || user.admin'>
+              <label class="col-sm-3 control-label">¿Es Administrador?</label>
+              <div class="col-sm-9">
+                <input class="" type="checkbox" name="admin" ng-true-value="true" ng-false-value="false" ng-model="formUser.admin">
+              </div>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in" ng-if="user.superadmin && loggedIn"></div>
+
+            <div class="form-group" ng-if="user.superadmin && loggedIn">
+              <label class="col-sm-3 control-label">¿Es SuperAdministrador?</label>
+              <div class="col-sm-9">
+                <input class="" type="checkbox" name="superadmin" ng-true-value="true" ng-false-value="false" ng-model="formUser.superadmin">
+              </div>
+            </div>
+            
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            
+            <div class="form-group">
+              <div class="col-sm-9 col-sm-offset-3">
+                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
+                  <span ng-if="!processing && !formUser._id">Crear</span>
+                  <span ng-if="!processing && formUser._id">Guardar cambios</span>
+                  <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+                </button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="role">Rol</label>
-        <select class="form-control" name="role" ng-model="formUser.role" ng-options="role for role in roles">
-          <option value=''>- Seleccione el rol del usuario -</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="email">Correo electronico</label>
-        <input class="form-control" type="email" name="email"  placeholder="Ingrese el correo eletronico del usuario" ng-model="formUser.email" required>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>
-          <span ng-if="!processing">Guardar</span>
-          <span ng-if="processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
+  
+
+

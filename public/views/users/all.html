@@ -1,43 +1,143 @@
-
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3"><i class="icon-users fa-fw"></i> Usuarios</h1>
+<div class="bg-light lter b-b wrapper-md ng-scope" style="width:84%;">
+	<div class="btn-group pull-right">
+		<button class="btn m-b-xs btn-sm btn-primary btn-addon"><i class="material-icons md-18">extension</i>Clima Laboral</button>
+	</div>
+	<h1 class="m-n font-thin h3"><i class="icon-users fa-fw"></i> Usuarios</h1>
 </div>
 <div class="wrapper-md">
-    <h4>
-      <a href="#/user/add" class="btn btn-info">
-      	<span class="glyphicon glyphicon-plus"> Agregar usuario</span>
-      </a>
-    </h4>
-  <div class="jumbotron text-center" ng-show="processing">
-    <span class="glyphicon glyphicon-repeat spinner"><p>Loading Users</p></span>
-  </div>
-  <div class="panel panel-default">
-	  <div class="table-responsive">
-		  <table class="table table-striped">
-			 <thead>
-				<tr>
-				  <th class="col-md-1">ID</th>
-				  <th class="col-md-1">Usuario</th>
-				  <th class="col-md-1">Admin</th>
-				  <th class="col-md-1">Gerencia</th>
-				  <th class="col-md-1">Rol</th>
-				  <th class="col-md-1"></th>
-				</tr>
-			 </thead>
-			 <tbody>
-				<tr ng-repeat="person in users">
-				  <td class="col-md-1">{{person._id}}</td>
-				  <td class="col-md-1">{{person.username}}</td>
-				  <td class="col-md-1">{{person.admin}}</td>
-				  <td class="col-md-1">{{person.area}}</td>
-				  <td class="col-md-1">{{person.role}}</td>
-				  <td class="col-md-1" nowrap>
-				    <a href="#/users/{{person._id}}" class="btn btn-danger">Editar</a>
-				    <a href="" ng-click="deleteUser(person)" class="btn btn-primary">Borrar</a>
-				  </td>
-				</tr>
-			 </tbody>
-		  </table>
-		</div>
+
+	<div class="jumbotron text-center" ng-show="processing">
+		<span class="glyphicon glyphicon-repeat spinner"></span>
 	</div>
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+
+			<span class="text-xs text-muted pull-right">
+				<i class="fa fa-circle text-success m-r-xs"></i> 12
+				<i class="fa fa-circle text-danger m-r-xs m-l-sm"></i> 23
+				<i class="fa fa-circle text-light m-r-xs m-l-sm"></i> 5
+			</span>
+			<h4 class=" m-t-none m-b-none">Lista de personas</h4>
+		</div>
+
+
+		<div class="row wrapper">
+			<div class="col-sm-5 m-b-xs">
+				<select class="input-sm form-control w-sm inline v-middle">
+					<option value="0">Acciones Bulk</option>
+					<option value="1">Eliminar seleccionados</option>
+					<option value="2">Editar</option>
+					<option value="3">Exportar</option>
+				</select>
+				<button class="btn btn-sm btn-default">Aplicar</button>                
+			</div>
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-3">
+				<div class="input-group">
+					<input type="text" class="input-sm form-control" placeholder="Buscar">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-default" type="button">Go!</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+
+			<table class="table m-b-none default footable-loaded footable">
+				<thead>
+					<tr>
+						<!-- <th class="col-md-1">ID</th> -->
+						<th style="width:20px;">
+							<label class="i-checks m-b-none">
+								<input type="checkbox"><i></i>
+							</label>
+						</th>
+						<th class="col-md-1">Nombre</th>
+						<th class="col-md-1">Apellido</th>
+						<th class="col-md-1">Usuario</th>
+						<th class="col-md-1" ng-if='user.superadmin'>Compañía</th>
+						<th class="col-md-1">Tipo</th>
+						<th class="col-md-1">Gerencia</th>
+						<th class="col-md-1">Rol</th>
+						<th class="col-md-1">¿Scores?</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="person in users">
+						<!-- <td class="col-md-2">{{person._id}}</td> -->
+						<th style="width:20px;">
+							<label class="i-checks m-b-none">
+								<input type="checkbox"><i></i>
+							</label>
+						</th>
+						<td class="col-md-2">{{person.name}}</td>
+						<td class="col-md-2">{{person.lastname}}</td>
+						<td class="col-md-2">{{person.username}}</td>
+						<td class="col-md-2" ng-if='user.superadmin'>{{person.company.name}}</td>
+						
+						<!-- <td class="col-md-2">{{person.admin}}</td> -->
+						<td class="col-md-2" ng-if="person.superadmin"><span class="label bg-danger">Super</span></td>
+						<td class="col-md-2" ng-if="person.admin && !person.superadmin"><span class="label bg-primary">Admin</span></td>
+						<td class="col-md-2" ng-if="!person.admin"><span class="label bg-info">Usuario</span></td>
+
+
+						<td class="col-md-2">{{person.area.name}}</td>
+						<td class="col-md-2">{{person.role.name}}</td>
+
+						<td class="col-md-2" ng-if="person.scores.length==0 && !person.admin"><span class="label bg-danger">No</span></td>
+						<td class="col-md-2" ng-if="person.scores.length==0 && person.admin"><span class="label bg-light">&nbsp;-&nbsp;</span></td>
+						<td class="col-md-2" ng-if="person.scores.length!=0"><span class="label bg-success">Sí</span></td>
+
+						<td class="col-md-1" nowrap>
+							<a href="#/users/{{person._id}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
+							<a href="" ng-click="deleteUser(person)" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer class="panel-footer">
+			<div class="row">
+				<div class="col-sm-4 hidden-xs">
+					<select class="input-sm form-control w-sm inline v-middle">
+					<option value="0">Acciones Bulk</option>
+					<option value="1">Eliminar seleccionados</option>
+					<option value="2">Editar</option>
+					<option value="3">Exportar</option>
+				</select>
+				<button class="btn btn-sm btn-default">Aplicar</button>                  
+				</div>
+				<!-- <div class="col-sm-4 text-center">
+					<small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+				</div>
+				<div class="col-sm-4 text-right text-center-xs">                
+					<ul class="pagination pagination-sm m-t-none m-b-none">
+						<li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+						<li><a href="">1</a></li>
+						<li><a href="">2</a></li>
+						<li><a href="">3</a></li>
+						<li><a href="">4</a></li>
+						<li><a href="">5</a></li>
+						<li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+					</ul>
+				</div> -->
+			</div>
+		</footer>
+	</div>
+
+
+	<div class="row">
+		<a href="#/user/add" class="auto">
+			<button class="btn m-b-xs btn-sm btn-info btn-addon m-l m-r"><i class="glyphicon glyphicon-plus"></i>Agregar Usuario</button>
+		</a>
+		<a href="#/users/list" class="auto">
+			<button class="btn m-b-xs btn-sm btn-primary btn-addon m-l m-r"><i class="glyphicon glyphicon-th-list"></i>Importar Lista CSV</button>
+		</a>
+	</div>
+
 </div>

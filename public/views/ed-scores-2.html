@@ -1,0 +1,125 @@
+<div class="bg-light lter b-b wrapper-md ng-scope" style="width:84%;">
+  <div class="btn-group pull-right">
+    <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="redirect('/scores-1')"><i class="material-icons md-18">extension</i>Evaluación de Desempeño</button>
+  </div>
+  <h1 class="m-n font-thin h3"><i class="icon-bar-chart"></i> Reportes</h1>
+</div>
+<div class="jumbotron text-center" ng-show="processing">
+  <span class="glyphicon glyphicon-repeat spinner"></span>
+</div>
+
+
+<div class="wrapper-md" ng-show="!processing">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <span class="font-bold">Desempeño Global</span>
+
+          <div class="row wrapper">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escriba el Área">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escriba el Rol">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-body">
+          <div ui-jq="plot" id="graph1" ui-options="" style="height: 240px; padding: 0px; position: relative; width:100%">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <span class="font-bold">Desempeño de Marketing</span>
+
+        <div class="row wrapper">
+          <div class="col-sm-6">
+            <div class="input-group">
+              <input type="text" class="input-sm form-control" placeholder="Marketing">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="input-group">
+              <input type="text" class="input-sm form-control" placeholder="Todos">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel-body">
+        <div ui-jq="plot" id="graph2" ui-options="" style="height: 240px; padding: 0px; position: relative; width:100%"></div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+     
+     <div class="row wrapper">
+       <span class="font-bold inline m-t-xs">Comparación de Gerencias por Resultados</span>
+            
+
+            <div class="btn-group m-r ng-scope pull-right">
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty active ng-valid-parse" ng-model="radioModel" btn-radio="'Left'" uncheckable="" aria-invalid="false" style="">No cumple</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Middle'" uncheckable="" aria-invalid="false" style="">Cumple parcialmente</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Cumple completamente</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Excede</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="radioModel" btn-radio="'Right'" uncheckable="" aria-invalid="false" style="">Excede por mucho</label>
+            </div>
+
+            <!-- <div class="col-sm-6 pull-right">
+              <div class="input-group">
+                <input type="text" class="input-sm form-control" placeholder="Escribir Resultados">
+                <span class="input-group-btn">
+                  <button class="btn btn-sm btn-default" type="button">Filtrar</button>
+                </span>
+              </div>
+            </div> -->
+          </div>
+
+          </div>
+
+
+    <div class="panel-body">
+      <div class="col-md-12">
+        <img src="img/filtrosgerencias.png" class="img-full" alt="...">
+      </div>
+      <div id="graph3" style="height: 240px; padding: 0px; position: relative; width:100%; opacity:0"></div>
+  </div>                  
+</div>
+</div>
+</div>
+
+</div>
+

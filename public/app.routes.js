@@ -1,4 +1,4 @@
-angular.module("app.routes", [])
+angular.module("app.routes", ["ngRoute"])
 .config(function($routeProvider){
   $routeProvider
   .when('/',{
@@ -9,9 +9,34 @@ angular.module("app.routes", [])
     controller: "MainCtrl",
     templateUrl: "./views/login.html"
   })
+
+  .when('/prices',{
+    controller: "PriceCtrl",
+    templateUrl: "./views/prices.html"
+  })
+
+  .when('/companies',{
+    controller: "CompaniesCtrl",
+    templateUrl: "./views/companies/all.html"
+  })
+
+   .when('/companies/add',{
+    controller: "AddCompaniesCtrl",
+    templateUrl: "./views/edit-companies.html"
+  })
+
+   .when('/company/:id',{
+    controller: "EditCompaniesCtrl",
+    templateUrl: "./views/edit-companies.html"
+  })
+
   .when('/users',{
     controller: "UserCtrl",
     templateUrl: "./views/users/all.html"
+  })
+  .when('/users/list',{
+    controller: "ListUserCtrl",
+    templateUrl: "./views/list-import.html"
   })
   .when('/users/:id',{
     controller: "EditUserCtrl",
@@ -38,11 +63,64 @@ angular.module("app.routes", [])
   })
   .when("/scores/:id",{
     controller: "userScoresCtrl",
-    templateUrl: "./views/user-scores.html"
+    //templateUrl: "./views/user-scores.html"
+    templateUrl: "./views/thanks.html"
   })
   .when('/questions/:id',{
     controller: "AddCtrl",
-    //templateUrl: "./views/add.html"
-    templateUrl: "./views/thanks.html"
+    templateUrl: "./views/add.html"
+    //templateUrl: "./views/thanks.html"
+  })
+
+
+  .when('/ed',{
+    controller: "AddCtrl",
+    templateUrl: "./views/ed.html"
+    //templateUrl: "./views/thanks.html"
+  })
+
+  .when('/hall-of-fame',{
+    controller: "HallOfFameCtrl",
+    templateUrl: "./views/hall-of-fame.html"
+  })
+
+  .when('/reconocimientos',{
+    controller: "UserCtrl",
+    templateUrl: "./views/reconocimientos.html"
+  })
+
+  .when('/reconocer/:id',{
+    controller: "EditUserCtrl",
+    templateUrl: "./views/reconocer.html"
+  })
+
+  .when('/organigrama',{
+    controller: "organizationChartCtrl",
+    templateUrl: "./views/organigrama.html"
+  })
+
+  .when('/competencias',{
+    controller: "CompetencesCtrl",
+    templateUrl: "./views/competencias.html"
+  })
+
+  .when('/areasyroles',{
+    controller: "EditAreasAndRolesCtrl",
+    templateUrl: "./views/areasyroles.html"
+  })
+
+  .when('/ed-scores-1',{
+    controller: "edScores1Ctrl",
+    templateUrl: "./views/ed-scores-1.html"
+  })
+
+  .when('/ed-scores-2',{
+    controller: "edScores2Ctrl",
+    templateUrl: "./views/ed-scores-2.html"
+  })
+
+  .when('/ed-scores-3',{
+    controller: "edScores3Ctrl",
+    templateUrl: "./views/ed-scores-3.html"
   })
 })

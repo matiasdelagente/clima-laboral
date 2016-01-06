@@ -237,11 +237,12 @@ a:hover .caret-white {
 .list-group-item {
   padding-right: 15px;
   border-color: #e7ecee;
+  cursor: pointer;
 }
 
-a.list-group-item:hover,
-a.list-group-item:focus,
-a.list-group-item.hover {
+div.list-group-item:hover,
+div.list-group-item:focus,
+div.list-group-item.hover {
   background-color: #f6f8f8;
 }
 
@@ -771,7 +772,11 @@ body {
   position: fixed;
   width: 100%;
   top: 50px;
-  z-index: 2;
+  z-index: 3;
+}
+
+.app-content-body>.bg-light h1 i{
+  margin-right: 5px;
 }
 
 .app-footer {
